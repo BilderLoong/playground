@@ -13,6 +13,30 @@
 function reverseBetween(head, left, right) {
   const dummyNode = new ListNode(-1, head);
 
+  let theOneBeforeLeft = dummyNode;
+
+  for (let i = 0; i < left - 1; i++) {
+    // edge case may be wrong.
+    theOneBeforeLeft = theOneBeforeLeft.next;
+  }
+
+  let cur = theOneBeforeLeft.next;
+
+  for (let i = 0; i < right - left; i++) {
+    const next = cur.next;
+    cur.next = next.next;
+    next.next = theOneBeforeLeft.next;
+    theOneBeforeLeft.next = next;
+  }
+
+  /* return dummyNode.next instead of head is when the left === 1,
+   the head of old link list is not the head of new link list  */
+  return dummyNode.next;
+}
+
+function reverseBetween(head, left, right) {
+  const dummyNode = new ListNode(-1, head);
+
   let pre = dummyNode;
 
   for (let i = 0; i < left - 1; i++) {
@@ -37,7 +61,7 @@ function reverseBetween(head, left, right) {
   // At this point pre is the right node
   theOneBeforeLeft.next = pre;
 
-  // At this point cur is the one after right node 
+  // At this point cur is the one after right node
   leftNode.next = cur;
 
   // If left === 1 then the head of the origin list will be changed to the right node
