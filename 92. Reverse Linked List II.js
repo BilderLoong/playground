@@ -22,8 +22,8 @@ function reverseBetween(head, left, right) {
 
   const theOneBeforeLeft = pre;
 
-  const leftNode = (pre = theOneBeforeLeft.next); // left node
-  theOneBeforeLeft.next = null; // avoid cycle
+  const leftNode = (pre = theOneBeforeLeft.next); // Left node
+  theOneBeforeLeft.next = null; // Avoid cycle
 
   let cur = pre.next;
 
@@ -34,15 +34,12 @@ function reverseBetween(head, left, right) {
     cur = next;
   }
 
-  const rightNode = pre;
-  const theOneAfterRight = cur;
+  // At this point pre is the right node
+  theOneBeforeLeft.next = pre;
 
-  theOneBeforeLeft.next = rightNode;
-  leftNode.next = theOneAfterRight;
+  // At this point cur is the one after right node 
+  leftNode.next = cur;
 
-  dummyNode.next = null;
-
-  // if left === 1 then the head of the origin list will be changed to
-  // the right node
-  return left === 1 ? rightNode : head;
+  // If left === 1 then the head of the origin list will be changed to the right node
+  return left === 1 ? pre : head;
 }
