@@ -34,6 +34,7 @@ function reverseBetween(head, left, right) {
   return dummyNode.next;
 }
 
+/* using different method from the above*/
 function reverseBetween(head, left, right) {
   const dummyNode = new ListNode(-1, head);
 
@@ -64,6 +65,9 @@ function reverseBetween(head, left, right) {
   // At this point cur is the one after right node
   leftNode.next = cur;
 
-  // If left === 1 then the head of the origin list will be changed to the right node
-  return left === 1 ? pre : head;
+  /* If don't use dummyNOde need to consider the case 
+  when the left === 1(the head of the linked list is changed to the right node)
+  by using the below code:
+    return left === 1 ? pre : head; */
+  return dummyNode.next;
 }
