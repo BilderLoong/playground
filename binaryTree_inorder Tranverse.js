@@ -13,17 +13,17 @@
 
 function inorderTraversal(root) {
   let result = [];
-  foo(root, result);
+  traverse(root, result);
   return result;
 
   // Why does use parameter to pass the arr like this: foo(root,result) instead of closure will
   // got result undefined error
-  function foo(root) {
+  function traverse(root) {
     if (!root) return;
 
-    foo(root.left);
+    traverse(root.left);
     result.push(root.val);
-    foo(root.right);
+    traverse(root.right);
   }
 }
 
