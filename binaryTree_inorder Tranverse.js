@@ -30,12 +30,12 @@ function inorderTraversal(root) {
 //----------------------------------------------------------------
 var inorderTraversal = function (root) {
   if (!root) return [];
-  const left = root.left ? root.left : [];
-  const right = root.right ? root.right : [];
-  return inorderTraversal(left)
+  return inorderTraversal(root.left)
     .concat(root.val)
-    .concat(inorderTraversal(right));
+    .concat(inorderTraversal(root.right));
 };
+
+//----------------------------------------------------------------
 
 var inorderTraversal = function (root) {
   if (!root) return [];
