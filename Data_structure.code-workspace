@@ -19,5 +19,8 @@
 				"outputCapture": "std"
 			}
 		]
+	},
+	"settings": {
+		"jupyter.jupyterServerType": "local"
 	}
 }
