@@ -15,6 +15,7 @@ function searchBST(root: TreeNode | null, val: number): TreeNode | null {
   }
   return null;
 }
+
 function searchBST(root: TreeNode | null, val: number): TreeNode | null {
   return !root || root.val === val
     ? root

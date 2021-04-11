@@ -1,4 +1,3 @@
-"use strict";
 var anyType;
 var aNumber = 0;
 //         ^ this is called type assignment
@@ -11,6 +10,10 @@ function aFunctionWithStringReturn(name) {
 }
 [1, 2, 3].map(function (e, i) { return e.toString() + i.toString(); }); // contextual typing
 // Type Assertions
+var stack = ['1', 1];
+var stackTop;
+stackTop = stack[0];
+stackTop = stack[0];
 var myInputs = document.getElementsByName('input');
 // The below two type assertions have the same effect
 var myInput = document.getElementById('myInput');
@@ -55,7 +58,7 @@ handleRequest(req2.url, req2.method);
 // workaround 3
 var req3 = {
     url: 'url',
-    method: 'GET',
+    method: 'GET'
 };
 /*     ^ ensuring that all properties are assigned the literal type
   instead of a more general version like string or number */
@@ -88,34 +91,41 @@ function padLeft(padding) {
     }
 }
 // Truthiness narrowing
-function printAll(strs) {
-    if (typeof strs === 'object') {
-        for (var _i = 0, strs_1 = strs; _i < strs_1.length; _i++) {
-            var s = strs_1[_i];
+function printAll(str) {
+    if (typeof str === 'object') {
+        for (var _i = 0, str_1 = str; _i < str_1.length; _i++) {
+            var s = str_1[_i];
             //              ^ Object is possibly 'null'.
             console.log(s);
         }
     }
-    else if (typeof strs === 'string') {
-        console.log(strs);
+    else if (typeof str === 'string') {
+        console.log(str);
     }
     else {
         // do nothing
     }
 }
-function _printAll(strs) {
-    if (strs && typeof strs === 'object') {
-        for (var _i = 0, strs_2 = strs; _i < strs_2.length; _i++) {
-            var s = strs_2[_i];
+function _printAll(str) {
+    if (str && typeof str === 'object') {
+        for (var _i = 0, str_2 = str; _i < str_2.length; _i++) {
+            var s = str_2[_i];
             //              ^ no error
             console.log(s);
         }
     }
-    else if (typeof strs === 'string') {
-        console.log(strs);
+    else if (typeof str === 'string') {
+        console.log(str);
     }
     else {
         // do nothing
     }
 }
-//# sourceMappingURL=ts-handbook.js.map
+// Conditional assignment/ non-null assertion operator (postfix !)
+var _foo;
+if (1) {
+    _foo = '1';
+}
+console.log(_foo);
+console.log(_foo);
+console.log(_foo);

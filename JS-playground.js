@@ -1,11 +1,14 @@
-let a;
-for (let i = 0; i < 5; i++) {
-  const a = i + 1;
-  const b = i;
-}
+const readline = require('readline');
 
-function foo() {
-  const a = 1;
-  console.log(a);
-  return a;
-}
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+rl.question('hello', (res) => {
+  console.log('hi');
+});
+
+rl.on('line', (e) => {
+  console.log(e);
+});

@@ -2,3 +2,4 @@ node_modules
 Data_structure.code-workspace
 *.map
 *.log
+ts-output
