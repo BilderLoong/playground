@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "name": "Launch current opend file",
+            "program": "${file}", // current file :https://code.visualstudio.com/docs/editor/variables-reference#_predefined-variables
+            "smartStep": true,
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "pwa-node"
+        }
+    ]
+}

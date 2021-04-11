@@ -26,6 +26,11 @@ function aFunctionWithStringReturn(name: string): string {
 [1, 2, 3].map((e, i) => e.toString() + i.toString()); // contextual typing
 
 // Type Assertions
+const stack = ['1', 1];
+let stackTop: string;
+stackTop = stack[0];
+stackTop = stack[0] as string;
+
 const myInputs = document.getElementsByName(
   'input'
 ) as NodeListOf<HTMLInputElement>;
@@ -129,28 +134,39 @@ function padLeft(padding: number | string) {
 }
 
 // Truthiness narrowing
-function printAll(strs: string | string[] | null) {
-  if (typeof strs === 'object') {
-    for (const s of strs) {
+function printAll(str: string | string[] | null) {
+  if (typeof str === 'object') {
+    for (const s of str) {
       //              ^ Object is possibly 'null'.
       console.log(s);
     }
-  } else if (typeof strs === 'string') {
-    console.log(strs);
+  } else if (typeof str === 'string') {
+    console.log(str);
   } else {
     // do nothing
   }
 }
 
-function _printAll(strs: string | string[] | null) {
-  if (strs && typeof strs === 'object') {
-    for (const s of strs) {
+function _printAll(str: string | string[] | null) {
+  if (str && typeof str === 'object') {
+    for (const s of str) {
       //              ^ no error
       console.log(s);
     }
-  } else if (typeof strs === 'string') {
-    console.log(strs);
+  } else if (typeof str === 'string') {
+    console.log(str);
   } else {
     // do nothing
   }
 }
+
+// Conditional assignment/ non-null assertion operator (postfix !)
+
+let _foo: string;
+if (1) {
+  _foo = '1';
+}
+
+console.log(_foo);
+console.log(_foo as string);
+console.log(_foo!);
