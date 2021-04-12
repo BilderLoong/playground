@@ -12,3 +12,4 @@ rl.question('hello', (res) => {
 rl.on('line', (e) => {
   console.log(e);
 });
+
