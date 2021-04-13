@@ -3,11 +3,12 @@
         {
             "type": "typescript",
             "tsconfig": "tsconfig.json",
+            "option": "watch",
             "problemMatcher": [
-                "$tsc"
+                "$tsc-watch"
             ],
             "group": "build",
-            "label": "tsc: build - tsconfig.json"
-        }
+            "label": "tsc: watch - tsconfig.json"
+        },
     ]
 }

@@ -22,7 +22,7 @@
             "name": "TS/JS: Current File",
             "request": "launch",
             "program": "${file}", // current file :https://code.visualstudio.com/docs/editor/variables-reference#_predefined-variables
-            "preLaunchTask": "tsc: build - tsconfig.json",
+            "preLaunchTask": "tsc: watch - tsconfig.json",
             "smartStep": true,
             "skipFiles": [
                 "<node_internals>/**"

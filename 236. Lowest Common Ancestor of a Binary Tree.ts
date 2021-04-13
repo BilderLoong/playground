@@ -1,12 +1,22 @@
-class TreeNode {
-  val: number;
-  left: TreeNode | null;
-  right: TreeNode | null;
-  constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
-    this.val = val === undefined ? 0 : val;
-    this.left = left === undefined ? null : left;
-    this.right = right === undefined ? null : right;
+function lowestCommonAncestor(
+  root: TreeNode | null,
+  p: TreeNode | null,
+  q: TreeNode | null
+): TreeNode | null {
+  if (!root) return null;
+  if (root === q || root === p) return root;
+
+  const left = lowestCommonAncestor(root.left, p, q);
+  const right = lowestCommonAncestor(root.right, p, q);
+
+  // if current root is the LCA
+  if ((left && right) || ((p === root || q === root) && (left || right))) {
+    return root;
   }
+
+  // 1. current root only contain p or q in one of it's left child or right child
+  // 2. the child of current root not contain any of p or q
+  return left ?? right;
 }
 
 function lowestCommonAncestor(
