@@ -1,1 +1,2 @@
-print(range(10))
+# %s
+print(type(1))
