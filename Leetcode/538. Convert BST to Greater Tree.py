@@ -3,7 +3,6 @@ class Solution:
         def traverse(node: TreeNode):
             if not node:
                 return
-
             nonlocal total
             traverse(node.right)
             total += node.val

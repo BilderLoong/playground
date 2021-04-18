@@ -8,9 +8,10 @@
             "console": "internalConsole",
         },
         {
-            "name": "Node: Current File in interged terminal",
+            "name": "Node: Current TS/JS File in interged terminal",
             "request": "launch",
             "program": "${file}", // current file :https://code.visualstudio.com/docs/editor/variables-reference#_predefined-variables
+            "preLaunchTask": "tsc: watch - tsconfig.json",
             "console": "integratedTerminal", // some node programs need terminal
             "smartStep": true,
             "skipFiles": [
@@ -22,6 +23,7 @@
             "name": "TS/JS: Current File",
             "request": "launch",
             "program": "${file}", // current file :https://code.visualstudio.com/docs/editor/variables-reference#_predefined-variables
+            "console": "internalConsole",
             "preLaunchTask": "tsc: watch - tsconfig.json",
             "smartStep": true,
             "skipFiles": [

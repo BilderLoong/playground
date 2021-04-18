@@ -1,4 +1,4 @@
-class LeetCodeTreeNode {
+export default class LeetCodeTreeNode {
   val: any;
   left: LeetCodeTreeNode | null;
   right: LeetCodeTreeNode | null;
@@ -31,7 +31,7 @@ class LeetCodeTreeNode {
 
     const queue = [root];
     while (queue.length > 0) {
-      let node = queue.shift();
+      let node = queue.shift()!;
       // 第一个是左节点，节点为空，直接跳过
       let leftVal = arr.shift();
       if (leftVal != null) {
@@ -50,5 +50,3 @@ class LeetCodeTreeNode {
     return root;
   }
 }
-
-module.exports = LeetCodeTreeNode;

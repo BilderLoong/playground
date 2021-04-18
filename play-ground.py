@@ -1,2 +1,1 @@
-# %s
-print(type(1))
+print(bool(None))
