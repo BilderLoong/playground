@@ -1,3 +1,4 @@
+export {};
 function dailyTemperatures(arr: number[]): number[] {
   const stack: number[] = [];
   const res: number[] = [];
@@ -40,4 +41,3 @@ const test = [73, 74, 75, 71, 69, 76];
 const result = [1, 1, 3, 2, 1, 0];
 
 console.log(dailyTemperatures(test));
-
