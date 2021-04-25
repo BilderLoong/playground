@@ -1,8 +1,17 @@
 (async function () {
-  try {
-    const result = await fetch('http://localhost:81');
-    console.log(result);
-  } catch (err) {
-    console.error(err);
-  }
+const container = document.querySelector('.container');
+const child = document.querySelector('.container > div');
+
+child.addEventListener('click', () => console.log('child got event'));
+
+container.addEventListener(
+  'click',
+  () => console.log('container got event during bubble'),
+);
+
+container.addEventListener(
+  'click',
+  () => console.log('container got event during capture'),
+  true
+);
 })();

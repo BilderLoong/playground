@@ -1,6 +1,17 @@
 {
     "configurations": [
         {
+            "type": "firefox",
+            "request": "launch",
+            "reAttach": true,
+            "name": "HTML: Run current file on Firefox",
+            "file": "${file}",
+            "reloadOnChange": {
+                "watch": "${workspaceFolder}/**/*",
+                "ignore": "**/node_modules/**"
+            },
+        },
+        {
             "type": "node",
             "name": "vscode-jest-tests",
             "request": "launch",
@@ -18,14 +29,14 @@
             "type": "python",
             "request": "launch",
             "program": "${file}",
-            "console": "internalConsole",
+            "console": "internalConsole"
         },
         {
             "name": "Node: Current TS/JS File in interged terminal",
             "request": "launch",
-            "program": "${file}", // current file :https://code.visualstudio.com/docs/editor/variables-reference#_predefined-variables
+            "program": "${file}",
             "preLaunchTask": "tsc: watch - tsconfig.json",
-            "console": "integratedTerminal", // some node programs need terminal
+            "console": "integratedTerminal",
             "smartStep": true,
             "skipFiles": [
                 "<node_internals>/**"
@@ -35,14 +46,15 @@
         {
             "name": "TS/JS: Current File",
             "request": "launch",
-            "program": "${file}", // current file :https://code.visualstudio.com/docs/editor/variables-reference#_predefined-variables
+            "program": "${file}",
             "console": "internalConsole",
+            "outputCapture": "std",
             "preLaunchTask": "tsc: watch - tsconfig.json",
             "smartStep": true,
             "skipFiles": [
                 "<node_internals>/**"
             ],
             "type": "pwa-node"
-        },
+        }
     ]
 }

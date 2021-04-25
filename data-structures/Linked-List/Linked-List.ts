@@ -122,13 +122,22 @@ export default class LinkedList {
 
   // find the given value
   // return the node first be found, if not found return null
-  find(value: unknown): LinkedListNode | null {
+  find({
+    value,
+    callback,
+  }: {
+    value?: unknown;
+    callback?: Function;
+  }): LinkedListNode | null {
     if (!this.head) return null;
 
     let curNode: LinkedListNode | null = this.head;
     while (curNode) {
+      if (callback && callback(curNode.value)) return curNode;
+
       if (value === curNode.value) return curNode;
-      else curNode = curNode.next;
+
+      curNode = curNode.next;
     }
 
     return null;

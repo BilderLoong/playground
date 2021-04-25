@@ -149,16 +149,53 @@ describe('LinkedList', () => {
     linkedList.append(4);
     linkedList.append(5);
 
-    let node = linkedList.find(3);
+    let node = linkedList.find({ value: 3 });
 
     expect(node).toBeDefined();
     expect(node).not.toBeNull();
     expect(node!.value).toBe(3);
 
-    node = linkedList.find(9);
+    node = linkedList.find({ value: 9 });
 
     expect(node).toBeDefined();
     expect(node).toBeNull();
+  });
+
+  it('should find node by callback', () => {
+    type nodeValue = {
+      value: number;
+      key: string;
+    };
+    const linkedList = new LinkedList();
+
+    linkedList
+      .append({ value: 1, key: 'test1' })
+      .append({ value: 2, key: 'test2' })
+      .append({ value: 3, key: 'test3' });
+
+    const node = linkedList.find({
+      callback: (value: nodeValue) => value.key === 'test2',
+    });
+
+    expect(node).toBeDefined();
+    expect((node!.value as nodeValue).value).toBe(2);
+    expect((node!.value as nodeValue).key).toBe('test2');
+
+    expect(
+      linkedList.find({ callback: (value: nodeValue) => value.key === 'test5' })
+    ).toBeNull();
+  });
+
+  it('should find preferring callback', () => {
+    const linkedList = new LinkedList();
+
+    linkedList.appendFromArray([1, 2, 3, 4, 5]);
+
+    let node = linkedList.find({ value: 3 });
+    expect(node!.value).toBe(3);
+
+    node = linkedList.find({ callback: (value: number) => value < 3 });
+    expect(node!.value).toBe(1);
   });
 
   it('should delete linked list tail', () => {
@@ -230,10 +267,7 @@ describe('LinkedList', () => {
     const linkedList = new LinkedList();
 
     // Add test values to linked list.
-    linkedList
-      .append(1)
-      .append(2)
-      .append(3);
+    linkedList.append(1).append(2).append(3);
 
     expect(linkedList.toString()).toBe('1,2,3');
     expect(linkedList.head!.value).toBe(1);
