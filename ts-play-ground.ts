@@ -1,4 +1,16 @@
 (function () {
+  // RegEx
+  const num = '123w435';
+  const alph = 'asdfasdf';
+  const numAndAlph = num + alph;
+
+  const res1 = num.match(/.*(?<=.*[a-z])(?<=.*\d)/g);
+  const res2 = alph.match(/.*(?<=.*[a-z])(?<=.*\d)/g);
+  const res3 = numAndAlph.match(/.*(?<=.*[a-z])(?<=.*\d)/g);
+
+  console.log();
+})();
+(function () {
   const arr = [];
   for (let i = 0; i < 10; i++) {
     arr.push(
