@@ -1,5 +1,9 @@
 function buildTree(preorder, inorder) {
   const map = new Map();
+
+  // Using a hash map to store the index of inorder array
+  // So that reduce the search time cost on searching inorder
+  // array.
   inorder.forEach((e, i) => {
     map.set(e, i);
   });
@@ -42,6 +46,7 @@ function buildTree(preorder, inorder) {
   }
 }
 //------------------------------------------------
+// Passing index instead of array to reduce the time complexity
 function buildTree(preorder, inorder) {
   return build(
     preorder,
