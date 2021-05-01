@@ -1,4 +1,36 @@
 (function () {
+  foo();
+  function foo({ a = 1, b = 2 }) {
+    console.log(a, b);
+  }
+})();
+(function () {
+  const arr = [1, 2, 3];
+  const [x, ...rest] = arr;
+  console.log(rest);
+})();
+(function () {
+  const arr = [1, 2, 3];
+
+  const [x, , y] = arr;
+  // const x = arr[0];
+  // const y = arr[2];
+  console.log(x, y);
+
+  // temp = a;
+  // a = b;
+  // b = temp + b
+})();
+(function () {
+  let a = 1,
+    b = 2;
+  [a, b] = [b, a + b]; 
+  console.log(a, b); // 2, 3
+  // temp = a;
+  // a = b;
+  // b = temp + b
+})();
+(function () {
   // RegEx
   const num = '123w435';
   const alph = 'asdfasdf';
