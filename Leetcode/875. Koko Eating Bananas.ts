@@ -7,8 +7,10 @@
     while (left < right) {
       const mid = Math.floor((left + right) / 2);
       if (canEatAll(mid, piles, h)) {
+        // [left...mid)
         right = mid;
       } else {
+        // [mid+1...right)
         left = mid + 1;
       }
     }
