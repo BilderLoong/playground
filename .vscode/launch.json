@@ -24,6 +24,7 @@
             "request": "launch",
             "program": "${file}", // current file :https://code.visualstudio.com/docs/editor/variables-reference#_predefined-variables
             "console": "internalConsole",
+            "outputCapture": "std",
             "preLaunchTask": "tsc: watch - tsconfig.json",
             "smartStep": true,
             "skipFiles": [
