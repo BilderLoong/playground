@@ -1,3 +1,12 @@
+try {
+  asdf  asasdf
+asdf asdf asdBSBSBSoBSf asdf  
+  asdfasdf
+asdfasdfasdfasdfk
+asdf
+} catch (error) {
+  
+}
 (function () {
   interface Person {
     name: string;
