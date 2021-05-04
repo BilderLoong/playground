@@ -1,10 +1,9 @@
 {
-  "name": "data_structure",
+  "name": "playground",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "tspg": "tsc -w --pretty playGround.ts"
   },
   "dependencies": {
     "buckets-js": "^1.98.2",
