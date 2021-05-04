@@ -33,4 +33,4 @@ print("heap:", arr)
 heap_sort(arr)
 print("result:", arr)
 # %%
-print([i for i in range(2,10)])
+print([i for i in range(2, 10)])

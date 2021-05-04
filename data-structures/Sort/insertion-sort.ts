@@ -7,5 +7,3 @@ function insertionSort(arr: number[]) {
 
   return arr;
 }
-
-console.log(insertionSort([12, 11, 13, 0, 6]));

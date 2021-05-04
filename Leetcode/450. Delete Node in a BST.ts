@@ -1,3 +1,4 @@
+export {}
 const TreeNode = require('./LeetCode-TreeNode');
 
 let tree = TreeNode.create([5, 3, 6, 2, 4, null, 7]); // false

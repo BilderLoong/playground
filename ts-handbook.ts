@@ -1,3 +1,12 @@
+try {
+  asdf  asasdf
+asdf asdf asdBSBSBSoBSf asdf  
+  asdfasdf
+asdfasdfasdfasdfk
+asdf
+} catch (error) {
+  
+}
 (function () {
   interface Person {
     name: string;
@@ -292,4 +301,149 @@ function getName(foo: Kinds) {
     // the `kind` property is the discriminant property of Kinds
     return foo.name1.toUpperCase;
   }
+}
+
+// More on Functions
+(function () {
+  // Function Type Expressions
+  function greeter(fn: (sen: string) => string): void {
+    console.log(fn('hello'));
+  }
+
+  function addName(name: string) {
+    return 'hello ' + name;
+  }
+
+  greeter(addName);
+
+  // using type alias
+  type GreetFunction = (sen: string) => string;
+  function welcome(fn: GreetFunction): void {
+    console.log(fn('bilder'));
+  }
+
+  welcome(addName);
+})();
+
+(function () {
+  //Call signatures
+
+  type foo = {
+    description: string;
+    (arg: number): boolean;
+  };
+
+  function doSomething(fn: foo) {
+    console.log(fn.description, fn(1));
+  }
+})();
+(function () {
+  //Construct signatures
+  type foo = {
+    description: string;
+    new (): void;
+    (): string;
+  };
+
+  function doSomething(fn: foo) {
+    console.log(fn.description, new fn());
+    fn();
+  }
+})();
+(function () {
+  function firstElement(arr: any[]) {
+    return arr[0];
+  }
+
+  const s = firstElement([1, 2, 3]);
+  //    ^any
+
+  function secondElement<Type>(arr: Type[]) {
+    return arr[1];
+  }
+
+  const b = secondElement(['a', 's']);
+  //    ^ string
+
+  // inference
+  function map<Input, Output>(
+    arr: Input[],
+    fn: (arg: Input) => Output
+  ): Output[] {
+    return arr.map(fn);
+  }
+  // constraints
+
+  function longest<Type extends { length: number }>(a: Type, b: Type) {
+    //                              ^ constrain the Type must have property length
+    if (a.length > b.length) {
+      return a;
+    } else {
+      return b;
+    }
+  }
+
+  const obj1 = {
+    length: 1,
+  };
+  const obj2 = {
+    a: 1,
+    length: 2,
+  };
+
+  longest(obj1, obj2);
+
+  longest(1, 2);
+  try {
+    // working with constrained values
+    function minimumLength<Type extends { length: number }>(
+      obj: Type,
+      minimum: number
+    ): Type {
+      return { length: minimum };
+    } //         ^ wrong
+
+    const arr = minimumLength([2, 3, 4], 9);
+    console.log(arr.slice(1));
+    //               ^crash here
+  } catch (err) {
+    console.error(err);
+  }
+})();
+try {
+  // specifying type arguments
+  function combine<Type>(arr1: Type[], arr2: Type[]): Type[] {
+    return arr1.concat(arr2);
+  }
+
+  combine([1, 2], ['1', '1']);
+  //                ^
+
+  combine<string | number>([1, 2], ['1', '1']);
+  //             ^ manually specify Type
+} catch (err) {}
+
+//Optional parameters
+try {
+   function f(n?: number) {
+    n;
+    // ^ number|undefined
+  }
+} catch (err) {}
+
+try {
+  // Optional parameters in callback
+  function myForEach(arr: any[], callback: (arg: any, index?: number) => void) {
+    for (let i = 0; i < arr.length; i++) {
+      callback(arr[i], i);
+    }
+  }
+
+  myForEach([1, 2, 3], (a) => console.log(a));
+  myForEach([1, 2, 3], (a, i) => {
+    console.log(i.toFixed());
+    //          ^
+  });
+} catch (err) {
+  console.error(err);
 }

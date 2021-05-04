@@ -69,8 +69,8 @@ class NestedIterator {
 
     /* using one of the below two function*/
     // this.dfs(this.list);
-    this.vals = this.dfsPureFunc(this.list);
-  }
+    // this.vals = this.dfsPureFunc(this.list);
+  // }
 
   dfsPureFunc(nestIntegers: NestedInteger[]): number[] {
     /* don't have side effect */
