@@ -6,32 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="./index.js" defer></script>
-    <style>
-      div {
-        width: 10rem;
-        height: 10rem;
-      }
-
-      .container {
-        background-color: lightblue;
-      }
-
-      .container > div {
-        position: relative;
-
-        top:50%;
-        left:50%;
-        transform:translate(-50%,-50%);
-
-        width: 50%;
-        height: 50%;
-        background-color: lightcoral;
-      }
-    </style>
   </head>
   <body>
-    <div class="container">
-      <div></div>
-    </div>
+    <form>
+      <label for="current-modifier"
+        >Current modifier:
+        <input type="number" id="current-modifier" min="0" required />
+      </label>
+
+      <label for="current-ratio"
+        >Current success ratio:
+        <input type="number" id="current-ratio" min="0" max="100" required />
+      </label>
+
+      <label for="desired-ratio"
+        >Desired success ratio:
+        <input type="number" id="desired-ratio" min="0" max="100" required100 />
+      </label>
+    </form>
+
+    <p>Result</p>
+    <p id="result">Please input valid value</p>
   </body>
 </html>

@@ -1,17 +1,32 @@
-(async function () {
-const container = document.querySelector('.container');
-const child = document.querySelector('.container > div');
+const form = document.getElementsByTagName('form')[0];
+const currentModifier = document.getElementById('current-modifier');
+const desiredRatio = document.getElementById('desired-ratio');
+const currentRatio = document.getElementById('current-ratio');
 
-child.addEventListener('click', () => console.log('child got event'));
+const result = document.getElementById('result');
 
-container.addEventListener(
-  'click',
-  () => console.log('container got event during bubble'),
-);
+form.addEventListener('input', (e) => {
+  const inputs = form.getElementsByTagName('input');
 
-container.addEventListener(
-  'click',
-  () => console.log('container got event during capture'),
-  true
-);
-})();
+  if (Array.from(inputs).every((e) => e.value)) {
+    const currentModifierValue = parseFloat(currentModifier.value);
+    const desiredRationValue = parseFloat(desiredRatio.value);
+    const currentRationValue = parseFloat(currentRatio.value);
+
+    const res = getNewModifier(
+      currentModifierValue,
+      desiredRationValue,
+      currentRationValue
+    );
+
+    result.innerHTML = res;
+  } else {
+    result.innerHTML = 'Please input valid value';
+  }
+});
+
+function getNewModifier(currentModifier, desiredRatio, currentRatio) {
+  return (
+    (currentModifier * Math.log10(desiredRatio)) / Math.log10(currentRatio)
+  );
+}
