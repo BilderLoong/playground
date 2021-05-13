@@ -1,3 +1,9 @@
+try {
+  function foo() {
+    console.log(arguments.callee);
+  }
+  foo()
+} catch (error) {}
 (function () {
   foo();
   function foo({ a = 1, b = 2 }) {
@@ -24,7 +30,7 @@
 (function () {
   let a = 1,
     b = 2;
-  [a, b] = [b, a + b]; 
+  [a, b] = [b, a + b];
   console.log(a, b); // 2, 3
   // temp = a;
   // a = b;
