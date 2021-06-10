@@ -1,12 +1,3 @@
-try {
-Sf asdf  
-  asdfasdf
-asdfasdfasdfasdfk
-asdf
-} catch (error) {
-  
-}
-(function () {
   interface Person {
     name: string;
     age: number;
@@ -322,6 +313,10 @@ function getName(foo: Kinds) {
   }
 
   welcome(addName);
+  
+  let bar: (sen: string) => string;
+  bar = (sen:string)=>sen
+
 })();
 
 (function () {
@@ -330,10 +325,12 @@ function getName(foo: Kinds) {
   type foo = {
     description: string;
     (arg: number): boolean;
+    new (arg:string): Date
   };
 
   function doSomething(fn: foo) {
-    console.log(fn.description, fn(1));
+  console.log(fn.description, fn(1));
+  const date = new fn('1');
   }
 })();
 (function () {
