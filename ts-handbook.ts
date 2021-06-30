@@ -1,39 +1,37 @@
+export {};
+import * as $ from 'jquery';
+import { boolean } from 'yargs';
+
 try {
-Sf asdf  
-  asdfasdf
-asdfasdfasdfasdfk
-asdf
-} catch (error) {
-  
-}
-(function () {
-  interface Person {
-    name: string;
-    age: number;
-  }
+  (function () {
+    interface Person {
+      name: string;
+      age: number;
+    }
 
-  type FooType = {
-    location: string[];
-    middleName?: string; // optional properties
-  };
+    type FooType = {
+      location: string[];
+      middleName?: string; // optional properties
+    };
 
-  type bar = string | object; // union type and type aliases
+    type bar = string | object; // union type and type aliases
 
-  let anyType;
-  let aNumber: number = 0;
-  //         ^ this is called type assignment
-  let aNumberArr = [1, 2, 3];
-  //       ^  let aNumberArr: number[]
+    let anyType;
+    let aNumber: number = 0;
+    //         ^ this is called type assignment
+    let aNumberArr = [1, 2, 3];
+    //       ^  let aNumberArr: number[]
 
-  let aNumberOrStringArr: number | string[] = 1; // union type
+    let aNumberOrStringArr: number | string[] = 1; // union type
 
-  function aFunctionWithStringReturn(name: string): string {
-    console.log(`Hello,${name}`);
-    return `Hello,${name}`;
-  }
+    function aFunctionWithStringReturn(name: string): string {
+      console.log(`Hello,${name}`);
+      return `Hello,${name}`;
+    }
 
-  [1, 2, 3].map((e, i) => e.toString() + i.toString()); // contextual typing
-});
+    [1, 2, 3].map((e, i) => e.toString() + i.toString()); // contextual typing
+  });
+} catch {}
 
 (function () {
   // Type Assertions
@@ -50,8 +48,8 @@ asdf
   const myInput = document.getElementById('myInput') as HTMLInputElement;
   const $myInput = <HTMLInputElement>document.getElementById('myInput'); // Can't be use in JSX
 
-  const welcome = ('hello' as any) as number;
-  const $welcome = ('hello' as unknown) as number;
+  const welcome = 'hello' as any as number;
+  const $welcome = 'hello' as unknown as number;
   const _welcome = 'hello' as number;
 });
 
@@ -424,7 +422,7 @@ try {
 
 //Optional parameters
 try {
-   function f(n?: number) {
+  function f(n?: number) {
     n;
     // ^ number|undefined
   }
@@ -446,3 +444,182 @@ try {
 } catch (err) {
   console.error(err);
 }
+
+try {
+  // Readonly modifier
+  interface Person {
+    age: number;
+  }
+  interface ReadonlyPerson {
+    readonly age: number;
+  }
+
+  const person: Person = {
+    age: 10,
+  };
+
+  const readonlyPerson: ReadonlyPerson = person;
+  const readonlyPerson2 = person as ReadonlyPerson;
+
+  person.age = 11;
+
+  console.log(readonlyPerson);
+} catch (error) {}
+
+try {
+  // Index Signatures
+  interface numberIndexObject {
+    [index: number]: number;
+  }
+
+  interface IAmAnObject {
+    [stringIndex: string]: string;
+    [numberKey: number]: number;
+  }
+
+  const foo: numberIndexObject = {};
+  foo[0] = 1;
+  foo['123'] = true;
+  foo[0] = '1';
+
+  const bar: stringIndexObject = {};
+  bar[1] = 1;
+  bar[0] = '0';
+  bar['1'] = 0;
+
+  console.log(foo);
+} catch (error) {}
+
+try {
+  const obj = {
+    toString() {
+      console.log('toString called');
+      return 'hello';
+    },
+  };
+
+  const foo = {
+    hello: 'hi',
+  };
+  console.log(foo[obj]); // hi
+} catch (error) {}
+try {
+  const obj = new Object();
+  const foo: any = {};
+  foo[obj] = 'What is the my key?';
+  //   ^ 型 'Object' はインデックスの型として使用できません。
+
+  console.log(Object.getOwnPropertyNames(foo));
+} catch (error) {}
+
+try {
+  const obj: { [username: string]: string } = {
+    bilder: 'bilder',
+  };
+
+  interface Person<T> {
+    [name: string]: T;
+    foo: string;
+    //^型 'string' のプロパティ 'foo' を文字列インデックス型 'T' に割り当てることはできません。ts(2411)
+  }
+
+  const foo: Person<string> = {
+    bilder: 'hello',
+  };
+
+  console.log(foo);
+} catch (error) {}
+
+try {
+  /** Okay */
+  interface Foo {
+    x: number;
+    y: number;
+  }
+  /** Error */
+  interface Bar {
+    x: number;
+    y: string; // ERROR: Property `y` must be of type number
+  }
+} catch (error) {}
+
+try {
+  type Index = 'birudo' | 'bilder' | 'loong';
+  type FromIndex = {
+    [k in Index]?: number;
+  };
+
+  const person: FromIndex = {
+    bilder: 1,
+    birudo: 2,
+  };
+
+  type FromSomeIndex<K extends string> = { [key in K]?: number };
+  const foo: FromSomeIndex<'a' | 'b' | 'c'> = {
+    a: 1,
+    b: 2,
+    c: 3,
+  };
+
+  console.log(foo);
+} catch (error) {}
+
+try {
+  interface Colorful {
+    color: string;
+  }
+
+  interface Circle {
+    radius: number;
+  }
+
+  interface ColorfulCircle extends Colorful, Circle {}
+  type ColorfulCircle2 = Colorful & Circle;
+
+  const cc: ColorfulCircle = {
+    color: 'red',
+    radius: 42,
+  };
+
+  const cc1: ColorfulCircle2 = {};
+} catch (error) {}
+
+try {
+  let name: {
+    first: string;
+    second: string;
+  } = {
+    first: 'John',
+    second: 'Doe',
+  };
+
+  name = {
+    // Error : `second` is missing
+    first: 'John',
+  };
+  name = {
+    // Error : `second` is the wrong type
+    first: 'John',
+    second: 1337,
+  };
+} catch (error) {}
+
+try {
+} catch (error) {}
+
+try {
+  foo = 123;
+} catch (error) {}
+try {
+} catch (error) {}
+try {
+  const foo = 123;
+  foo.toString();
+
+  document;
+  window.screenLeft;
+  window.hello('123');
+  process;
+
+  Buffer.from('123');
+} catch (error) {}
