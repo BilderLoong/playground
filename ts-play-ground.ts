@@ -2,7 +2,7 @@ try {
   function foo() {
     console.log(arguments.callee);
   }
-  foo()
+  foo();
 } catch (error) {}
 (function () {
   foo();
