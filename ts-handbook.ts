@@ -840,3 +840,102 @@ try {
 
   Buffer.from('123');
 } catch (error) {}
+
+try {
+  // The Array Type
+  let foo: Array<number>;
+  let bar: Array<string>;
+} catch (error) {}
+
+try {
+  // The ReadonlyArray Type
+  let readonlyArray: ReadonlyArray<number>;
+  readonlyArray = [1, 2];
+  readonlyArray[1] = 333;
+  // ^ 型 'readonly number[]' のインデックス シグネチャは、読み取りのみを許可します。ts(2542)
+} catch (error) {}
+try {
+  let foo: [string, number, number?] = ['1', 2, 3];
+  foo.length; // (property) length: 2 | 3
+  foo[0] = '2';
+  foo = ['1', 2, 3];
+
+  foo = [1, 2];
+} catch (error) {}
+
+try {
+  let foo: readonly [string, number, number?] = ['1', 2, 3];
+  foo.length; // (property) length: 2 | 3
+  foo[0] = '2';
+  foo = ['1', 2, 3];
+
+  foo = [1, 2];
+} catch (error) {}
+
+try {
+  // Generic Types
+  function foo<T>(arg: T): T {
+    return arg;
+  }
+
+  let bar: <T>(arg: T) => T;
+  bar = function <T>(arg: T): T {
+    return arg;
+  };
+
+  const fun1 = function <T>(arg: T): T {
+    return arg;
+  };
+  const fun2 = foo;
+} catch (error) {}
+
+try {
+  // Generic Type
+  {
+    interface GenericFun {
+      <T>(arg: T): T;
+    }
+
+    const genericFun: GenericFun = function <T>(arg: T): T {
+      return arg;
+    };
+  }
+
+  {
+    interface GenericFun<T> {
+      (arg: T): T;
+    }
+
+    let genericFun: GenericFun<number> = function <T>(arg: T): T {
+      return arg;
+    };
+
+    genericFun;
+
+    genericFun = function (arg: number): number {
+      return arg;
+    };
+
+    genericFun;
+  }
+} catch (error) {}
+
+try {
+  // The keyof type operator
+
+  type Point = {
+    x: number;
+    y: number;
+  };
+
+  type P = keyof Point;
+  let foo: P;
+} catch (error) {}
+
+try {
+  let s: string;
+  let n: typeof s;
+  //  ^ let n: string
+
+  console.log(n);
+} catch (error) {}
