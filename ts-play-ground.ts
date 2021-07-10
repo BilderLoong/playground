@@ -1,364 +1,341 @@
 try {
+  const res = JSON.stringify(() => 1);
+  console.log(res);
+
+  const res1 = JSON.stringify([1]);
+  console.log(res1);
+} catch (error) {}
+try {
+  const set1 = new Set([1]);
+} catch (error) {}
+try {
   function foo() {
     console.log(arguments.callee);
   }
-  foo()
-} catch (error) {}
-(function () {
   foo();
-  function foo({ a = 1, b = 2 }) {
-    console.log(a, b);
-  }
-})();
-(function () {
-  const arr = [1, 2, 3];
-  const [x, ...rest] = arr;
-  console.log(rest);
-})();
-(function () {
-  const arr = [1, 2, 3];
+} catch (error) {}
 
-  const [x, , y] = arr;
-  // const x = arr[0];
-  // const y = arr[2];
-  console.log(x, y);
-
-  // temp = a;
-  // a = b;
-  // b = temp + b
-})();
-(function () {
-  let a = 1,
-    b = 2;
-  [a, b] = [b, a + b];
-  console.log(a, b); // 2, 3
-  // temp = a;
-  // a = b;
-  // b = temp + b
-})();
-(function () {
-  // RegEx
-  const num = '123w435';
-  const alph = 'asdfasdf';
-  const numAndAlph = num + alph;
-
-  const res1 = num.match(/.*(?<=.*[a-z])(?<=.*\d)/g);
-  const res2 = alph.match(/.*(?<=.*[a-z])(?<=.*\d)/g);
-  const res3 = numAndAlph.match(/.*(?<=.*[a-z])(?<=.*\d)/g);
-
-  console.log();
-})();
-(function () {
-  const arr = [];
-  for (let i = 0; i < 10; i++) {
-    arr.push(
-      new Promise((resolve, reject) => {
-        resolve('');
-      })
-    );
-  }
-
-  arr.push(Promise.reject());
-  const res = Promise.all(arr)
-    .then((val) => console.log(val))
-    .catch((val) => console.log(val));
-})();
-(function () {
-  function Maker() {
-    this.name = 'foo';
-    return null;
-  }
-
-  const obj = new Maker();
-})();
-(function () {
-  class Foo {}
-
-  class Bar extends Foo {
-    constructor() {
-      return {};
+try {
+  (function () {
+    foo();
+    function foo({ a = 1, b = 2 }) {
+      console.log(a, b);
     }
-    method() {}
-  }
+  })();
+  (function () {
+    const arr = [1, 2, 3];
+    const [x, ...rest] = arr;
+    console.log(rest);
+  })();
+  (function () {
+    const arr = [1, 2, 3];
 
-  const bar = new Bar();
-  console.log(bar);
-})();
-// realize instanceof operator
-(function () {
-  function instanceOf(l: object, r: object) {
-    const proto = r.prototype;
-    let curProto = Object.getPrototypeOf(l);
-    while (curProto) {
-      if (proto === curProto) return true;
-      curProto = Object.getPrototypeOf(curProto);
+    const [x, , y] = arr;
+    // const x = arr[0];
+    // const y = arr[2];
+    console.log(x, y);
+
+    // temp = a;
+    // a = b;
+    // b = temp + b
+  })();
+  (function () {
+    let a = 1,
+      b = 2;
+    [a, b] = [b, a + b];
+    console.log(a, b); // 2, 3
+    // temp = a;
+    // a = b;
+    // b = temp + b
+  })();
+  (function () {
+    // RegEx
+    const num = '123w435';
+    const alph = 'asdfasdf';
+    const numAndAlph = num + alph;
+
+    const res1 = num.match(/.*(?<=.*[a-z])(?<=.*\d)/g);
+    const res2 = alph.match(/.*(?<=.*[a-z])(?<=.*\d)/g);
+    const res3 = numAndAlph.match(/.*(?<=.*[a-z])(?<=.*\d)/g);
+
+    console.log();
+  })();
+  (function () {
+    const arr = [];
+    for (let i = 0; i < 10; i++) {
+      arr.push(
+        new Promise((resolve, reject) => {
+          resolve('');
+        })
+      );
     }
 
-    return false;
-  }
-
-  class Foo {}
-  class Bar {}
-
-  const foo = new Foo();
-  console.log(foo instanceof Foo);
-  console.log(instanceOf(foo, Foo));
-  console.log(instanceOf(foo, Object));
-  console.log(instanceOf(foo, Bar));
-})();
-// in operator
-(function () {
-  const obj = Object.defineProperty({}, 'foo', {
-    value: 1,
-    enumerable: false,
-  });
-
-  for (const key in obj) {
-    console.log(key);
-  }
-
-  console.log('foo' in obj);
-})();
-
-//class
-(function () {
-  const foo = {
-    sayHi() {
-      console.log('hi from foo');
-    },
-  };
-
-  const bar = {
-    sayHi() {
-      super.sayHi();
-    },
-  };
-  Object.setPrototypeOf(bar, foo);
-
-  bar.sayHi();
-})();
-(function () {
-  let animal = {
-    name: 'Animal',
-    eat() {
-      // animal.eat.[[HomeObject]] == animal
-      console.log(`${this.name} eats.`);
-    },
-  };
-
-  let rabbit = {
-    __proto__: animal,
-    name: 'Rabbit',
-    eat() {
-      // rabbit.eat.[[HomeObject]] == rabbit
-      super.eat();
-    },
-  };
-
-  let longEar = {
-    __proto__: rabbit,
-    name: 'Long Ear',
-    eat() {
-      // longEar.eat.[[HomeObject]] == longEar
-      super.eat();
-    },
-  };
-
-  // works correctly
-  longEar.eat(); // Long Ear eats.
-})();
-
-(function () {
-  class Foo {
-    sayHi() {
-      console.log('hi');
-    }
-  }
-
-  const foo = new Foo();
-  const bar = {
-    sayHi() {
-      console.log('hi');
-    },
-  };
-
-  console.log(bar.hasOwnProperty('sayHi'));
-  console.log(foo.hasOwnProperty('sayHi'));
-})();
-(function () {
-  class Base {
-    constructor() {
-      console.log('Base constructor run');
+    arr.push(Promise.reject());
+    const res = Promise.all(arr)
+      .then((val) => console.log(val))
+      .catch((val) => console.log(val));
+  })();
+  (function () {
+    function Maker() {
+      this.name = 'foo';
+      return null;
     }
 
-    name = (function () {
-      console.log('Base class field initialized');
-    })();
-  }
+    const obj = new Maker();
+  })();
+  (function () {
+    class Foo {}
 
-  class Derived extends Base {
-    constructor() {
-      super();
-      console.log('Derived constructor run');
+    class Bar extends Foo {
+      constructor() {
+        return {};
+      }
+      method() {}
     }
-    name = (function () {
-      console.log('Derived class field initialized');
-    })();
 
-    age = 1;
-  }
+    const bar = new Bar();
+    console.log(bar);
+  })();
+  // realize instanceof operator
+  (function () {
+    function instanceOf(l: object, r: object) {
+      const proto = r.prototype;
+      let curProto = Object.getPrototypeOf(l);
+      while (curProto) {
+        if (proto === curProto) return true;
+        curProto = Object.getPrototypeOf(curProto);
+      }
 
-  const sub = new Derived();
-})();
-(function () {
-  // What does the Foo.prototype contain ?
-  class Foo {
-    constructor() {
-      this.name = 'bar';
+      return false;
     }
-    sayName() {
-      console.log(this.name);
+
+    class Foo {}
+    class Bar {}
+
+    const foo = new Foo();
+    console.log(foo instanceof Foo);
+    console.log(instanceOf(foo, Foo));
+    console.log(instanceOf(foo, Object));
+    console.log(instanceOf(foo, Bar));
+  })();
+  // in operator
+  (function () {
+    const obj = Object.defineProperty({}, 'foo', {
+      value: 1,
+      enumerable: false,
+    });
+
+    for (const key in obj) {
+      console.log(key);
     }
-  }
-  console.log(Foo.prototype);
-})();
 
-(function () {
-  class Foo {
-    say = () => console.log(this);
-  }
+    console.log('foo' in obj);
+  })();
 
-  const foo = new Foo();
+  //class
+  (function () {
+    const foo = {
+      sayHi() {
+        console.log('hi from foo');
+      },
+    };
 
-  const bar = {
-    say: function () {
-      console.log(this);
-    },
-  };
+    const bar = {
+      sayHi() {
+        super.sayHi();
+      },
+    };
+    Object.setPrototypeOf(bar, foo);
 
-  bar.say();
-  foo.say();
+    bar.sayHi();
+  })();
+  (function () {
+    let animal = {
+      name: 'Animal',
+      eat() {
+        // animal.eat.[[HomeObject]] == animal
+        console.log(`${this.name} eats.`);
+      },
+    };
 
-  console.log();
-})();
+    let rabbit = {
+      __proto__: animal,
+      name: 'Rabbit',
+      eat() {
+        // rabbit.eat.[[HomeObject]] == rabbit
+        super.eat();
+      },
+    };
 
-(function () {
-  const bar = {
-    self: this,
-  };
+    let longEar = {
+      __proto__: rabbit,
+      name: 'Long Ear',
+      eat() {
+        // longEar.eat.[[HomeObject]] == longEar
+        super.eat();
+      },
+    };
 
-  console.log(bar.self);
-})();
+    // works correctly
+    longEar.eat(); // Long Ear eats.
+  })();
 
-// const proto = {
-//   location: 'on the proto',
-// };
+  (function () {
+    class Foo {
+      sayHi() {
+        console.log('hi');
+      }
+    }
 
-// const person2 = Object.create(proto);
-// Object.defineProperty(person2, 'location', {
-//   enumerable: false,
-//   value: 'on the instance',
-// });
+    const foo = new Foo();
+    const bar = {
+      sayHi() {
+        console.log('hi');
+      },
+    };
 
-// // person2.location = 'on the instance';
+    console.log(bar.hasOwnProperty('sayHi'));
+    console.log(foo.hasOwnProperty('sayHi'));
+  })();
+  (function () {
+    class Base {
+      constructor() {
+        console.log('Base constructor run');
+      }
 
-// for (const key in person2) {
-//   if (Object.prototype.hasOwnProperty.call(person2, key)) {
-//     console.log(key);
-//   }
-// }
+      name = (function () {
+        console.log('Base class field initialized');
+      })();
+    }
 
-// for (const key of Object.getOwnPropertyNames(person2)) {
-//   console.log(`${key}: ${person2[key]}`);
-// }
+    class Derived extends Base {
+      constructor() {
+        super();
+        console.log('Derived constructor run');
+      }
+      name = (function () {
+        console.log('Derived class field initialized');
+      })();
 
-// // Object.key()
-// // const protoOfFoo = {
-// //   location: 'on the proto',
-// // };
+      age = 1;
+    }
 
-// // const foo = Object.create(protoOfFoo);
+    const sub = new Derived();
+  })();
+  (function () {
+    // What does the Foo.prototype contain ?
+    class Foo {
+      constructor() {
+        this.name = 'bar';
+      }
+      sayName() {
+        console.log(this.name);
+      }
+    }
+    console.log(Foo.prototype);
+  })();
 
-// // Object.defineProperties(foo, {
-// //   one: { enumerable: true, value: 1 },
-// //   two: { enumerable: false, value: 2 },
-// // });
+  (function () {
+    class Foo {
+      say = () => console.log(this);
+    }
 
-// // console.log(Object.keys(foo));
-// // console.log(Object.getOwnPropertyNames(foo));
+    const foo = new Foo();
 
-// class Parent {
-//   parentPro = 'parent';
-//   foo() {}
-// }
+    const bar = {
+      say: function () {
+        console.log(this);
+      },
+    };
 
-// class Child extends Parent {
-//   childPro = 'child';
-//   bar() {}
-// }
+    bar.say();
+    foo.say();
 
-// const child = new Child();
-// console.log(child);
+    console.log();
+  })();
 
-// console.log(child.hasOwnProperty('parentPro')); // true
-// console.log(child.hasOwnProperty('foo'));
-// console.log(child.hasOwnProperty('bar'));
+  (function () {
+    const bar = {
+      self: this,
+    };
 
-// function Parent2() {
-//   this.parentPro = 'parent';
-// }
-// Parent2.prototype.foo = function () {};
+    console.log(bar.self);
+  })();
 
-// function Child2() {
-//   Parent2();
-//   this.childPro = 'child';
-// }
-// Child2.prototype = new Parent2();
+  // const proto = {
+  //   location: 'on the proto',
+  // };
 
-// const child2 = new Child();
-// console.log(child2);
+  // const person2 = Object.create(proto);
+  // Object.defineProperty(person2, 'location', {
+  //   enumerable: false,
+  //   value: 'on the instance',
+  // });
 
-// console.log(child2.hasOwnProperty('parentPro')); // true
-// console.log(child2.hasOwnProperty('foo'));
-// console.log(child2.hasOwnProperty('bar'));
+  // // person2.location = 'on the instance';
 
-// combination inheritance
+  // for (const key in person2) {
+  //   if (Object.prototype.hasOwnProperty.call(person2, key)) {
+  //     console.log(key);
+  //   }
+  // }
 
-function SuperType(name: string) {
-  this.name = name;
-  this.color = ['red'];
-}
+  // for (const key of Object.getOwnPropertyNames(person2)) {
+  //   console.log(`${key}: ${person2[key]}`);
+  // }
 
-SuperType.prototype.sayName = function () {
-  console.log(this.name);
-};
+  // // Object.key()
+  // // const protoOfFoo = {
+  // //   location: 'on the proto',
+  // // };
 
-function SubType(name: string, age: number) {
-  SuperType.call(this, name);
+  // // const foo = Object.create(protoOfFoo);
 
-  this.age = age;
-}
+  // // Object.defineProperties(foo, {
+  // //   one: { enumerable: true, value: 1 },
+  // //   two: { enumerable: false, value: 2 },
+  // // });
 
-SubType.prototype = new SuperType();
+  // // console.log(Object.keys(foo));
+  // // console.log(Object.getOwnPropertyNames(foo));
 
-const person = new SubType();
+  // class Parent {
+  //   parentPro = 'parent';
+  //   foo() {}
+  // }
 
-for (const i in person) {
-  console.log(i);
-}
+  // class Child extends Parent {
+  //   childPro = 'child';
+  //   bar() {}
+  // }
 
-// parasitic inheritance
+  // const child = new Child();
+  // console.log(child);
 
-const original = {};
+  // console.log(child.hasOwnProperty('parentPro')); // true
+  // console.log(child.hasOwnProperty('foo'));
+  // console.log(child.hasOwnProperty('bar'));
 
-const res = Object.create(original);
+  // function Parent2() {
+  //   this.parentPro = 'parent';
+  // }
+  // Parent2.prototype.foo = function () {};
 
-res.sayHi = function () {
-  console.log('hi');
-};
+  // function Child2() {
+  //   Parent2();
+  //   this.childPro = 'child';
+  // }
+  // Child2.prototype = new Parent2();
 
-// parasitic combination inheritance
-(function () {
+  // const child2 = new Child();
+  // console.log(child2);
+
+  // console.log(child2.hasOwnProperty('parentPro')); // true
+  // console.log(child2.hasOwnProperty('foo'));
+  // console.log(child2.hasOwnProperty('bar'));
+
+  // combination inheritance
+
   function SuperType(name: string) {
     this.name = name;
     this.color = ['red'];
@@ -374,65 +351,103 @@ res.sayHi = function () {
     this.age = age;
   }
 
-  // if direct assign the SuperType.prototype to the
-  // SubType.prototype, then when the instance of
-  // SubType access the constructor property will
-  // get the SuperType instead SubType which isn't right behavior.
-  // So we need copy a new prototype from the SuperType.prototype
-  // And assign the SubType to the new prototype.constructor
-
-  // wrong method
-  // SubType.prototype = SuperType.prototype;
-
-  // right method
-
-  const newPrototype = Object.create(SuperType.prototype);
-  newPrototype.constructor = SubType;
-  SubType.prototype = newPrototype;
+  SubType.prototype = new SuperType();
 
   const person = new SubType();
-
-  console.log(person.constructor);
 
   for (const i in person) {
     console.log(i);
   }
-})();
 
-(function () {
-  // compare the difference between Object.create() amd Object.assign()
+  // parasitic inheritance
 
-  const obj = {
-    a: 1,
+  const original = {};
+
+  const res = Object.create(original);
+
+  res.sayHi = function () {
+    console.log('hi');
   };
 
-  const foo = Object.create(obj);
-  const bar = Object.assign({}, obj);
+  // parasitic combination inheritance
+  (function () {
+    function SuperType(name: string) {
+      this.name = name;
+      this.color = ['red'];
+    }
 
-  obj.a = 2;
+    SuperType.prototype.sayName = function () {
+      console.log(this.name);
+    };
 
-  console.log(foo.a);
-  console.log(bar.a);
-})();
+    function SubType(name: string, age: number) {
+      SuperType.call(this, name);
 
-(function () {
-  // realize Object.create() using two methods
+      this.age = age;
+    }
 
-  function object1(o) {
-    const res = {};
-    Object.setPrototypeOf(res, o);
-    return res;
-  }
+    // if direct assign the SuperType.prototype to the
+    // SubType.prototype, then when the instance of
+    // SubType access the constructor property will
+    // get the SuperType instead SubType which isn't right behavior.
+    // So we need copy a new prototype from the SuperType.prototype
+    // And assign the SubType to the new prototype.constructor
 
-  function object2(o) {
-    function F() {}
-    F.prototype = o;
-    return new F();
-  }
+    // wrong method
+    // SubType.prototype = SuperType.prototype;
 
-  const foo = { a: 1 };
-  const obj1 = object1(foo);
-  const obj2 = object2(foo);
+    // right method
 
-  console.log(obj1);
-})();
+    const newPrototype = Object.create(SuperType.prototype);
+    newPrototype.constructor = SubType;
+    SubType.prototype = newPrototype;
+
+    const person = new SubType();
+
+    console.log(person.constructor);
+
+    for (const i in person) {
+      console.log(i);
+    }
+  })();
+
+  (function () {
+    // compare the difference between Object.create() amd Object.assign()
+
+    const obj = {
+      a: 1,
+    };
+
+    const foo = Object.create(obj);
+    const bar = Object.assign({}, obj);
+
+    obj.a = 2;
+
+    console.log(foo.a);
+    console.log(bar.a);
+  })();
+
+  (function () {
+    // realize Object.create() using two methods
+
+    function object1(o) {
+      const res = {};
+      Object.setPrototypeOf(res, o);
+      return res;
+    }
+
+    function object2(o) {
+      function F() {}
+      F.prototype = o;
+      return new F();
+    }
+
+    const foo = { a: 1 };
+    const obj1 = object1(foo);
+    const obj2 = object2(foo);
+
+    console.log(obj1);
+  })();
+} catch (error) {
+  console.error(error);
+}

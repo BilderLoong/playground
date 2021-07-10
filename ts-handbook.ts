@@ -1,6 +1,4 @@
 export {};
-import * as $ from 'jquery';
-import { boolean } from 'yargs';
 
 try {
   (function () {
@@ -8,10 +6,10 @@ try {
       name: string;
       age: number;
     }
-  interface Person {
-    name: string;
-    age: number;
-  }
+    interface Person {
+      name: string;
+      age: number;
+    }
 
     type FooType = {
       location: string[];
@@ -324,10 +322,9 @@ function getName(foo: Kinds) {
   }
 
   welcome(addName);
-  
-  let bar: (sen: string) => string;
-  bar = (sen:string)=>sen
 
+  let bar: (sen: string) => string;
+  bar = (sen: string) => sen;
 })();
 
 (function () {
@@ -336,12 +333,12 @@ function getName(foo: Kinds) {
   type foo = {
     description: string;
     (arg: number): boolean;
-    new (arg:string): Date
+    new (arg: string): Date;
   };
 
   function doSomething(fn: foo) {
-  console.log(fn.description, fn(1));
-  const date = new fn('1');
+    console.log(fn.description, fn(1));
+    const date = new fn('1');
   }
 })();
 (function () {
@@ -356,7 +353,20 @@ function getName(foo: Kinds) {
     console.log(fn.description, new fn());
     fn();
   }
+
+  function bar(con: new (name: string) => void) {
+    return new con('birudo');
+  }
+
+  type Con = {
+    new (name: string): void;
+  };
+
+  const cons: Con = function (name: string): void {};
+
+  bar(cons);
 })();
+
 (function () {
   function firstElement(arr: any[]) {
     return arr[0];
@@ -372,6 +382,10 @@ function getName(foo: Kinds) {
   const b = secondElement(['a', 's']);
   //    ^ string
 
+  function foo<T>(arg: T): T {
+    return res;
+  }
+
   // inference
   function map<Input, Output>(
     arr: Input[],
@@ -381,9 +395,16 @@ function getName(foo: Kinds) {
   }
   // constraints
 
-  function longest<Type extends { length: number }>(a: Type, b: Type) {
+  function hello<T>(name: T): T {
+    return name;
+  }
+
+  const res = hello('hello');
+
+  function longest<Type>(a: Type, b: Type) {
     //                              ^ constrain the Type must have property length
     if (a.length > b.length) {
+      //   ^ プロパティ 'length' は型 'Type' に存在しません
       return a;
     } else {
       return b;
@@ -403,20 +424,25 @@ function getName(foo: Kinds) {
   longest(1, 2);
   try {
     // working with constrained values
-    function minimumLength<Type extends { length: number }>(
-      obj: Type,
-      minimum: number
-    ): Type {
-      return { length: minimum };
-    } //         ^ wrong
+    function minimumLength<Type extends { length: number }>(): Type {
+      return { length: 1 };
+    } //         ^ 型 '{ length: number; }' を型 'Type' に割り当てることはできません。
+    //'              { length: number; }' は型 'Type' の制約に代入できますが、'Type' は制約 '{ length: number; }' の別のサブタイプでインスタンス化できることがあります。ts(2322)
 
     const arr = minimumLength([2, 3, 4], 9);
     console.log(arr.slice(1));
     //               ^crash here
+
+    function foo<T extends any[]>(age: T): T {
+      return age;
+    }
+
+    foo<number[] | string[]>([123, 11111111111]);
   } catch (err) {
     console.error(err);
   }
 })();
+
 try {
   // specifying type arguments
   function combine<Type>(arr1: Type[], arr2: Type[]): Type[] {
@@ -455,6 +481,186 @@ try {
   console.error(err);
 }
 
+try {
+  // Optional Modifiers
+  function draw({ age: number }): number {
+    return age;
+    // ^名前 'age' が見つかりません。
+  }
+} catch (error) {}
+
+try {
+  // readonly
+  interface Foo {
+    readonly cookie: string;
+  }
+
+  const bar: Foo = {
+    cookie: 'blue',
+  };
+
+  bar.cookie = 'red';
+  //  ^ 読み取り専用プロパティであるため、'cookie' に代入することはできません。
+} catch (error) {}
+
+try {
+  // Function overloads
+  function fn(x: number): void;
+  function fn(x: string) {}
+
+  function fn1(x: number): void;
+  function fn1(x: string | number): void {}
+
+  fn1('hello');
+
+  function fn2(x: number): void;
+  function fn2(): string {}
+
+  function foo(str: string): string;
+  function foo(num1: number, num2: number): number;
+  function foo(strOrNum1: string | number, num2?: number): string | number {
+    return 123;
+  }
+} catch (error) {}
+
+try {
+  // Function generic
+  function foo<Type extends any[]>(arr: Type) {
+    return arr[1];
+  }
+
+  const res1 = foo([1, 1, 1]);
+
+  function bar<Type>(arr: Type[]) {
+    return arr[1];
+  }
+
+  const res2 = bar([1, 1, 1]);
+} catch (error) {}
+
+try {
+  // Declaring `this` in function
+  // auto infer this
+  const user = {
+    id: 123,
+
+    admin: false,
+    becomeAdmin: function () {
+      this.admin = true;
+    },
+  };
+
+  // Explicitly set this pointer
+  interface User {
+    name: string;
+  }
+
+  interface Cat {
+    weight: number;
+    foo: () => void;
+  }
+
+  const littleCat: Cat = {
+    weight: 1,
+    foo: function () {},
+  };
+
+  function userFun(this: User): string {
+    console.log('userFun');
+    return 'userFun';
+  }
+
+  // littleCat.foo = foo;
+  littleCat.foo = userFun;
+  const bar = littleCat.foo();
+  console.log(bar);
+} catch (error) {}
+
+try {
+  interface Person {
+    age: number;
+    say: () => void;
+  }
+
+  const person: Person = {
+    age: 1,
+    say: function (): string {
+      return '1';
+    },
+  };
+} catch (error) {}
+
+// try {
+
+//   const foo: 'str1'|'str2';
+
+//   const xy = [8, 5];
+//   Math.atan2(...xy);
+
+//   const xy1: [8,5] = [8, 5]
+//   Math.atan2(...xy1)
+
+//   const xy2 = [8, 5] as const;
+//   Math.atan2(...xy2){
+
+// } catch (error)
+
+// }
+
+try {
+  const foo: any = 1;
+  const bar = foo as number;
+  const ho = <number>foo;
+} catch (error) {}
+
+try {
+  let foo1: 'str1' | 1 | 2 | true | false;
+
+  let bar: 1 | 0;
+  bar = Number(true);
+  //^型 'number' を型 '0 | 1' に割り当てることはできません。
+} catch (error) {}
+
+try {
+  // Object Destructuring
+  const { a, b } = {
+    b: 1,
+    a: 2,
+  };
+
+  console.log(a, b);
+} catch (error) {}
+
+try {
+  type numberFun = () => number;
+  type voidFun = () => void;
+  const fun1: voidFun = function (): string {
+    return 'fun1';
+  }; // non-void function is assignable to void function type;
+  const res1 = fun1();
+  //^ res1: void;
+  console.log(res1);
+  console.log(res1.length);
+
+  // const fun2:numberFun = function():void{}
+  [1, 2, 3].forEach;
+} catch (error) {}
+
+try {
+  interface Foo {
+    readonly bar: {
+      height: number;
+    };
+  }
+
+  let foo: Foo = {
+    bar: {
+      height: 123,
+    },
+  };
+
+  foo.bar.height = 1;
+} catch (error) {}
 try {
   // Readonly modifier
   interface Person {
@@ -622,6 +828,7 @@ try {
 } catch (error) {}
 try {
 } catch (error) {}
+
 try {
   const foo = 123;
   foo.toString();
@@ -632,4 +839,103 @@ try {
   process;
 
   Buffer.from('123');
+} catch (error) {}
+
+try {
+  // The Array Type
+  let foo: Array<number>;
+  let bar: Array<string>;
+} catch (error) {}
+
+try {
+  // The ReadonlyArray Type
+  let readonlyArray: ReadonlyArray<number>;
+  readonlyArray = [1, 2];
+  readonlyArray[1] = 333;
+  // ^ 型 'readonly number[]' のインデックス シグネチャは、読み取りのみを許可します。ts(2542)
+} catch (error) {}
+try {
+  let foo: [string, number, number?] = ['1', 2, 3];
+  foo.length; // (property) length: 2 | 3
+  foo[0] = '2';
+  foo = ['1', 2, 3];
+
+  foo = [1, 2];
+} catch (error) {}
+
+try {
+  let foo: readonly [string, number, number?] = ['1', 2, 3];
+  foo.length; // (property) length: 2 | 3
+  foo[0] = '2';
+  foo = ['1', 2, 3];
+
+  foo = [1, 2];
+} catch (error) {}
+
+try {
+  // Generic Types
+  function foo<T>(arg: T): T {
+    return arg;
+  }
+
+  let bar: <T>(arg: T) => T;
+  bar = function <T>(arg: T): T {
+    return arg;
+  };
+
+  const fun1 = function <T>(arg: T): T {
+    return arg;
+  };
+  const fun2 = foo;
+} catch (error) {}
+
+try {
+  // Generic Type
+  {
+    interface GenericFun {
+      <T>(arg: T): T;
+    }
+
+    const genericFun: GenericFun = function <T>(arg: T): T {
+      return arg;
+    };
+  }
+
+  {
+    interface GenericFun<T> {
+      (arg: T): T;
+    }
+
+    let genericFun: GenericFun<number> = function <T>(arg: T): T {
+      return arg;
+    };
+
+    genericFun;
+
+    genericFun = function (arg: number): number {
+      return arg;
+    };
+
+    genericFun;
+  }
+} catch (error) {}
+
+try {
+  // The keyof type operator
+
+  type Point = {
+    x: number;
+    y: number;
+  };
+
+  type P = keyof Point;
+  let foo: P;
+} catch (error) {}
+
+try {
+  let s: string;
+  let n: typeof s;
+  //  ^ let n: string
+
+  console.log(n);
 } catch (error) {}

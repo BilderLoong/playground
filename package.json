@@ -5,6 +5,9 @@
   "license": "MIT",
   "scripts": {},
   "dependencies": {
+    "@types/immutable": "^3.8.7",
+    "seamless-immutable": "^7.1.4",
+    "immutable": "^4.0.0-rc.12",
     "buckets-js": "^1.98.2",
     "express": "^4.17.1",
     "ts-node": "^9.1.1"
@@ -17,6 +20,7 @@
     "@types/express": "^4.17.11",
     "@types/jest": "^26.0.22",
     "@types/jquery": "^3.5.5",
+    "@types/node": "^15.12.5",
     "@typescript-eslint/eslint-plugin": "^4.21.0",
     "@typescript-eslint/parser": "^4.21.0",
     "babel-jest": "^26.6.3",
