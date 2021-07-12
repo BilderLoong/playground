@@ -1,28 +1,29 @@
 markOverflowCard();
 function markOverflowCard() {
-	// Change to toggle whether show the toast.
+  // Change to toggle whether show the toast.
   const DEBUG = false;
 
   if (!_canUseToggleFlag()) {
-    toast(`can't use toggle flag`);
+    display(`can't use toggle flag`);
     return;
   }
 
   const BLUE = 4;
   const NONE = 0;
 
-  toast(`Flag: ${AnkiDroidJS.ankiGetCardFlag()}`);
-  toast(`_isNeedScroll(): ${_isNeedScroll()}`);
+  display(`Flag: ${AnkiDroidJS.ankiGetCardFlag()}`);
+  display(`_isNeedScroll(): ${_isNeedScroll()}`);
 
   if (AnkiDroidJS.ankiGetCardFlag() !== BLUE && _isNeedScroll()) {
     // blue flag means this cart has overflow content.
     ankiToggleFlag(BLUE);
-    toast(`Add blue flag`);
+    ankiShowOptionsMenu();
+    display(`Added blue flag`);
   }
 
   if (AnkiDroidJS.ankiGetCardFlag() === BLUE && !_isNeedScroll()) {
     ankiToggleFlag(NONE);
-    toast(`Remove blue flag`);
+    display(`Remove blue flag`);
   }
 
   /**
@@ -31,16 +32,16 @@ function markOverflowCard() {
   function _isNeedScroll() {
     const bodyWidth = document.body.clientWidth;
     const bodyScrollWidth = document.body.scrollWidth;
-    // const viewPortWidth = document.documentElement.clientWidth;
-    // const viewPortScrollWidth = document.documentElement.scrollWidth;
+    const viewPortWidth = document.documentElement.clientWidth;
+    const viewPortScrollWidth = document.documentElement.scrollWidth;
 
-    // toast(`viewPortScrollWidth: ${viewPortScrollWidth}`);
-    // toast(`viewPortWidth: ${viewPortWidth}`);
-    // toast(`bodyScrollWidth: ${bodyScrollWidth}`);
-    // toast(`bodyWidth: ${bodyWidth}`);
-    // toast(`window.inner: ${window.innerWidth}`);
-    const res = bodyScrollWidth > bodyWidth;
-    toast(res);
+    display(`viewPortScrollWidth: ${viewPortScrollWidth}`);
+    display(`viewPortWidth: ${viewPortWidth}`);
+    display(`bodyScrollWidth: ${bodyScrollWidth}`);
+    display(`bodyWidth: ${bodyWidth}`);
+    display(`window.inner: ${window.innerWidth}`);
+    const res = bodyScrollWidth - bodyWidth > 100;
+    // toast(res);
     return res;
   }
 
@@ -61,7 +62,7 @@ function markOverflowCard() {
    * @returns {boolean}
    */
   function _canUseToggleFlag() {
-    toast(`_canUseToggleFlag run`);
+    display(`_canUseToggleFlag run`);
     try {
       // To use toggleFlag api need to initialize first: https://github.com/ankidroid/Anki-Android/wiki/AnkiDroid-Javascript-API#initialize
       const apiStatus = AnkiDroidJS.init(
@@ -71,15 +72,15 @@ function markOverflowCard() {
       const api = JSON.parse(apiStatus);
 
       if (!api['toggleFlag']) {
-        toast(`can't use api[toggleFlag]`);
+        display(`can't use api[toggleFlag]`);
         return false;
       }
     } catch (error) {
-      toast(`can't use AnkiDroidJS`);
+      display(`can't use AnkiDroidJS`);
       return false;
     }
 
-    toast(`able to use AnkiDroidJS`);
+    display(`able to use AnkiDroidJS`);
     return true;
   }
 
@@ -87,9 +88,21 @@ function markOverflowCard() {
    * @param {string} msg
    * @return {void}
    */
-  function toast(msg) {
+  function display(msg) {
     if (_canUseAnkiDroidJS() && DEBUG) {
-      ankiShowToast(msg.toString());
+      msg = msg.toString();
+      addStrToCard(msg);
     }
   }
+}
+
+/**
+ * @description add string to the begin of the card for debugging
+ * @param {string} str;
+ * @return {HTMLElement};
+ */
+function addStrToCard(str) {
+  const card = document.getElementsByClassName('card')[0];
+  card.innerHTML = `${str}<br/> ${card.innerHTML}`;
+  return card;
 }
