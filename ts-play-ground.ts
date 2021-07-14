@@ -1,4 +1,18 @@
 try {
+  // hand write extends function
+
+  function extend(sup: Function, sub: Function): Function {
+    const proto = Object.create(sup.prototype);
+    proto.constructor = sub;
+    sub.prototype = proto;
+
+    return function (this: unknown, ...args: Array<unknown>) {
+      sup.apply(this, args);
+      sub.apply(this, args);
+    };
+  }
+} catch (error) {}
+try {
   const res = JSON.stringify(() => 1);
   console.log(res);
 
@@ -371,7 +385,7 @@ try {
 
   // parasitic combination inheritance
   (function () {
-    function SuperType(name: string) {
+    function SuperType(this: any, name: string) {
       this.name = name;
       this.color = ['red'];
     }
@@ -380,7 +394,7 @@ try {
       console.log(this.name);
     };
 
-    function SubType(name: string, age: number) {
+    function SubType(this: any, name: string, age: number) {
       SuperType.call(this, name);
 
       this.age = age;
