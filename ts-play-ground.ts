@@ -1,4 +1,25 @@
 try {
+  const bar = {
+    age: 12,
+  };
+
+  function foo(this: unknown, name: string): unknown {
+    console.log(name);
+    console.log(this);
+    return this;
+  }
+
+  const bindFoo = foo.myBind(bar);
+
+  Function.prototype.myBind = function (...args: unknown[]) {
+    const self = this;
+
+    return function (...bindArgs: unknown[]) {
+      return self.call(args[0], args.concat([bindArgs]));
+    };
+  };
+} catch (error) {}
+try {
   // hand write extends function
 
   function extend(sup: Function, sub: Function): Function {

@@ -1,6 +1,10 @@
 setTimeout(markOverflowCard, 0);
 
 function markOverflowCard() {
+  if (!resizeDone) {
+    setTimeout(markOverflowCard, 0);
+  }
+
   // Change to toggle whether show the toast.
   const DEBUG = false;
 
