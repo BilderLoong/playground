@@ -1,23 +1,84 @@
 try {
+  console.log(/[\[\{\(]/.test('['));
+  console.log('['.match(/[\[\{\(]/));
+  console.log('({'.search(/[\[\{\(]/));
+} catch (error) {}
+try {
+  const foo = function (...args) {
+    if (this instanceof foo) {
+      this.context = 'new create object';
+    }
+    console.log(this);
+    console.log(...args);
+  };
+
+  const bar = foo.bind({ context: 'bound this' }, 'bound args');
+  new bar('calling args');
+} catch (error) {}
+try {
+  const foo = function (this: unknown) {
+    console.log(this);
+  }.call();
+} catch (error) {}
+try {
+  function call(fun: AnyFunction) {
+    return fun();
+  }
+  class Foo {
+    arrSayThis: () => void;
+    normalSayThis: () => void;
+    constructor() {
+      this.arrSayThis = () => console.log('arrSayThis:', this);
+
+      this.normalSayThis = function () {
+        console.log('normalSayThis:', this);
+      };
+
+      call(this.arrSayThis);
+      call(this.normalSayThis);
+    }
+  }
+
+  const foo = new Foo();
+} catch (error) {}
+try {
+  // handwrite bind
+  const foo = function () {
+    console.log('target function');
+  }.bind({ name: 1 }, 1, 2, 3);
+  console.log(1);
+} catch (error) {}
+try {
+  // handwrite bind don't consider the situation use new keyword
+  type AnyFunction = (...args: unknown[]) => unknown;
+  interface Function {
+    myBind: <T>(context: any, ...args: T[]) => AnyFunction;
+  }
+
+  Function.prototype.myBind = function (
+    this: AnyFunction,
+    context: any,
+    ...args: unknown[]
+  ) {
+    const fn = this;
+
+    return function (this: unknown, ...bindArgs: unknown[]) {
+      return fn.call(context ?? this, ...args, ...bindArgs);
+    };
+  };
+
   const bar = {
     age: 12,
   };
 
-  function foo(this: unknown, name: string): unknown {
-    console.log(name);
-    console.log(this);
-    return this;
+  function foo(this: unknown, ...args: unknown[]): unknown {
+    console.log('this:', this);
+    console.log('args:', args);
+    return args;
   }
 
-  const bindFoo = foo.myBind(bar);
-
-  Function.prototype.myBind = function (...args: unknown[]) {
-    const self = this;
-
-    return function (...bindArgs: unknown[]) {
-      return self.call(args[0], args.concat([bindArgs]));
-    };
-  };
+  const boundFoo = foo.myBind(bar);
+  boundFoo(1, 2, 3, 4);
 } catch (error) {}
 try {
   // hand write extends function
