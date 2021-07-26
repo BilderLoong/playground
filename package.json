@@ -13,7 +13,8 @@
     "express": "^4.17.1",
     "immutable": "^4.0.0-rc.12",
     "seamless-immutable": "^7.1.4",
-    "ts-node": "^9.1.1"
+    "ts-node": "^9.1.1",
+    "underscore": "^1.13.1"
   },
   "devDependencies": {
     "@babel/core": "^7.13.15",
