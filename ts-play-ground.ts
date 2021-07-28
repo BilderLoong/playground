@@ -1,4 +1,6 @@
 try {
+} catch (error) {}
+try {
   function dealDishInfo(menuSku, cartSku) {
     if (!menuSku || !cartSku) return null;
     // 去掉 sku 级别失效商品 (无||不在可售时间||售完)
