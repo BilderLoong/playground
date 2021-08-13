@@ -1,6 +1,10 @@
 try {
 } catch (error) {}
 try {
+  const res = '123abc.,'.match(/[\d]/g);
+  console.log(res);
+} catch (error) {}
+try {
   function dealDishInfo(menuSku, cartSku) {
     if (!menuSku || !cartSku) return null;
     // 去掉 sku 级别失效商品 (无||不在可售时间||售完)
@@ -643,6 +647,42 @@ try {
 
     console.log(obj1);
   })();
+} catch (error) {}
+
+try {
+  const res = '123abc.,'.match(/[\d]/g);
+  console.log(res);
+} catch (error) {}
+try {
+  const arr1 = [1, 2, [3, 4]];
+  const res1 = flatten(arr1);
+  console.log(res1);
+
+  const arr2 = [['a', ' b', ['c', ' d'], 'asdf'], 1, 2, [3, 4]];
+  const res2 = flatten(arr2);
+  console.log(res2);
+
+  function flatten(arr: Array<unknown>) {
+    const stack = [...arr];
+    const res = [];
+
+    while (stack.length) {
+      let temp = stack.shift();
+      if (Array.isArray(temp)) {
+        stack.unshift(...temp);
+      } else {
+        res.push(temp);
+      }
+    }
+
+    return res;
+  }
+
+  function isArr(arr: Array<unknown>) {
+    // return arr instanceof Array;
+    // return arr.constructor === Array;
+    // return Object.prototype.toString.call(arr) === '[object Array]';
+  }
 } catch (error) {
   console.error(error);
 }

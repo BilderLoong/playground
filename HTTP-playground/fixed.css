@@ -1,0 +1,13 @@
+.bottom-bars {
+  position: fixed;
+
+  /* What is the default width of out flow elements? */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.upper {
+  padding-bottom: 250px;
+}

@@ -939,3 +939,17 @@ try {
 
   console.log(n);
 } catch (error) {}
+
+try {
+  // class implements
+  interface Foo {
+    name: string;
+  }
+
+  class Bar implements Foo {
+    name = '1';
+  }
+} catch (error) {}
+
+try {
+} catch (error) {}
