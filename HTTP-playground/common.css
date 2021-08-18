@@ -8,6 +8,7 @@ body {
 
 .place-holder {
   height: 30px;
+  width: 100%;
 }
 
 .place-holder:last-child {
@@ -15,7 +16,6 @@ body {
 }
 
 .wrapper {
-  height: 100vh;
 }
 
 .upper {
@@ -23,5 +23,6 @@ body {
 }
 
 .bottom-bars {
+  width: 100%;
   background-color: lightcoral;
 }

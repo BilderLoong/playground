@@ -1,4 +1,6 @@
 try {
+  let foo: ReadonlyArray<number> = [1, 2, 3];
+  foo = [9, 9, 9];
 } catch (error) {}
 try {
   const res = '123abc.,'.match(/[\d]/g);

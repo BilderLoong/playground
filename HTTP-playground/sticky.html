@@ -18,8 +18,12 @@
       .bottom-bars {
         position: sticky;
         bottom: 0;
-        left: 0;
-        right: 0;
+      }
+
+      .bottom-bars::before {
+        content: '';
+        width: 100%;
+        height: 100%;
       }
     </style>
   </head>
@@ -99,7 +103,15 @@
         <div class="place-holder"></div>
         <div class="place-holder"></div>
         <div class="place-holder"></div>
+        <div class="place-holder"></div>
       </div>
     </div>
+    <script>
+      const placeHolder = document.getElementsByClassName('place-holder')[0];
+      const bottomBars = document.getElementsByClassName('bottom-bars')[0];
+      document.addEventListener('click', () => {
+        bottomBars.appendChild(placeHolder.cloneNode(true));
+      });
+    </script>
   </body>
 </html>
