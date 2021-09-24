@@ -46,6 +46,173 @@ try {
   interface Foo {
     x: number;
     y: string;
+  function getMessage(object) {
+    const data = object.data;
+    const message1 = JSON.parse(data);
+    const message2 = JSON.parse(message1.message);
+    const res = JSON.parse(message2.message);
+    return res;
+  }
+
+  const obj = {
+    command: 7,
+    data: '{"message":"{\\"bizType\\":1,\\"msgType\\":1,\\"message\\":\\"{\\\\\\"data\\\\\\":{\\\\\\"allUsers\\\\\\":[{\\\\\\"avatar\\\\\\":\\\\\\"\\\\\\",\\\\\\"count\\\\\\":0,\\\\\\"nickname\\\\\\":\\\\\\"\\\\\\",\\\\\\"uid\\\\\\":\\\\\\"04687281845118957401\\\\\\"},{\\\\\\"avatar\\\\\\":\\\\\\"\\\\\\",\\\\\\"count\\\\\\":0,\\\\\\"nickname\\\\\\":\\\\\\"\\\\\\",\\\\\\"uid\\\\\\":\\\\\\"04826250544900272523\\\\\\"}],\\\\\\"cartId\\\\\\":147597,\\\\\\"cloudCart\\\\\\":{\\\\\\"dishInfos\\\\\\":[{\\\\\\"count\\\\\\":1,\\\\\\"createTime\\\\\\":1630486827209,\\\\\\"itemNo\\\\\\":\\\\\\"1e9af610620f5fa96001bea22dd61e5f\\\\\\",\\\\\\"methods\\\\\\":[],\\\\\\"mustCount\\\\\\":-1,\\\\\\"packages\\\\\\":[],\\\\\\"skuId\\\\\\":\\\\\\"898531601\\\\\\",\\\\\\"skuName\\\\\\":\\\\\\"云的称重菜\\\\\\",\\\\\\"spuId\\\\\\":\\\\\\"898531600\\\\\\",\\\\\\"tastes\\\\\\":[{\\\\\\"groupId\\\\\\":\\\\\\"42778983\\\\\\",\\\\\\"groupName\\\\\\":\\\\\\"🐏的加料\\\\\\",\\\\\\"items\\\\\\":[{\\\\\\"count\\\\\\":1,\\\\\\"id\\\\\\":\\\\\\"237876462\\\\\\",\\\\\\"name\\\\\\":\\\\\\"辣椒\\\\\\"}]}],\\\\\\"updateTime\\\\\\":1630486827209,\\\\\\"userAvatars\\\\\\":[{\\\\\\"count\\\\\\":1,\\\\\\"uid\\\\\\":\\\\\\"04826250544900272523\\\\\\"}],\\\\\\"weight\\\\\\":2}],\\\\\\"mealType\\\\\\":0,\\\\\\"peopleCount\\\\\\":0,\\\\\\"seqId\\\\\\":3,\\\\\\"type\\\\\\":0,\\\\\\"version\\\\\\":6},\\\\\\"ignoreMerge\\\\\\":false,\\\\\\"operaUid\\\\\\":\\\\\\"04826250544900272523\\\\\\",\\\\\\"shopId\\\\\\":600026005,\\\\\\"tableNum\\\\\\":\\\\\\"10129574\\\\\\",\\\\\\"tips\\\\\\":[{\\\\\\"toastText\\\\\\":\\\\\\"小伙伴点了 云的称重菜 x2\\\\\\",\\\\\\"toastType\\\\\\":2}]},\\\\\\"type\\\\\\":1}\\"}","messageId":"AQpJ0ssCg9qrAq5S","token":"ANwKSdLLG5jdsHexrZA8+Q=="}',
+  };
+
+  console.log(getMessage(obj));
+} catch (error) {}
+try {
+  const input = {
+    command: 5,
+    data: {
+      messageId: 'qif2tHgw52V7x45DGvM81cgA',
+      token: 'ANwKSdLLG5jRPHK+jyQ5GA==',
+      rt: 'Cr2IVg==',
+      message: {
+        bizType: 1,
+        msgType: 1,
+        message:
+          '{"type":1,"data":{"operationList":[{"seqId":1,"createTime":1630486000068,"operaType":5,"operateCartDishList":[{"itemNo":"1e9af610620f5fa96001bea22dd61e5f","tastes":[{"groupId":"42778983","groupName":"🐏的加料","items":[{"id":"237876462","name":"辣椒","count":1}]}],"methods":[],"packages":[],"spuId":"898531600","skuId":"898531601","skuName":"云的称重菜","mustCount":-1,"operateWeight":3}],"auto":false}],"localVersion":1,"cartId":147597,"shopId":600026005,"tableNum":"10129574"}}',
+      },
+    },
+  };
+  const res = JSON.parse(input.data.message.message);
+  console.log(res);
+} catch (error) {}
+try {
+  function makeActionCreator(
+    type: string,
+    actionPayloadName: string,
+    changingScope: string[]
+  ) {
+    return function (obj: Record<string | number | symbol, unknown>) {
+      const payload = obj;
+      return {
+        type,
+        [actionPayloadName]: payload,
+      };
+    };
+  }
+  const selectedSkuDishes = makeActionCreator('type', 'skuDishes', [
+    'menuSkuDish',
+    'cartSkuDish',
+    'menuPackageSku',
+    'cartPackageSku',
+  ]);
+  const res = selectedSkuDishes({ menuSkuDish: 'asdf' });
+  console.log(res);
+} catch (error) {}
+try {
+  const arr = ['aaa', 'bbb', 'ccc'] as const;
+  type myCustomType = typeof arr[number];
+  type Index = 'a' | 'b';
+  interface obj {
+    [key in Index]: string;
+  }
+} catch (error) {}
+try {
+  /**
+   * Creates an object composed of the picked object properties.
+   * @param object the object be picked.
+   * @param allowList the property to pick.
+   * eg.  expect(pick({ foo: 1, bar: 2, dodo: 2 }, ['bar', 'didi'])).isEqual({ bar: 2 });
+   *
+   */
+  function pick<T extends Record<string | number, unknown>>(
+    object: T,
+    allowList: string[]
+  ): {
+    [Property in keyof T]?: T[Property];
+  } {
+    const res = allowList.reduce<T>((obj: T, key) => {
+      if (object.hasOwnProperty(key)) {
+        return { ...obj, [key]: object[key] };
+      }
+
+      return obj;
+    }, <T>{});
+
+    return res;
+  }
+  const res = pick({ foo: 1, bar: 2 }, []);
+  console.log(res);
+} catch (error) {}
+try {
+  function foo<T extends Record<string | number, unknown>>(): void {}
+} catch (error) {}
+try {
+  let foo = {};
+  let bubu: Record<string, unknown> = {};
+  foo = bubu;
+  const bar = ['s', 'b'].reduce<number>((acc, cur) => {
+    console.log(pre, cur);
+    return 1;
+  }, 0);
+} catch (error) {}
+try {
+  function pick<T extends object>(
+    object: T,
+    allowList: string[]
+  ): {
+    [Property in keyof T]?: T[Property];
+  } {
+    const res = allowList.reduce<T>((obj: T, key) => {
+      if (object.hasOwnProperty(key)) {
+        return { ...obj, [key]: object[key] };
+      }
+
+      return obj;
+    }, {});
+
+    return res;
+  }
+
+  console.log(pick({ foo: 1, bar: 2, name: 'birudo' }, ['bar', 'foo']));
+} catch (error) {}
+try {
+  interface Foo {
+    name: string;
+    age: string;
+  }
+
+  let bar: keyof Foo;
+} catch (error) {}
+try {
+  let foo: ReadonlyArray<number> = [1, 2, 3];
+  foo = [9, 9, 9];
+} catch (error) {}
+try {
+  const res = '123abc.,'.match(/[\d]/g);
+  console.log(res);
+} catch (error) {}
+try {
+  function dealDishInfo(menuSku, cartSku) {
+    if (!menuSku || !cartSku) return null;
+    // 去掉 sku 级别失效商品 (无||不在可售时间||售完)
+    if (!menuSku || !menuSku.validity || menuSku.soldOut) return null;
+
+    // 校验菜品信息
+    if (menuSku.skuName !== cartSku.skuName) return null;
+    // the below li is difference.
+    if (menuSku.currentPrice !== cartSku.currentPrice) return null;
+    if (menuSku.originalPrice !== cartSku.originalPrice) return null;
+    if (menuSku.memberPrice !== cartSku.memberPrice) return null;
+    if (menuSku.dishType !== cartSku.dishType) return null;
+    if (menuSku.canWeight !== cartSku.canWeight) return null;
+    if (menuSku.unit !== cartSku.unit) return null;
+
+    // 有规格时才判断
+    if (menuSku.specAttrs && cartSku.specAttrs) {
+      // TODO:如何判断规格信息一致
+      let isEqual = true;
+      // TODO: 代码有问题，此处不会走到false
+      Object.keys(menuSku.specAttrs).forEach((key) => {
+        if (menuSku.specAttrs[0][key] !== cartSku.specAttrs[0][key]) {
+          isEqual = false;
+        }
+      });
+      if (!isEqual) return null;
+      // if (!Immutable.is(menuSku.specAttrs, cartSku.specAttrs)) return null;
   }
 } catch (error) {}
 try {
@@ -608,6 +775,42 @@ try {
 
     console.log(obj1);
   })();
+} catch (error) {}
+
+try {
+  const res = '123abc.,'.match(/[\d]/g);
+  console.log(res);
+} catch (error) {}
+try {
+  const arr1 = [1, 2, [3, 4]];
+  const res1 = flatten(arr1);
+  console.log(res1);
+
+  const arr2 = [['a', ' b', ['c', ' d'], 'asdf'], 1, 2, [3, 4]];
+  const res2 = flatten(arr2);
+  console.log(res2);
+
+  function flatten(arr: Array<unknown>) {
+    const stack = [...arr];
+    const res = [];
+
+    while (stack.length) {
+      let temp = stack.shift();
+      if (Array.isArray(temp)) {
+        stack.unshift(...temp);
+      } else {
+        res.push(temp);
+      }
+    }
+
+    return res;
+  }
+
+  function isArr(arr: Array<unknown>) {
+    // return arr instanceof Array;
+    // return arr.constructor === Array;
+    // return Object.prototype.toString.call(arr) === '[object Array]';
+  }
 } catch (error) {
   console.error(error);
 }

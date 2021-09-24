@@ -1,0 +1,13 @@
+.wrapper {
+  display: grid;
+  grid-template-rows: 1fr max-content;
+  height: 100vh;
+}
+
+.upper {
+  overflow: auto;
+}
+
+.bottom-bars {
+  min-height: max-content;
+}

@@ -1139,4 +1139,15 @@ try {
   type T10 = Foo<{ a: string; b: (x: string) => void }>; // string
   type T12 = Foo<{ a: string; b: (x: number) => void }>; // string
   type T11 = Foo<{ a: string; b: number }>; // string | number
+  // class implements
+  interface Foo {
+    name: string;
+  }
+
+  class Bar implements Foo {
+    name = '1';
+  }
+} catch (error) {}
+
+try {
 } catch (error) {}

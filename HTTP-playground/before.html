@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./index.js" defer></script>
+    <link rel="stylesheet" href="./common.css" />
+
+    <style>
+      .upper {
+      }
+
+      .bottom-bars {
+        position: fixed;
+        bottom: 0;
+      }
+
+      .bottom-bars::after {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="upper">
+        reiciendis porro deleniti, nam perferendis id molestiae architecto
+        repellat consectetur omnis iure facilis quis quod incidunt voluptatem
+        dolore.Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+        Nesciunt asperiores voluptatibus accusantium reiciendis porro deleniti,
+        nam perferendis id molestiae architecto repellat consectetur omnis iure
+        facilis quis quod incidunt voluptatem dolore.Lorem ipsum dolor sit, amet
+        consectetur adipisicing elit. Nesciunt asperiores voluptatibus
+        accusantium reiciendis porro deleniti, nam perferendis id molestiae
+        architecto repellat consectetur omnis iure facilis quis quod incidunt
+        voluptatem dolore.Lorem ipsum dolor sit, amet consectetur adipisicing
+        elit. Nesciunt asperiores voluptatibus accusantium reiciendis porro
+        deleniti, nam perferendis id molestiae architecto repellat consectetur
+        omnis iure facilis quis quod incidunt voluptatem dolore.Lorem ipsum
+        dolor sit, amet consectetur adipisicing elit. Nesciunt asperiores
+        voluptatibus accusantium reiciendis porro deleniti, nam perferendis id
+        molestiae architecto repellat consectetur omnis iure facilis quis quod
+        incidunt voluptatem dolore.Lorem ipsum dolor sit, amet consectetur
+        adipisicing elit. Nesciunt asperiores voluptatibus accusantium
+        reiciendis porro deleniti, nam perferendis id molestiae architecto
+        repellat consectetur omnis iure facilis quis quod incidunt voluptatem
+        dolore.Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+        Nesciunt asperiores voluptatibus accusantium reiciendis porro deleniti,
+        nam perferendis id molestiae architecto repellat consectetur omnis iure
+        facilis quis quod incidunt voluptatem dolore.Lorem ipsum dolor sit, amet
+        consectetur adipisicing elit. Nesciunt asperiores voluptatibus
+        accusantium reiciendis porro deleniti, nam perferendis id molestiae
+        architecto repellat consectetur omnis iure facilis quis quod incidunt
+        voluptatem dolore.Lorem ipsum dolor sit, amet consectetur adipisicing
+        elit. Nesciunt asperiores voluptatibus accusantium reiciendis porro
+        deleniti, nam perferendis id molestiae architecto repellat consectetur
+        omnis iure facilis quis quod incidunt voluptatem dolore.Lorem ipsum
+        dolor sit, amet consectetur adipisicing elit. Nesciunt asperiores
+        voluptatibus accusantium reiciendis porro deleniti, nam perferendis id
+        molestiae architecto repellat consectetur omnis iure facilis quis quod
+        incidunt voluptatem dolore.Lorem ipsum dolor sit, amet consectetur
+        adipisicing elit. Nesciunt asperiores voluptatibus accusantium
+        reiciendis porro deleniti, nam perferendis id molestiae architecto
+        repellat consectetur omnis iure facilis quis quod incidunt voluptatem
+        dolore.Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+        Nesciunt asperiores voluptatibus accusantium reiciendis porro deleniti,
+        nam perferendis id molestiae architecto repellat consectetur omnis iure
+        facilis quis quod incidunt voluptatem dolore.Lorem ipsum dolor sit, amet
+        consectetur adipisicing elit. Nesciunt asperiores voluptatibus
+        accusantium reiciendis porro deleniti, nam perferendis id molestiae
+        architecto repellat consectetur omnis iure facilis quis quod incidunt
+        voluptatem dolore.Lorem ipsum dolor sit, amet consectetur adipisicing
+        elit. Nesciunt asperiores voluptatibus accusantium reiciendis porro
+        deleniti, nam perferendis id molestiae architecto repellat consectetur
+        omnis iure facilis quis quod incidunt voluptatem dolore.Lorem ipsum
+        dolor sit, amet consectetur adipisicing elit. Nesciunt asperiores
+        voluptatibus accusantium reiciendis porro deleniti, nam perferendis id
+        molestiae architecto repellat consectetur omnis iure facilis quis quod
+        incidunt voluptatem dolore.Lorem ipsum dolor sit, amet consectetur
+        adipisicing elit. Nesciunt asperiores voluptatibus accusantium
+        reiciendis porro deleniti, nam perferendis id molestiae architecto
+        repellat consectetur omnis iure facilis quis quod incidunt voluptatem
+        dolore.orem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt
+        asperiores voluptatibus accusantium reiciendis porro deleniti, nam
+        perferendis id molestiae architecto repellat consectetur omnis iure
+        facilis quis quod incidunt voluptatem dolore.
+        -------------------------------end----------------------------------------
+      </div>
+
+      <div class="bottom-bars">
+        <div class="place-holder"></div>
+        <div class="place-holder"></div>
+        <div class="place-holder"></div>
+        <div class="place-holder"></div>
+        <div class="place-holder"></div>
+        <div class="place-holder"></div>
+        <div class="place-holder"></div>
+      </div>
+    </div>
+    <script>
+      const placeHolder = document.getElementsByClassName('place-holder')[0];
+      const bottomBars = document.getElementsByClassName('bottom-bars')[0];
+      document.addEventListener('click', () => {
+        bottomBars.appendChild(placeHolder.cloneNode(true));
+      });
+    </script>
+  </body>
+</html>

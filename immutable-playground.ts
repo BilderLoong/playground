@@ -1,14 +1,7 @@
-import { Map, Set } from 'immutable';
+import Immutable from 'seamless-immutable';
 
-const map1 = Map({ a: 1 });
-console.log(map1);
+const foo = Immutable({ name: 'birudo' });
 
-const set1 = Set([1]);
-console.log(set1);
-
-console.log(set1.has(1));
-console.log(set1.has(2));
-
-const newMap = map1.set('a', 50);
-console.log(map1.get('a'));
-console.log(newMap.get('a'));
+Object.keys(foo).forEach((k) => {
+  console.log(k, foo.getIn([ k ])
+});
