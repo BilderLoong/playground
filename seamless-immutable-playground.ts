@@ -39,3 +39,23 @@ try {
 } catch (error) {
   console.error(error);
 }
+
+const res1 = Immutable([1, 2, 3]).reduce(
+  (pre: number, cur: number) => pre + cur
+);
+console.log(res1);
+
+try {
+  const res2 = Immutable([1, 2, 3]).reduce((pre: Set<number>, cur: number) => {
+    pre.add(cur);
+    // console.log(Immutable.isImmutable(pre));
+    return pre;
+  }, new Set());
+
+  console.log({ res2 });
+  console.log(Immutable.isImmutable(res2));
+} catch (error) {
+  console.error(error);
+}
+const res3 = Immutable(new Set());
+console.log(res3);

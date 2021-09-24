@@ -939,3 +939,215 @@ try {
 
   console.log(n);
 } catch (error) {}
+
+try {
+  // Generic Types
+
+  function identity<T>(input: T): T {
+    return input;
+  }
+
+  const anotherIdentity: <U>(arg: U) => U = identity;
+  type type1 = <T>() => T;
+  type type2 = <U>() => U;
+
+  type type3 = type2;
+  // Using Type Parameters in Generic Constraints
+  // function getProperty<T, U extends keyof T>(obj: T, key: string) {
+  // function getProperty<T, U extends keyof T>(obj: T, key: U) {
+  function getProperty<T, U extends T>(obj: T, key: U) {
+    return obj[key];
+  }
+
+  const obj = { a: 1, b: 2 };
+  getProperty(obj, 'a');
+  getProperty(obj, 'm');
+} catch (error) {}
+
+try {
+  // Keyof
+  interface Foo {
+    name: string;
+    age: number;
+  }
+
+  type Bar = {
+    name: string;
+    age: number;
+  };
+
+  let foo: string | number = '1';
+  console.log(foo);
+  foo = 1;
+
+  typeof foo;
+  foo = 'name';
+  type foo1 = typeof foo;
+  let bar: keyof Bar = 'age';
+
+  interface Foo {
+    [key: string]: number;
+  }
+
+  type FooKeys = keyof Foo;
+  //   ^ type FooKeys = string | number
+} catch (error) {}
+
+try {
+  // Indexed Access Types
+  type Person = {
+    name: string;
+    age: number;
+  };
+
+  type I1 = Person['name'];
+  //   ^ type I1 = string
+  type IAll = Person[keyof Person];
+
+  const arr = ['name', 'age', 1, { bibi: 1 }];
+  const _arr = <const>['name', 'age', 1, { bibi: 1 }];
+  type _arr0 = typeof _arr[0];
+  type _arr3 = typeof _arr[3];
+  type _arrAll = typeof _arr[number];
+  type arr0 = typeof arr[0];
+  type age = typeof arr[number]['bibi'];
+  type arrAll = typeof arr[number];
+
+  const MyArray = [
+    { name: 'Alice', age: 15 },
+    { name: 'Bob', age: 23 },
+    { name: 'Eve', age: 38 },
+    'string',
+  ];
+
+  type Person_ = typeof MyArray[number];
+} catch (error) {}
+try {
+  type Foo = {
+    [key: string]: boolean | number;
+    [index: number]: boolean;
+  };
+
+  type FooStringKey = Foo[string];
+  // type FooStringKey = number | boolean
+} catch (error) {}
+try {
+  const arr: readonly any[] = [1, '1', true];
+  type arrElementsType = typeof arr[number];
+} catch (error) {}
+try {
+  const foo = <const>[1, '1', true];
+  //const foo: readonly [1, '1', true];
+  const bar = <const>{
+    name: 'birudo',
+    age: '21',
+  };
+  /*
+const bar: {
+  name: string;
+  age: string;
+};
+*/
+
+  /* 
+const bar: {
+  readonly name: 'birudo';
+  readonly age: '21';
+};
+*/
+} catch (error) {}
+try {
+  // Mapped Types
+  // type Foo<T extends string | number | symbol> = {
+  type Foo<T> = {
+    [key in keyof T]: string;
+  };
+
+  type didi = Foo<1 | 2 | 3>;
+  type dodo = 1 | 2 | 3;
+  type dada = keyof '';
+} catch (error) {}
+try {
+  type T = 'name' | 1;
+  type Foo = {
+    // [key in T]: string;
+    [key in T]: key;
+  };
+
+  type Bar = {
+    [key: string]: key;
+  };
+} catch (error) {}
+try {
+  type keys = 'stringKey' | 1 | 2;
+  type Foo1 = {
+    [key in keys as 'index']: key;
+  };
+
+  type Foo = {
+    [key in keys as `_${key}_`]: `$${key}$`;
+  };
+
+  type foo3 = {
+    [key in keys as key]: key;
+  };
+} catch (error) {}
+
+try {
+  type NewKeyType = '1';
+  type MappedTypeWithNewProperties<Type> = {
+    [Properties in keyof Type as NewKeyType]: Type[Properties];
+  };
+} catch (error) {}
+
+try {
+  type Foo = 1 & string;
+} catch (error) {}
+try {
+  // Conditional type
+  type Bar = 'Bar';
+  type Dada = 'Dada';
+  const numberOrString = Math.random() ? 'hello' : 42;
+  type NumberOrString = typeof numberOrString;
+  type BarOrDada<T extends number | string> = T extends number ? Bar : Dada;
+  type Foo = BarOrDada<NumberOrString>;
+} catch (q) {}
+try {
+  type Foo = 'sdf' extends string ? boolean : bigint;
+  type Bar = 1 extends string ? boolean : bigint;
+} catch (error) {}
+try {
+  type MessageOf<T> = T extends { message: unknown } ? T['message'] : never;
+  type Foo = MessageOf<{ message: string }>;
+  type Bar = MessageOf<{ bar: number };
+} catch (error) {}
+try {
+  type DisToArray<T> = T extends any ? T[] : never;
+  type NotDisToArray<T> = [T] extends [any] ? T[] : never;
+  type ToArray<T> = T[];
+  type StrNumArr = ToArray<string | number>;
+  type AnotherStrNumArr = NotDisToArray<string | number>;
+  type StrArrOrNumArr = DisToArray<string | number>;
+} catch (error) {}
+try {
+  type Foo<T> = T extends { name: infer U; age: infer U } ? U : never;
+  type T10 = Foo<{ name: number; age: string }>;
+  type T11 = Foo<{ name: number; age: string }>;
+} catch (error) {}
+try {
+  type Foo<T> = T extends { a: infer U; b: (x: infer U) => void } ? U : never;
+  type T10 = Foo<{ a: string; b: (x: string) => void }>; // string
+  type T12 = Foo<{ a: string; b: (x: number) => void }>; // string
+  type T11 = Foo<{ a: string; b: number }>; // string | number
+  // class implements
+  interface Foo {
+    name: string;
+  }
+
+  class Bar implements Foo {
+    name = '1';
+  }
+} catch (error) {}
+
+try {
+} catch (error) {}

@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0px;
+}
+
+.place-holder {
+  height: 30px;
+  width: 100%;
+}
+
+.place-holder:last-child {
+  background-color: lightgreen;
+}
+
+.wrapper {
+}
+
+.upper {
+  background-color: lightblue;
+}
+
+.bottom-bars {
+  width: 100%;
+  background-color: lightcoral;
+}

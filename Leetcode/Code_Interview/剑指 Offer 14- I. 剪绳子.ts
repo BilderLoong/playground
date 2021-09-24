@@ -10,7 +10,7 @@
   const res2 = cuttingRope(29);
   console.assert(res2 === 39366, res2);
 
-  function cuttingRope(n: number): number {
+  function cuttingRope(n: number): number | undefined {
     if (n === 2) return 1;
     if (n === 3) return 2;
 
@@ -30,7 +30,7 @@
   }
 })();
 (function () {
-  // dp
+  // dp1
 
   const res3 = cuttingRope(4);
   console.assert(res3 === 4, res3);
@@ -41,12 +41,25 @@
   const res2 = cuttingRope(29);
   console.assert(res2 === 39366, res2);
 
+  const res4 = cuttingRope(8);
+  console.assert(res4 === 18, res4);
+
   function cuttingRope(n: number): number {
+    // This dp array: the max value of the all possible (must cut one time) product
+    // of the current length rope.
     const dp = [0, 1, 1];
 
     for (let i = 3; i <= n; i++) {
       for (let j = 1; j < i; j++) {
         dp[i] ??= -Infinity;
+
+        //(i - j) * j : cut one time.
+        // dp[i - j] * j: cut more than one time.
+        // Q: why does use j in the dp[i-j]*j instead of using dp[j] * dp[i-j]?
+        // A: Because the use dp[j] is duplicated.
+        // consider below situation:
+        // dp[j] | dp[i-j ]
+
         dp[i] = Math.max(dp[i], (i - j) * j, j * dp[i - j]);
       }
     }
@@ -87,6 +100,9 @@
   const res1 = cuttingRope(10);
   console.assert(res1 === 36, res1);
 
+  /**
+   * @description return the max number of the production of two parts of cut current given rope.
+   */
   function cuttingRope(n: number): number {
     if (n < 2) return 0;
     if (n === 2) return 1;
