@@ -1,6 +1,6 @@
 markOverflowCard();
 function markOverflowCard() {
-	// Change to toggle whether show the toast.
+  // Change to toggle whether show the toast.
   const DEBUG = false;
 
   if (!_canUseToggleFlag()) {
@@ -18,6 +18,7 @@ function markOverflowCard() {
     // blue flag means this cart has overflow content.
     ankiToggleFlag(BLUE);
     toast(`Add blue flag`);
+    ankiShowOptionsMenu();
   }
 
   if (AnkiDroidJS.ankiGetCardFlag() === BLUE && !_isNeedScroll()) {
