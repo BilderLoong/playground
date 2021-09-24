@@ -1,4 +1,82 @@
 try {
+  const person: { age: number } = { age: 10 };
+  const readonlyPerson: { readonly age: number } = person;
+
+  person.age = 11;
+
+  console.log(readonlyPerson); //?
+} catch (error) {}
+try {
+  function func<T>(param: T) {}
+  function func4<T>(param: T extends 'type' ? never : T) {}
+  function func1<T extends string>(param: T) {}
+  function func2<T extends string>(param: Exclude<T, 'type'>) {}
+  function func3(param: string) {}
+  let foo = 'str';
+  const bar = 'str';
+  func('a');
+  func(foo);
+  func(bar);
+  func<'b'>('b');
+
+  func4('type');
+  func4(<const>'type');
+
+  func3('a');
+  func3(foo);
+  func3(bar);
+
+  func1(foo);
+  func1(bar);
+  func1('asdf');
+
+  func2('asdf');
+  func2('type');
+} catch (error) {}
+try {
+  // type Exclusion = 'Invalid';
+  // type ExcludeString = Exclude<string, Exclusion>;
+
+  function func<T extends string>(param1: Exclude<T, 'type'>): void {}
+
+  func('SS');
+  func('type'); // error
+} catch (error) {}
+try {
+  interface Foo {
+    x: number;
+    y: string;
+  }
+} catch (error) {}
+try {
+  type Foo<T extends string> = {
+    type: string;
+    // [key in T]: number;
+  };
+
+  type Bar<T extends string> = {
+    [key in T]: string;
+  } & { didi: number };
+
+  function acceptDidiAndName(bar: Bar<'name'>) {}
+
+  acceptDidiAndName({ didi: 1, name: 'birudo', age: 1 });
+  acceptDidiAndName({ didi: 1 });
+} catch (error) {}
+try {
+  let time = 0;
+  const sayHi = () => {
+    console.log(time++);
+  };
+
+  const callMe = () => {
+    const arr = [sayHi()];
+  };
+
+  callMe();
+  callMe();
+} catch (error) {}
+try {
   console.log(/[\[\{\(]/.test('['));
   console.log('['.match(/[\[\{\(]/));
   console.log('({'.search(/[\[\{\(]/));
@@ -79,199 +157,6 @@ try {
 
   const boundFoo = foo.myBind(bar);
   boundFoo(1, 2, 3, 4);
-} catch (error) {}
-try {
-  function dealDishInfo(menuSku, cartSku) {
-    if (!menuSku || !cartSku) return null;
-    // 去掉 sku 级别失效商品 (无||不在可售时间||售完)
-    if (!menuSku || !menuSku.validity || menuSku.soldOut) return null;
-
-    // 校验菜品信息
-    if (menuSku.skuName !== cartSku.skuName) return null;
-    // the below li is difference.
-    if (menuSku.currentPrice !== cartSku.currentPrice) return null;
-    if (menuSku.originalPrice !== cartSku.originalPrice) return null;
-    if (menuSku.memberPrice !== cartSku.memberPrice) return null;
-    if (menuSku.dishType !== cartSku.dishType) return null;
-    if (menuSku.canWeight !== cartSku.canWeight) return null;
-    if (menuSku.unit !== cartSku.unit) return null;
-
-    // 有规格时才判断
-    if (menuSku.specAttrs && cartSku.specAttrs) {
-      // TODO:如何判断规格信息一致
-      let isEqual = true;
-      // TODO: 代码有问题，此处不会走到false
-      Object.keys(menuSku.specAttrs).forEach((key) => {
-        if (menuSku.specAttrs[0][key] !== cartSku.specAttrs[0][key]) {
-          isEqual = false;
-        }
-      });
-      if (!isEqual) return null;
-      // if (!Immutable.is(menuSku.specAttrs, cartSku.specAttrs)) return null;
-    }
-
-    // 更新必点菜属性(不存在必点规则时购物车存在老的必点菜时的场景)
-    if (cartSku.mustCount >= 0) {
-      const matchSku = mustDishInfo.find(
-        (item) => item.skuId === cartSku.skuId
-      );
-      if (!matchSku) {
-        cartSku = Immutable.set(cartSku, 'mustCount', -1);
-      }
-    }
-
-    return cartSku;
-  }
-
-  const _ = require('underscore');
-  const menuSku = {
-    skuId: '671115260',
-    spuId: '671115259',
-    skuName:
-      '这是一个超长的菜名：菜品价格超长时，有菜品折扣，加入购物车后，折扣后的菜品价格会被遮住',
-    validity: true,
-    saleTimeDesc: '',
-    // note
-    currentPrice: 499999.5,
-    originalPrice: 999999,
-    memberPrice: 899999,
-    soldOut: false,
-    stockCount: 3,
-    canWeight: false,
-    defaultSelected: false,
-    dishType: 0,
-    specAttrs: [
-      {
-        specificationId: -1,
-        specificationName: '规格',
-        valueId: 25072250,
-        value: '',
-      },
-    ],
-    mbDiscountTag: null,
-    promotionTag: {
-      labelCode: 0,
-      labelName: null,
-      extraInfo: null,
-      type: 22,
-      tag: '5折',
-      tagDesc: null,
-      tags: null,
-    },
-    promotionRule: {
-      type: 22,
-      actId: '2000016280545',
-      status: 1,
-      actName: '☁️的分类5折',
-      periodLimited: false,
-      startDate: '',
-      endDate: '',
-      timeLimit: null,
-      rule: null,
-    },
-    tastes: null,
-    methods: null,
-    packageGroups: null,
-    unit: '份',
-    showRemark: false,
-    includeMethodPrice: false,
-    includeTastePrice: false,
-    dishBoxVO: null,
-    minFeeding: -1,
-    maxFeeding: -1,
-    allowManualDiscount: 20,
-  };
-
-  const cartSku = {
-    spuId: '671115259',
-    skuId: '671115260',
-    skuName:
-      '这是一个超长的菜名：菜品价格超长时，有菜品折扣，加入购物车后，折扣后的菜品价格会被遮住',
-    canWeight: false,
-    weight: null,
-    count: 3,
-    specAttrs: [
-      {
-        specificationId: -1,
-        specificationName: '规格',
-        valueId: 25072250,
-        value: '',
-      },
-    ],
-    remark: null,
-    mustCount: -1,
-    createTime: 1626955546952,
-    recommendType: null,
-    categoryId: '63327117',
-    unit: '份',
-    dishType: 0,
-    // note
-    currentPrice: 449999.5,
-    originalPrice: 999999,
-    memberPrice: 899999,
-    soldOut: false,
-    validity: true,
-    stockCount: 3,
-    saleTimeDesc: '',
-    showRemark: false,
-    promotionTag: {
-      labelCode: 0,
-      labelName: null,
-      extraInfo: null,
-      type: 22,
-      tag: '5折',
-      tagDesc: null,
-      tags: null,
-    },
-    promotionRule: {
-      type: 22,
-      actId: '2000016280545',
-      status: 1,
-      actName: '☁️的分类5折',
-      periodLimited: false,
-      startDate: '',
-      endDate: '',
-      timeLimit: null,
-      rule: null,
-    },
-    defaultSelected: false,
-    packageGroups: null,
-    includeMethodPrice: false,
-    includeTastePrice: false,
-    dishBoxVO: null,
-    minFeeding: -1,
-    maxFeeding: -1,
-    allowManualDiscount: 20,
-    methods: [],
-    tastes: [],
-    extraPrice: 0,
-    goodsNo: 'a6b92da5471ddebdba318ad446cd0277',
-    userAvatars: [
-      {
-        uid: '69237496998760826221',
-        count: 3,
-      },
-    ],
-  };
-  const res1 = _.omit(menuSku, function (v, k) {
-    return cartSku[k] === v;
-  });
-  console.log(res1);
-
-  const res2 = dealDishInfo(menuSku, cartSku);
-  console.log(res2);
-  // hand write extends function
-
-  function extend(sup: Function, sub: Function): Function {
-    const proto = Object.create(sup.prototype);
-    proto.constructor = sub;
-    sub.prototype = proto;
-
-    return function (this: unknown, ...args: Array<unknown>) {
-      sup.apply(this, args);
-      sub.apply(this, args);
-    };
-  }
 } catch (error) {}
 try {
   const res = JSON.stringify(() => 1);
