@@ -1350,6 +1350,11 @@
   resolved "https://registry.npmjs.org/@types/range-parser/-/range-parser-1.2.4.tgz#cd667bcfdd025213aafb7ca5915a932590acdcdc"
   integrity sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==
 
+"@types/seamless-immutable@^7.1.16":
+  version "7.1.16"
+  resolved "https://registry.nlark.com/@types/seamless-immutable/download/@types/seamless-immutable-7.1.16.tgz#f593ea86da53d66d74c87c2cc4ff8bd71dd066d5"
+  integrity sha1-9ZPqhtpT1m10yHwsxP+L1x3QZtU=
+
 "@types/serve-static@*":
   version "1.13.10"
   resolved "https://registry.npmjs.org/@types/serve-static/-/serve-static-1.13.10.tgz#f5e0ce8797d2d7cc5ebeda48a52c96c4fa47a8d9"

@@ -124,9 +124,14 @@ rl.on('line', (line: string) => {
 
         break;
 
+      //Vertical
       case 'V':
+        [dy] = arr.slice(i + 1, i + 2).map((e) => parseInt(e));
+        break;
+
+      //Horizontal
       case 'H':
-        [, dx] = arr.slice(i, i + 2).map((e) => parseInt(e));
+        [dx] = arr.slice(i + 1, i + 2).map((e) => parseInt(e));
         break;
 
       case 'Z':
