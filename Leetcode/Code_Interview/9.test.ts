@@ -1,3 +1,7 @@
+// Real life Analogy
+// Given two bottles
+// (only able to put into thing and take out thing via the bottles open analogy to stack),
+// and use them to realize the limiting condition that a queue features.
 (function () {
   // Version 3; Small difference
   // with Version 1 in `deleteHead()` method.
@@ -30,6 +34,7 @@
     }
   }
 })();
+
 (function () {
   // Version 2
   class CQueue {
