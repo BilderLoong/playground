@@ -1,0 +1,79 @@
+{
+    "configurations": [
+        {
+            "type": "node",
+            "name": "Jest: current file",
+            "request": "launch",
+            "program": "${workspaceFolder}/node_modules/.bin/jest",
+            "args": [
+                "--runTestByPath=${file}",
+                "--runInBand",
+                "--watch",
+            ],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "disableOptimisticBPs": true,
+            "windows": {
+                "program": "${workspaceFolder}/node_modules/jest/bin/jest"
+            }
+        },
+        {
+            "type": "firefox",
+            "request": "launch",
+            "reAttach": true,
+            "name": "HTML: Run current file on Firefox",
+            "file": "${file}",
+            "reloadOnChange": {
+                "watch": "${workspaceFolder}/**/*",
+                "ignore": "**/node_modules/**"
+            },
+        },
+        {
+            "type": "node",
+            "name": "vscode-jest-tests",
+            "request": "launch",
+            "program": "${workspaceFolder}/node_modules/jest/bin/jest",
+            "args": [
+                "--watch",
+                "--runInBand"
+            ],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "disableOptimisticBPs": true
+        },
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "internalConsole"
+        },
+        {
+            "name": "Node: Current TS/JS File in interged terminal",
+            "request": "launch",
+            "program": "${file}",
+            "preLaunchTask": "tsc: watch - tsconfig.json",
+            "console": "integratedTerminal",
+            "smartStep": true,
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "pwa-node"
+        },
+        {
+            "name": "TS/JS: Current File",
+            "request": "launch",
+            "program": "${file}",
+            "console": "internalConsole",
+            "outputCapture": "std",
+            "preLaunchTask": "tsc: watch - tsconfig.json",
+            "smartStep": true,
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "pwa-node"
+        }
+    ]
+}
