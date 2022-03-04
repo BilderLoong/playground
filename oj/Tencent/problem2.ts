@@ -1,3 +1,4 @@
+export {};
 /*
  * function ListNode(x){
  *   this.val = x;
@@ -18,7 +19,7 @@ interface ListNode {
 }
 function solve(k: number, a: ListNode) {
   // write code here
-// ((x^y)*k+(x*y))
+  // ((x^y)*k+(x*y))
 }
 module.exports = {
   solve: solve,

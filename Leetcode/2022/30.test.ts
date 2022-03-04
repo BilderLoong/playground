@@ -3,13 +3,31 @@ class MinStack {
   auxiliaryStack: number[] = [];
   constructor() {}
 
-  push(x: number): void {}
+  push(x: number): void {
+    this.mainStack.push(x);
 
-  pop(): void {}
+    if (x <= this.min()) {
+      this.auxiliaryStack.push(x);
+    }
+  }
 
-  top(): number {}
+  pop(): void {
+    if (this.top() === this.min()) {
+      this.auxiliaryStack.pop();
+    }
 
-  min(): number {}
+    this.mainStack.pop();
+  }
+
+  top(): number {
+    return this.mainStack[this.mainStack.length - 1];
+  }
+
+  min(): number {
+    const auxiliaryStackLen = this.auxiliaryStack.length;
+    const min = this.auxiliaryStack[auxiliaryStackLen - 1] ?? Infinity;
+    return min;
+  }
 }
 
 /**
