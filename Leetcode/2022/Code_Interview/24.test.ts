@@ -17,24 +17,6 @@
 })();
 
 (function () {
-  // Iteration 1
-  function reverseList(head: ListNode | null): ListNode | null {
-    if (!head) return head;
-
-    let cur = head;
-    let next = cur.next;
-
-    head.next = null;
-
-    while (next) {
-      const temp = next.next;
-      next.next = cur;
-      cur = next;
-      next = temp;
-    }
-
-    return cur;
-  }
   // Iteration 2
   function reverseList(head: ListNode | null): ListNode | null {
     let cur = head;
