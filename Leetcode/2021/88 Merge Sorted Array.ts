@@ -5,7 +5,7 @@ function merge(nums1: number[], m: number, nums2: number[], n: number): void {
   let a = m + n - 1;
   m--;
   n--;
-  while (m >= 0 && n>= 0) {
+  while (m >= 0 && n >= 0) {
     if (nums1[m] <= nums2[n]) {
       nums1[a--] = nums2[n--];
     } else {
@@ -13,10 +13,9 @@ function merge(nums1: number[], m: number, nums2: number[], n: number): void {
     }
   }
 
-
   // Pay attention on the edge case
   if (n >= 0) {
-    nums1.splice(0, n+1 , ...nums2.slice(0, n+1 ));
+    nums1.splice(0, n + 1, ...nums2.slice(0, n + 1));
   }
 }
 
