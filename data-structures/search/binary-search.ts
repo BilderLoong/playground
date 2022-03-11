@@ -6,6 +6,7 @@ function binarySearchRecursion(
   end: number
 ): number | boolean {
   if (start > end) return false;
+
   const middle = Math.floor((end + start) / 2);
   const guess = array[middle];
   if (guess === target) {
