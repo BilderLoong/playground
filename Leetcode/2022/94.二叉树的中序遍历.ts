@@ -20,7 +20,22 @@
  */
 
 function inorderTraversal(root: TreeNode | null): number[] {
+  if (!root) return [];
 
-};
+  const stack = [];
+  const res = [];
+
+  while (root || stack.length) {
+    while (root) {
+      stack.push(root);
+      root = root.left;
+    }
+
+    root = stack.pop()!;
+    res.push(root.val);
+    root = root.right;
+  }
+
+  return res;
+}
 // @lc code=end
-
