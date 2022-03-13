@@ -20,7 +20,57 @@
  */
 
 function preorderTraversal(root: TreeNode | null): number[] {
+  // Iteration
+  if (!root) return [];
 
-};
+  const res = [];
+  const stack = [root];
+  while (stack.length) {
+    const top = stack.pop()!;
+
+    res.push(top.val);
+
+    if (top.right) {
+      stack.push(top.right);
+    }
+
+    if (top.left) {
+      stack.push(top.left);
+    }
+  }
+
+  return res;
+}
 // @lc code=end
 
+try {
+  function preorderTraversal(root: TreeNode | null): number[] {
+    // Recursion with helper function.
+    const res: number[] = [];
+
+    const dfs = (root: TreeNode | null) => {
+      if (!root) return;
+
+      res.push(root.val);
+      root.left && dfs(root.left);
+      root.right && dfs(root.right);
+    };
+
+    dfs(root);
+
+    return res;
+  }
+} catch (error) {}
+
+try {
+  function preorderTraversal(root: TreeNode | null): number[] {
+    // Recursion 1
+    if (!root) return [];
+
+    return [
+      root.val,
+      ...preorderTraversal(root.left),
+      ...preorderTraversal(root.right),
+    ];
+  }
+} catch (err) {}

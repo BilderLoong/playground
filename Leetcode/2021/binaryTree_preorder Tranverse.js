@@ -1,3 +1,4 @@
+export {};
 //https://leetcode-cn.com/problems/binary-tree-inorder-traversal/
 
 /**
@@ -14,6 +15,7 @@
  */
 var preorderTraversal = function (root) {
   if (!root) return [];
+
   const stack = [];
   const ret = [root];
   let t = root;
@@ -23,5 +25,6 @@ var preorderTraversal = function (root) {
     ret.push(t.val);
     t = stack.pop();
   }
+
   return ret;
 };
