@@ -34,6 +34,15 @@ it('should ', () => {
   expect(unique(arr)).toEqual(['A', 'B', 'C']);
 
   function unique(arr: any[]): any[] {
+    return arr.filter((v, i) => arr.indexOf(v) === i);
+  }
+});
+
+it('should ', () => {
+  const arr = ['A', 'B', 'A', 'C', 'B'];
+  expect(unique(arr)).toEqual(['A', 'B', 'C']);
+
+  function unique(arr: any[]): any[] {
     const set = new Set();
     return arr.filter((v) => {
       if (!set.has(v)) {
