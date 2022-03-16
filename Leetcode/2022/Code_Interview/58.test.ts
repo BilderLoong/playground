@@ -7,7 +7,7 @@ describe('test', () => {
   function reverseLeftWords(s: string, n: number): string {
     // const stringToMove = s.slice(0, n);
     // const stringUntouched = s.slice(n);
-    // return stringUntouched + stringToMove;
+    // return stringUntouched + stringToMove
     return s.slice(n) + s.slice(0, n);
   }
 });

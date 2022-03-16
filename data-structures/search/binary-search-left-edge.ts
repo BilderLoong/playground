@@ -77,8 +77,8 @@ export {};
         left = mid + 1;
       } else if (target < arr[mid]) {
         /* 
-        because right isn't in the search interval,
-        so assign mid to the right exclude the middle element
+        because `right` isn't in the search interval,
+        so assign `mid` to the `right` exclude the middle element
       */
         right = mid;
       }
