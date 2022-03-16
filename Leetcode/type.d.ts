@@ -17,3 +17,7 @@ class TreeNode {
     this.right = right === undefined ? null : right;
   }
 }
+
+type Constructor = {
+  new (...parameters: any[]): any;
+};

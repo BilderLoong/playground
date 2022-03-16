@@ -1,4 +1,28 @@
 try {
+  // Extend
+  // This solution is lack of validation.
+  function myExtend(Sub: Constructor, Super: Constructor): Constructor {
+    const res = function () {
+      Super.call(this);
+      Sub.call(this);
+    } as any as Constructor;
+
+    Object.assign(Object.create(Super), Sub.prototype);
+
+    return res;
+  }
+} catch (e) {}
+try {
+  // Object.create()
+  function create(obj: object) {
+    const F = function () {} as any as Constructor;
+    F.prototype = obj;
+
+    return new F();
+  }
+} catch (error) {}
+
+try {
   // Inherit
   const SuperClass = function (this: any) {
     this.propertyOnSuperInstance = 'hey';
@@ -54,7 +78,9 @@ try {
 
     const proto = Object.create(SuperClass.prototype);
     // Whether change the `constructor` property doesn't affect the result of `sub instanceof SuperClass`.
-    proto.constructor = SubClass;
+    Object.defineProperties(proto, {
+      constructor: { value: SubClass, enumerable: false, writeable: false },
+    });
     SubClass.prototype = proto;
 
     const sub = new SubClass();
@@ -64,16 +90,6 @@ try {
     console.log(sub instanceof SuperClass);
     console.log(sub instanceof SubClass);
   })();
-
-  type Constructor = {
-    new (...parameters: any[]): any;
-  };
-  function isSubClass(Super: Constructor, Sub: Constructor) {
-    it('should ', () => {
-      const sup = new Super();
-      const sub = new Sub();
-    });
-  }
 } catch (error) {}
 
 try {
