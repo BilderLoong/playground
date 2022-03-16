@@ -1119,7 +1119,7 @@ try {
 try {
   type MessageOf<T> = T extends { message: unknown } ? T['message'] : never;
   type Foo = MessageOf<{ message: string }>;
-  type Bar = MessageOf<{ bar: number };
+  type Bar = MessageOf<{ bar: number }>;
 } catch (error) {}
 try {
   type DisToArray<T> = T extends any ? T[] : never;
