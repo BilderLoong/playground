@@ -1,8 +1,30 @@
 try {
+  // Bind
+} catch (error) {}
+try {
+  // `new` operator
+  const con1 = function (this: { color: string }, color: string) {
+    this.color = color;
+  } as any as Constructor;
+  const myNew = (con: Function, ...args: any[]): object => {
+    const obj = Object.create(con.prototype);
+    const res = con.apply(obj, args);
+
+    return Object(res) === res || typeof res === 'function' ? res : obj;
+  };
+
+  const res = myNew(con1, 'red');
+  const res1 = new con1('red');
+
+  it('should ', () => {
+    expect(res).toEqual(res1);
+  });
+} catch (error) {}
+try {
   // Extend
   // This solution is lack of validation.
   function myExtend(Sub: Constructor, Super: Constructor): Constructor {
-    const res = function () {
+    const res = function (this: any) {
       Super.call(this);
       Sub.call(this);
     } as any as Constructor;

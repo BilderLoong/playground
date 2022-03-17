@@ -1,4 +1,14 @@
 try {
+  const con1 = function () {
+    return function () {
+      console.log('didi~~~');
+    };
+  };
+
+  const res = new con1();
+  console.log(typeof res);
+} catch (error) {}
+try {
   const obj = {};
   obj[Symbol.toStringTag] = 'didi';
   console.log(obj[Symbol.toStringTag]);
