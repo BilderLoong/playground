@@ -1,10 +1,30 @@
 it('should ', () => {
   // TC: O(n); SC: O(N)
-  // Two time traverse with hash map.
+  // It use a queue and a map;
   expect(firstUniqChar('abaccdeff')).toBe('b');
   expect(firstUniqChar('')).toBe(' ');
 
-  function firstUniqChar(s: string): string {}
+  function firstUniqChar(s: string): string {
+    const queue = [];
+    const map = new Map();
+
+    for (const c of s) {
+      if (map.has(c)) {
+        // false means the element is duplicate.
+        map.set(c, false);
+
+        while (queue.length && !map.get(queue[0])) {
+          queue.shift();
+        }
+      } else {
+        // true means the element is unique for now.
+        map.set(c, true);
+        queue.push(c);
+      }
+    }
+
+    return queue.length ? queue[0] : ' ';
+  }
 });
 
 it('should ', () => {
