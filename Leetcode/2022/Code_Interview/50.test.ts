@@ -10,8 +10,8 @@ it('should ', () => {
 
     for (const c of s) {
       if (map.has(c)) {
-        // false means the element is duplicate.
-        map.set(c, false);
+        // Make sure the head of the queue is non-duplicated element.
+        map.set(c, false); // false means the element is duplicate.
 
         while (queue.length && !map.get(queue[0])) {
           queue.shift();
