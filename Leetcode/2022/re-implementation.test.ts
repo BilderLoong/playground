@@ -1,5 +1,51 @@
 try {
-  // Bind
+  // Bind, call, apply
+  Function.prototype.myCall = function (obj: any = globalThis, ...args: any[]) {
+    const fn = this;
+    const sym = Symbol();
+    obj[sym] = fn;
+
+    const res = obj[sym](...args);
+    delete obj[sym];
+
+    return res;
+  };
+
+  const obj1 = { age: 12 };
+  console.log(log.myCall(obj1, 'name', 'name2'));
+
+  Function.prototype.myBind = function (
+    obj: any = globalThis,
+    ...preArgs: any[]
+  ): AnyFunction {
+    const fn = this;
+    const sym = Symbol();
+    obj[sym] = fn;
+
+    return function (...postArgs: any[]) {
+      obj[sym](...preArgs, ...postArgs);
+      delete obj[sym];
+    };
+  };
+
+  // Test
+  function log(this: any, name: string, name2: string) {
+    console.log({
+      name,
+      name2,
+      age: this.age,
+    });
+
+    return 'return value of log';
+  }
+
+  const obj = {
+    age: 11,
+  };
+
+  const res = log.myBind(obj, 'name');
+  res('name2');
+  console.log(obj);
 } catch (error) {}
 try {
   // `new` operator
