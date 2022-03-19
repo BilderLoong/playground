@@ -45,7 +45,6 @@ function levelOrder(root: TreeNode | null): number[][] {
     }
 
     res.push(curLevel);
-    curLevel = [];
   }
 
   return res;
