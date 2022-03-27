@@ -197,3 +197,73 @@ try {
     expect(myInstanceof0(new Date(), C1)).toBe(false);
   });
 } catch (error) {}
+
+(function () {
+  // Compose function;
+  // https://segmentfault.com/a/1190000008394749
+  (function () {
+    // Compose with reduce.
+    const compose_0 =
+      (...fns: Function[]) =>
+      (x: any) =>
+        fns.reduceRight((pre, fn) => fn(pre), x);
+
+    it('should ', () => {
+      const double = (x: number) => x * 2;
+      const minus2 = (x: number) => x - 2;
+      expect(compose_0(double, minus2)(10)).toBe(16);
+    });
+  })();
+
+  (function () {
+    // Compose use recursion.
+    const compose = (...fns: Function[]) => {
+      let cur = fns.length - 1;
+      let res: any;
+      return function f1(this: any, ...args: any[]): any {
+        if (cur >= 0) {
+          res = fns[cur--].apply(this, args);
+          return f1.call(this, res);
+        } else {
+          cur = fns.length - 1;
+          return res;
+        }
+      };
+    };
+
+    it('should ', () => {
+      const double = (x: number) => x * 2;
+      const minus2 = (x: number) => x - 2;
+
+      expect(compose(double, minus2)(10)).toBe(16);
+    });
+  })();
+
+  (function () {
+    // Compose use iteration.
+    const compose = (...fns: Function[]) => {
+      const length = fns.length;
+      if (fns.every((e) => typeof e !== 'function')) {
+        throw new TypeError('Expect function');
+      }
+
+      return function (this: any, ...args: any[]) {
+        let i = fns.length - 1;
+        // When the fns is empty, return the first argument.
+        let res = length ? fns[i].apply(this, args) : args[0];
+        while (i--) {
+          res = fns[i].call(i, res);
+        }
+
+        return res;
+      };
+    };
+
+    it('should ', () => {
+      const double = (x: number) => x * 2;
+      const minus2 = (x: number) => x - 2;
+
+      expect(compose(double, minus2)(10)).toBe(16);
+    });
+  })();
+})();
