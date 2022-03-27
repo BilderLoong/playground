@@ -18,3 +18,5 @@ var reverseList = function (head) {
 
   return newHead;
 };
+
+reverseList({ val: 2, next: { val: 1, next: null } });
