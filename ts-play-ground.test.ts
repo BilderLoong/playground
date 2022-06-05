@@ -1,4 +1,18 @@
 try {
+  interface Foo {
+    [s: string]: string | boolean | number;
+    name: boolean;
+    age: number;
+  }
+
+  type a = Foo[string];
+} catch (error) {}
+try {
+  const str = '[1,[1,1],1]';
+  console.log(str.split(/([,\]\[])/));
+  console.log([...'asdf']);
+} catch (error) {}
+try {
   const con1 = function () {
     return function () {
       console.log('didi~~~');
