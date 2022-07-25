@@ -67,7 +67,7 @@
             "request": "launch",
             "program": "${file}",
             "console": "internalConsole",
-            "outputCapture": "std",
+            "outputCapture": "console",
             "preLaunchTask": "tsc: watch - tsconfig.json",
             "smartStep": true,
             "skipFiles": [

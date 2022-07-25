@@ -92,3 +92,48 @@ let foo: Foo = {
   1: 1,
   2: 2,
 };
+=======
+export {};
+import { Readable } from 'stream';
+import { createInterface } from 'readline';
+
+// The string used to debug, don't forget add \n to trigger the 'line' event;
+const DEBUG_STRING = 'asdfasd asd fasd f asd\n';
+let s;
+
+if (DEBUG_STRING) {
+  s = new Readable();
+  s.push(DEBUG_STRING);
+  s.push(null);
+}
+
+// If provide the debug string, prior to use it.
+const inputStream = s || process.stdin;
+const rl = createInterface({
+  input: inputStream,
+  output: process.stdout,
+});
+
+// `lines` is used to store all the lines from input stream;
+// Each line is stored as an entry of the array.
+// const lines: string[] = [];
+rl.on('line', (line: string) => {
+  const arr: number[][] = [];
+  let res = 0;
+
+  arr.push(line.split(' ').map((e) => parseInt(e)));
+  if (arr.length > 2) {
+    const [row, col] = arr[0];
+    const [x, y] = arr[1];
+
+    arr.slice(2).forEach((curLine, curRowNum) => {
+      curLine.forEach((e, curColNum) => {
+        res += e;
+      });
+    });
+
+    res = res - arr[x - 1][y - 1] + 1;
+  }
+
+  console.log(res);
+});

@@ -111,6 +111,20 @@ try {
   console.log(p);
 } catch (error) {}
 
+export const a = 1;
+
+try {
+  // WeakMap
+
+  let obj1: object | null = { a: '1' };
+  const wMap = new WeakMap([[obj1, 'didi']]);
+  const res1 = wMap.get(obj1);
+  console.log({ res1 });
+
+  obj1 = null;
+  console.log(wMap.get(obj1));
+} catch (error) {}
+
 try {
   (function () {
     interface person {
@@ -1082,9 +1096,9 @@ try {
     age: number;
   };
 
-  let foo: string | number = '1';
+  let foo: string | number = 'adfasd';
   console.log(foo);
-  foo = 1;
+  foo = '123';
 
   typeof foo;
   foo = 'name';
@@ -1155,7 +1169,7 @@ const bar: {
 };
 */
 
-  /* 
+  /*
 const bar: {
   readonly name: 'birudo';
   readonly age: '21';
@@ -1252,8 +1266,73 @@ try {
 
   class bar implements foo {
     name = '1';
+  class Bar implements Foo {
+    name = 'name';
   }
 } catch (error) {}
 
 try {
+  console.log(i);
+
+  let i;
+} catch (error) {}
+
+try {
+  const createResolvePromise = async (val: any, time: number = 1000) =>
+    new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(val);
+      }, time);
+    });
+
+  const createRejectPromise = async (val: any, time: number = 1000) =>
+    new Promise((_, reject) => {
+      setTimeout(() => {
+        reject(val);
+      }, time);
+    });
+
+  const pro = createResolvePromise('0');
+  // const pro_1 = createRejectPromise('1', 1000);
+  // const pro_2 = createRejectPromise('2', 500);
+  // const promiseAll = Promise.all([pro, pro_1, pro_2])
+  const promiseAll = Promise.all([pro])
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((reason) => {
+      console.log('from catch');
+
+      console.error(reason);
+    });
+
+  console.log(promiseAll);
+} catch (error) {}
+try {
+  const createResolvePromise = async (val: any, time: number = 1000) =>
+    new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(val);
+      }, time);
+    });
+
+  const createRejectPromise = async (val: any, time: number = 1000) =>
+    new Promise((_, reject) => {
+      setTimeout(() => {
+        reject(val);
+      }, time);
+    });
+
+  console.log('==================================================');
+  // const pro = createResolvePromise('0');
+  // const pro_1 = createRejectPromise('1', 1000);
+  // const pro_2 = createRejectPromise('2', 500);
+  // const promiseAll = Promise.all([pro, pro_1, pro_2])
+  const p1 = Promise.all([1, 'a']);
+  console.log(p1);
+
+  setTimeout(() => {
+    console.log('the stack is now empty');
+    console.log(p1);
+  });
 } catch (error) {}
