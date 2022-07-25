@@ -43,33 +43,3 @@ def clean_tokens(tokens: list):
 
 cleaned_tokens = clean_tokens(tokens)
 print(nltk.FreqDist(clean_tokens).most_common())
-
-
-proxies = {"http": "http://localhost:8080"}
-
-
-def get_request_dict(action_name: str, **params):
-    res = {"action": action_name, "version": 6, "params": params}
-    return res
-
-
-def invoke(action_name: str, **params):
-    r = requests.post(
-        "http://127.0.0.1:8765",
-        data=json.dumps(get_request_dict(action_name, **params)),
-        proxies=proxies,
-    )
-    res = r.json()
-
-    # If response contain error, raise exception.
-    if res["error"] is not None:
-        raise Exception(res["error"])
-
-    return res["result"]
-
-
-def get_word_query(word: str):
-    return f"expression:{word} note:odh_默认模板 -is:suspended"
-
-
-res = invoke("findCards", query=get_word_query("upswing"))
