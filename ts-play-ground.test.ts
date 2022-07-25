@@ -1,4 +1,12 @@
 try {
+  const bar = {
+    fun1() {
+      console.log(this);
+    },
+  };
+  bar.fun1();
+} catch (e) {}
+try {
   interface Foo {
     [s: string]: string | boolean | number;
     name: boolean;

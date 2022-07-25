@@ -1,54 +1,164 @@
 export {};
+namespace dodo {
+  export const foo = 1;
+  export type didi = number;
+  type baba = string;
+}
+
+namespace dodo {
+  const bar: baba = '1';
+}
+try {
+} catch (error) {}
+try {
+  // Declaration merging
+  interface Foo {
+    name: string;
+  }
+  interface Foo {
+    name: number;
+  }
+} catch (error) {}
+try {
+  // Parameter Properties
+  class test {
+    public name: string;
+    constructor(name: string) {
+      this.name = name;
+    }
+  }
+
+  const foo = new test('123');
+  console.log(foo);
+} catch (error) {}
+try {
+  class Foo {
+    private a = 1;
+
+    static bar() {
+      console.log(this);
+    }
+  }
+} catch (error) {}
+try {
+  interface Animal {
+    dateOfBirth: any;
+  }
+
+  interface Dog extends Animal {
+    breed: any;
+  }
+
+  class AnimalHouse {
+    protected resident: Animal;
+    private foo: number = 1;
+    public d: number = 1;
+    constructor(animal: Animal) {
+      this.resident = animal;
+    }
+  }
+
+  class DogHouse extends AnimalHouse {
+    // Does not emit JavaScript code,
+    // only ensures the types are correct
+    declare resident: Dog;
+    constructor(dog: Dog) {
+      super(dog);
+      this.resident = dog;
+    }
+  }
+
+  const dog = new DogHouse({ breed: 1, dateOfBirth: 2 });
+  const foo = dog.resident;
+} catch (error) {}
+try {
+  class Base {
+    name: string = 'base';
+  }
+
+  class Derived extends Base {
+    name: number = 1;
+    // (property) derived.name: number
+    // 型 'derived' のプロパティ 'name' を基本データ型 'base' の同じプロパティに割り当てることはできません。
+    // 型 'number' を型 'string' に割り当てることはできません。ts(2416)
+  }
+} catch (error) {}
+
+try {
+  // implement
+  interface a {
+    x: number;
+    y?: number;
+  }
+  class c implements a {
+    x = '1';
+  }
+
+  const foo = new c();
+} catch (error) {}
+try {
+  // @strictpropertyinitialization: false
+  class point {
+    readonly x: number = 1;
+    constructor() {
+      this.x = 2;
+    }
+  }
+
+  const p = new point(true);
+  // p.x = '123';
+  // p.y = 1;
+  console.log(p);
+} catch (error) {}
 
 try {
   (function () {
-    interface Person {
+    interface person {
       name: string;
       age: number;
     }
-    interface Person {
+    interface person {
       name: string;
       age: number;
     }
-
-    type FooType = {
+    type footype = {
       location: string[];
-      middleName?: string; // optional properties
+      middlename?: string; // optional properties
     };
 
     type bar = string | object; // union type and type aliases
 
-    let anyType;
-    let aNumber: number = 0;
+    let anytype;
+    let anumber: number = 0;
     //         ^ this is called type assignment
-    let aNumberArr = [1, 2, 3];
-    //       ^  let aNumberArr: number[]
+    let anumberarr = [1, 2, 3];
+    //       ^  let anumberarr: number[]
 
-    let aNumberOrStringArr: number | string[] = 1; // union type
+    let anumberorstringarr: number | string[] = 1; // union type
 
-    function aFunctionWithStringReturn(name: string): string {
-      console.log(`Hello,${name}`);
-      return `Hello,${name}`;
+    function afunctionwithstringreturn(name: string): string {
+      console.log(`hello,${name}`);
+      return `hello,${name}`;
     }
 
-    [1, 2, 3].map((e, i) => e.toString() + i.toString()); // contextual typing
+    [1, 2, 3].map((e, i) => e.tostring() + i.tostring()); // contextual typing
   });
 } catch {}
 
 (function () {
-  // Type Assertions
+  // type assertions
   const stack = ['1', 1];
-  let stackTop: string;
-  stackTop = stack[0];
-  stackTop = stack[0] as string;
+  let stacktop: string;
+  stacktop = stack[0];
+  stacktop = stack[0] as string;
 
-  const myInputs = document.getElementsByName(
+  const myinputs = document.getelementsbyname(
     'input'
-  ) as NodeListOf<HTMLInputElement>;
+  ) as nodelistof<htmlinputelement>;
 
-  // The below two type assertions have the same effect
-  const myInput = document.getElementById('myInput') as HTMLInputElement;
-  const $myInput = <HTMLInputElement>document.getElementById('myInput'); // Can't be use in JSX
+  // the below two type assertions have the same effect
+  const myinput = document.getelementbyid('myinput') as htmlinputelement;
+  const $myinput = <htmlinputelement>document.getelementbyid('myinput'); // can't be use in jsx
 
   const welcome = 'hello' as any as number;
   const $welcome = 'hello' as unknown as number;
@@ -58,88 +168,88 @@ try {
 //----------------------------------------------------------------
 
 (function () {
-  // Literal Types
+  // literal types
 
-  let changingString = 'hello';
-  changingString = 'welcome';
+  let changingstring = 'hello';
+  changingstring = 'welcome';
 
-  const constString = 'hello';
+  const conststring = 'hello';
 
   let foo: 'bar';
   foo = 'bar';
   foo = 'hello';
 
-  let myName: 'birudo' | 'bilder' | 'cokoryuu';
-  myName = 'birudo';
-  myName = 'bilder';
-  myName = 'blider';
+  let myname: 'birudo' | 'bilder' | 'cokoryuu';
+  myname = 'birudo';
+  myname = 'bilder';
+  myname = 'blider';
 
   // the below two is equal
-  let booleanLiteralType: boolean;
-  let _booleanLiteralType: true | false;
+  let booleanliteraltype: boolean;
+  let _booleanliteraltype: true | false;
 
   // combine literal with non-literal
-  let literalTypeWithNonLiteralType: Person | 'bar';
-  literalTypeWithNonLiteralType = { name: 'huzils', age: 21 };
-  literalTypeWithNonLiteralType = 'bar';
-  literalTypeWithNonLiteralType = 'foo';
+  let literaltypewithnonliteraltype: person | 'bar';
+  literaltypewithnonliteraltype = { name: 'huzils', age: 21 };
+  literaltypewithnonliteraltype = 'bar';
+  literaltypewithnonliteraltype = 'foo';
 
-  // Literal Inference
-  const handleRequest = (url: string, method: 'GET' | 'POST') => {
+  // literal inference
+  const handlerequest = (url: string, method: 'get' | 'post') => {
     console.log(`${url},${method}`);
   };
 
-  const req1 = { url: 'url', method: 'GET' };
+  const req1 = { url: 'url', method: 'get' };
 
-  /* Will get error, because the inference type of req.method is
+  /* will get error, because the inference type of req.method is
  string type don't correspond to the function argument
  type(a union type) */
-  handleRequest(req1.url, req1.method);
+  handlerequest(req1.url, req1.method);
 
   // workaround 1
-  handleRequest(req1.url, req1.method as 'GET');
+  handlerequest(req1.url, req1.method as 'get');
 
   // workaround 2
-  const req2 = { url: 'url', method: 'GET' as 'GET' };
-  handleRequest(req2.url, req2.method);
+  const req2 = { url: 'url', method: 'get' as 'get' };
+  handlerequest(req2.url, req2.method);
 
   // workaround 3
   const req3 = {
     url: 'url',
-    method: 'GET' as 'GET',
+    method: 'get' as 'get',
   } as const;
   /*     ^ ensuring that all properties are assigned the literal type
   instead of a more general version like string or number */
 
-  handleRequest(req3.url, req3.method);
+  handlerequest(req3.url, req3.method);
 });
-// strictNullChecks on
+// strictnullchecks on
 
-function doSomething(x: string | null | undefined) {
+function dosomething(x: string | null | undefined) {
   if (typeof x === 'string') {
-    x.toLowerCase(); //narrowing
+    x.tolowercase(); //narrowing
   }
-  x?.toUpperCase(); // Non-null assertion operator
+  x?.touppercase(); // non-null assertion operator
 
-  x.toUpperCase();
+  x.touppercase();
 }
 
-function _doSomething(x: string | null | undefined) {
+function _dosomething(x: string | null | undefined) {
   if (typeof x === 'string') {
-    return x.toLowerCase(); // narrowing
+    return x.tolowercase(); // narrowing
   }
 
-  x?.toUpperCase(); // this line is never got evaluated
-  x.toUpperCase();
+  x?.touppercase(); // this line is never got evaluated
+  x.touppercase();
 }
 
 // never type
 let x: null = null;
-x?.toLocaleLowerCase(); // The line is "never" got evaluated
+x?.tolocalelowercase(); // the line is "never" got evaluated
 
 // type guard
 
-function padLeft(padding: number | string) {
+function padleft(padding: number | string) {
   if (typeof padding === 'number') {
     console.log('the type of padding here' + padding + ' is a number');
   } else {
@@ -147,11 +257,11 @@ function padLeft(padding: number | string) {
   }
 }
 
-// Truthiness narrowing
-function printAll(str: string | string[] | null) {
+// truthiness narrowing
+function printall(str: string | string[] | null) {
   if (typeof str === 'object') {
     for (const s of str) {
-      //              ^ Object is possibly 'null'.
+      //              ^ object is possibly 'null'.
       console.log(s);
     }
   } else if (typeof str === 'string') {
@@ -161,7 +271,7 @@ function printAll(str: string | string[] | null) {
   }
 }
 
-function _printAll(str: string | string[] | null) {
+function _printall(str: string | string[] | null) {
   if (str && typeof str === 'object') {
     for (const s of str) {
       //              ^ no error
@@ -174,7 +284,7 @@ function _printAll(str: string | string[] | null) {
   }
 }
 
-// Conditional assignment/ non-null assertion operator (postfix !)
+// conditional assignment/ non-null assertion operator (postfix !)
 
 let _foo: string;
 if (1) {
@@ -185,11 +295,11 @@ console.log(_foo);
 console.log(_foo as string);
 console.log(_foo!);
 
-// Equality narrowing
+// equality narrowing
 
 function example(x: string | number, y: string) {
   if (x === y) {
-    x.toLowerCase();
+    x.tolowercase();
     console.log(x);
     //          ^(parameter) x: string
   } else {
@@ -197,13 +307,13 @@ function example(x: string | number, y: string) {
   }
 
   if (x == y) {
-    x.toLowerCase();
+    x.tolowercase();
   }
 }
 
 // truthiness narrowing
 
-function truthinessNarrowing(x: null | string) {
+function truthinessnarrowing(x: null | string) {
   if (x) {
     x;
   } else {
@@ -231,26 +341,26 @@ console.log(assignment);
 
 // type predicates
 
-interface Car {
+interface car {
   wheel: number;
 }
 
-type Ship = {
+type ship = {
   sprial: boolean;
 };
 
-const car: Car = { wheel: 4 };
-const ship: Ship = { sprial: true };
-const vehicle: Car | Ship = {
+const car: car = { wheel: 4 };
+const ship: ship = { sprial: true };
+const vehicle: car | ship = {
   wheel: 1,
 };
 
-function isCar(vehicle: Car | Ship): vehicle is Car {
-  if ((vehicle as Car).wheel === undefined) return false;
+function iscar(vehicle: car | ship): vehicle is car {
+  if ((vehicle as car).wheel === undefined) return false;
   else return true;
 }
 
-if (isCar(vehicle)) {
+if (iscar(vehicle)) {
   vehicle;
 } else {
   vehicle;
@@ -260,96 +370,96 @@ if (isCar(vehicle)) {
   // discriminated unions
 
   (function () {
-    interface Kinds {
+    interface kinds {
       kind: 'kind1' | 'kind2';
       name1?: string;
       name2?: string;
     }
 
-    function getName(foo: Kinds) {
+    function getname(foo: kinds) {
       if (foo.kind === 'kind1') {
-        // will get foo.name1 may be undefined, but I know the name1 is exist
+        // will get foo.name1 may be undefined, but i know the name1 is exist
         // on the kind1.
-        // Can solve this by using the non-null type assertions `!`.
+        // can solve this by using the non-null type assertions `!`.
         // but the assertions are error prone
-        return foo.name1.toUpperCase;
+        return foo.name1.touppercase;
       }
     }
   });
 });
 
 //solution:
-interface Kind1 {
+interface kind1 {
   kind: 'kind1';
   name1: string;
 }
 
-interface Kind2 {
+interface kind2 {
   kind: 'kind2';
   name2: string;
 }
 
-type Kinds = Kind1 | Kind2;
+type kinds = kind1 | kind2;
 
-function _getName(foo: Kinds) {
-  return foo.name1.toUpperCase();
+function _getname(foo: kinds) {
+  return foo.name1.touppercase();
 }
 
-function getName(foo: Kinds) {
+function getname(foo: kinds) {
   if (foo.kind === 'kind1') {
-    // the `kind` property is the discriminant property of Kinds
-    return foo.name1.toUpperCase;
+    // the `kind` property is the discriminant property of kinds
+    return foo.name1.touppercase;
   }
 }
 
-// More on Functions
+// more on functions
 (function () {
-  // Function Type Expressions
+  // function type expressions
   function greeter(fn: (sen: string) => string): void {
     console.log(fn('hello'));
   }
 
-  function addName(name: string) {
+  function addname(name: string) {
     return 'hello ' + name;
   }
 
-  greeter(addName);
+  greeter(addname);
 
   // using type alias
-  type GreetFunction = (sen: string) => string;
-  function welcome(fn: GreetFunction): void {
+  type greetfunction = (sen: string) => string;
+  function welcome(fn: greetfunction): void {
     console.log(fn('bilder'));
   }
 
-  welcome(addName);
+  welcome(addname);
 
   let bar: (sen: string) => string;
   bar = (sen: string) => sen;
 })();
 
 (function () {
-  //Call signatures
+  //call signatures
 
   type foo = {
     description: string;
     (arg: number): boolean;
-    new (arg: string): Date;
+    new (arg: string): date;
   };
 
-  function doSomething(fn: foo) {
+  function dosomething(fn: foo) {
     console.log(fn.description, fn(1));
     const date = new fn('1');
   }
 })();
 (function () {
-  //Construct signatures
+  //construct signatures
   type foo = {
     description: string;
     new (): void;
     (): string;
   };
 
-  function doSomething(fn: foo) {
+  function dosomething(fn: foo) {
     console.log(fn.description, new fn());
     fn();
   }
@@ -358,53 +468,53 @@ function getName(foo: Kinds) {
     return new con('birudo');
   }
 
-  type Con = {
+  type con = {
     new (name: string): void;
   };
 
-  const cons: Con = function (name: string): void {};
+  const cons: con = function (name: string): void {};
 
   bar(cons);
 })();
 
 (function () {
-  function firstElement(arr: any[]) {
+  function firstelement(arr: any[]) {
     return arr[0];
   }
 
-  const s = firstElement([1, 2, 3]);
+  const s = firstelement([1, 2, 3]);
   //    ^any
 
-  function secondElement<Type>(arr: Type[]) {
+  function secondelement<type>(arr: type[]) {
     return arr[1];
   }
 
-  const b = secondElement(['a', 's']);
+  const b = secondelement(['a', 's']);
   //    ^ string
 
-  function foo<T>(arg: T): T {
+  function foo<t>(arg: t): t {
     return res;
   }
 
   // inference
-  function map<Input, Output>(
-    arr: Input[],
-    fn: (arg: Input) => Output
-  ): Output[] {
+  function map<input, output>(
+    arr: input[],
+    fn: (arg: input) => output
+  ): output[] {
     return arr.map(fn);
   }
   // constraints
 
-  function hello<T>(name: T): T {
+  function hello<t>(name: t): t {
     return name;
   }
 
   const res = hello('hello');
 
-  function longest<Type>(a: Type, b: Type) {
-    //                              ^ constrain the Type must have property length
+  function longest<type>(a: type, b: type) {
+    //                              ^ constrain the type must have property length
     if (a.length > b.length) {
-      //   ^ プロパティ 'length' は型 'Type' に存在しません
+      //   ^ プロパティ 'length' は型 'type' に存在しません
       return a;
     } else {
       return b;
@@ -424,28 +534,26 @@ function getName(foo: Kinds) {
   longest(1, 2);
   try {
     // working with constrained values
-    function minimumLength<Type extends { length: number }>(): Type {
+    function minimumlength<type extends { length: number }>(): type {
       return { length: 1 };
-    } //         ^ 型 '{ length: number; }' を型 'Type' に割り当てることはできません。
-    //'              { length: number; }' は型 'Type' の制約に代入できますが、'Type' は制約 '{ length: number; }' の別のサブタイプでインスタンス化できることがあります。ts(2322)
+    } //         ^ 型 '{ length: number; }' を型 'type' に割り当てることはできません。
+    //'              { length: number; }' は型 'type' の制約に代入できますが、'type' は制約 '{ length: number; }' の別のサブタイプでインスタンス化できることがあります。ts(2322)
 
-    const arr = minimumLength([2, 3, 4], 9);
+    const arr = minimumlength([2, 3, 4], 9);
     console.log(arr.slice(1));
     //               ^crash here
 
-    function foo<T extends any[]>(age: T): T {
+    function foo<t extends any[]>(age: t): t {
       return age;
     }
 
     foo<number[] | string[]>([123, 11111111111]);
-  } catch (err) {
-    console.error(err);
-  }
+  } catch (err) {}
 })();
 
 try {
   // specifying type arguments
-  function combine<Type>(arr1: Type[], arr2: Type[]): Type[] {
+  function combine<type>(arr1: type[], arr2: type[]): type[] {
     return arr1.concat(arr2);
   }
 
@@ -453,10 +561,10 @@ try {
   //                ^
 
   combine<string | number>([1, 2], ['1', '1']);
-  //             ^ manually specify Type
+  //             ^ manually specify type
 } catch (err) {}
 
-//Optional parameters
+//optional parameters
 try {
   function f(n?: number) {
     n;
@@ -465,24 +573,22 @@ try {
 } catch (err) {}
 
 try {
-  // Optional parameters in callback
-  function myForEach(arr: any[], callback: (arg: any, index?: number) => void) {
+  // optional parameters in callback
+  function myforeach(arr: any[], callback: (arg: any, index?: number) => void) {
     for (let i = 0; i < arr.length; i++) {
       callback(arr[i], i);
     }
   }
 
-  myForEach([1, 2, 3], (a) => console.log(a));
-  myForEach([1, 2, 3], (a, i) => {
-    console.log(i.toFixed());
+  myforeach([1, 2, 3], (a) => console.log(a));
+  myforeach([1, 2, 3], (a, i) => {
+    console.log(i.tofixed());
     //          ^
   });
-} catch (err) {
-  console.error(err);
-}
+} catch (err) {}
 
 try {
-  // Optional Modifiers
+  // optional modifiers
   function draw({ age: number }): number {
     return age;
     // ^名前 'age' が見つかりません。
@@ -491,11 +597,11 @@ try {
 
 try {
   // readonly
-  interface Foo {
+  interface foo {
     readonly cookie: string;
   }
 
-  const bar: Foo = {
+  const bar: foo = {
     cookie: 'blue',
   };
 
@@ -504,7 +610,7 @@ try {
 } catch (error) {}
 
 try {
-  // Function overloads
+  // function overloads
   function fn(x: number): void;
   function fn(x: string) {}
 
@@ -518,20 +624,20 @@ try {
 
   function foo(str: string): string;
   function foo(num1: number, num2: number): number;
-  function foo(strOrNum1: string | number, num2?: number): string | number {
+  function foo(strornum1: string | number, num2?: number): string | number {
     return 123;
   }
 } catch (error) {}
 
 try {
-  // Function generic
-  function foo<Type extends any[]>(arr: Type) {
+  // function generic
+  function foo<type extends any[]>(arr: type) {
     return arr[1];
   }
 
   const res1 = foo([1, 1, 1]);
 
-  function bar<Type>(arr: Type[]) {
+  function bar<type>(arr: type[]) {
     return arr[1];
   }
 
@@ -539,50 +645,50 @@ try {
 } catch (error) {}
 
 try {
-  // Declaring `this` in function
+  // declaring `this` in function
   // auto infer this
   const user = {
     id: 123,
 
     admin: false,
-    becomeAdmin: function () {
+    becomeadmin: function () {
       this.admin = true;
     },
   };
 
-  // Explicitly set this pointer
-  interface User {
+  // explicitly set this pointer
+  interface user {
     name: string;
   }
 
-  interface Cat {
+  interface cat {
     weight: number;
     foo: () => void;
   }
 
-  const littleCat: Cat = {
+  const littlecat: cat = {
     weight: 1,
     foo: function () {},
   };
 
-  function userFun(this: User): string {
-    console.log('userFun');
-    return 'userFun';
+  function userfun(this: user): string {
+    console.log('userfun');
+    return 'userfun';
   }
 
-  // littleCat.foo = foo;
-  littleCat.foo = userFun;
-  const bar = littleCat.foo();
+  // littlecat.foo = foo;
+  littlecat.foo = userfun;
+  const bar = littlecat.foo();
   console.log(bar);
 } catch (error) {}
 
 try {
-  interface Person {
+  interface person {
     age: number;
     say: () => void;
   }
 
-  const person: Person = {
+  const person: person = {
     age: 1,
     say: function (): string {
       return '1';
@@ -595,13 +701,13 @@ try {
 //   const foo: 'str1'|'str2';
 
 //   const xy = [8, 5];
-//   Math.atan2(...xy);
+//   math.atan2(...xy);
 
 //   const xy1: [8,5] = [8, 5]
-//   Math.atan2(...xy1)
+//   math.atan2(...xy1)
 
 //   const xy2 = [8, 5] as const;
-//   Math.atan2(...xy2){
+//   math.atan2(...xy2){
 
 // } catch (error)
 
@@ -617,12 +723,12 @@ try {
   let foo1: 'str1' | 1 | 2 | true | false;
 
   let bar: 1 | 0;
-  bar = Number(true);
+  bar = number(true);
   //^型 'number' を型 '0 | 1' に割り当てることはできません。
 } catch (error) {}
 
 try {
-  // Object Destructuring
+  // object destructuring
   const { a, b } = {
     b: 1,
     a: 2,
@@ -632,9 +738,9 @@ try {
 } catch (error) {}
 
 try {
-  type numberFun = () => number;
-  type voidFun = () => void;
-  const fun1: voidFun = function (): string {
+  type numberfun = () => number;
+  type voidfun = () => void;
+  const fun1: voidfun = function (): string {
     return 'fun1';
   }; // non-void function is assignable to void function type;
   const res1 = fun1();
@@ -642,18 +748,18 @@ try {
   console.log(res1);
   console.log(res1.length);
 
-  // const fun2:numberFun = function():void{}
-  [1, 2, 3].forEach;
+  // const fun2:numberfun = function():void{}
+  [1, 2, 3].foreach;
 } catch (error) {}
 
 try {
-  interface Foo {
+  interface foo {
     readonly bar: {
       height: number;
     };
   }
 
-  let foo: Foo = {
+  let foo: foo = {
     bar: {
       height: 123,
     },
@@ -662,43 +768,43 @@ try {
   foo.bar.height = 1;
 } catch (error) {}
 try {
-  // Readonly modifier
-  interface Person {
+  // readonly modifier
+  interface person {
     age: number;
   }
-  interface ReadonlyPerson {
+  interface readonlyperson {
     readonly age: number;
   }
 
-  const person: Person = {
+  const person: person = {
     age: 10,
   };
 
-  const readonlyPerson: ReadonlyPerson = person;
-  const readonlyPerson2 = person as ReadonlyPerson;
+  const readonlyperson: readonlyperson = person;
+  const readonlyperson2 = person as readonlyperson;
 
   person.age = 11;
 
-  console.log(readonlyPerson);
+  console.log(readonlyperson);
 } catch (error) {}
 
 try {
-  // Index Signatures
-  interface numberIndexObject {
+  // index signatures
+  interface numberindexobject {
     [index: number]: number;
   }
 
-  interface IAmAnObject {
-    [stringIndex: string]: string;
-    [numberKey: number]: number;
+  interface iamanobject {
+    [stringindex: string]: string;
+    [numberkey: number]: number;
   }
 
-  const foo: numberIndexObject = {};
+  const foo: numberindexobject = {};
   foo[0] = 1;
   foo['123'] = true;
   foo[0] = '1';
 
-  const bar: stringIndexObject = {};
+  const bar: stringindexobject = {};
   bar[1] = 1;
   bar[0] = '0';
   bar['1'] = 0;
@@ -708,8 +814,8 @@ try {
 
 try {
   const obj = {
-    toString() {
-      console.log('toString called');
+    tostring() {
+      console.log('tostring called');
       return 'hello';
     },
   };
@@ -720,12 +826,12 @@ try {
   console.log(foo[obj]); // hi
 } catch (error) {}
 try {
-  const obj = new Object();
+  const obj = new object();
   const foo: any = {};
-  foo[obj] = 'What is the my key?';
-  //   ^ 型 'Object' はインデックスの型として使用できません。
+  foo[obj] = 'what is the my key?';
+  //   ^ 型 'object' はインデックスの型として使用できません。
 
-  console.log(Object.getOwnPropertyNames(foo));
+  console.log(object.getownpropertynames(foo));
 } catch (error) {}
 
 try {
@@ -733,13 +839,13 @@ try {
     bilder: 'bilder',
   };
 
-  interface Person<T> {
-    [name: string]: T;
+  interface person<t> {
+    [name: string]: t;
     foo: string;
-    //^型 'string' のプロパティ 'foo' を文字列インデックス型 'T' に割り当てることはできません。ts(2411)
+    //^型 'string' のプロパティ 'foo' を文字列インデックス型 't' に割り当てることはできません。ts(2411)
   }
 
-  const foo: Person<string> = {
+  const foo: person<string> = {
     bilder: 'hello',
   };
 
@@ -747,31 +853,31 @@ try {
 } catch (error) {}
 
 try {
-  /** Okay */
-  interface Foo {
+  /** okay */
+  interface foo {
     x: number;
     y: number;
   }
-  /** Error */
-  interface Bar {
+  /** error */
+  interface bar {
     x: number;
-    y: string; // ERROR: Property `y` must be of type number
+    y: string; // error: property `y` must be of type number
   }
 } catch (error) {}
 
 try {
-  type Index = 'birudo' | 'bilder' | 'loong';
-  type FromIndex = {
-    [k in Index]?: number;
+  type index = 'birudo' | 'bilder' | 'loong';
+  type fromindex = {
+    [k in index]?: number;
   };
 
-  const person: FromIndex = {
+  const person: fromindex = {
     bilder: 1,
     birudo: 2,
   };
 
-  type FromSomeIndex<K extends string> = { [key in K]?: number };
-  const foo: FromSomeIndex<'a' | 'b' | 'c'> = {
+  type fromsomeindex<k extends string> = { [key in k]?: number };
+  const foo: fromsomeindex<'a' | 'b' | 'c'> = {
     a: 1,
     b: 2,
     c: 3,
@@ -781,23 +887,23 @@ try {
 } catch (error) {}
 
 try {
-  interface Colorful {
+  interface colorful {
     color: string;
   }
 
-  interface Circle {
+  interface circle {
     radius: number;
   }
 
-  interface ColorfulCircle extends Colorful, Circle {}
-  type ColorfulCircle2 = Colorful & Circle;
+  interface colorfulcircle extends colorful, circle {}
+  type colorfulcircle2 = colorful & circle;
 
-  const cc: ColorfulCircle = {
+  const cc: colorfulcircle = {
     color: 'red',
     radius: 42,
   };
 
-  const cc1: ColorfulCircle2 = {};
+  const cc1: colorfulcircle2 = {};
 } catch (error) {}
 
 try {
@@ -805,17 +911,17 @@ try {
     first: string;
     second: string;
   } = {
-    first: 'John',
-    second: 'Doe',
+    first: 'john',
+    second: 'doe',
   };
 
   name = {
-    // Error : `second` is missing
-    first: 'John',
+    // error : `second` is missing
+    first: 'john',
   };
   name = {
-    // Error : `second` is the wrong type
-    first: 'John',
+    // error : `second` is the wrong type
+    first: 'john',
     second: 1337,
   };
 } catch (error) {}
@@ -831,27 +937,27 @@ try {
 
 try {
   const foo = 123;
-  foo.toString();
+  foo.tostring();
 
   document;
-  window.screenLeft;
+  window.screenleft;
   window.hello('123');
   process;
 
-  Buffer.from('123');
+  buffer.from('123');
 } catch (error) {}
 
 try {
-  // The Array Type
-  let foo: Array<number>;
-  let bar: Array<string>;
+  // the array type
+  let foo: array<number>;
+  let bar: array<string>;
 } catch (error) {}
 
 try {
-  // The ReadonlyArray Type
-  let readonlyArray: ReadonlyArray<number>;
-  readonlyArray = [1, 2];
-  readonlyArray[1] = 333;
+  // the readonlyarray type
+  let readonlyarray: readonlyarray<number>;
+  readonlyarray = [1, 2];
+  readonlyarray[1] = 333;
   // ^ 型 'readonly number[]' のインデックス シグネチャは、読み取りのみを許可します。ts(2542)
 } catch (error) {}
 try {
@@ -873,63 +979,63 @@ try {
 } catch (error) {}
 
 try {
-  // Generic Types
-  function foo<T>(arg: T): T {
+  // generic types
+  function foo<t>(arg: t): t {
     return arg;
   }
 
-  let bar: <T>(arg: T) => T;
-  bar = function <T>(arg: T): T {
+  let bar: <t>(arg: t) => t;
+  bar = function <t>(arg: t): t {
     return arg;
   };
 
-  const fun1 = function <T>(arg: T): T {
+  const fun1 = function <t>(arg: t): t {
     return arg;
   };
   const fun2 = foo;
 } catch (error) {}
 
 try {
-  // Generic Type
+  // generic type
   {
-    interface GenericFun {
-      <T>(arg: T): T;
+    interface genericfun {
+      <t>(arg: t): t;
     }
 
-    const genericFun: GenericFun = function <T>(arg: T): T {
+    const genericfun: genericfun = function <t>(arg: t): t {
       return arg;
     };
   }
 
   {
-    interface GenericFun<T> {
-      (arg: T): T;
+    interface genericfun<t> {
+      (arg: t): t;
     }
 
-    let genericFun: GenericFun<number> = function <T>(arg: T): T {
+    let genericfun: genericfun<number> = function <t>(arg: t): t {
       return arg;
     };
 
-    genericFun;
+    genericfun;
 
-    genericFun = function (arg: number): number {
+    genericfun = function (arg: number): number {
       return arg;
     };
 
-    genericFun;
+    genericfun;
   }
 } catch (error) {}
 
 try {
-  // The keyof type operator
+  // the keyof type operator
 
-  type Point = {
+  type point = {
     x: number;
     y: number;
   };
 
-  type P = keyof Point;
-  let foo: P;
+  type p = keyof point;
+  let foo: p;
 } catch (error) {}
 
 try {
@@ -941,37 +1047,37 @@ try {
 } catch (error) {}
 
 try {
-  // Generic Types
+  // generic types
 
-  function identity<T>(input: T): T {
+  function identity<t>(input: t): t {
     return input;
   }
 
-  const anotherIdentity: <U>(arg: U) => U = identity;
-  type type1 = <T>() => T;
-  type type2 = <U>() => U;
+  const anotheridentity: <u>(arg: u) => u = identity;
+  type type1 = <t>() => t;
+  type type2 = <u>() => u;
 
   type type3 = type2;
-  // Using Type Parameters in Generic Constraints
-  // function getProperty<T, U extends keyof T>(obj: T, key: string) {
-  // function getProperty<T, U extends keyof T>(obj: T, key: U) {
-  function getProperty<T, U extends T>(obj: T, key: U) {
+  // using type parameters in generic constraints
+  // function getproperty<t, u extends keyof t>(obj: t, key: string) {
+  // function getproperty<t, u extends keyof t>(obj: t, key: u) {
+  function getproperty<t, u extends t>(obj: t, key: u) {
     return obj[key];
   }
 
   const obj = { a: 1, b: 2 };
-  getProperty(obj, 'a');
-  getProperty(obj, 'm');
+  getproperty(obj, 'a');
+  getproperty(obj, 'm');
 } catch (error) {}
 
 try {
-  // Keyof
-  interface Foo {
+  // keyof
+  interface foo {
     name: string;
     age: number;
   }
 
-  type Bar = {
+  type bar = {
     name: string;
     age: number;
   };
@@ -983,57 +1089,57 @@ try {
   typeof foo;
   foo = 'name';
   type foo1 = typeof foo;
-  let bar: keyof Bar = 'age';
+  let bar: keyof bar = 'age';
 
-  interface Foo {
+  interface foo {
     [key: string]: number;
   }
 
-  type FooKeys = keyof Foo;
-  //   ^ type FooKeys = string | number
+  type fookeys = keyof foo;
+  //   ^ type fookeys = string | number
 } catch (error) {}
 
 try {
-  // Indexed Access Types
-  type Person = {
+  // indexed access types
+  type person = {
     name: string;
     age: number;
   };
 
-  type I1 = Person['name'];
-  //   ^ type I1 = string
-  type IAll = Person[keyof Person];
+  type i1 = person['name'];
+  //   ^ type i1 = string
+  type iall = person[keyof person];
 
   const arr = ['name', 'age', 1, { bibi: 1 }];
   const _arr = <const>['name', 'age', 1, { bibi: 1 }];
   type _arr0 = typeof _arr[0];
   type _arr3 = typeof _arr[3];
-  type _arrAll = typeof _arr[number];
+  type _arrall = typeof _arr[number];
   type arr0 = typeof arr[0];
   type age = typeof arr[number]['bibi'];
-  type arrAll = typeof arr[number];
+  type arrall = typeof arr[number];
 
-  const MyArray = [
-    { name: 'Alice', age: 15 },
-    { name: 'Bob', age: 23 },
-    { name: 'Eve', age: 38 },
+  const myarray = [
+    { name: 'alice', age: 15 },
+    { name: 'bob', age: 23 },
+    { name: 'eve', age: 38 },
     'string',
   ];
 
-  type Person_ = typeof MyArray[number];
+  type person_ = typeof myarray[number];
 } catch (error) {}
 try {
-  type Foo = {
+  type foo = {
     [key: string]: boolean | number;
     [index: number]: boolean;
   };
 
-  type FooStringKey = Foo[string];
-  // type FooStringKey = number | boolean
+  type foostringkey = foo[string];
+  // type foostringkey = number | boolean
 } catch (error) {}
 try {
   const arr: readonly any[] = [1, '1', true];
-  type arrElementsType = typeof arr[number];
+  type arrelementstype = typeof arr[number];
 } catch (error) {}
 try {
   const foo = <const>[1, '1', true];
@@ -1057,34 +1163,34 @@ const bar: {
 */
 } catch (error) {}
 try {
-  // Mapped Types
-  // type Foo<T extends string | number | symbol> = {
-  type Foo<T> = {
-    [key in keyof T]: string;
+  // mapped types
+  // type foo<t extends string | number | symbol> = {
+  type foo<t> = {
+    [key in keyof t]: string;
   };
 
-  type didi = Foo<1 | 2 | 3>;
+  type didi = foo<1 | 2 | 3>;
   type dodo = 1 | 2 | 3;
   type dada = keyof '';
 } catch (error) {}
 try {
-  type T = 'name' | 1;
-  type Foo = {
-    // [key in T]: string;
-    [key in T]: key;
+  type t = 'name' | 1;
+  type foo = {
+    // [key in t]: string;
+    [key in t]: key;
   };
 
-  type Bar = {
+  type bar = {
     [key: string]: key;
   };
 } catch (error) {}
 try {
-  type keys = 'stringKey' | 1 | 2;
-  type Foo1 = {
+  type keys = 'stringkey' | 1 | 2;
+  type foo1 = {
     [key in keys as 'index']: key;
   };
 
-  type Foo = {
+  type foo = {
     [key in keys as `_${key}_`]: `$${key}$`;
   };
 
@@ -1094,57 +1200,57 @@ try {
 } catch (error) {}
 
 try {
-  type NewKeyType = '1';
-  type MappedTypeWithNewProperties<Type> = {
-    [Properties in keyof Type as NewKeyType]: Type[Properties];
+  type newkeytype = '1';
+  type mappedtypewithnewproperties<type> = {
+    [properties in keyof type as newkeytype]: type[properties];
   };
 } catch (error) {}
 
 try {
-  type Foo = 1 & string;
+  type foo = 1 & string;
 } catch (error) {}
 try {
-  // Conditional type
-  type Bar = 'Bar';
-  type Dada = 'Dada';
-  const numberOrString = Math.random() ? 'hello' : 42;
-  type NumberOrString = typeof numberOrString;
-  type BarOrDada<T extends number | string> = T extends number ? Bar : Dada;
-  type Foo = BarOrDada<NumberOrString>;
+  // conditional type
+  type bar = 'bar';
+  type dada = 'dada';
+  const numberorstring = math.random() ? 'hello' : 42;
+  type numberorstring = typeof numberorstring;
+  type barordada<t extends number | string> = t extends number ? bar : dada;
+  type foo = barordada<numberorstring>;
 } catch (q) {}
 try {
-  type Foo = 'sdf' extends string ? boolean : bigint;
-  type Bar = 1 extends string ? boolean : bigint;
+  type foo = 'sdf' extends string ? boolean : bigint;
+  type bar = 1 extends string ? boolean : bigint;
 } catch (error) {}
 try {
-  type MessageOf<T> = T extends { message: unknown } ? T['message'] : never;
-  type Foo = MessageOf<{ message: string }>;
-  type Bar = MessageOf<{ bar: number }>;
+  type messageof<t> = t extends { message: unknown } ? t['message'] : never;
+  type foo = messageof<{ message: string }>;
+  type bar = messageof<{ bar: number }>;
 } catch (error) {}
 try {
-  type DisToArray<T> = T extends any ? T[] : never;
-  type NotDisToArray<T> = [T] extends [any] ? T[] : never;
-  type ToArray<T> = T[];
-  type StrNumArr = ToArray<string | number>;
-  type AnotherStrNumArr = NotDisToArray<string | number>;
-  type StrArrOrNumArr = DisToArray<string | number>;
+  type distoarray<t> = t extends any ? t[] : never;
+  type notdistoarray<t> = [t] extends [any] ? t[] : never;
+  type toarray<t> = t[];
+  type strnumarr = toarray<string | number>;
+  type anotherstrnumarr = notdistoarray<string | number>;
+  type strarrornumarr = distoarray<string | number>;
 } catch (error) {}
 try {
-  type Foo<T> = T extends { name: infer U; age: infer U } ? U : never;
-  type T10 = Foo<{ name: number; age: string }>;
-  type T11 = Foo<{ name: number; age: string }>;
+  type foo<t> = t extends { name: infer u; age: infer u } ? u : never;
+  type t10 = foo<{ name: number; age: string }>;
+  type t11 = foo<{ name: number; age: string }>;
 } catch (error) {}
 try {
-  type Foo<T> = T extends { a: infer U; b: (x: infer U) => void } ? U : never;
-  type T10 = Foo<{ a: string; b: (x: string) => void }>; // string
-  type T12 = Foo<{ a: string; b: (x: number) => void }>; // string
-  type T11 = Foo<{ a: string; b: number }>; // string | number
+  type foo<t> = t extends { a: infer u; b: (x: infer u) => void } ? u : never;
+  type t10 = foo<{ a: string; b: (x: string) => void }>; // string
+  type t12 = foo<{ a: string; b: (x: number) => void }>; // string
+  type t11 = foo<{ a: string; b: number }>; // string | number
   // class implements
-  interface Foo {
+  interface foo {
     name: string;
   }
 
-  class Bar implements Foo {
+  class bar implements foo {
     name = '1';
   }
 } catch (error) {}
