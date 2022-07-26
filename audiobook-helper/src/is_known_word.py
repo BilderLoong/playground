@@ -33,5 +33,6 @@ def _generate_word_query(word: str):
 
 
 def is_known_word(word: str):
+    # Add most common words as know words.
     cards_id = _invoke("findCards", query=_generate_word_query(word))
     return bool(len(cards_id))
