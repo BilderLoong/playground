@@ -13,6 +13,7 @@ s = "Our next upswing task is to tokenize the words in the text. Word tokenizati
 
 res = []
 for word, freq in get_freq_dist(s).most_common():
+    # TODO: Add log for progress.
     res.append((word, freq, is_known_word(word)))
 
 print(res)

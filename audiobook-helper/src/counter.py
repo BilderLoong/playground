@@ -20,6 +20,7 @@ def _remove_noise(tokens: list):
     stop_words = stopwords.words("english")
     lemmatizer = WordNetLemmatizer()
 
+    # TODO: Add log for progress.
     for token, tag in pos_tag(tokens):
         token = token.lower()
         if tag.startswith("NN"):
