@@ -2,6 +2,7 @@ node_modules
 **/.DS_Store
 *.map
 *.log
+**/__pycache__
 ts-output
 data-structures/src
 Mini-program-playground

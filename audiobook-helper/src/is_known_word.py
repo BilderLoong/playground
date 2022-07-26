@@ -32,6 +32,6 @@ def _generate_word_query(word: str):
     return f"expression:{word} note:odh_默认模板 -is:suspended"
 
 
-def is_know_word(word: str):
+def is_known_word(word: str):
     cards_id = _invoke("findCards", query=_generate_word_query(word))
     return bool(len(cards_id))
