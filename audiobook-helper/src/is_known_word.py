@@ -1,5 +1,4 @@
 import json
-import string
 import requests
 
 
@@ -29,7 +28,7 @@ def _invoke(action_name: str, **params):
 
 
 def _generate_word_query(word: str):
-    return f"expression:{word} note:odh_默认模板 -is:suspended"
+    return f"expression:re:\\b{word}\\b note:odh_默认模板 -is:suspended"
 
 
 def is_known_word(word: str):
