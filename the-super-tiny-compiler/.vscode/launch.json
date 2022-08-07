@@ -1,0 +1,17 @@
+{
+	"configurations": [
+		{
+			"name": "Launch Program",
+			"program": "${file}",
+			"request": "launch",
+			"preLaunchTask": "tsc: watch - tsconfig.json",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"type": "node",
+			"outFiles": [
+				"${workspaceFolder}/out/**/*.js",
+			]
+		},
+	]
+}
