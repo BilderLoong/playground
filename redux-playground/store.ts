@@ -1,8 +1,11 @@
 import { createStore } from 'redux';
 
-function counterReducer(state = { value: 0 }, action) {
+function counterReducer(
+  state = { value: 0 },
+  action: { type: string; payload: any }
+) {
   switch (action.type) {
-    case 'counter/incremented':
+    case 'action1':
       return { value: state.value + 1 };
     case 'counter/decremented':
       return { value: state.value - 1 };
@@ -14,3 +17,6 @@ function counterReducer(state = { value: 0 }, action) {
 let store = createStore(counterReducer);
 
 store.subscribe(() => console.log(store.getState()));
+
+store.dispatch({ type: 'action1' });
+store.dispatch({ type: 'action1' });
