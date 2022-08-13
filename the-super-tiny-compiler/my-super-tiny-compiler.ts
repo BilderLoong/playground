@@ -35,7 +35,7 @@ namespace LispAST {
 namespace JavaScriptAST {
   type primaryNodeType = 'NumberLiteral' | 'StringLiteral';
 
-  type Node =
+  export type Node =
     | RootNode
     | ExpressionStatement
     | CallExpression
@@ -79,7 +79,7 @@ namespace JavaScriptAST {
 export function tokenizer(input: string) {
   let isInDoubleQuote = false;
   let value = '';
-  const tokens = [...input].reduce((pre, char, index, arr) => {
+  const tokens: Token[] = [...input].reduce((pre, char, index, arr) => {
     if (char === '"') {
       // If already in double quote, then we are exiting double quote.
       if (isInDoubleQuote) {
@@ -271,7 +271,7 @@ function traverser(ast: LispAST.RootNode, visitor: Visitor) {
 
     // Enter the ASTNode.
     // TODO: Don't understand why does the below code got error.
-    methods.enter && methods.enter(node, parent);
+    methods?.enter && methods.enter(node, parent);
 
     // If the node isn't primary node, in other words, the node isn't the leaves of the AST tree,
     // which means it contain child nodes. We should traverse it's child nodes.
@@ -288,57 +288,107 @@ function traverser(ast: LispAST.RootNode, visitor: Visitor) {
     }
 
     // Exit from the current node.
-    methods.exit && methods.exit(node, parent);
+    methods?.exit && methods.exit(node, parent);
   }
 
   traverseNode(ast, null);
 }
 
-const visitor: Visitor = {
-  CallExpression: {
-    enter: (node, parent) => {
-      const expression: JavaScriptAST.CallExpression = {
-        type: 'CallExpression',
-        callee: {
-          type: 'Identifier',
-          name: (<LispAST.CallNode>node).name,
-        },
-        arguments: [],
-      };
-
-      node._context = expression.arguments;
-      
-      // TODO to be continue.
-      if(parent)
-    },
-  },
-  NumberLiteral: {
-    enter: (node, parent) => {
-      const newNode: JavaScriptAST.PrimaryNode<'NumberLiteral'> = {
-        type: 'NumberLiteral',
-        value: node.value,
-      };
-
-      parent?._context.push(newNode);
-    },
-  },
-  StringLiteral: {
-    enter: (node, parent) => {
-      const newNode: JavaScriptAST.PrimaryNode<'StringLiteral'> = {
-        type: 'StringLiteral',
-        value: node.value,
-      };
-
-      parent?._context.push(newNode);
-    },
-  },
-};
-
-function transformer(ast: LispAST.RootNode, visitor: Visitor) {
-  const newAst: LispAST.RootNode = {
+export function transformer(ast: LispAST.RootNode) {
+  const newAst: JavaScriptAST.RootNode = {
     type: 'Program',
     body: [],
   };
 
-  (<typeof ast & { _context: Array<any> }>ast)._context = newAst.body;
+  ast._context = newAst.body;
+
+  const visitor: Visitor = {
+    CallExpression: {
+      enter: (node, parent) => {
+        let expression:
+          | JavaScriptAST.CallExpression
+          | JavaScriptAST.ExpressionStatement = {
+          type: 'CallExpression',
+          callee: {
+            type: 'Identifier',
+            name: (<LispAST.CallNode>node).name,
+          },
+          arguments: [],
+        };
+
+        node._context = expression.arguments;
+
+        // TODO to be continue.
+        if (parent?.type !== 'CallExpression') {
+          expression = {
+            type: 'ExpressionStatement',
+            expression,
+          };
+        }
+
+        parent?._context.push(expression);
+      },
+    },
+
+    NumberLiteral: {
+      enter: (node, parent) => {
+        const newNode: JavaScriptAST.PrimaryNode<'NumberLiteral'> = {
+          type: 'NumberLiteral',
+          value: node.value,
+        };
+
+        parent?._context.push(newNode);
+      },
+    },
+
+    StringLiteral: {
+      enter: (node, parent) => {
+        const newNode: JavaScriptAST.PrimaryNode<'StringLiteral'> = {
+          type: 'StringLiteral',
+          value: node.value,
+        };
+
+        parent?._context.push(newNode);
+      },
+    },
+  };
+
+  traverser(ast, visitor);
+
+  return newAst;
 }
+
+export function codeGenerator(node: JavaScriptAST.Node): string {
+  switch (node.type) {
+    case 'Program':
+      return node.body.map(codeGenerator).join('\n');
+
+    case 'ExpressionStatement':
+      return codeGenerator(node.expression) + ';';
+
+    case 'CallExpression':
+      return `${codeGenerator(node.callee)}(${node.arguments
+        .map(codeGenerator)
+        .join(', ')})`;
+
+    case 'Identifier':
+      return node.name;
+
+    case 'NumberLiteral':
+      return node.value;
+
+    case 'StringLiteral':
+      return `"${node.value}"`;
+  }
+}
+
+export function compiler(input: string): string {
+  const tokens = tokenizer(input);
+  const lispAst = parser(tokens);
+  const newAst = transformer(lispAst);
+  const output = codeGenerator(newAst);
+  return output;
+}
+
+console.log(compiler('(bar 1 (foo 2 3))'));
+console.log(compiler('1 1 1 1 '));

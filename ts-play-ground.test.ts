@@ -1,4 +1,22 @@
 try {
+  type Union = 1 | 2 | 3 | 4;
+  type SubUnion1 = 1 | 2;
+  type SubUnion2 = 3 | 4;
+
+  type Bar = {
+    [U in Union]: {
+      bar?: (param: U extends SubUnion1 ? string : number) => void;
+    };
+  };
+  interface Foo {
+    [U in Union]: U extends SubUnion1
+      ? string
+      : U extends SubUnion2
+      ? number
+      : never;
+  }
+} catch (error) {}
+try {
   const bar = {
     fun1() {
       console.log(this);
