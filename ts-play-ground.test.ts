@@ -1,4 +1,67 @@
 try {
+  interface Bar {
+    age: number;
+    hello(): void;
+  }
+
+  type BarWithDifferentThis = Bar & ThisType<Bar & { name: string }>;
+
+  const obj: Bar = {
+    age: 1,
+    hello() {
+      console.log(this.age);
+      //           ^this: Bar
+    },
+  };
+
+  const obj2: BarWithDifferentThis = {
+    age: 2,
+    hello() {
+      console.log(this.name);
+      //          ^Bar & {
+      //             name: string;
+      //            }
+    },
+  };
+} catch (error) {}
+try {
+  class Cat {
+    eat(food: Food) {
+      console.log(food.getNutrition());
+    }
+  }
+
+  interface Food {
+    getNutrition(): void;
+  }
+
+  class Fish implements Food {
+    getNutrition() {}
+    getColor() {}
+  }
+} catch (error) {}
+try {
+  class Cat {
+    eat(food: Fish) {
+      console.log(food.getNutrition());
+    }
+  }
+
+  class Fish {
+    getNutrition() {}
+    getColor() {}
+  }
+} catch (error) {}
+try {
+  interface Foo {
+    say: () => void;
+  }
+
+  class Bar implements Foo {
+    say(): any {}
+  }
+} catch (error) {}
+try {
   type Union = 1 | 2 | 3 | 4;
   type SubUnion1 = 1 | 2;
   type SubUnion2 = 3 | 4;
