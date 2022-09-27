@@ -1,4 +1,29 @@
 export {};
+try {
+enum RedirectCode {
+  REDIRECT_TO_SHOP_LIST = 1200,
+}
+  
+RedirectCode
+
+} catch (error) {
+  
+}
+try {
+
+  function classDecorator(con:Function) {
+    console.log(con);
+  }  
+  
+  @classDecorator
+  class Foo {
+    constructor() {
+      console.log('Foo'); 
+    }
+  }
+} catch (error) {
+  console.log(error);
+}
 namespace dodo {
   export const foo = 1;
   export type didi = number;

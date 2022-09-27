@@ -1,4 +1,21 @@
 try {
+  const foo = {
+    foo: 1,
+    bar(this: { foo: number }) {
+      this.bar();
+    },
+  };
+} catch (error) {}
+try {
+  enum foo {
+    A = 1,
+    B = 2,
+  }
+
+  const bar: foo = foo;
+  //    ^Type 'typeof foo' is not assignable to type 'foo'.ts(2322)
+} catch (error) {}
+try {
   const bar = {
     fun1() {
       console.log(this);
