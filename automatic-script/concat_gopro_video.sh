@@ -1,17 +1,12 @@
-read -p "Please the last three number of videos that you want to concat: " n
+read -p "Please the number of videos that you want to concat: " n
 
-for v in {1..5} 
-do
-	if [ ${v} -eq 1 ]; then
-		echo file \'GX0${v}0${n}.mp4\' > temp.txt
-	else
-		echo file \'GX0${v}0${n}.mp4\' >> temp.txt
-	fi
-done
-echo File list:
 
-cat temp.txt
+
+# https://stackoverflow.com/questions/7333232/how-to-concatenate-two-mp4-files-using-ffmpeg
+file_list=$(find . -type f -name 'GX*'${n}'.MP4' -printf "file '%p'\n" | sort) 
+
+echo $file_list
 
 echo run ffmpeg!
 
-ffmpeg -f concat -i temp.txt -c copy $n.mp4
+ffmpeg -f concat -i <$file_list -c copy $n.mp4
