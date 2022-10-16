@@ -1,4 +1,17 @@
 try {
+  interface Data<D> {
+    data: D;
+  }
+  // interface Option<D> {
+
+  // }
+  function test<O, D>({}: O & Data<D>) {}
+  test({
+    data: { a: 1 },
+    bar: 1,
+  });
+} catch (error) {}
+try {
   const foo = {
     foo: 1,
     bar(this: { foo: number }) {
