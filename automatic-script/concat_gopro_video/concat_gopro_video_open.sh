@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # Generate the file list to be concat in the format used by ffmpeg.
 # ARGUEMNTS:
 #   Accept one parameter which should be the video indentifier.
@@ -15,13 +14,40 @@ get_file_list() {
 
 # Check whether a video is charpterd.
 # ARGUEMNTS:
-#   Accept one parameter which should be the video indentifier.
+#   Accept one parameter which should be the video identifier.
 # OUTPUT: 
 #   1: there are multiple charpters of the given video.
 #   0: there is only one charpter of the given video.
 is_charptered_video() {
-    count=$(find . -type f -name "G*${1}.MP4" -printf "." | wc -m)
+    count=$(gfind . -type f -name "G*${1}.MP4" -printf "." | wc -m)
     echo $(( count > 1 ))
+}
+
+# Get the video identifier from full file name.
+# ARGUEMNTS:
+#   Accept one parameter which should be the video full name.
+# OUTPUT: 
+#   The identifier of the given video.
+# Example:
+# get_video_identifier GX010002.MP4 should output 0002.
+# TODO: findish this function: https://stackoverflow.com/questions/125281/how-do-i-remove-the-file-suffix-and-path-portion-from-a-path-string-in-bash
+get_video_identifier(){
+
+}
+
+# List all multiple charpeters videos in current directory.
+# ARGUEMNTS:
+# OUTPUT: 
+#   A list of multi charpters video idetifier.
+# TODO: 
+list_charptered_video() {
+  for file in G*.MP4 
+  do
+    local video_identifier=$(get_video_identifier $file)
+    if [ $(is_charptered_video $video_identifier) -eq 1 ]; then
+      echo $file_identifier
+    fi
+  done
 }
 
 # Archieve already merged charpter video files and other useless file.
@@ -38,18 +64,23 @@ clear_files(){
 }
 
 
-# TODO input multiple files number and concat them all.
-file_list_file=.${1}.tmp
+# If run script without parameter, list video identifier of multiple charpters video.
+if [ -z ${1+x} ]; then
+  list_charptered_video $1
+else 
+  # TODO input multiple files number and concat them all.
+  file_list_file=.${1}.tmp
 
-echo "$(get_file_list $1)" > $file_list_file
+  echo "$(get_file_list $1)" > $file_list_file
 
-echo ffmpeg_file_list: $(cat $file_list_file)
+  echo ffmpeg_file_list: $(cat $file_list_file)
 
-echo begin runnning ffmpeg!
+  echo begin runnning ffmpeg!
 
-# # TODO: using string replace the temp.tmp file.
-# # TODO: add date information in output file name.
-# # TODO mv chaptered files after concat.
-ffmpeg -f concat -i $file_list_file -c copy $1.mkv
+  # # TODO: using string replace the temp.tmp file.
+  # # TODO: add date information in output file name.
+  # # TODO mv chaptered files after concat.
+  ffmpeg -f concat -i $file_list_file -c copy $1.mkv
 
-clear_files $1
+  clear_files $1
+fi
