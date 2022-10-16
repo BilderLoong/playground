@@ -1,1 +1,4 @@
-mocked_test_files/*.MP4
+mocked_test_files/**/*.MP4
+mocked_test_files/**/*.LRV
+mocked_test_files/**/*.THM
+mocked_test_files/**/*.tmp
