@@ -1,14 +1,16 @@
-#!/bin/bash
+echo foo: ${foo:+didi}
 
-var1=A
-var2=B
+bar=1
+echo ${bar:+didi}
+# check_exit_staus(){
+# if [ $? -eq 0 ]; then 
+#   echo "success!"
+# else
+#   echo "failed!"
+# fi
+# }
 
-my_func(){
-  echo $1
-  return $(($1>10))
-}
-
-my_func 11 
-my_func 1
-
-echo $?
+# ls --a &> /dev/null
+# check_exit_staus
+# ls -- &> /dev/null
+# check_exit_staus
