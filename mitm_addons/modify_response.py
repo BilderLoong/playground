@@ -1,4 +1,5 @@
 from mitmproxy import ctx
+
 # Testing command
 # curl https://example.com -x http:localhost:8080
 
