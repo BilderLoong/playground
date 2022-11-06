@@ -29,23 +29,24 @@ is_charptered_video() {
 # OUTPUT:
 #   The identifier of the given video.
 # Example:
-#   get_video_identifier GX010002.MP4 should output 0002.
-# TODO: findish this function: https://stackoverflow.com/questions/125281/how-do-i-remove-the-file-suffix-and-path-portion-from-a-path-string-in-bash
-get_video_identifier(){
-    echo ''
+#   get_video_identifier_from_file_name GX010002.MP4 should output 0002.
+get_video_identifier_from_file_name(){
+    echo ${1:4:4}
 }
 
 # List all multiple charpeters videos in current directory.
 # ARGUEMNTS:
 # OUTPUT:
 #   A list of multi charpters video idetifier.
-# TODO:
+# TODO: sort and uniq the result.
 list_charptered_video() {
     for file in G*.MP4
     do
-        local video_identifier=$(get_video_identifier $file)
+        local video_identifier=$(get_video_identifier_from_file_name $file)
+        # echo $video_identifier
+        # echo $(is_charptered_video $video_identifier)
         if [ $(is_charptered_video $video_identifier) -eq 1 ]; then
-            echo $file_identifier
+            echo $video_identifier
         fi
     done
 }
@@ -78,7 +79,6 @@ else
     echo begin runnning ffmpeg!
     
     # TODO: add date information in output file name.
-    # ffmpeg -f  -probesize 200 -analyzeduration 200 concat -i $file_list_file -c copy $1.mkv
     ffmpeg -f concat -i $file_list_file -codec copy $1.mkv
     # ffplay -f concat -i $file_list_file   $1.mkv
     
