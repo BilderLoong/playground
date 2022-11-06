@@ -78,8 +78,8 @@ else
     
     echo begin runnning ffmpeg!
     
-    # TODO: add date information in output file name.
-    ffmpeg -f concat -i $file_list_file -codec copy $1.mkv
+    # TODO: Fix the missing meta data: https://video.stackexchange.com/questions/23741/how-to-prevent-ffmpeg-from-dropping-metadata
+    ffmpeg -f concat -i $file_list_file -map_metadata -codec copy $1.mkv
     # ffplay -f concat -i $file_list_file   $1.mkv
     
     if [ $? -eq 0 ]; then
