@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# a=
+# b=''
+# echo ${a:-default}
+
+# b=''
+# echo ${b:-default} # default
+# echo ${b-default} # empty string
+
+# c=123
+# echo ${#c}
+
+# c=01234
+# echo ${c:3} #34
+# echo ${c:2:2} #23
+
+foo=GX010002.MP4
+echo ${foo:2:6}

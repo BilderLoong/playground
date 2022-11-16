@@ -1,0 +1,27 @@
+#!/bin/bash
+echo "Actual Arguments"
+printf "%d args:" "$#"
+printf " <%s>" "$@"
+echo
+printf  "\n"
+
+
+args(){
+    printf "%d args:" $#
+    printf " <%s>" $@
+    echo
+}
+
+IFS=c
+
+
+echo '$@'
+args $@
+echo '"$@"'
+args "$@"
+printf  "\n"
+
+echo '$*'
+args $*
+echo '"$*"'
+args "$*"
