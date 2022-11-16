@@ -1,24 +1,32 @@
 export {};
 try {
-enum RedirectCode {
-  REDIRECT_TO_SHOP_LIST = 1200,
-}
-  
-RedirectCode
+  const what = () => {
+    console.log(123);
+  };
 
-} catch (error) {
-  
-}
+  @what
+  class Foo {
+    constructor() {
+      console.log('Foo');
+    }
+  }
+} catch (e) {}
 try {
+  enum RedirectCode {
+    REDIRECT_TO_SHOP_LIST = 1200,
+  }
 
-  function classDecorator(con:Function) {
+  RedirectCode;
+} catch (error) {}
+try {
+  function classDecorator(con: Function) {
     console.log(con);
-  }  
-  
+  }
+
   @classDecorator
   class Foo {
     constructor() {
-      console.log('Foo'); 
+      console.log('Foo');
     }
   }
 } catch (error) {
@@ -1289,11 +1297,11 @@ try {
     name: string;
   }
 
-  class bar implements foo {
-    name = '1';
-  class Bar implements Foo {
-    name = 'name';
-  }
+  // class bar implements foo {
+  //   name = '1';
+  // class Bar implements Foo {
+  //   name = 'name';
+  // }
 } catch (error) {}
 
 try {

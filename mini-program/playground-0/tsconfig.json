@@ -16,13 +16,14 @@
     "noUnusedParameters": true,
     "strict": true,
     "strictPropertyInitialization": true,
-    "lib": ["ES2020"],
-    "typeRoots": [
-      "./typings"
-    ]
+    "lib": [
+      "ES2020",
+      "DOM"
+    ],
   },
   "include": [
-    "./**/*.ts"
+    "./**/*.ts",
+    "jest.config.ts"
   ],
   "exclude": [
     "node_modules"

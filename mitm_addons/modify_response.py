@@ -22,9 +22,9 @@ def response(flow):
     # https://docs.mitmproxy.org/stable/api/mitmproxy/http.html#Response
     request = flow.request 
 
-    if "example" or 'queryNeedSignAgreements' in request.host:
+    if "orderConfirm" in request.url:
         # https://docs.mitmproxy.org/stable/api/mitmproxy/http.html#Message.set_text
-        response.set_text("123") 
+        # response.set_text('123') 
         # get_text(): https://docs.mitmproxy.org/stable/api/mitmproxy/http.html#Message.get_text
         ctx.log.info(flow.response.get_text())
      
