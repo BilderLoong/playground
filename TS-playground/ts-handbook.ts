@@ -1,7 +1,13 @@
 export {};
 try {
-  const what = () => {
-    console.log(123);
+  const what = (BaseClass: Function) => {
+    console.log(`what?`);
+    return class extends BaseClass {
+      constructor() {
+        super();
+        console.log('log from what dec');
+      }
+    };
   };
 
   @what
@@ -10,6 +16,7 @@ try {
       console.log('Foo');
     }
   }
+  console.log(123);
 } catch (e) {}
 try {
   enum RedirectCode {
