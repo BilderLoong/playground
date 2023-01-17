@@ -37,7 +37,7 @@ get_video_identifier_from_file_name(){
 # List all multiple charpeters videos in current directory.
 # ARGUEMNTS:
 # OUTPUT:
-#   A list of multi charpters video idetifier.
+#   A list of multi charpters video identifier.
 # TODO: sort and uniq the result.
 list_charptered_video() {
     for file in G*.MP4
@@ -48,10 +48,10 @@ list_charptered_video() {
         if [ $(is_charptered_video $video_identifier) -eq 1 ]; then
             echo $video_identifier
         fi
-    done
+    done | sort | uniq # https://stackoverflow.com/questions/54594818/sort-output-of-loop-and-display
 }
 
-# Archieve already merged charpter video files and other useless file.
+# Archive already merged chapter video files and other useless file.
 clear_files(){
     if [ $? -eq 0 ]; then
         archieve_path="merged_chapter_videos/$1"
