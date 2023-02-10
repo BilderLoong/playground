@@ -2,26 +2,30 @@ package main
 
 import (
 	"fmt"
+
 	"golang.org/x/tour/tree"
 )
 
 // Walk walks the tree t sending all values
 // from the tree to the channel ch.
 func Walk(t *tree.Tree, ch chan int) {
-	if t == nil {
-		return
+	_walk := func(t *tree.Tree, ch chan int) {
+		if t == nil {
+			return
+		}
 	}
 
 	ch <- t.Value
 
 	if t.Left != nil {
-		Walk(t.Left, ch)
+		_walk(t.Left, ch)
 	}
 	if t.Right != nil {
-		Walk(t.Right, ch)
+		_walk(t.Right, ch)
 	}
 
-	return
+	defer close(ch)
+	_walk(t, ch)
 }
 
 // Same determines whether the trees
@@ -36,14 +40,13 @@ func Same(t1, t2 *tree.Tree) bool {
 		a, ok1 := <-ch1
 		b, ok2 := <-ch2
 
-		// fmt.Println(a, b)
-
-		if a != b {
+		if ok1 != ok2 || a != b {
 			return false
 		}
 
-		if (ok1 || ok2) == false {
-			return false
+		// If both `ok1` and `ok1` is false
+		if !ok1 {
+			break
 		}
 
 	}
@@ -52,7 +55,8 @@ func Same(t1, t2 *tree.Tree) bool {
 }
 
 func main() {
-	t1, t2 := tree.New(1), tree.New(1)
+	t1 := tree.New(1)
+	t2 := tree.New(1)
 	fmt.Println(Same(t1, t2))
 	fmt.Println(Same(tree.New(1), tree.New(2)))
 }
