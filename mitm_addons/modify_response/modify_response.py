@@ -1,7 +1,11 @@
 from mitmproxy import ctx
+import pathlib
+
+# Path should relative to the script file.
+MOCKED_JSON_FILE_NAME = 'orderConfirm.json'
 
 # Testing command
-# curl https://example.com -x http:localhost:8080
+# curl https://example.com -x http://localhost:8080
 
 # def request(flow):
 #     ctx.log.info(flow.request.get_text())
@@ -23,8 +27,13 @@ def response(flow):
     request = flow.request 
 
     if "orderConfirm" in request.url:
-        # https://docs.mitmproxy.org/stable/api/mitmproxy/http.html#Message.set_text
-        # response.set_text('123') 
+        # Read mocked file.
+       with open(pathlib.Path(__file__).parent / MOCKED_JSON_FILE_NAME, 'r') as f:
+            data = f.read() 
+
+       # https://docs.mitmproxy.org/stable/api/mitmproxy/http.html#Message.set_text
+       response.set_text(data) 
+
         # get_text(): https://docs.mitmproxy.org/stable/api/mitmproxy/http.html#Message.get_text
-        ctx.log.info(flow.response.get_text())
+       ctx.log.info(flow.response.get_text())
      
