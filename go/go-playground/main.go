@@ -2,61 +2,84 @@ package main
 
 import (
 	"fmt"
-
-	"golang.org/x/tour/tree"
 )
 
-// Walk walks the tree t sending all values
-// from the tree to the channel ch.
-func Walk(t *tree.Tree, ch chan int) {
-	_walk := func(t *tree.Tree, ch chan int) {
-		if t == nil {
-			return
-		}
-	}
-
-	ch <- t.Value
-
-	if t.Left != nil {
-		_walk(t.Left, ch)
-	}
-	if t.Right != nil {
-		_walk(t.Right, ch)
-	}
-
-	defer close(ch)
-	_walk(t, ch)
+type Fetcher interface {
+	// Fetch returns the body of URL and
+	// a slice of URLs found on that page.
+	Fetch(url string) (body string, urls []string, err error)
 }
 
-// Same determines whether the trees
-// t1 and t2 contain the same values.
-func Same(t1, t2 *tree.Tree) bool {
-	ch1, ch2 := make(chan int), make(chan int)
-
-	go Walk(t1, ch1)
-	go Walk(t2, ch2)
-
-	for {
-		a, ok1 := <-ch1
-		b, ok2 := <-ch2
-
-		if ok1 != ok2 || a != b {
-			return false
-		}
-
-		// If both `ok1` and `ok1` is false
-		if !ok1 {
-			break
-		}
-
+// Crawl uses fetcher to recursively crawl
+// pages starting with url, to a maximum of depth.
+func Crawl(url string, depth int, fetcher Fetcher) {
+	// TODO: Fetch URLs in parallel.
+	// TODO: Don't fetch the same URL twice.
+	// This implementation doesn't do either:
+	if depth <= 0 {
+		return
 	}
-
-	return true
+	body, urls, err := fetcher.Fetch(url)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Printf("found: %s %q\n", url, body)
+	for _, u := range urls {
+		go Crawl(u, depth-1, fetcher)
+	}
+	return
 }
 
 func main() {
-	t1 := tree.New(1)
-	t2 := tree.New(1)
-	fmt.Println(Same(t1, t2))
-	fmt.Println(Same(tree.New(1), tree.New(2)))
+	Crawl("https://golang.org/", 4, fetcher)
+}
+
+// fakeFetcher is Fetcher that returns canned results.
+type fakeFetcher map[string]*fakeResult
+
+type fakeResult struct {
+	body string
+	urls []string
+}
+
+func (f fakeFetcher) Fetch(url string) (string, []string, error) {
+	if res, ok := f[url]; ok {
+		return res.body, res.urls, nil
+	}
+	return "", nil, fmt.Errorf("not found: %s", url)
+}
+
+// fetcher is a populated fakeFetcher.
+var fetcher = fakeFetcher{
+	"https://golang.org/": &fakeResult{
+		"The Go Programming Language",
+		[]string{
+			"https://golang.org/pkg/",
+			"https://golang.org/cmd/",
+		},
+	},
+	"https://golang.org/pkg/": &fakeResult{
+		"Packages",
+		[]string{
+			"https://golang.org/",
+			"https://golang.org/cmd/",
+			"https://golang.org/pkg/fmt/",
+			"https://golang.org/pkg/os/",
+		},
+	},
+	"https://golang.org/pkg/fmt/": &fakeResult{
+		"Package fmt",
+		[]string{
+			"https://golang.org/",
+			"https://golang.org/pkg/",
+		},
+	},
+	"https://golang.org/pkg/os/": &fakeResult{
+		"Package os",
+		[]string{
+			"https://golang.org/",
+			"https://golang.org/pkg/",
+		},
+	},
 }

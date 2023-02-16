@@ -8,7 +8,7 @@ import json
 
 
 # The part of the  api path aim to replace.
-MOCKED_API_PATH='orderDetail'
+MOCKED_API_PATH='orderConfirm'
 
 # Path should relative to the script file.
 MOCKED_JSON_FILE_NAME = f'{MOCKED_API_PATH}.json'
@@ -36,15 +36,16 @@ def response(flow):
     if MOCKED_API_PATH in request.url:
         # Read mocked file.
        with open(pathlib.Path(__file__).parent / MOCKED_JSON_FILE_NAME, 'r') as f:
-            data = f.read() 
+            json_str = f.read() 
+            
             try:
-                json.loads(data)
+                json.loads(json_str)
             except ValueError:
                ctx.log.error("Mocked File doesn't contain valid JSON:", flow.response.get_text())
 
        # https://docs.mitmproxy.org/stable/api/mitmproxy/http.html#Message.set_text
-       response.set_text(data) 
-
+       response.set_text(json_str) 
+       
         # get_text(): https://docs.mitmproxy.org/stable/api/mitmproxy/http.html#Message.get_text
        ctx.log.info(flow.response.get_text())
      

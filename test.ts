@@ -10,8 +10,6 @@ const a = {
 };
 
 class Bar {
-  dodo: number;
-  foo() {
     return this;
   }
 }
