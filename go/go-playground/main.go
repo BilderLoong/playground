@@ -41,7 +41,6 @@ func Crawl(url string, depth int, fetcher Fetcher) {
 }
 
 func main() {
-	wg.Add(1)
 	Crawl("https://golang.org/", 4, fetcher)
 	wg.Wait()
 }
