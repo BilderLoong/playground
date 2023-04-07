@@ -1,6 +1,6 @@
 module.exports = {
-  preset: 'ts-jest',
-  testEnvironment: 'node',
+  preset: "ts-jest",
+  testEnvironment: "node",
   /**
    * https://jestjs.io/ja/docs/configuration#testregex-string--arraystring
    */

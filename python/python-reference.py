@@ -44,3 +44,4 @@ print(i)
 
 def foo(i):
     print(i)
+i

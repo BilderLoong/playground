@@ -9,12 +9,11 @@ from mitmproxy import ctx
 
 # https://docs.python.org/3/library/typing.html
 # https://fastapi.tiangolo.com/python-types/?h=type#motivation
-MOCKED_API_PATH_TYPE = Literal['provinceCityList'] | Literal['orderConfirm']
+MOCKED_API_PATH_TYPE =   Literal['queryMemberCoupons']|Literal['search']| Literal['pageShopList']|Literal['provinceCityList']|Literal['orderList']|Literal['loadFirstPage']|Literal['loadFMPInfo']|Literal['pageSpuInfo']|Literal['queryNeedSignAgreements'] |Literal['provinceCityList'] | Literal['orderConfirm'] | Literal['orderDetail'] | Literal['queryDishMoreInfo']
 
 # The part of the  api path aim to replace.
-MOCKED_API_PATH: MOCKED_API_PATH_TYPE = 'orderConfirm'
-# Path should relative to the script file.
-MOCKED_JSON_FILE_NAME = f'{MOCKED_API_PATH}.json'
+
+MOCKED_API_PATHS: list[MOCKED_API_PATH_TYPE] = ['queryMemberCoupons','loadFmpInfo']
 
 
 # def request(flow):
@@ -38,19 +37,24 @@ def response(flow):
     # https://docs.mitmproxy.org/stable/api/mitmproxy/http.html#Response
     request = flow.request
 
-    if MOCKED_API_PATH in request.url:
-        # Read mocked file.
-        with open(pathlib.Path(__file__).parent / MOCKED_JSON_FILE_NAME, 'r') as f:
-            json_str = f.read()
+    for PATH in MOCKED_API_PATHS:
+        ctx.log.info(f'PATH: {PATH}')
+        if PATH in request.url:
+            # Path should relative to the script file.
+            MOCKED_JSON_FILE_NAME = f'{PATH}.json'
+            # Read mocked file.
+            with open(pathlib.Path(__file__).parent / MOCKED_JSON_FILE_NAME, 'r') as f:
+                json_str = f.read()
 
-            try:
-                json.loads(json_str)
-            except ValueError:
-                ctx.log.error(
-                    "Mocked File doesn't contain valid JSON:", flow.response.get_text())
+                try:
+                    json.loads(json_str)
+                except ValueError:
+                    ctx.log.error(
+                        "Mocked File doesn't contain valid JSON:", flow.response.get_text())
 
-        # https://docs.mitmproxy.org/stable/api/mitmproxy/http.html#Message.set_text
-        response.set_text(json_str)
+            # https://docs.mitmproxy.org/stable/api/mitmproxy/http.html#Message.set_text
+            response.set_text(json_str)
 
-        # get_text(): https://docs.mitmproxy.org/stable/api/mitmproxy/http.html#Message.get_text
-        ctx.log.info(flow.response.get_text())
+            # get_text(): https://docs.mitmproxy.org/stable/api/mitmproxy/http.html#Message.get_text
+            ctx.log.info(flow.response.get_text())
+

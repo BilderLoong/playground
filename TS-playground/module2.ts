@@ -1,3 +1,2 @@
-function say(str: string) {
-  console.log(str, 2);
-}
+import { foo } from "./module1";
+const bar = foo.a;

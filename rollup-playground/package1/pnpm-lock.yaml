@@ -1,0 +1,25 @@
+lockfileVersion: 5.4
+
+specifiers:
+  rollup: ^3.20.2
+
+devDependencies:
+  rollup: 3.20.2
+
+packages:
+
+  /fsevents/2.3.2:
+    resolution: {integrity: sha1-ilJveLj99GI7cJ4Ll1xSwkwC/Ro=, tarball: fsevents/download/fsevents-2.3.2.tgz}
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /rollup/3.20.2:
+    resolution: {integrity: sha1-95jGADF/IW3i5K2fTZqzCom2kP8=, tarball: rollup/download/rollup-3.20.2.tgz}
+    engines: {node: '>=14.18.0', npm: '>=8.0.0'}
+    hasBin: true
+    optionalDependencies:
+      fsevents: 2.3.2
+    dev: true

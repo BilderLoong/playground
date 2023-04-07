@@ -1,0 +1,829 @@
+lockfileVersion: 5.4
+
+specifiers:
+  lodash: ^4.17.21
+  webpack: ^5.77.0
+  webpack-cli: ^5.0.1
+
+dependencies:
+  lodash: 4.17.21
+
+devDependencies:
+  webpack: 5.77.0_webpack-cli@5.0.1
+  webpack-cli: 5.0.1_webpack@5.77.0
+
+packages:
+
+  /@discoveryjs/json-ext/0.5.7:
+    resolution: {integrity: sha1-HVcr+74Ut3BOC6Dzm3SBW4SHDXA=, tarball: '@discoveryjs/json-ext/download/@discoveryjs/json-ext-0.5.7.tgz'}
+    engines: {node: '>=10.0.0'}
+    dev: true
+
+  /@jridgewell/gen-mapping/0.3.2:
+    resolution: {integrity: sha1-wa7cYehT8rufXf5tRELTtWWyU7k=, tarball: '@jridgewell/gen-mapping/download/@jridgewell/gen-mapping-0.3.2.tgz'}
+    engines: {node: '>=6.0.0'}
+    dependencies:
+      '@jridgewell/set-array': 1.1.2
+      '@jridgewell/sourcemap-codec': 1.4.14
+      '@jridgewell/trace-mapping': 0.3.17
+    dev: true
+
+  /@jridgewell/resolve-uri/3.1.0:
+    resolution: {integrity: sha1-IgOxGMFXchrd/mnUe3BGVGMGbXg=, tarball: '@jridgewell/resolve-uri/download/@jridgewell/resolve-uri-3.1.0.tgz'}
+    engines: {node: '>=6.0.0'}
+    dev: true
+
+  /@jridgewell/set-array/1.1.2:
+    resolution: {integrity: sha1-fGz5mNbSC5FMClWpGuko/yWWXnI=, tarball: '@jridgewell/set-array/download/@jridgewell/set-array-1.1.2.tgz'}
+    engines: {node: '>=6.0.0'}
+    dev: true
+
+  /@jridgewell/source-map/0.3.2:
+    resolution: {integrity: sha1-9FNRqu1FJ6KYUS7HL4EEDJmFgPs=, tarball: '@jridgewell/source-map/download/@jridgewell/source-map-0.3.2.tgz'}
+    dependencies:
+      '@jridgewell/gen-mapping': 0.3.2
+      '@jridgewell/trace-mapping': 0.3.17
+    dev: true
+
+  /@jridgewell/sourcemap-codec/1.4.14:
+    resolution: {integrity: sha1-rdTJjTQUcqKJGQtCTvvbCWmRuyQ=, tarball: '@jridgewell/sourcemap-codec/download/@jridgewell/sourcemap-codec-1.4.14.tgz'}
+    dev: true
+
+  /@jridgewell/trace-mapping/0.3.17:
+    resolution: {integrity: sha1-eTBBJ3r5BzsJUaf+Dw2MTJjDaYU=, tarball: '@jridgewell/trace-mapping/download/@jridgewell/trace-mapping-0.3.17.tgz'}
+    dependencies:
+      '@jridgewell/resolve-uri': 3.1.0
+      '@jridgewell/sourcemap-codec': 1.4.14
+    dev: true
+
+  /@types/eslint-scope/3.7.4:
+    resolution: {integrity: sha1-N/wSI/B4bDlicGihLpTW5vxh3hY=, tarball: '@types/eslint-scope/download/@types/eslint-scope-3.7.4.tgz'}
+    dependencies:
+      '@types/eslint': 8.21.3
+      '@types/estree': 0.0.51
+    dev: true
+
+  /@types/eslint/8.21.3:
+    resolution: {integrity: sha1-V5SzkR8PGeNOOicsScvfSNb1Q/I=, tarball: '@types/eslint/download/@types/eslint-8.21.3.tgz'}
+    dependencies:
+      '@types/estree': 0.0.51
+      '@types/json-schema': 7.0.11
+    dev: true
+
+  /@types/estree/0.0.51:
+    resolution: {integrity: sha1-z9cJJKJaP9MrIY5eQg5ol+GsT0A=, tarball: '@types/estree/download/@types/estree-0.0.51.tgz'}
+    dev: true
+
+  /@types/json-schema/7.0.11:
+    resolution: {integrity: sha1-1CG2xSejA398hEM/0sQingFoY9M=, tarball: '@types/json-schema/download/@types/json-schema-7.0.11.tgz'}
+    dev: true
+
+  /@types/node/18.15.11:
+    resolution: {integrity: sha1-s7eQ8JyxaWz/zsYF3gJbCI+kIl8=, tarball: '@types/node/download/@types/node-18.15.11.tgz'}
+    dev: true
+
+  /@webassemblyjs/ast/1.11.1:
+    resolution: {integrity: sha1-K/12fq4aaZb0Mv9+jX/HVnnAtqc=, tarball: '@webassemblyjs/ast/download/@webassemblyjs/ast-1.11.1.tgz'}
+    dependencies:
+      '@webassemblyjs/helper-numbers': 1.11.1
+      '@webassemblyjs/helper-wasm-bytecode': 1.11.1
+    dev: true
+
+  /@webassemblyjs/floating-point-hex-parser/1.11.1:
+    resolution: {integrity: sha1-9sYacF8P16auyqToGY8j2dwXnk8=, tarball: '@webassemblyjs/floating-point-hex-parser/download/@webassemblyjs/floating-point-hex-parser-1.11.1.tgz'}
+    dev: true
+
+  /@webassemblyjs/helper-api-error/1.11.1:
+    resolution: {integrity: sha1-GmMZLYeI5cASgAump6RscFKI/RY=, tarball: '@webassemblyjs/helper-api-error/download/@webassemblyjs/helper-api-error-1.11.1.tgz'}
+    dev: true
+
+  /@webassemblyjs/helper-buffer/1.11.1:
+    resolution: {integrity: sha1-gyqQDrREiEzemnytRn+BUA9eWrU=, tarball: '@webassemblyjs/helper-buffer/download/@webassemblyjs/helper-buffer-1.11.1.tgz'}
+    dev: true
+
+  /@webassemblyjs/helper-numbers/1.11.1:
+    resolution: {integrity: sha1-ZNgdohn7u6HjvRv8dPboxOEKYq4=, tarball: '@webassemblyjs/helper-numbers/download/@webassemblyjs/helper-numbers-1.11.1.tgz'}
+    dependencies:
+      '@webassemblyjs/floating-point-hex-parser': 1.11.1
+      '@webassemblyjs/helper-api-error': 1.11.1
+      '@xtuc/long': 4.2.2
+    dev: true
+
+  /@webassemblyjs/helper-wasm-bytecode/1.11.1:
+    resolution: {integrity: sha1-8ygkHkHnsZnQsgwY6IQpxEMyleE=, tarball: '@webassemblyjs/helper-wasm-bytecode/download/@webassemblyjs/helper-wasm-bytecode-1.11.1.tgz'}
+    dev: true
+
+  /@webassemblyjs/helper-wasm-section/1.11.1:
+    resolution: {integrity: sha1-Ie4GWntjXzGec48N1zv72igcCXo=, tarball: '@webassemblyjs/helper-wasm-section/download/@webassemblyjs/helper-wasm-section-1.11.1.tgz'}
+    dependencies:
+      '@webassemblyjs/ast': 1.11.1
+      '@webassemblyjs/helper-buffer': 1.11.1
+      '@webassemblyjs/helper-wasm-bytecode': 1.11.1
+      '@webassemblyjs/wasm-gen': 1.11.1
+    dev: true
+
+  /@webassemblyjs/ieee754/1.11.1:
+    resolution: {integrity: sha1-ljkp6bvQVwnn4SJDoJkYCBKZJhQ=, tarball: '@webassemblyjs/ieee754/download/@webassemblyjs/ieee754-1.11.1.tgz'}
+    dependencies:
+      '@xtuc/ieee754': 1.2.0
+    dev: true
+
+  /@webassemblyjs/leb128/1.11.1:
+    resolution: {integrity: sha1-zoFLRVdOk9drrh+yZEq5zdlSeqU=, tarball: '@webassemblyjs/leb128/download/@webassemblyjs/leb128-1.11.1.tgz'}
+    dependencies:
+      '@xtuc/long': 4.2.2
+    dev: true
+
+  /@webassemblyjs/utf8/1.11.1:
+    resolution: {integrity: sha1-0fi3ZDaefG5rrjUOhU3smlnwo/8=, tarball: '@webassemblyjs/utf8/download/@webassemblyjs/utf8-1.11.1.tgz'}
+    dev: true
+
+  /@webassemblyjs/wasm-edit/1.11.1:
+    resolution: {integrity: sha1-rSBuv0v5WgWM6YgKjAksXeyBk9Y=, tarball: '@webassemblyjs/wasm-edit/download/@webassemblyjs/wasm-edit-1.11.1.tgz'}
+    dependencies:
+      '@webassemblyjs/ast': 1.11.1
+      '@webassemblyjs/helper-buffer': 1.11.1
+      '@webassemblyjs/helper-wasm-bytecode': 1.11.1
+      '@webassemblyjs/helper-wasm-section': 1.11.1
+      '@webassemblyjs/wasm-gen': 1.11.1
+      '@webassemblyjs/wasm-opt': 1.11.1
+      '@webassemblyjs/wasm-parser': 1.11.1
+      '@webassemblyjs/wast-printer': 1.11.1
+    dev: true
+
+  /@webassemblyjs/wasm-gen/1.11.1:
+    resolution: {integrity: sha1-hsXqMEhJdZt9iMR6MvTwOa48j3Y=, tarball: '@webassemblyjs/wasm-gen/download/@webassemblyjs/wasm-gen-1.11.1.tgz'}
+    dependencies:
+      '@webassemblyjs/ast': 1.11.1
+      '@webassemblyjs/helper-wasm-bytecode': 1.11.1
+      '@webassemblyjs/ieee754': 1.11.1
+      '@webassemblyjs/leb128': 1.11.1
+      '@webassemblyjs/utf8': 1.11.1
+    dev: true
+
+  /@webassemblyjs/wasm-opt/1.11.1:
+    resolution: {integrity: sha1-ZXtMIgL0zzs0X4pMZGHIwkGJhfI=, tarball: '@webassemblyjs/wasm-opt/download/@webassemblyjs/wasm-opt-1.11.1.tgz'}
+    dependencies:
+      '@webassemblyjs/ast': 1.11.1
+      '@webassemblyjs/helper-buffer': 1.11.1
+      '@webassemblyjs/wasm-gen': 1.11.1
+      '@webassemblyjs/wasm-parser': 1.11.1
+    dev: true
+
+  /@webassemblyjs/wasm-parser/1.11.1:
+    resolution: {integrity: sha1-hspzRTT0F+m9PGfHocddi+QfsZk=, tarball: '@webassemblyjs/wasm-parser/download/@webassemblyjs/wasm-parser-1.11.1.tgz'}
+    dependencies:
+      '@webassemblyjs/ast': 1.11.1
+      '@webassemblyjs/helper-api-error': 1.11.1
+      '@webassemblyjs/helper-wasm-bytecode': 1.11.1
+      '@webassemblyjs/ieee754': 1.11.1
+      '@webassemblyjs/leb128': 1.11.1
+      '@webassemblyjs/utf8': 1.11.1
+    dev: true
+
+  /@webassemblyjs/wast-printer/1.11.1:
+    resolution: {integrity: sha1-0Mc77ajuxUJvEK6O9VzuXnCEwvA=, tarball: '@webassemblyjs/wast-printer/download/@webassemblyjs/wast-printer-1.11.1.tgz'}
+    dependencies:
+      '@webassemblyjs/ast': 1.11.1
+      '@xtuc/long': 4.2.2
+    dev: true
+
+  /@webpack-cli/configtest/2.0.1_kdcgy6q6iscqqjdxycyax7fave:
+    resolution: {integrity: sha1-ppcg9sm61q71So+mupw1M+fvTH8=, tarball: '@webpack-cli/configtest/download/@webpack-cli/configtest-2.0.1.tgz'}
+    engines: {node: '>=14.15.0'}
+    peerDependencies:
+      webpack: 5.x.x
+      webpack-cli: 5.x.x
+    dependencies:
+      webpack: 5.77.0_webpack-cli@5.0.1
+      webpack-cli: 5.0.1_webpack@5.77.0
+    dev: true
+
+  /@webpack-cli/info/2.0.1_kdcgy6q6iscqqjdxycyax7fave:
+    resolution: {integrity: sha1-7tdFeZyRDSAIHgblF3wrJWnxZsA=, tarball: '@webpack-cli/info/download/@webpack-cli/info-2.0.1.tgz'}
+    engines: {node: '>=14.15.0'}
+    peerDependencies:
+      webpack: 5.x.x
+      webpack-cli: 5.x.x
+    dependencies:
+      webpack: 5.77.0_webpack-cli@5.0.1
+      webpack-cli: 5.0.1_webpack@5.77.0
+    dev: true
+
+  /@webpack-cli/serve/2.0.1_kdcgy6q6iscqqjdxycyax7fave:
+    resolution: {integrity: sha1-NL3DFyehiJGYhVkT2y8nCs5te/g=, tarball: '@webpack-cli/serve/download/@webpack-cli/serve-2.0.1.tgz'}
+    engines: {node: '>=14.15.0'}
+    peerDependencies:
+      webpack: 5.x.x
+      webpack-cli: 5.x.x
+      webpack-dev-server: '*'
+    peerDependenciesMeta:
+      webpack-dev-server:
+        optional: true
+    dependencies:
+      webpack: 5.77.0_webpack-cli@5.0.1
+      webpack-cli: 5.0.1_webpack@5.77.0
+    dev: true
+
+  /@xtuc/ieee754/1.2.0:
+    resolution: {integrity: sha1-7vAUoxRa5Hehy8AM0eVSM23Ot5A=, tarball: '@xtuc/ieee754/download/@xtuc/ieee754-1.2.0.tgz'}
+    dev: true
+
+  /@xtuc/long/4.2.2:
+    resolution: {integrity: sha1-0pHGpOl5ibXGHZrPOWrk/hM6cY0=, tarball: '@xtuc/long/download/@xtuc/long-4.2.2.tgz'}
+    dev: true
+
+  /acorn-import-assertions/1.8.0_acorn@8.8.2:
+    resolution: {integrity: sha1-uitZOc5iwjjbbZPYHJsRGym4Vek=, tarball: acorn-import-assertions/download/acorn-import-assertions-1.8.0.tgz}
+    peerDependencies:
+      acorn: ^8
+    dependencies:
+      acorn: 8.8.2
+    dev: true
+
+  /acorn/8.8.2:
+    resolution: {integrity: sha1-Gy8l2wKvllOZuXdrDCw5EnbTfEo=, tarball: acorn/download/acorn-8.8.2.tgz}
+    engines: {node: '>=0.4.0'}
+    hasBin: true
+    dev: true
+
+  /ajv-keywords/3.5.2_ajv@6.12.6:
+    resolution: {integrity: sha1-MfKdpatuANHC0yms97WSlhTVAU0=, tarball: ajv-keywords/download/ajv-keywords-3.5.2.tgz}
+    peerDependencies:
+      ajv: ^6.9.1
+    dependencies:
+      ajv: 6.12.6
+    dev: true
+
+  /ajv/6.12.6:
+    resolution: {integrity: sha1-uvWmLoArB9l3A0WG+MO69a3ybfQ=, tarball: ajv/download/ajv-6.12.6.tgz}
+    dependencies:
+      fast-deep-equal: 3.1.3
+      fast-json-stable-stringify: 2.1.0
+      json-schema-traverse: 0.4.1
+      uri-js: 4.4.1
+    dev: true
+
+  /browserslist/4.21.5:
+    resolution: {integrity: sha1-dcXa5gBj7mQfl34A7dPPsvt69qc=, tarball: browserslist/download/browserslist-4.21.5.tgz}
+    engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
+    hasBin: true
+    dependencies:
+      caniuse-lite: 1.0.30001473
+      electron-to-chromium: 1.4.337
+      node-releases: 2.0.10
+      update-browserslist-db: 1.0.10_browserslist@4.21.5
+    dev: true
+
+  /buffer-from/1.1.2:
+    resolution: {integrity: sha1-KxRqb9cugLT1XSVfNe1Zo6mkG9U=, tarball: buffer-from/download/buffer-from-1.1.2.tgz}
+    dev: true
+
+  /caniuse-lite/1.0.30001473:
+    resolution: {integrity: sha1-OFmJizyrZfyJBbuSPfNq01BYFTw=, tarball: caniuse-lite/download/caniuse-lite-1.0.30001473.tgz}
+    dev: true
+
+  /chrome-trace-event/1.0.3:
+    resolution: {integrity: sha1-EBXs7UdB4V0GZkqVfbv1DQQeJqw=, tarball: chrome-trace-event/download/chrome-trace-event-1.0.3.tgz}
+    engines: {node: '>=6.0'}
+    dev: true
+
+  /clone-deep/4.0.1:
+    resolution: {integrity: sha1-wZ/Zvbv4WUK0/ZechNz31fB8I4c=, tarball: clone-deep/download/clone-deep-4.0.1.tgz}
+    engines: {node: '>=6'}
+    dependencies:
+      is-plain-object: 2.0.4
+      kind-of: 6.0.3
+      shallow-clone: 3.0.1
+    dev: true
+
+  /colorette/2.0.19:
+    resolution: {integrity: sha1-zfBE9HrUGg9LVrOg1bTm4aLVp5g=, tarball: colorette/download/colorette-2.0.19.tgz}
+    dev: true
+
+  /commander/2.20.3:
+    resolution: {integrity: sha1-/UhehMA+tIgcIHIrpIA16FMa6zM=, tarball: commander/download/commander-2.20.3.tgz}
+    dev: true
+
+  /commander/9.5.0:
+    resolution: {integrity: sha1-vAjR61zt98y3l6lhmdQce8PmDTA=, tarball: commander/download/commander-9.5.0.tgz}
+    engines: {node: ^12.20.0 || >=14}
+    dev: true
+
+  /cross-spawn/7.0.3:
+    resolution: {integrity: sha1-9zqFudXUHQRVUcF34ogtSshXKKY=, tarball: cross-spawn/download/cross-spawn-7.0.3.tgz}
+    engines: {node: '>= 8'}
+    dependencies:
+      path-key: 3.1.1
+      shebang-command: 2.0.0
+      which: 2.0.2
+    dev: true
+
+  /electron-to-chromium/1.4.337:
+    resolution: {integrity: sha1-cQFoJAstxf5etfjk75wW1wrtwLo=, tarball: electron-to-chromium/download/electron-to-chromium-1.4.337.tgz}
+    dev: true
+
+  /enhanced-resolve/5.12.0:
+    resolution: {integrity: sha1-MA4ckCKPW1cMTTW6vyY/bacVVjQ=, tarball: enhanced-resolve/download/enhanced-resolve-5.12.0.tgz}
+    engines: {node: '>=10.13.0'}
+    dependencies:
+      graceful-fs: 4.2.11
+      tapable: 2.2.1
+    dev: true
+
+  /envinfo/7.8.1:
+    resolution: {integrity: sha1-Bjd+Pl9NN5/qesWS1a2JJ+DE1HU=, tarball: envinfo/download/envinfo-7.8.1.tgz}
+    engines: {node: '>=4'}
+    hasBin: true
+    dev: true
+
+  /es-module-lexer/0.9.3:
+    resolution: {integrity: sha1-bxPbAMw4QXE32vdDZvU1yOtDjxk=, tarball: es-module-lexer/download/es-module-lexer-0.9.3.tgz}
+    dev: true
+
+  /escalade/3.1.1:
+    resolution: {integrity: sha1-2M/ccACWXFoBdLSoLqpcBVJ0LkA=, tarball: escalade/download/escalade-3.1.1.tgz}
+    engines: {node: '>=6'}
+    dev: true
+
+  /eslint-scope/5.1.1:
+    resolution: {integrity: sha1-54blmmbLkrP2wfsNUIqrF0hI9Iw=, tarball: eslint-scope/download/eslint-scope-5.1.1.tgz}
+    engines: {node: '>=8.0.0'}
+    dependencies:
+      esrecurse: 4.3.0
+      estraverse: 4.3.0
+    dev: true
+
+  /esrecurse/4.3.0:
+    resolution: {integrity: sha1-eteWTWeauyi+5yzsY3WLHF0smSE=, tarball: esrecurse/download/esrecurse-4.3.0.tgz}
+    engines: {node: '>=4.0'}
+    dependencies:
+      estraverse: 5.3.0
+    dev: true
+
+  /estraverse/4.3.0:
+    resolution: {integrity: sha1-OYrT88WiSUi+dyXoPRGn3ijNvR0=, tarball: estraverse/download/estraverse-4.3.0.tgz}
+    engines: {node: '>=4.0'}
+    dev: true
+
+  /estraverse/5.3.0:
+    resolution: {integrity: sha1-LupSkHAvJquP5TcDcP+GyWXSESM=, tarball: estraverse/download/estraverse-5.3.0.tgz}
+    engines: {node: '>=4.0'}
+    dev: true
+
+  /events/3.3.0:
+    resolution: {integrity: sha1-Mala0Kkk4tLEGagTrrLE6HjqdAA=, tarball: events/download/events-3.3.0.tgz}
+    engines: {node: '>=0.8.x'}
+    dev: true
+
+  /fast-deep-equal/3.1.3:
+    resolution: {integrity: sha1-On1WtVnWy8PrUSMlJE5hmmXGxSU=, tarball: fast-deep-equal/download/fast-deep-equal-3.1.3.tgz}
+    dev: true
+
+  /fast-json-stable-stringify/2.1.0:
+    resolution: {integrity: sha1-h0v2nG9ATCtdmcSBNBOZ/VWJJjM=, tarball: fast-json-stable-stringify/download/fast-json-stable-stringify-2.1.0.tgz}
+    dev: true
+
+  /fastest-levenshtein/1.0.16:
+    resolution: {integrity: sha1-IQ5htv8YHekeqbPRuE/e3UfgNOU=, tarball: fastest-levenshtein/download/fastest-levenshtein-1.0.16.tgz}
+    engines: {node: '>= 4.9.1'}
+    dev: true
+
+  /find-up/4.1.0:
+    resolution: {integrity: sha1-l6/n1s3AvFkoWEt8jXsW6KmqXRk=, tarball: find-up/download/find-up-4.1.0.tgz}
+    engines: {node: '>=8'}
+    dependencies:
+      locate-path: 5.0.0
+      path-exists: 4.0.0
+    dev: true
+
+  /function-bind/1.1.1:
+    resolution: {integrity: sha1-pWiZ0+o8m6uHS7l3O3xe3pL0iV0=, tarball: function-bind/download/function-bind-1.1.1.tgz}
+    dev: true
+
+  /glob-to-regexp/0.4.1:
+    resolution: {integrity: sha1-x1KXCHyFG5pXi9IX3VmpL1n+VG4=, tarball: glob-to-regexp/download/glob-to-regexp-0.4.1.tgz}
+    dev: true
+
+  /graceful-fs/4.2.11:
+    resolution: {integrity: sha1-QYPk6L8Iu24Fu7L30uDI9xLKQOM=, tarball: graceful-fs/download/graceful-fs-4.2.11.tgz}
+    dev: true
+
+  /has-flag/4.0.0:
+    resolution: {integrity: sha1-lEdx/ZyByBJlxNaUGGDaBrtZR5s=, tarball: has-flag/download/has-flag-4.0.0.tgz}
+    engines: {node: '>=8'}
+    dev: true
+
+  /has/1.0.3:
+    resolution: {integrity: sha1-ci18v8H2qoJB8W3YFOAR4fQeh5Y=, tarball: has/download/has-1.0.3.tgz}
+    engines: {node: '>= 0.4.0'}
+    dependencies:
+      function-bind: 1.1.1
+    dev: true
+
+  /import-local/3.1.0:
+    resolution: {integrity: sha1-tEed+KX9RPbNziQHBnVnYGPJXLQ=, tarball: import-local/download/import-local-3.1.0.tgz}
+    engines: {node: '>=8'}
+    hasBin: true
+    dependencies:
+      pkg-dir: 4.2.0
+      resolve-cwd: 3.0.0
+    dev: true
+
+  /interpret/3.1.1:
+    resolution: {integrity: sha1-W+DO7WfKecbEvFzw1+6EPc6hEMQ=, tarball: interpret/download/interpret-3.1.1.tgz}
+    engines: {node: '>=10.13.0'}
+    dev: true
+
+  /is-core-module/2.11.0:
+    resolution: {integrity: sha1-rUyz44Y+gUUjyW8/WNJsxXD/AUQ=, tarball: is-core-module/download/is-core-module-2.11.0.tgz}
+    dependencies:
+      has: 1.0.3
+    dev: true
+
+  /is-plain-object/2.0.4:
+    resolution: {integrity: sha1-LBY7P6+xtgbZ0Xko8FwqHDjgdnc=, tarball: is-plain-object/download/is-plain-object-2.0.4.tgz}
+    engines: {node: '>=0.10.0'}
+    dependencies:
+      isobject: 3.0.1
+    dev: true
+
+  /isexe/2.0.0:
+    resolution: {integrity: sha1-6PvzdNxVb/iUehDcsFctYz8s+hA=, tarball: isexe/download/isexe-2.0.0.tgz}
+    dev: true
+
+  /isobject/3.0.1:
+    resolution: {integrity: sha1-TkMekrEalzFjaqH5yNHMvP2reN8=, tarball: isobject/download/isobject-3.0.1.tgz}
+    engines: {node: '>=0.10.0'}
+    dev: true
+
+  /jest-worker/27.5.1:
+    resolution: {integrity: sha1-jRRvCQDolzsQa29zzB6ajLhvjbA=, tarball: jest-worker/download/jest-worker-27.5.1.tgz}
+    engines: {node: '>= 10.13.0'}
+    dependencies:
+      '@types/node': 18.15.11
+      merge-stream: 2.0.0
+      supports-color: 8.1.1
+    dev: true
+
+  /json-parse-even-better-errors/2.3.1:
+    resolution: {integrity: sha1-fEeAWpQxmSjgV3dAXcEuH3pO4C0=, tarball: json-parse-even-better-errors/download/json-parse-even-better-errors-2.3.1.tgz}
+    dev: true
+
+  /json-schema-traverse/0.4.1:
+    resolution: {integrity: sha1-afaofZUTq4u4/mO9sJecRI5oRmA=, tarball: json-schema-traverse/download/json-schema-traverse-0.4.1.tgz}
+    dev: true
+
+  /kind-of/6.0.3:
+    resolution: {integrity: sha1-B8BQNKbDSfoG4k+jWqdttFgM5N0=, tarball: kind-of/download/kind-of-6.0.3.tgz}
+    engines: {node: '>=0.10.0'}
+    dev: true
+
+  /loader-runner/4.3.0:
+    resolution: {integrity: sha1-wbShY7mfYUgwNTsWdV5xSawjFOE=, tarball: loader-runner/download/loader-runner-4.3.0.tgz}
+    engines: {node: '>=6.11.5'}
+    dev: true
+
+  /locate-path/5.0.0:
+    resolution: {integrity: sha1-Gvujlq/WdqbUJQTQpno6frn2KqA=, tarball: locate-path/download/locate-path-5.0.0.tgz}
+    engines: {node: '>=8'}
+    dependencies:
+      p-locate: 4.1.0
+    dev: true
+
+  /lodash/4.17.21:
+    resolution: {integrity: sha1-Z5WRxWTDv/quhFTPCz3zcMPWkRw=, tarball: lodash/download/lodash-4.17.21.tgz}
+    dev: false
+
+  /merge-stream/2.0.0:
+    resolution: {integrity: sha1-UoI2KaFN0AyXcPtq1H3GMQ8sH2A=, tarball: merge-stream/download/merge-stream-2.0.0.tgz}
+    dev: true
+
+  /mime-db/1.52.0:
+    resolution: {integrity: sha1-u6vNwChZ9JhzAchW4zh85exDv3A=, tarball: mime-db/download/mime-db-1.52.0.tgz}
+    engines: {node: '>= 0.6'}
+    dev: true
+
+  /mime-types/2.1.35:
+    resolution: {integrity: sha1-OBqHG2KnNEUGYK497uRIE/cNlZo=, tarball: mime-types/download/mime-types-2.1.35.tgz}
+    engines: {node: '>= 0.6'}
+    dependencies:
+      mime-db: 1.52.0
+    dev: true
+
+  /neo-async/2.6.2:
+    resolution: {integrity: sha1-tKr7k+OustgXTKU88WOrfXMIMF8=, tarball: neo-async/download/neo-async-2.6.2.tgz}
+    dev: true
+
+  /node-releases/2.0.10:
+    resolution: {integrity: sha1-wxHrrjtqFIyJsYE/18TTwCTvU38=, tarball: node-releases/download/node-releases-2.0.10.tgz}
+    dev: true
+
+  /p-limit/2.3.0:
+    resolution: {integrity: sha1-PdM8ZHohT9//2DWTPrCG2g3CHbE=, tarball: p-limit/download/p-limit-2.3.0.tgz}
+    engines: {node: '>=6'}
+    dependencies:
+      p-try: 2.2.0
+    dev: true
+
+  /p-locate/4.1.0:
+    resolution: {integrity: sha1-o0KLtwiLOmApL2aRkni3wpetTwc=, tarball: p-locate/download/p-locate-4.1.0.tgz}
+    engines: {node: '>=8'}
+    dependencies:
+      p-limit: 2.3.0
+    dev: true
+
+  /p-try/2.2.0:
+    resolution: {integrity: sha1-yyhoVA4xPWHeWPr741zpAE1VQOY=, tarball: p-try/download/p-try-2.2.0.tgz}
+    engines: {node: '>=6'}
+    dev: true
+
+  /path-exists/4.0.0:
+    resolution: {integrity: sha1-UTvb4tO5XXdi6METfvoZXGxhtbM=, tarball: path-exists/download/path-exists-4.0.0.tgz}
+    engines: {node: '>=8'}
+    dev: true
+
+  /path-key/3.1.1:
+    resolution: {integrity: sha1-WB9q3mWMu6ZaDTOA3ndTKVBU83U=, tarball: path-key/download/path-key-3.1.1.tgz}
+    engines: {node: '>=8'}
+    dev: true
+
+  /path-parse/1.0.7:
+    resolution: {integrity: sha1-+8EUtgykKzDZ2vWFjkvWi77bZzU=, tarball: path-parse/download/path-parse-1.0.7.tgz}
+    dev: true
+
+  /picocolors/1.0.0:
+    resolution: {integrity: sha1-y1vcdP8/UYkiNur3nWi8RFZKuBw=, tarball: picocolors/download/picocolors-1.0.0.tgz}
+    dev: true
+
+  /pkg-dir/4.2.0:
+    resolution: {integrity: sha1-8JkTPfft5CLoHR2ESCcO6z5CYfM=, tarball: pkg-dir/download/pkg-dir-4.2.0.tgz}
+    engines: {node: '>=8'}
+    dependencies:
+      find-up: 4.1.0
+    dev: true
+
+  /punycode/2.3.0:
+    resolution: {integrity: sha1-9n+mfJTaj00M//mBruQRgGQZm48=, tarball: punycode/download/punycode-2.3.0.tgz}
+    engines: {node: '>=6'}
+    dev: true
+
+  /randombytes/2.1.0:
+    resolution: {integrity: sha1-32+ENy8CcNxlzfYpE0mrekc9Tyo=, tarball: randombytes/download/randombytes-2.1.0.tgz}
+    dependencies:
+      safe-buffer: 5.2.1
+    dev: true
+
+  /rechoir/0.8.0:
+    resolution: {integrity: sha1-Sfhm4NMhRhQto62PDv81KzIV/yI=, tarball: rechoir/download/rechoir-0.8.0.tgz}
+    engines: {node: '>= 10.13.0'}
+    dependencies:
+      resolve: 1.22.1
+    dev: true
+
+  /resolve-cwd/3.0.0:
+    resolution: {integrity: sha1-DwB18bslRHZs9zumpuKt/ryxPy0=, tarball: resolve-cwd/download/resolve-cwd-3.0.0.tgz}
+    engines: {node: '>=8'}
+    dependencies:
+      resolve-from: 5.0.0
+    dev: true
+
+  /resolve-from/5.0.0:
+    resolution: {integrity: sha1-w1IlhD3493bfIcV1V7wIfp39/Gk=, tarball: resolve-from/download/resolve-from-5.0.0.tgz}
+    engines: {node: '>=8'}
+    dev: true
+
+  /resolve/1.22.1:
+    resolution: {integrity: sha1-J8suu1P5GrtJRwqSi7p1WAZqwXc=, tarball: resolve/download/resolve-1.22.1.tgz}
+    hasBin: true
+    dependencies:
+      is-core-module: 2.11.0
+      path-parse: 1.0.7
+      supports-preserve-symlinks-flag: 1.0.0
+    dev: true
+
+  /safe-buffer/5.2.1:
+    resolution: {integrity: sha1-Hq+fqb2x/dTsdfWPnNtOa3gn7sY=, tarball: safe-buffer/download/safe-buffer-5.2.1.tgz}
+    dev: true
+
+  /schema-utils/3.1.1:
+    resolution: {integrity: sha1-vHTEtraZXB2I92qLd76nIZ4MgoE=, tarball: schema-utils/download/schema-utils-3.1.1.tgz}
+    engines: {node: '>= 10.13.0'}
+    dependencies:
+      '@types/json-schema': 7.0.11
+      ajv: 6.12.6
+      ajv-keywords: 3.5.2_ajv@6.12.6
+    dev: true
+
+  /serialize-javascript/6.0.1:
+    resolution: {integrity: sha1-sgbvsnw9oLCra1L0jRcLeZZFjlw=, tarball: serialize-javascript/download/serialize-javascript-6.0.1.tgz}
+    dependencies:
+      randombytes: 2.1.0
+    dev: true
+
+  /shallow-clone/3.0.1:
+    resolution: {integrity: sha1-jymBrZJTH1UDWwH7IwdppA4C76M=, tarball: shallow-clone/download/shallow-clone-3.0.1.tgz}
+    engines: {node: '>=8'}
+    dependencies:
+      kind-of: 6.0.3
+    dev: true
+
+  /shebang-command/2.0.0:
+    resolution: {integrity: sha1-zNCvT4g1+9wmW4JGGq8MNmY/NOo=, tarball: shebang-command/download/shebang-command-2.0.0.tgz}
+    engines: {node: '>=8'}
+    dependencies:
+      shebang-regex: 3.0.0
+    dev: true
+
+  /shebang-regex/3.0.0:
+    resolution: {integrity: sha1-rhbxZE2HPsrYQ7AwexQzYtTEIXI=, tarball: shebang-regex/download/shebang-regex-3.0.0.tgz}
+    engines: {node: '>=8'}
+    dev: true
+
+  /source-map-support/0.5.21:
+    resolution: {integrity: sha1-BP58f54e0tZiIzwoyys1ufY/bk8=, tarball: source-map-support/download/source-map-support-0.5.21.tgz}
+    dependencies:
+      buffer-from: 1.1.2
+      source-map: 0.6.1
+    dev: true
+
+  /source-map/0.6.1:
+    resolution: {integrity: sha1-dHIq8y6WFOnCh6jQu95IteLxomM=, tarball: source-map/download/source-map-0.6.1.tgz}
+    engines: {node: '>=0.10.0'}
+    dev: true
+
+  /supports-color/8.1.1:
+    resolution: {integrity: sha1-zW/BfihQDP9WwbhsCn/UpUpzAFw=, tarball: supports-color/download/supports-color-8.1.1.tgz}
+    engines: {node: '>=10'}
+    dependencies:
+      has-flag: 4.0.0
+    dev: true
+
+  /supports-preserve-symlinks-flag/1.0.0:
+    resolution: {integrity: sha1-btpL00SjyUrqN21MwxvHcxEDngk=, tarball: supports-preserve-symlinks-flag/download/supports-preserve-symlinks-flag-1.0.0.tgz}
+    engines: {node: '>= 0.4'}
+    dev: true
+
+  /tapable/2.2.1:
+    resolution: {integrity: sha1-GWenPvQGCoLxKrlq+G1S/bdu7KA=, tarball: tapable/download/tapable-2.2.1.tgz}
+    engines: {node: '>=6'}
+    dev: true
+
+  /terser-webpack-plugin/5.3.7_webpack@5.77.0:
+    resolution: {integrity: sha1-73YGMtJJkXYPM5/pKQ3rk2rR/8c=, tarball: terser-webpack-plugin/download/terser-webpack-plugin-5.3.7.tgz}
+    engines: {node: '>= 10.13.0'}
+    peerDependencies:
+      '@swc/core': '*'
+      esbuild: '*'
+      uglify-js: '*'
+      webpack: ^5.1.0
+    peerDependenciesMeta:
+      '@swc/core':
+        optional: true
+      esbuild:
+        optional: true
+      uglify-js:
+        optional: true
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.17
+      jest-worker: 27.5.1
+      schema-utils: 3.1.1
+      serialize-javascript: 6.0.1
+      terser: 5.16.8
+      webpack: 5.77.0_webpack-cli@5.0.1
+    dev: true
+
+  /terser/5.16.8:
+    resolution: {integrity: sha1-zN5YPavnHfP07QK2XrZTLg+uFdU=, tarball: terser/download/terser-5.16.8.tgz}
+    engines: {node: '>=10'}
+    hasBin: true
+    dependencies:
+      '@jridgewell/source-map': 0.3.2
+      acorn: 8.8.2
+      commander: 2.20.3
+      source-map-support: 0.5.21
+    dev: true
+
+  /update-browserslist-db/1.0.10_browserslist@4.21.5:
+    resolution: {integrity: sha1-D1S4dlRXJvF9AM2aJWHm2t6UP/M=, tarball: update-browserslist-db/download/update-browserslist-db-1.0.10.tgz}
+    hasBin: true
+    peerDependencies:
+      browserslist: '>= 4.21.0'
+    dependencies:
+      browserslist: 4.21.5
+      escalade: 3.1.1
+      picocolors: 1.0.0
+    dev: true
+
+  /uri-js/4.4.1:
+    resolution: {integrity: sha1-mxpSWVIlhZ5V9mnZKPiMbFfyp34=, tarball: uri-js/download/uri-js-4.4.1.tgz}
+    dependencies:
+      punycode: 2.3.0
+    dev: true
+
+  /watchpack/2.4.0:
+    resolution: {integrity: sha1-+jMDI3SWLHgRP5PH8vtMVMmGKl0=, tarball: watchpack/download/watchpack-2.4.0.tgz}
+    engines: {node: '>=10.13.0'}
+    dependencies:
+      glob-to-regexp: 0.4.1
+      graceful-fs: 4.2.11
+    dev: true
+
+  /webpack-cli/5.0.1_webpack@5.77.0:
+    resolution: {integrity: sha1-lfwElaxAZelCOnIt7JF1VgtvLZo=, tarball: webpack-cli/download/webpack-cli-5.0.1.tgz}
+    engines: {node: '>=14.15.0'}
+    hasBin: true
+    peerDependencies:
+      '@webpack-cli/generators': '*'
+      webpack: 5.x.x
+      webpack-bundle-analyzer: '*'
+      webpack-dev-server: '*'
+    peerDependenciesMeta:
+      '@webpack-cli/generators':
+        optional: true
+      webpack-bundle-analyzer:
+        optional: true
+      webpack-dev-server:
+        optional: true
+    dependencies:
+      '@discoveryjs/json-ext': 0.5.7
+      '@webpack-cli/configtest': 2.0.1_kdcgy6q6iscqqjdxycyax7fave
+      '@webpack-cli/info': 2.0.1_kdcgy6q6iscqqjdxycyax7fave
+      '@webpack-cli/serve': 2.0.1_kdcgy6q6iscqqjdxycyax7fave
+      colorette: 2.0.19
+      commander: 9.5.0
+      cross-spawn: 7.0.3
+      envinfo: 7.8.1
+      fastest-levenshtein: 1.0.16
+      import-local: 3.1.0
+      interpret: 3.1.1
+      rechoir: 0.8.0
+      webpack: 5.77.0_webpack-cli@5.0.1
+      webpack-merge: 5.8.0
+    dev: true
+
+  /webpack-merge/5.8.0:
+    resolution: {integrity: sha1-Kznb8ir4d3atdEw5AiNzHTCmj2E=, tarball: webpack-merge/download/webpack-merge-5.8.0.tgz}
+    engines: {node: '>=10.0.0'}
+    dependencies:
+      clone-deep: 4.0.1
+      wildcard: 2.0.0
+    dev: true
+
+  /webpack-sources/3.2.3:
+    resolution: {integrity: sha1-LU2quEUf1LJAzCcFX/agwszqDN4=, tarball: webpack-sources/download/webpack-sources-3.2.3.tgz}
+    engines: {node: '>=10.13.0'}
+    dev: true
+
+  /webpack/5.77.0_webpack-cli@5.0.1:
+    resolution: {integrity: sha1-3qOtFtfqa4SqVfpC9OrJ8w5+ubQ=, tarball: webpack/download/webpack-5.77.0.tgz}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    peerDependencies:
+      webpack-cli: '*'
+    peerDependenciesMeta:
+      webpack-cli:
+        optional: true
+    dependencies:
+      '@types/eslint-scope': 3.7.4
+      '@types/estree': 0.0.51
+      '@webassemblyjs/ast': 1.11.1
+      '@webassemblyjs/wasm-edit': 1.11.1
+      '@webassemblyjs/wasm-parser': 1.11.1
+      acorn: 8.8.2
+      acorn-import-assertions: 1.8.0_acorn@8.8.2
+      browserslist: 4.21.5
+      chrome-trace-event: 1.0.3
+      enhanced-resolve: 5.12.0
+      es-module-lexer: 0.9.3
+      eslint-scope: 5.1.1
+      events: 3.3.0
+      glob-to-regexp: 0.4.1
+      graceful-fs: 4.2.11
+      json-parse-even-better-errors: 2.3.1
+      loader-runner: 4.3.0
+      mime-types: 2.1.35
+      neo-async: 2.6.2
+      schema-utils: 3.1.1
+      tapable: 2.2.1
+      terser-webpack-plugin: 5.3.7_webpack@5.77.0
+      watchpack: 2.4.0
+      webpack-cli: 5.0.1_webpack@5.77.0
+      webpack-sources: 3.2.3
+    transitivePeerDependencies:
+      - '@swc/core'
+      - esbuild
+      - uglify-js
+    dev: true
+
+  /which/2.0.2:
+    resolution: {integrity: sha1-fGqN0KY2oDJ+ELWckobu6T8/UbE=, tarball: which/download/which-2.0.2.tgz}
+    engines: {node: '>= 8'}
+    hasBin: true
+    dependencies:
+      isexe: 2.0.0
+    dev: true
+
+  /wildcard/2.0.0:
+    resolution: {integrity: sha1-p30g5SAMb6qsl55LOq3Hs91/j+w=, tarball: wildcard/download/wildcard-2.0.0.tgz}
+    dev: true

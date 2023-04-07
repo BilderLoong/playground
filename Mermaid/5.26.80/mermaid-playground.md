@@ -75,7 +75,7 @@ R3[\parallelogram alt\]
 ```
 
 ```mermaid
-graph LR;
+graph LR$$;
 
 A1-->B1
 A2---B2

@@ -1,15 +1,26 @@
-const sqrt = (x: number) => {
-  let g = 1;
-  let preG = 0;
-  let dealt = Math.abs(g - preG);
-  while (dealt > 0.00000000000001) {
-    preG = g;
-    g -= (g * g - x) / (2 * x);
-    dealt = Math.abs(preG - g);
-  }
+import shell = require("shelljs");
 
-  return g;
-};
+// shell.exec(
+//   "echo 1 & false & echo 2",
+//   { silent: true },
+//   (code, stdout, stderr) => {
+//     console.log("Exit code:", code);
+//     console.log("Program output:", stdout);
+//     console.log("Program stderr:", stderr);
+//   }
+// );
 
-console.log(sqrt(4));
-console.log(sqrt(3));
+const child = shell.exec("false; >&2 echo error & echo next", {
+  async: true,
+  fatal: true,
+  silent: true,
+});
+
+// stdout?.on("data", (data) => console.log(data));
+// stderr?.on("data", (data) => {
+//   console.error(data);
+//   process.exit(1);
+// });
+// code?.on("exit", (code) => {
+//   console.log("code is:", code);
+// });

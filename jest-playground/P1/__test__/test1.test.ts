@@ -1,3 +1,4 @@
+import "../../matchers";
 export const reduceAvg = ({ preAvg, cur, index }: Record<string, number>) => {
   if (index === 0) {
     return cur;
@@ -9,8 +10,8 @@ export const reduceAvg = ({ preAvg, cur, index }: Record<string, number>) => {
   return (preSum + cur) / curBase;
 };
 
-describe('reduceAvg', () => {
-  it('should return right avg when index equal to 0', () => {
+describe("reduceAvg", () => {
+  it("should return right avg when index equal to 0", () => {
     const array = [1];
 
     const res = array.reduce((pre, cur, index) =>
@@ -20,7 +21,7 @@ describe('reduceAvg', () => {
     expect(res).toEqual(1);
   });
 
-  it('should return right avg when index equal to 0', () => {
+  it("should return right avg when index equal to 0", () => {
     const array: number[] = [];
 
     const res = array.reduce(
@@ -30,7 +31,7 @@ describe('reduceAvg', () => {
 
     expect(res).toEqual(0);
   });
-  it('should return right avg when index equal to 0', () => {
+  it("should return right avg when index equal to 0", () => {
     const array = [1, 2];
 
     const res = array.reduce((pre, cur, index) =>
@@ -38,5 +39,11 @@ describe('reduceAvg', () => {
     );
 
     expect(res).toEqual(1.5);
+  });
+});
+
+describe("test custom matcher", () => {
+  it("should", () => {
+    expect(1).toBeWithinRange(3, 3);
   });
 });
