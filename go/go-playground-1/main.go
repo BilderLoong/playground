@@ -1,7 +1,9 @@
 package main
 
-import "./package1"
+func foo() {
+	println("1")
+}
 
 func main() {
-	package1.Foo()
+	foo()
 }
