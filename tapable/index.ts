@@ -2,19 +2,33 @@ import { Hook, SyncHook } from "tapable";
 
 class MyTappable {
   hooks = {
-    accelerate: new SyncHook(["newSpeed"]),
-    brake: new SyncHook(),
-    calculateRoutes: new SyncHook(),
+    hookWithArgs: new SyncHook(["newSpeed"]),
+    normalHook: new SyncHook(),
   };
 
-  startBreak() {
-    this.hooks.accelerate.call("123");
+  runNormalHook() {
+    this.hooks.normalHook.call("123");
+  }
+  runHookWithArgs() {
+    this.hooks.hookWithArgs.call("123");
+  }
+
+  runAllHooks() {
+    this.runHookWithArgs();
+    this.runNormalHook();
   }
 }
 
 const myTappable = new MyTappable();
 
-myTappable.hooks.brake.tap("MyPlugin", (args) => {
+myTappable.hooks.normalHook.tap("MyPlugin", (args) => {
   console.log("MyPlugin brake");
   console.table(args);
 });
+
+myTappable.hooks.hookWithArgs.tap("MyPlugin", (args) => {
+  console.log("MyPlugin brake");
+  console.table(args);
+});
+
+myTappable.runAllHooks();

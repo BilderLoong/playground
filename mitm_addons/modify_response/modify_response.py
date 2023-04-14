@@ -9,11 +9,12 @@ from mitmproxy import ctx
 
 # https://docs.python.org/3/library/typing.html
 # https://fastapi.tiangolo.com/python-types/?h=type#motivation
-MOCKED_API_PATH_TYPE =   Literal['queryMemberCoupons']|Literal['search']| Literal['pageShopList']|Literal['provinceCityList']|Literal['orderList']|Literal['loadFirstPage']|Literal['loadFMPInfo']|Literal['pageSpuInfo']|Literal['queryNeedSignAgreements'] |Literal['provinceCityList'] | Literal['orderConfirm'] | Literal['orderDetail'] | Literal['queryDishMoreInfo']
+MOCKED_API_PATH_TYPE = Literal['queryMemberCoupons'] | Literal['search'] | Literal['pageShopList'] | Literal['provinceCityList'] | Literal['orderList'] | Literal['loadFirstPage'] | Literal[
+    'loadFMPInfo'] | Literal['pageSpuInfo'] | Literal['queryNeedSignAgreements'] | Literal['provinceCityList'] | Literal['orderConfirm'] | Literal['orderDetail'] | Literal['queryDishMoreInfo']
 
 # The part of the  api path aim to replace.
 
-MOCKED_API_PATHS: list[MOCKED_API_PATH_TYPE] = ['queryMemberCoupons','loadFmpInfo']
+MOCKED_API_PATHS: list[MOCKED_API_PATH_TYPE] = ['orderConfirm']
 
 
 # def request(flow):
@@ -57,4 +58,3 @@ def response(flow):
 
             # get_text(): https://docs.mitmproxy.org/stable/api/mitmproxy/http.html#Message.get_text
             ctx.log.info(flow.response.get_text())
-

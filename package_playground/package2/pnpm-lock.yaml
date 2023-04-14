@@ -1,0 +1,7 @@
+lockfileVersion: 5.4
+
+specifiers:
+  package1: link:../package1
+
+dependencies:
+  package1: link:../package1

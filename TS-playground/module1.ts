@@ -1,3 +1,6 @@
-export const enum foo {
+export enum foo {
   a = 1,
 }
+
+const bar = 1;
+export default bar;
