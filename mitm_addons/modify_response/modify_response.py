@@ -14,7 +14,7 @@ MOCKED_API_PATH_TYPE = Literal['queryMemberCoupons'] | Literal['search'] | Liter
 
 # The part of the  api path aim to replace.
 
-MOCKED_API_PATHS: list[MOCKED_API_PATH_TYPE] = ['orderConfirm']
+MOCKED_API_PATHS: list[MOCKED_API_PATH_TYPE] = ['orderDetail']
 
 
 # def request(flow):
