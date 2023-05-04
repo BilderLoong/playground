@@ -1,6 +1,7 @@
 import path from "path";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import webpack from "webpack";
+import { ConsoleLogOnBuildWebpackPlugin } from "./plugins/index";
 
 import "webpack-dev-server";
 
@@ -17,6 +18,7 @@ const config: webpack.Configuration = {
     clean: true,
   },
   plugins: [
+    new ConsoleLogOnBuildWebpackPlugin(),
     new HtmlWebpackPlugin({
       filename: "page1.html",
       chunks: ["page1"],
