@@ -57,4 +57,4 @@ def response(flow):
             response.set_text(json_str)
 
             # get_text(): https://docs.mitmproxy.org/stable/api/mitmproxy/http.html#Message.get_text
-            ctx.log.info(flow.response.get_text())
+            # ctx.log.info(flow.response.get_text())
