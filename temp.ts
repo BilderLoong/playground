@@ -16,7 +16,10 @@
     { task: "wait", duration: 2000 },
     { task: "fetch", url: "https://httpstat.us/300" },
   ];
-  function runTask(spec) {
+
+
+
+  // function runTask(spec) {
     return spec.task === "wait"
       ? asyncTimeout(spec.duration)
       : asyncFetch(spec.url);
