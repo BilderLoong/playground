@@ -1,0 +1,10 @@
+{
+  "name": "multiple-packages-without-workspace",
+  "packageManager": "yarn@3.5.0",
+  "dependencies": {
+    "loadsh": "^0.0.4"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}
