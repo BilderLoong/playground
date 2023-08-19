@@ -19,6 +19,9 @@ try {
   console.log(123);
 } catch (e) {}
 try {
+  /**
+    * [123](https://google.com)
+    */
   enum RedirectCode {
     REDIRECT_TO_SHOP_LIST = 1200,
   }

@@ -1,0 +1,30 @@
+html {
+  font-size: calc(7px + 0.7vw) !important;
+}
+
+.card-target {
+  font-size: 4rem !important;
+}
+
+.target-meaning,
+.definition {
+  font-size: 3rem !important;
+}
+
+.example-sentence {
+  font-size: 2rem !important;
+}
+
+.sentence-translation {
+  font-size: 1.5rem !important;
+}
+
+.no-underline {
+  text-decoration: none;
+}
+
+.refold-card,
+.flashcard {
+  max-width: 40vw !important;
+}
+
