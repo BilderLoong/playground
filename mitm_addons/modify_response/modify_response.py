@@ -31,10 +31,11 @@ MOCKED_API_PATH_TYPE = (
     | Literal["payOrder"]
     | Literal["couponUseInfo"]
     | Literal["postOrder"]
+    | Literal["login"]
 )
 
 # The part of the  api path aim to replace.
-MOCKED_API_PATHS: list[MOCKED_API_PATH_TYPE] = ["couponUseInfo"]
+MOCKED_API_PATHS: list[MOCKED_API_PATH_TYPE] = ["loadFMPInfo"]
 
 
 # def request(flow):
@@ -57,6 +58,7 @@ def response(flow):
     response = flow.response
     # https://docs.mitmproxy.org/stable/api/mitmproxy/http.html#Response
     request = flow.request
+
 
     for path in MOCKED_API_PATHS:
         if path in request.url:
@@ -84,5 +86,3 @@ def response(flow):
 
             # get_text(): https://docs.mitmproxy.org/stable/api/mitmproxy/http.html#Message.get_text
             # ctx.log.info(flow.response.get_text())
-
-

@@ -6,3 +6,6 @@ node_modules
 ts-output
 data-structures/src
 Mini-program-playground
+/test-results/
+/playwright-report/
+/playwright/.cache/

@@ -1,4 +1,8 @@
-const Immutable = require('seamless-immutable');
+function test(params) {
+  debugger
+  console.log('test')
+}
 
-const res = Immutable({ a: 1 });
-console.log('res', res['a']);
+test()
+
+console.log('123')

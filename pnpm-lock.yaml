@@ -39,6 +39,9 @@ devDependencies:
   '@babel/preset-typescript':
     specifier: ^7.21.0
     version: 7.21.0(@babel/core@7.21.0)
+  '@playwright/test':
+    specifier: ^1.36.2
+    version: 1.36.2
   '@types/babel__core':
     specifier: ^7.20.0
     version: 7.20.0
@@ -1634,6 +1637,17 @@ packages:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
+    dev: true
+
+  /@playwright/test@1.36.2:
+    resolution: {integrity: sha512-2rVZeyPRjxfPH6J0oGJqE8YxiM1IBRyM8hyrXYK7eSiAqmbNhxwcLa7dZ7fy9Kj26V7FYia5fh9XJRq4Dqme+g==}
+    engines: {node: '>=16'}
+    hasBin: true
+    dependencies:
+      '@types/node': 15.14.9
+      playwright-core: 1.36.2
+    optionalDependencies:
+      fsevents: 2.3.2
     dev: true
 
   /@sinonjs/commons@1.8.6:
@@ -5165,6 +5179,12 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       find-up: 4.1.0
+    dev: true
+
+  /playwright-core@1.36.2:
+    resolution: {integrity: sha512-sQYZt31dwkqxOrP7xy2ggDfEzUxM1lodjhsQ3NMMv5uGTRDsLxU0e4xf4wwMkF2gplIxf17QMBCodSFgm6bFVQ==}
+    engines: {node: '>=16'}
+    hasBin: true
     dev: true
 
   /plur@4.0.0:

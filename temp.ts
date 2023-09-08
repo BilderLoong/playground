@@ -17,9 +17,7 @@
     { task: "fetch", url: "https://httpstat.us/300" },
   ];
 
-
-
-  // function runTask(spec) {
+  function runTask(spec) {
     return spec.task === "wait"
       ? asyncTimeout(spec.duration)
       : asyncFetch(spec.url);
@@ -32,7 +30,7 @@
   const starterPromise = Promise.resolve(null);
   const log = (result) => console.log(result);
   await asyncThingsToDo.reduce(
-    (p, spec) => p.then(() => runTask(spec).then(log)),
+    (a, spec) => a.then(() => runTask(spec).then(log)),
     starterPromise
   );
 
@@ -40,3 +38,4 @@
     await runTask(task).then((result) => console.log(result));
   }
 })();
+

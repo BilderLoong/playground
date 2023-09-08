@@ -1,6 +1,7 @@
 export {};
 try {
   const what = (BaseClass: Function) => {
+
     console.log(`what?`);
     return class extends BaseClass {
       constructor() {
@@ -14,8 +15,10 @@ try {
   class Foo {
     constructor() {
       console.log('Foo');
+
     }
   }
+
   console.log(123);
 } catch (e) {}
 try {

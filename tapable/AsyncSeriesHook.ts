@@ -4,18 +4,6 @@ class MyTappable {
   hooks = {
     asyncHookWithArgs: new AsyncSeriesHook(["arg1"]),
   };
-
-  // runNormalHook() {
-  //   this.hooks.normalHook.call("123");
-  // }
-  // runHookWithArgs() {
-  //   this.hooks.hookWithArgs.call("123");
-  // }
-
-  // runAllHooks() {
-  //   this.runHookWithArgs();
-  //   this.runNormalHook();
-  // }
 }
 
 const myTappable = new MyTappable();
