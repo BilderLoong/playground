@@ -9,3 +9,9 @@ func main(){
 	ha.Ha()
   fmt.Println("123")
 }
+
+var symbol_across_multiple_language = 1
+
+func foo(){
+	
+}

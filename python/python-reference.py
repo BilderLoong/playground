@@ -45,3 +45,4 @@ print(i)
 def foo(i):
     print(i)
 i
+symbol_across_multiple_language = 1

@@ -1,4 +1,3 @@
-const Immutable = require('seamless-immutable');
+const { log } = require("console");
 
-const res = Immutable({ a: 1 });
-console.log('res', res['a']);
+log('123')
