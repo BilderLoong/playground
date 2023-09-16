@@ -1,10 +1,1 @@
-package greetings
-
-import "fmt"
-
-// Hello returns a greeting for the named person.
-func Hello(name string) string {
-    // Return a greeting that embeds the name in a message.
-    message := fmt.Sprintf("Hi, %v. Welcome!", name)
-    return message
-}
+/annex/objects/SHA256E-s250--99dee07f8a042e5ae1a20af07533df8bd3470ac2353ef7f13935ca581212f165.go

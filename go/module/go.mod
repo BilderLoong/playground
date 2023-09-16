@@ -1,3 +1,1 @@
-module module
-
-go 1.20
+/annex/objects/SHA256E-s23--9efc2637f45d2799e6f9a7e2724d729e4d24f874e95dcaf04c0758067b1eb430.mod

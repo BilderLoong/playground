@@ -1,16 +1,1 @@
-module.exports = {
-  preset: 'ts-jest',
-  testEnvironment: 'node',
-  /**
-   * https://jestjs.io/ja/docs/configuration#testregex-string--arraystring
-   */
-  // testRegex: [
-  //   '(/__tests__/.*|(\\.|/)(test|spec))\\.[jt]sx?$,', // Default value
-  //   '.*/Leetcode/.*\\.[jt]s$', // For LeetCode problems test
-  // ],
-  testPathIgnorePatterns: [
-    '<rootDir>/data-structures/src/',
-    '<rootDir>/ts-output/',
-    '/node_modules/',
-  ],
-};
+/annex/objects/SHA256E-s458--0f471ca492e4145541d1e5df0192d4d8c32555125043a2f96798a04fcf7a719f.js

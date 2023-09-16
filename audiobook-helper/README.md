@@ -1,6 +1,1 @@
-## TODO
-
-Adding command-line interface.
-
-Caching lemmatized result.
-Adding part of speech tagging information into CSV file.
+/annex/objects/SHA256E-s125--0bd66f1a1181100cd2c10823e9bdd314b7278ba24929dfb2d9243ebaab2c422e.md

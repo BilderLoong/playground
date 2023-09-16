@@ -1,16 +1,1 @@
-{
-	// IntelliSense を使用して利用可能な属性を学べます。
-	// 既存の属性の説明をホバーして表示します。
-	// 詳細情報は次を確認してください: https://go.microsoft.com/fwlink/?linkid=830387
-	"version": "0.2.0",
-	"configurations": [
-		{
-			"name": "Python: 現在のファイル",
-			"type": "python",
-			"request": "launch",
-			"program": "${file}",
-			"console": "integratedTerminal",
-			"justMyCode": true,
-		}
-	]
-}
+/annex/objects/SHA256E-s464--9b38c339157401b2df7dbd10f5b540ce1cd928ad0a101308844368c4885e8a25.json

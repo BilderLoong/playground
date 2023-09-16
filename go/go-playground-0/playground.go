@@ -1,17 +1,1 @@
-package main
-
-import (
-  "fmt"
-	"github.com/BilderLoong/playground/go/go-playground-0/hi"
-)
-
-func main(){
-	ha.Ha()
-  fmt.Println("123")
-}
-
-var symbol_across_multiple_language = 1
-
-func foo(){
-	
-}
+/annex/objects/SHA256E-s69--a4dc2f7500b9572a818b938d7a9d27e5dea286cc08b46576600242f06165003f.go

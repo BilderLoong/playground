@@ -1,13 +1,1 @@
-module.exports = {
-  presets: [
-    [
-      '@babel/preset-env',
-      {
-        targets: {
-          node: 'current',
-        },
-      },
-    ],
-    '@babel/preset-typescript',
-  ],
-};
+/annex/objects/SHA256E-s199--8413a1dbb490df34a85f5db8f139115ea0007f248ea1f3056cdf51610f4ceb99.js

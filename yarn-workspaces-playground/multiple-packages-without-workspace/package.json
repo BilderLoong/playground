@@ -1,10 +1,1 @@
-{
-  "name": "multiple-packages-without-workspace",
-  "packageManager": "yarn@3.5.0",
-  "dependencies": {
-    "loadsh": "^0.0.4"
-  },
-  "workspaces": [
-    "packages/*"
-  ]
-}
+/annex/objects/SHA256E-s174--aca9bb8ad6d1843f16f9f18f0f86475ffe9953ddb03abdfb0f57f01da03710b5.json
