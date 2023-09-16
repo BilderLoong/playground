@@ -1,1 +1,10 @@
-/annex/objects/SHA256E-s134--cb34055f603cf26be47d9f69208b4498b10f07239e8b7d7c343ed4ff1f512e87
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+[*.{js,json,yml}]
+charset = utf-8
+indent_style = space
+indent_size = 2

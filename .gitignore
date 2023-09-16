@@ -6,3 +6,4 @@ node_modules
 ts-output
 data-structures/src
 Mini-program-playground
+./virtualenvs
