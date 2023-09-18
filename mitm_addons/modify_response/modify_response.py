@@ -7,11 +7,38 @@ import pathlib
 from typing import Literal
 
 from mitmproxy import ctx
+import logging
 
 __dir = pathlib.Path(__file__).parent
 
 # LOG_LEVEL =
 
+# https://docs.python.org/3/library/typing.html
+# https://fastapi.tiangolo.com/python-types/?h=type#motivation
+MOCKED_API_PATH_TYPE = (
+    Literal["queryMemberCoupons"]
+    | Literal["search"]
+    | Literal["pageShopList"]
+    | Literal["provinceCityList"]
+    | Literal["orderList"]
+    | Literal["loadFirstPage"]
+    | Literal["loadFMPInfo"]
+    | Literal["pageSpuInfo"]
+    | Literal["queryNeedSignAgreements"]
+    | Literal["provinceCityList"]
+    | Literal["orderConfirm"]
+    | Literal["orderDetail"]
+    | Literal["queryDishMoreInfo"]
+    | Literal["order-detail"]
+    | Literal["order-list"]
+    | Literal["payOrder"]
+    | Literal["couponUseInfo"]
+    | Literal["postOrder"]
+    | Literal["login"]
+)
+
+# The part of the  api path aim to replace.
+MOCKED_API_PATHS: list[MOCKED_API_PATH_TYPE] = ["pageSpuInfo","queryDishMoreInfo"]
 
 # def request(flow):
 #     ctx.log.info(flow.request.get_text())
@@ -34,31 +61,6 @@ def response(flow):
 
 
 def replace_response_body(flow):
-    # https://docs.python.org/3/library/typing.html
-    # https://fastapi.tiangolo.com/python-types/?h=type#motivation
-    MOCKED_API_PATH_TYPE = (
-        Literal["queryMemberCoupons"]
-        | Literal["search"]
-        | Literal["pageShopList"]
-        | Literal["provinceCityList"]
-        | Literal["orderList"]
-        | Literal["loadFirstPage"]
-        | Literal["loadFMPInfo"]
-        | Literal["pageSpuInfo"]
-        | Literal["queryNeedSignAgreements"]
-        | Literal["provinceCityList"]
-        | Literal["orderConfirm"]
-        | Literal["orderDetail"]
-        | Literal["queryDishMoreInfo"]
-        | Literal["order-detail"]
-        | Literal["order-list"]
-        | Literal["payOrder"]
-        | Literal["couponUseInfo"]
-        | Literal["postOrder"]
-        | Literal["login"]
-    )
-    # The part of the  api path aim to replace.
-    MOCKED_API_PATHS: list[MOCKED_API_PATH_TYPE] = ["pageSpuInfo"]
 
     # https://docs.mitmproxy.org/stable/api/mitmproxy/http.html#Request
     response = flow.response
@@ -91,22 +93,23 @@ def replace_response_body(flow):
 
 def modify_response_body(flow):
     response = flow.response
+    # if 'queryDishMoreInfo' in 
     try:
         response_dict = json.loads(response.get_text())
-        modified = add_adjencent_key(
+        # logging.info(response_dict["data"]["moduleData"])
+        modified = add_adjacent_key(
             response_dict, "saleQuantity", "saleQuantityStr", "haha"
         )
 
         response.set_text(json.dumps(modified))
 
     except ValueError:
-        ctx.log.error(
-            "Response body doesn't contain valid JSON:",
-            flow.response.get_text(),
+        logging.info(
+            f"Response body is not valid JSON request path: {flow.request.pretty_url}"
         )
 
 
-def add_adjencent_key(data, target_key, added_key, added_value):
+def add_adjacent_key(data, target_key, added_key, added_value):
     if isinstance(data, dict):
         updated_data = data.copy()  # Create a shallow copy of the original dictionary
 
@@ -115,8 +118,17 @@ def add_adjencent_key(data, target_key, added_key, added_value):
 
         for key, value in updated_data.items():
             # Recursively update nested dictionaries
-            updated_data[key] = add_adjencent_key(
+            updated_data[key] = add_adjacent_key(
                 value, target_key, added_key, added_value
+            )
+
+        return updated_data
+
+    elif isinstance(data, list):
+        updated_data = []
+        for item in data:
+            updated_data.append(
+                add_adjacent_key(item, target_key, added_key, added_value)
             )
 
         return updated_data
