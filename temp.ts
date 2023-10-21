@@ -1,9 +1,4 @@
-(async function () {
-  function asyncTimeout(delay) {
-    return new Promise((resolve) => {
-      setTimeout(() => resolve(delay), delay);
-    }).then((d) => `Waited ${d} seconds`);
-  }
+import { nextTick } from "node:process";
 
   function asyncFetch(url) {
     return fetch(url)
@@ -39,3 +34,7 @@
   }
 })();
 
+Promise.resolve().then(() => console.log(1));
+queueMicrotask(() => console.log(2));
+nextTick(() => console.log(3));
+const symbol_across_multiple_language = 1

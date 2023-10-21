@@ -1,18 +1,1 @@
-export default class BinaryTreeNode {
-  val: any;
-  left: BinaryTreeNode | null;
-  right: BinaryTreeNode | null;
-  parent: BinaryTreeNode | null;
-  constructor(
-    val = null,
-    left: BinaryTreeNode,
-    right: BinaryTreeNode,
-    parent: BinaryTreeNode
-  ) {
-    this.val = val;
-    this.left = left ?? null;
-    this.right = right ?? null;
-    this.parent = parent ?? null;
-  }
-  
-}
+/annex/objects/SHA256E-s406--c46234d03629518cc947b0d7c7651ea1fe8f3280f9b7278dc467df9844ede17e.ts

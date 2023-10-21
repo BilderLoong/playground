@@ -1,13 +1,1 @@
-export default class LinkedListNode {
-  value: unknown;
-  next: LinkedListNode | null;
-
-  constructor(val: unknown, next: LinkedListNode | null = null) {
-    this.value = val;
-    this.next = next;
-  }
-
-  toString(callback?: Function): string {
-    return callback ? callback(this.value) : `${this.value}`;
-  }
-}
+/annex/objects/SHA256E-s326--0e7749847d757b13d90e696f1b4e23fc2c374b7edb235a937b719dfb742afb26.ts

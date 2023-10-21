@@ -1,9 +1,1 @@
-function insertionSort(arr: number[]) {
-  for (let i = 1; i <= arr.length - 1; i++) {
-    for (let j = i; j > 0 && arr[j] < arr[j - 1]; j--) {
-      [arr[j - 1], arr[j]] = [arr[j], arr[j - 1]];
-    }
-  }
-
-  return arr;
-}
+/annex/objects/SHA256E-s228--356be41c4440163fc9a5f4258381618599b4003ff852cdd40bfb12a03cff918f.ts
