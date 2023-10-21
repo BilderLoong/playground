@@ -16,6 +16,7 @@
     "http-proxy-middleware": "^2.0.6",
     "immutable": "^4.2.4",
     "just-diff": "^5.2.0",
+    "node-notifier": "^10.0.1",
     "ts-node": "^10.9.1",
     "underscore": "^1.13.6"
   },

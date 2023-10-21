@@ -6,16 +6,13 @@
   }
 
   function asyncFetch(url) {
-     // 123
-    // return fetch(url)
+    return fetch(url)
       .then((response) => response.text())
       .then((text) => `Fetched ${url}, and got back ${text}`);
-
   }
   const asyncThingsToDo = [
     { task: "wait", duration: 1000 },
-    { task: "fetch", url: "https://httpstat.us/20011" },
-
+    { task: "fetch", url: "https://httpstat.us/2002" },
     { task: "wait", duration: 2000 },
     { task: "fetch", url: "https://httpstat.us/300" },
   ];

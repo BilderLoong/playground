@@ -1,4 +1,4 @@
-type tokenType = 'string' | 'paren' | 'number' | 'name';
+type tokenType = "string" | "paren" | "number" | "name";
 
 interface Token {
   type: tokenType;
@@ -6,7 +6,7 @@ interface Token {
 }
 
 namespace LispAST {
-  export type primaryNodeType = 'NumberLiteral' | 'StringLiteral';
+  export type primaryNodeType = "NumberLiteral" | "StringLiteral";
 
   export type PrimaryNode = {
     type: primaryNodeType;
@@ -18,22 +18,24 @@ namespace LispAST {
   export type ParentNode = CallNode | RootNode;
 
   export interface CallNode {
-    type: 'CallExpression';
-    name: Token['value'];
+    type: "CallExpression";
+    name: Token["value"];
     params: Node[];
     _context?: any;
   }
 
   export interface RootNode {
-    type: 'Program';
+    type: "Program";
+
     body: Array<Node>;
+
     _context?: any;
   }
-  export type NodeType = LispAST.Node['type'];
+  export type NodeType = LispAST.Node["type"];
 }
 
 namespace JavaScriptAST {
-  type primaryNodeType = 'NumberLiteral' | 'StringLiteral';
+  type primaryNodeType = "NumberLiteral" | "StringLiteral";
 
   export type Node =
     | RootNode
@@ -48,20 +50,20 @@ namespace JavaScriptAST {
 
   // type Node
   export interface RootNode {
-    type: 'Program';
+    type: "Program";
     body: Array<Node>;
   }
 
-  export interface ExpressionStatement extends BaseNode<'ExpressionStatement'> {
+  export interface ExpressionStatement extends BaseNode<"ExpressionStatement"> {
     expression: CallExpression;
   }
 
-  export interface CallExpression extends BaseNode<'CallExpression'> {
+  export interface CallExpression extends BaseNode<"CallExpression"> {
     callee: Identifier;
     arguments: Node[];
   }
 
-  export interface Identifier extends BaseNode<'Identifier'> {
+  export interface Identifier extends BaseNode<"Identifier"> {
     name: string;
   }
 
@@ -78,7 +80,7 @@ namespace JavaScriptAST {
  */
 export function tokenizer(input: string) {
   let isInDoubleQuote = false;
-  let value = '';
+  let value = "";
   const tokens: Token[] = [...input].reduce((pre, char, index, arr) => {
     if (char === '"') {
       // If already in double quote, then we are exiting double quote.
@@ -88,12 +90,12 @@ export function tokenizer(input: string) {
         const result = [
           ...pre,
           {
-            type: 'string',
+            type: "string",
             value,
           },
         ];
 
-        value = '';
+        value = "";
         return result;
       }
 
@@ -107,22 +109,22 @@ export function tokenizer(input: string) {
       return pre;
     }
 
-    if (char === '(') {
+    if (char === "(") {
       return [
         ...pre,
         {
-          type: 'paren',
-          value: '(',
+          type: "paren",
+          value: "(",
         },
       ];
     }
 
-    if (char === ')') {
+    if (char === ")") {
       return [
         ...pre,
         {
-          type: 'paren',
-          value: ')',
+          type: "paren",
+          value: ")",
         },
       ];
     }
@@ -144,20 +146,20 @@ export function tokenizer(input: string) {
 
       const tmp = value + char;
       // If next char is not a number, push the number token.
-      value = ''; // Clear the value for late use.
-      return [...pre, { type: 'number', value: tmp }];
+      value = ""; // Clear the value for late use.
+      return [...pre, { type: "number", value: tmp }];
     }
 
     const nameRegex = /[a-z]/i;
     if (nameRegex.test(char)) {
-      if (nameRegex.test(nextChar || '')) {
+      if (nameRegex.test(nextChar || "")) {
         value += char;
         return pre;
       }
 
       const tmp = value + char;
-      value = '';
-      return [...pre, { type: 'name', value: tmp }];
+      value = "";
+      return [...pre, { type: "name", value: tmp }];
     }
 
     throw new Error(`Unexpected token: ${char}`);
@@ -177,22 +179,22 @@ export function parser(tokens: Token[]): LispAST.RootNode {
   function walk(): LispAST.Node {
     let token = tokens[current];
 
-    if (token.type === 'string') {
+    if (token.type === "string") {
       current++;
-      return { type: 'StringLiteral', value: token.value };
+      return { type: "StringLiteral", value: token.value };
     }
 
-    if (token.type === 'number') {
+    if (token.type === "number") {
       current++;
-      return { type: 'NumberLiteral', value: token.value };
+      return { type: "NumberLiteral", value: token.value };
     }
 
-    if (token.type === 'paren' && token.value === '(') {
+    if (token.type === "paren" && token.value === "(") {
       // Current token is the name of this call expression.
       token = tokens[++current];
 
       const callNode: LispAST.CallNode = {
-        type: 'CallExpression',
+        type: "CallExpression",
         name: token.value,
         params: [],
       };
@@ -201,8 +203,8 @@ export function parser(tokens: Token[]): LispAST.RootNode {
       token = tokens[++current];
 
       while (
-        token.type !== 'paren' ||
-        (token.type === 'paren' && token.value === '(')
+        token.type !== "paren" ||
+        (token.type === "paren" && token.value === "(")
       ) {
         callNode.params.push(walk());
         // At this time, `current` point to next unused token.
@@ -219,7 +221,7 @@ export function parser(tokens: Token[]): LispAST.RootNode {
   }
 
   const AST: LispAST.RootNode = {
-    type: 'Program',
+    type: "Program",
     body: [],
   };
 
@@ -276,14 +278,14 @@ function traverser(ast: LispAST.RootNode, visitor: Visitor) {
     // If the node isn't primary node, in other words, the node isn't the leaves of the AST tree,
     // which means it contain child nodes. We should traverse it's child nodes.
     switch (node.type) {
-      case 'Program':
+      case "Program":
         traverseNodesInArray(node.body, node);
         break;
-      case 'CallExpression':
+      case "CallExpression":
         traverseNodesInArray(node.params, node);
         break;
-      case 'NumberLiteral':
-      case 'StringLiteral':
+      case "NumberLiteral":
+      case "StringLiteral":
         break;
     }
 
@@ -296,7 +298,7 @@ function traverser(ast: LispAST.RootNode, visitor: Visitor) {
 
 export function transformer(ast: LispAST.RootNode) {
   const newAst: JavaScriptAST.RootNode = {
-    type: 'Program',
+    type: "Program",
     body: [],
   };
 
@@ -308,9 +310,9 @@ export function transformer(ast: LispAST.RootNode) {
         let expression:
           | JavaScriptAST.CallExpression
           | JavaScriptAST.ExpressionStatement = {
-          type: 'CallExpression',
+          type: "CallExpression",
           callee: {
-            type: 'Identifier',
+            type: "Identifier",
             name: (<LispAST.CallNode>node).name,
           },
           arguments: [],
@@ -319,9 +321,9 @@ export function transformer(ast: LispAST.RootNode) {
         node._context = expression.arguments;
 
         // TODO to be continue.
-        if (parent?.type !== 'CallExpression') {
+        if (parent?.type !== "CallExpression") {
           expression = {
-            type: 'ExpressionStatement',
+            type: "ExpressionStatement",
             expression,
           };
         }
@@ -332,8 +334,8 @@ export function transformer(ast: LispAST.RootNode) {
 
     NumberLiteral: {
       enter: (node, parent) => {
-        const newNode: JavaScriptAST.PrimaryNode<'NumberLiteral'> = {
-          type: 'NumberLiteral',
+        const newNode: JavaScriptAST.PrimaryNode<"NumberLiteral"> = {
+          type: "NumberLiteral",
           value: node.value,
         };
 
@@ -343,8 +345,8 @@ export function transformer(ast: LispAST.RootNode) {
 
     StringLiteral: {
       enter: (node, parent) => {
-        const newNode: JavaScriptAST.PrimaryNode<'StringLiteral'> = {
-          type: 'StringLiteral',
+        const newNode: JavaScriptAST.PrimaryNode<"StringLiteral"> = {
+          type: "StringLiteral",
           value: node.value,
         };
 
@@ -360,24 +362,24 @@ export function transformer(ast: LispAST.RootNode) {
 
 export function codeGenerator(node: JavaScriptAST.Node): string {
   switch (node.type) {
-    case 'Program':
-      return node.body.map(codeGenerator).join('\n');
+    case "Program":
+      return node.body.map(codeGenerator).join("\n");
 
-    case 'ExpressionStatement':
-      return codeGenerator(node.expression) + ';';
+    case "ExpressionStatement":
+      return codeGenerator(node.expression) + ";";
 
-    case 'CallExpression':
+    case "CallExpression":
       return `${codeGenerator(node.callee)}(${node.arguments
         .map(codeGenerator)
-        .join(', ')})`;
+        .join(", ")})`;
 
-    case 'Identifier':
+    case "Identifier":
       return node.name;
 
-    case 'NumberLiteral':
+    case "NumberLiteral":
       return node.value;
 
-    case 'StringLiteral':
+    case "StringLiteral":
       return `"${node.value}"`;
   }
 }
@@ -390,5 +392,5 @@ export function compiler(input: string): string {
   return output;
 }
 
-console.log(compiler('(bar 1 (foo 2 3))'));
-console.log(compiler('1 1 1 1 '));
+console.log(compiler("(bar 1 (foo 2 3))"));
+console.log(compiler("1 1 1 1 "));

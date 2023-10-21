@@ -9,6 +9,9 @@ from typing import Literal
 from mitmproxy import ctx
 import logging
 
+# https://docs.python.org/ja/3/howto/logging.html
+logging.basicConfig(encoding="utf-8", level=logging.DEBUG)
+
 __dir = pathlib.Path(__file__).parent
 
 # LOG_LEVEL =
@@ -38,7 +41,7 @@ MOCKED_API_PATH_TYPE = (
 )
 
 # The part of the  api path aim to replace.
-MOCKED_API_PATHS: list[MOCKED_API_PATH_TYPE] = ["pageSpuInfo","queryDishMoreInfo"]
+MODIFIED_API_PATHS: list[MOCKED_API_PATH_TYPE] = ["pageSpuInfo", "queryDishMoreInfo"]
 
 # def request(flow):
 #     ctx.log.info(flow.request.get_text())
@@ -56,17 +59,19 @@ MOCKED_API_PATHS: list[MOCKED_API_PATH_TYPE] = ["pageSpuInfo","queryDishMoreInfo
 
 
 def response(flow):
-    replace_response_body(flow)
-    modify_response_body(flow)
+    if not any([i in flow.request.url for i in MODIFIED_API_PATHS]):
+        return
+
+    # replace_response_body(flow)
+    # modify_response_body(flow)
 
 
 def replace_response_body(flow):
-
     # https://docs.mitmproxy.org/stable/api/mitmproxy/http.html#Request
     response = flow.response
     # https://docs.mitmproxy.org/stable/api/mitmproxy/http.html#Response
     request = flow.request
-    for path in MOCKED_API_PATHS:
+    for path in MODIFIED_API_PATHS:
         if path in request.url:
             # Path should relative to the script file.
             MOCKED_JSON_FILE_NAME = f"{path}.json"
@@ -93,7 +98,7 @@ def replace_response_body(flow):
 
 def modify_response_body(flow):
     response = flow.response
-    # if 'queryDishMoreInfo' in 
+    # if 'queryDishMoreInfo' in
     try:
         response_dict = json.loads(response.get_text())
         # logging.info(response_dict["data"]["moduleData"])

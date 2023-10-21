@@ -1,8 +1,7 @@
-function test(params) {
-  debugger
-  console.log('test')
-}
+const notifier = require('node-notifier');
 
-test()
-
-console.log('123')
+notifier.notify({
+  title: 'Notification Title',
+  message: 'Notification Message',
+  // sound: true, // Play a notification sound
+});

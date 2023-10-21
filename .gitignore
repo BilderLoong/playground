@@ -9,3 +9,4 @@ Mini-program-playground
 /test-results/
 /playwright-report/
 /playwright/.cache/
+.virtualenvs/*
