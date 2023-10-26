@@ -17,7 +17,6 @@
 -- y1 = 10
 -- f = x + y
 
-
 module MyModule where
 
 import Data.List
