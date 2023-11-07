@@ -34,4 +34,28 @@ g = u
 
 h :: (Num a, Num b) => a -> b -> b
 h = u
-h :: (Num a, Num b) => a -> b -> b
+
+x234 = h 1 (5.5 :: Double)
+
+jackal :: (Ord a, Eq b) => a -> b -> a
+jackal = undefined
+x0 = jackal "keyboard" "has the word jackal in it"
+
+kessel :: (Ord a, Num b) => a -> b -> a
+kessel = undefined
+x1 = kessel 1 2
+
+-- impossible :: a -> a
+-- impossible a = a + a
+
+hypothetical :: a -> a -> a
+hypothetical a b = a
+
+hypothetical0 :: a -> a -> a
+hypothetical0 a b = b
+
+parametricity :: a -> b -> b
+parametricity x y = y
+
+xs = [1, 2, 3]
+xsRes = 6 / fromIntegral (length xs)
