@@ -176,3 +176,122 @@ data WherePenguinsLive
 data Penguin
   = Peng WherePenguinsLive
   deriving (Eq, Show)
+
+isSouthAfrica :: WherePenguinsLive -> Bool
+isSouthAfrica SouthAfrica = True
+isSouthAfrica _ = False
+
+gimmeWhereTheyLive :: Penguin -> WherePenguinsLive
+gimmeWhereTheyLive (Peng place) = place
+
+galapagosPenguin :: Penguin -> Bool
+galapagosPenguin (Peng Galapagos) = True
+galapagosPenguin _ = False
+
+f3 :: (a, b) -> (c, d) -> ((b, d), (a, c))
+f3 (a, b) (c, d) = ((b, d), (a, c))
+
+snd3 (_, x, _) = x
+
+k :: (a, b) -> a
+k (x, y) = x
+
+k2 :: String
+k2 = k ("s", 1 + 2)
+
+f0' :: (a, b, c) -> (d, e, f) -> ((a, d), (c, f))
+f0' (a, b, c) (d, e, f) = ((a, d), (c, f))
+
+funcZ' x = if x + 1 == 1 then "Awe" else "Wut"
+
+funcZ x = case x + 1 == 1 of
+  True -> "Awe"
+  False -> "Wut"
+
+pal xs = case xs == reverse xs of
+  True -> "Yes"
+  False -> "No"
+
+pal' xs = case y of
+  True -> "Yes"
+  False -> "No"
+ where
+  y = xs == reverse xs
+
+greetIfCool :: String -> IO ()
+greetIfCool coolness = case cool of
+  True -> putStr "hei hei"
+  False -> putStr "pshhhh."
+ where
+  cool = coolness == "cool"
+
+functionC x y = case (x > y) of
+  True -> x
+  False -> y
+
+functionG x y
+  | x > y = True
+  | otherwise = False
+
+ifEvenAdd2 x = case mod x 2 of
+  0 -> x + 2
+  _ -> x
+
+nums x =
+  case compare x 0 of
+    LT -> -1
+    GT -> 1
+    EQ -> 0
+
+-- fSub x y = flip (-) x y
+fSub = flip (-)
+
+data Employee
+  = Coder
+  | Manager
+  | Veep
+  | CEO
+  deriving (Eq, Ord, Show)
+
+reportBoss :: Employee -> Employee -> IO ()
+reportBoss e e' =
+  putStrLn
+    $ show e
+    ++ " is the boss of "
+    ++ show e'
+
+codersRuleCEOsDrool :: Employee -> Employee -> Ordering
+codersRuleCEOsDrool Coder Coder = EQ
+codersRuleCEOsDrool _ Coder = LT
+codersRuleCEOsDrool Coder _ = GT
+codersRuleCEOsDrool e e' = compare e e'
+
+employeeRank ::
+  (Employee -> Employee -> Ordering) ->
+  Employee ->
+  Employee ->
+  IO ()
+employeeRank f e e' =
+  case f e e' of
+    GT -> reportBoss e e'
+    EQ ->
+      putStrLn
+        "Neither employee\
+        \ is the boss"
+    LT -> (flip reportBoss) e e'
+
+dodgy :: (Num a) => a -> a -> a
+dodgy x y = x + y * 10
+
+oneIsOne :: (Num a) => a -> a
+oneIsOne = dodgy 1
+
+oneIsTwo :: (Num a) => a -> a
+oneIsTwo = flip dodgy 2
+
+isRight x y z
+  | x ^ 2 + y ^ 2 == z ^ 2 = "RIGHT!"
+  | otherwise = "Wrong!"
+
+
+
