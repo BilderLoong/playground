@@ -1,0 +1,2372 @@
+[
+  {
+    "sha": "a469b2727a0c101bce557a89fcbf1cb27df81a55",
+    "node_id": "C_kwDOFYWjXtoAKGE0NjliMjcyN2EwYzEwMWJjZTU1N2E4OWZjYmYxY2IyN2RmODFhNTU",
+    "commit": {
+      "author": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-20T02:04:26Z"
+      },
+      "committer": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-20T02:04:26Z"
+      },
+      "message": "Fix a few spelling mistakes.",
+      "tree": {
+        "sha": "669369185a5753c026dd31396afac8fbf59f5514",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/trees/669369185a5753c026dd31396afac8fbf59f5514"
+      },
+      "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/commits/a469b2727a0c101bce557a89fcbf1cb27df81a55",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/a469b2727a0c101bce557a89fcbf1cb27df81a55",
+    "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/a469b2727a0c101bce557a89fcbf1cb27df81a55",
+    "comments_url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/a469b2727a0c101bce557a89fcbf1cb27df81a55/comments",
+    "author": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "5e0f71f1f682499afa1479f21353c572d34ecd3c",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/5e0f71f1f682499afa1479f21353c572d34ecd3c",
+        "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/5e0f71f1f682499afa1479f21353c572d34ecd3c"
+      }
+    ]
+  },
+  {
+    "sha": "5e0f71f1f682499afa1479f21353c572d34ecd3c",
+    "node_id": "C_kwDOFYWjXtoAKDVlMGY3MWYxZjY4MjQ5OWFmYTE0NzlmMjEzNTNjNTcyZDM0ZWNkM2M",
+    "commit": {
+      "author": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-17T02:33:38Z"
+      },
+      "committer": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-17T02:33:38Z"
+      },
+      "message": "Still under development, but not very active; a little haphazard to be honest. I definitely don't stream on Twitch anymore.",
+      "tree": {
+        "sha": "15b97c90262771102c149e35db84579133806d26",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/trees/15b97c90262771102c149e35db84579133806d26"
+      },
+      "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/commits/5e0f71f1f682499afa1479f21353c572d34ecd3c",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/5e0f71f1f682499afa1479f21353c572d34ecd3c",
+    "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/5e0f71f1f682499afa1479f21353c572d34ecd3c",
+    "comments_url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/5e0f71f1f682499afa1479f21353c572d34ecd3c/comments",
+    "author": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "7142c9a7308a5d6fe696bad408ad82648e084ca1",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/7142c9a7308a5d6fe696bad408ad82648e084ca1",
+        "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/7142c9a7308a5d6fe696bad408ad82648e084ca1"
+      }
+    ]
+  },
+  {
+    "sha": "7142c9a7308a5d6fe696bad408ad82648e084ca1",
+    "node_id": "C_kwDOFYWjXtoAKDcxNDJjOWE3MzA4YTVkNmZlNjk2YmFkNDA4YWQ4MjY0OGUwODRjYTE",
+    "commit": {
+      "author": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-17T02:18:59Z"
+      },
+      "committer": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-17T02:32:19Z"
+      },
+      "message": "Add clarifying note to RELEASE_CHECKLIST.md because I messed up the first time.",
+      "tree": {
+        "sha": "a96588c79e96183277fbdccfb8827cacf46613e4",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/trees/a96588c79e96183277fbdccfb8827cacf46613e4"
+      },
+      "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/commits/7142c9a7308a5d6fe696bad408ad82648e084ca1",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/7142c9a7308a5d6fe696bad408ad82648e084ca1",
+    "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/7142c9a7308a5d6fe696bad408ad82648e084ca1",
+    "comments_url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/7142c9a7308a5d6fe696bad408ad82648e084ca1/comments",
+    "author": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "ee848bdbd3465d97097a18edb62482bdb7e04cd1",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/ee848bdbd3465d97097a18edb62482bdb7e04cd1",
+        "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/ee848bdbd3465d97097a18edb62482bdb7e04cd1"
+      }
+    ]
+  },
+  {
+    "sha": "ee848bdbd3465d97097a18edb62482bdb7e04cd1",
+    "node_id": "C_kwDOFYWjXtoAKGVlODQ4YmRiZDM0NjVkOTcwOTdhMThlZGI2MjQ4MmJkYjdlMDRjZDE",
+    "commit": {
+      "author": {
+        "name": "Gerome Meyer",
+        "email": "39983753+GeroVanMi@users.noreply.github.com",
+        "date": "2023-07-17T02:23:54Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2023-07-17T02:23:54Z"
+      },
+      "message": "Move `cargo install jless` to the Installation table proper (#122)\n\nCo-authored-by: Paul Julius Martinez <pauljuliusmartinez@gmail.com>",
+      "tree": {
+        "sha": "6a4f02a3bcb4ca3ce8edee1cc986e259f9a6f0db",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/trees/6a4f02a3bcb4ca3ce8edee1cc986e259f9a6f0db"
+      },
+      "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/commits/ee848bdbd3465d97097a18edb62482bdb7e04cd1",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsBcBAABCAAQBQJktKY6CRBK7hj4Ov3rIwAAW2IIABPP1BJyUnWT68pjUlRrsys/\nNMygkCrse9TaFGauQQwkncoil/OT4UAzRz//EIRqIcFb7LQYfWY1rJAiX6V5Qq3m\nU+RZEzXV9w1ItXhZwYMsqoSzIzznRln9/g52aNXTxO8D75nQhXT9IiTggluEayU3\nc2tnaDhg2MlNHLAkOHQ5vZSw0oUOeA2rldLC6HLTapK3IqFohEJTDgwUf6qE72T7\noc75FzqAnX2J+w6oqOjwUgC2hKyK/6jFyqmcDAQD6/HEaaFljfc1/jz1OoDeOdcD\ngmMNgmqx4aOmsKkb6JHM3mdYMOmZtpp4QzOvZ4+3QUrGeCjDoEXAkdvb8lM5pBc=\n=Smkn\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 6a4f02a3bcb4ca3ce8edee1cc986e259f9a6f0db\nparent 21dd6100edb47145bb9570931bec29697bcd0d9b\nauthor Gerome Meyer <39983753+GeroVanMi@users.noreply.github.com> 1689560634 +0200\ncommitter GitHub <noreply@github.com> 1689560634 -0400\n\nMove `cargo install jless` to the Installation table proper (#122)\n\nCo-authored-by: Paul Julius Martinez <pauljuliusmartinez@gmail.com>"
+      }
+    },
+    "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/ee848bdbd3465d97097a18edb62482bdb7e04cd1",
+    "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/ee848bdbd3465d97097a18edb62482bdb7e04cd1",
+    "comments_url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/ee848bdbd3465d97097a18edb62482bdb7e04cd1/comments",
+    "author": {
+      "login": "GeroVanMi",
+      "id": 39983753,
+      "node_id": "MDQ6VXNlcjM5OTgzNzUz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/39983753?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/GeroVanMi",
+      "html_url": "https://github.com/GeroVanMi",
+      "followers_url": "https://api.github.com/users/GeroVanMi/followers",
+      "following_url": "https://api.github.com/users/GeroVanMi/following{/other_user}",
+      "gists_url": "https://api.github.com/users/GeroVanMi/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/GeroVanMi/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/GeroVanMi/subscriptions",
+      "organizations_url": "https://api.github.com/users/GeroVanMi/orgs",
+      "repos_url": "https://api.github.com/users/GeroVanMi/repos",
+      "events_url": "https://api.github.com/users/GeroVanMi/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/GeroVanMi/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "21dd6100edb47145bb9570931bec29697bcd0d9b",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/21dd6100edb47145bb9570931bec29697bcd0d9b",
+        "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/21dd6100edb47145bb9570931bec29697bcd0d9b"
+      }
+    ]
+  },
+  {
+    "sha": "21dd6100edb47145bb9570931bec29697bcd0d9b",
+    "node_id": "C_kwDOFYWjXtoAKDIxZGQ2MTAwZWRiNDcxNDViYjk1NzA5MzFiZWMyOTY5N2JjZDBkOWI",
+    "commit": {
+      "author": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-17T02:12:03Z"
+      },
+      "committer": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-17T02:12:03Z"
+      },
+      "message": "v0.9.0 Release",
+      "tree": {
+        "sha": "fa01871a180e013bb1e7fc05736092b47140bf64",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/trees/fa01871a180e013bb1e7fc05736092b47140bf64"
+      },
+      "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/commits/21dd6100edb47145bb9570931bec29697bcd0d9b",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/21dd6100edb47145bb9570931bec29697bcd0d9b",
+    "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/21dd6100edb47145bb9570931bec29697bcd0d9b",
+    "comments_url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/21dd6100edb47145bb9570931bec29697bcd0d9b/comments",
+    "author": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "5d5a597f6f4d8f6376a57cb9155f490a3e700fe6",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/5d5a597f6f4d8f6376a57cb9155f490a3e700fe6",
+        "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/5d5a597f6f4d8f6376a57cb9155f490a3e700fe6"
+      }
+    ]
+  },
+  {
+    "sha": "5d5a597f6f4d8f6376a57cb9155f490a3e700fe6",
+    "node_id": "C_kwDOFYWjXtoAKDVkNWE1OTdmNmY0ZDhmNjM3NmE1N2NiOTE1NWY0OTBhM2U3MDBmZTY",
+    "commit": {
+      "author": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-17T01:45:16Z"
+      },
+      "committer": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-17T01:45:16Z"
+      },
+      "message": "Add 'C' and 'E' commands to deeply collapse/expand nodes.\n\nAlso update the focus behavior of c/e/C/E so that the focused node\nstays in the same position on the screen. This is an improvement\nover the previous behavior (and roughly matches the same behavior\nthat would occur when you pressed 'm' to toggle between data and\nline mode), but there are still some wonky cases such as:\n\n- Behavior when the top of the file is visible\n- Behavior when you're focusing the closing of a container in\n  line mode (maybe the opening of the container, if it's visible,\n  should stay in the same place?)\n\nIt seems desirable that the viewport would be remain unchanged after\npressing 'c' and then 'e' (or vice versa), assuming the collapsed\nstate of everything is unchanged, but that might be impossible in\nthe general case.\n\nMaybe there should be slightly different behavior for expanding vs\ncollapsing too?\n\nI also left a TODO noting that it would be good to unify/classify\nthe desired viewport behavior after an operation, rather than using\na couple of very ill-defined boolean functions right now. Possibly\nvalues include:\n\n- ViewportUpdatedByAction (the code for the action manages updating\n  the viewport by itself, like for zz commands)\n- ScrollToEnsureFocusedRowIsVisible (the action changes the focused\n  row, and the viewport should scroll to get it into view)\n- KeepFocusedLineInSamePlaceOnScreen (the focused line should be\n  in the same place on the screen after this)\n\nThe third one could be generalizable to keeping an arbitrary row\n(not necessarily the focused one) in the same place, or put it\nin the same spot +/- some delta.",
+      "tree": {
+        "sha": "fdfd737812494a6cb4776a7a3061c7bf76ce5380",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/trees/fdfd737812494a6cb4776a7a3061c7bf76ce5380"
+      },
+      "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/commits/5d5a597f6f4d8f6376a57cb9155f490a3e700fe6",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/5d5a597f6f4d8f6376a57cb9155f490a3e700fe6",
+    "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/5d5a597f6f4d8f6376a57cb9155f490a3e700fe6",
+    "comments_url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/5d5a597f6f4d8f6376a57cb9155f490a3e700fe6/comments",
+    "author": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "275f9cb518f2d3a92fd36f89d40ac7613b7ca7af",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/275f9cb518f2d3a92fd36f89d40ac7613b7ca7af",
+        "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/275f9cb518f2d3a92fd36f89d40ac7613b7ca7af"
+      }
+    ]
+  },
+  {
+    "sha": "275f9cb518f2d3a92fd36f89d40ac7613b7ca7af",
+    "node_id": "C_kwDOFYWjXtoAKDI3NWY5Y2I1MThmMmQzYTkyZmQzNmY4OWQ0MGFjNzYxM2I3Y2E3YWY",
+    "commit": {
+      "author": {
+        "name": "Joe Abbate",
+        "email": "40615740+jabbate19@users.noreply.github.com",
+        "date": "2023-07-09T05:19:35Z"
+      },
+      "committer": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-09T05:21:10Z"
+      },
+      "message": "Return non-zero exit code on parse errors (#98)",
+      "tree": {
+        "sha": "d39090795f2446bb7bb426e72dd587533c696dc4",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/trees/d39090795f2446bb7bb426e72dd587533c696dc4"
+      },
+      "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/commits/275f9cb518f2d3a92fd36f89d40ac7613b7ca7af",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/275f9cb518f2d3a92fd36f89d40ac7613b7ca7af",
+    "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/275f9cb518f2d3a92fd36f89d40ac7613b7ca7af",
+    "comments_url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/275f9cb518f2d3a92fd36f89d40ac7613b7ca7af/comments",
+    "author": {
+      "login": "jabbate19",
+      "id": 40615740,
+      "node_id": "MDQ6VXNlcjQwNjE1NzQw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/40615740?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/jabbate19",
+      "html_url": "https://github.com/jabbate19",
+      "followers_url": "https://api.github.com/users/jabbate19/followers",
+      "following_url": "https://api.github.com/users/jabbate19/following{/other_user}",
+      "gists_url": "https://api.github.com/users/jabbate19/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/jabbate19/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/jabbate19/subscriptions",
+      "organizations_url": "https://api.github.com/users/jabbate19/orgs",
+      "repos_url": "https://api.github.com/users/jabbate19/repos",
+      "events_url": "https://api.github.com/users/jabbate19/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/jabbate19/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "3500b5843edf5e7d676a32354c9f43f975ed82f9",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/3500b5843edf5e7d676a32354c9f43f975ed82f9",
+        "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/3500b5843edf5e7d676a32354c9f43f975ed82f9"
+      }
+    ]
+  },
+  {
+    "sha": "3500b5843edf5e7d676a32354c9f43f975ed82f9",
+    "node_id": "C_kwDOFYWjXtoAKDM1MDBiNTg0M2VkZjVlN2Q2NzZhMzIzNTRjOWY0M2Y5NzVlZDgyZjk",
+    "commit": {
+      "author": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-09T05:10:45Z"
+      },
+      "committer": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-09T05:10:45Z"
+      },
+      "message": "Add short flags for enabling/disabling absolute/relative line numbers: -n/-N/-r/-R.",
+      "tree": {
+        "sha": "207c91c549f99e6b620d6544a4923fb858681b64",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/trees/207c91c549f99e6b620d6544a4923fb858681b64"
+      },
+      "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/commits/3500b5843edf5e7d676a32354c9f43f975ed82f9",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/3500b5843edf5e7d676a32354c9f43f975ed82f9",
+    "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/3500b5843edf5e7d676a32354c9f43f975ed82f9",
+    "comments_url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/3500b5843edf5e7d676a32354c9f43f975ed82f9/comments",
+    "author": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "c06fead6c825950b3f61e7aa8f59554d73ea448e",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/c06fead6c825950b3f61e7aa8f59554d73ea448e",
+        "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/c06fead6c825950b3f61e7aa8f59554d73ea448e"
+      }
+    ]
+  },
+  {
+    "sha": "c06fead6c825950b3f61e7aa8f59554d73ea448e",
+    "node_id": "C_kwDOFYWjXtoAKGMwNmZlYWQ2YzgyNTk1MGIzZjYxZTdhYThmNTk1NTRkNzNlYTQ0OGU",
+    "commit": {
+      "author": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-09T04:54:15Z"
+      },
+      "committer": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-09T04:54:15Z"
+      },
+      "message": "Use --line-numbers and --relative-line-numbers as the names of the flags, instead of \"--number\" and \"--relative-number\".",
+      "tree": {
+        "sha": "a60631b7831905f63e59e71d04f3e676563d5759",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/trees/a60631b7831905f63e59e71d04f3e676563d5759"
+      },
+      "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/commits/c06fead6c825950b3f61e7aa8f59554d73ea448e",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/c06fead6c825950b3f61e7aa8f59554d73ea448e",
+    "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/c06fead6c825950b3f61e7aa8f59554d73ea448e",
+    "comments_url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/c06fead6c825950b3f61e7aa8f59554d73ea448e/comments",
+    "author": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "cf8d48b1f034fb49792ec555418cff7e096112b1",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/cf8d48b1f034fb49792ec555418cff7e096112b1",
+        "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/cf8d48b1f034fb49792ec555418cff7e096112b1"
+      }
+    ]
+  },
+  {
+    "sha": "cf8d48b1f034fb49792ec555418cff7e096112b1",
+    "node_id": "C_kwDOFYWjXtoAKGNmOGQ0OGIxZjAzNGZiNDk3OTJlYzU1NTQxOGNmZjdlMDk2MTEyYjE",
+    "commit": {
+      "author": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-09T04:36:20Z"
+      },
+      "committer": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-09T04:36:20Z"
+      },
+      "message": "Enable line numbers by default (had to upgrade clap to 4.0 in the process).",
+      "tree": {
+        "sha": "d0782ff5471d25b55e53887add0aea6581a6acfa",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/trees/d0782ff5471d25b55e53887add0aea6581a6acfa"
+      },
+      "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/commits/cf8d48b1f034fb49792ec555418cff7e096112b1",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/cf8d48b1f034fb49792ec555418cff7e096112b1",
+    "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/cf8d48b1f034fb49792ec555418cff7e096112b1",
+    "comments_url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/cf8d48b1f034fb49792ec555418cff7e096112b1/comments",
+    "author": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "3499fd8c5033efec64efaba2eb51d5e2b3312388",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/3499fd8c5033efec64efaba2eb51d5e2b3312388",
+        "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/3499fd8c5033efec64efaba2eb51d5e2b3312388"
+      }
+    ]
+  },
+  {
+    "sha": "3499fd8c5033efec64efaba2eb51d5e2b3312388",
+    "node_id": "C_kwDOFYWjXtoAKDM0OTlmZDhjNTAzM2VmZWM2NGVmYWJhMmViNTFkNWUyYjMzMTIzODg",
+    "commit": {
+      "author": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-09T04:05:30Z"
+      },
+      "committer": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-09T04:05:30Z"
+      },
+      "message": "Update CHANGELOG",
+      "tree": {
+        "sha": "33020701d21d58c512e1039a4aa5d48def5cf151",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/trees/33020701d21d58c512e1039a4aa5d48def5cf151"
+      },
+      "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/commits/3499fd8c5033efec64efaba2eb51d5e2b3312388",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/3499fd8c5033efec64efaba2eb51d5e2b3312388",
+    "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/3499fd8c5033efec64efaba2eb51d5e2b3312388",
+    "comments_url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/3499fd8c5033efec64efaba2eb51d5e2b3312388/comments",
+    "author": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "7a3a719e4eb471bae7b125c346f01f37274cb20b",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/7a3a719e4eb471bae7b125c346f01f37274cb20b",
+        "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/7a3a719e4eb471bae7b125c346f01f37274cb20b"
+      }
+    ]
+  },
+  {
+    "sha": "7a3a719e4eb471bae7b125c346f01f37274cb20b",
+    "node_id": "C_kwDOFYWjXtoAKDdhM2E3MTllNGViNDcxYmFlN2IxMjVjMzQ2ZjAxZjM3Mjc0Y2IyMGI",
+    "commit": {
+      "author": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-09T02:04:09Z"
+      },
+      "committer": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-09T02:04:09Z"
+      },
+      "message": "Support jumping to line numbers (with auto-expand) with <n>g and <n>G.",
+      "tree": {
+        "sha": "92d587f4f691af37ebaae62992c220273016583c",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/trees/92d587f4f691af37ebaae62992c220273016583c"
+      },
+      "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/commits/7a3a719e4eb471bae7b125c346f01f37274cb20b",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/7a3a719e4eb471bae7b125c346f01f37274cb20b",
+    "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/7a3a719e4eb471bae7b125c346f01f37274cb20b",
+    "comments_url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/7a3a719e4eb471bae7b125c346f01f37274cb20b/comments",
+    "author": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "b5507c6b805e68a4ec84224e4d92e6d6c5eec509",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/b5507c6b805e68a4ec84224e4d92e6d6c5eec509",
+        "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/b5507c6b805e68a4ec84224e4d92e6d6c5eec509"
+      }
+    ]
+  },
+  {
+    "sha": "b5507c6b805e68a4ec84224e4d92e6d6c5eec509",
+    "node_id": "C_kwDOFYWjXtoAKGI1NTA3YzZiODA1ZTY4YTRlYzg0MjI0ZTRkOTJlNmQ2YzVlZWM1MDk",
+    "commit": {
+      "author": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-08T20:11:53Z"
+      },
+      "committer": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-08T20:11:53Z"
+      },
+      "message": "Invert styling on array indexes when focused to make the focused line stand out more.",
+      "tree": {
+        "sha": "334aacd77556002a341731dea5a9c4588acf6ab0",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/trees/334aacd77556002a341731dea5a9c4588acf6ab0"
+      },
+      "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/commits/b5507c6b805e68a4ec84224e4d92e6d6c5eec509",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/b5507c6b805e68a4ec84224e4d92e6d6c5eec509",
+    "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/b5507c6b805e68a4ec84224e4d92e6d6c5eec509",
+    "comments_url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/b5507c6b805e68a4ec84224e4d92e6d6c5eec509/comments",
+    "author": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "1d055f8f4eac5a1f3566a55c4ec1a387ac45039e",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/1d055f8f4eac5a1f3566a55c4ec1a387ac45039e",
+        "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/1d055f8f4eac5a1f3566a55c4ec1a387ac45039e"
+      }
+    ]
+  },
+  {
+    "sha": "1d055f8f4eac5a1f3566a55c4ec1a387ac45039e",
+    "node_id": "C_kwDOFYWjXtoAKDFkMDU1ZjhmNGVhYzVhMWYzNTY2YTU1YzRlYzFhMzg3YWM0NTAzOWU",
+    "commit": {
+      "author": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-08T20:10:12Z"
+      },
+      "committer": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-08T20:10:12Z"
+      },
+      "message": "Don't forget to subtract space used for indicators from available space.",
+      "tree": {
+        "sha": "9355321009064702799743554c41776d697f0f6a",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/trees/9355321009064702799743554c41776d697f0f6a"
+      },
+      "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/commits/1d055f8f4eac5a1f3566a55c4ec1a387ac45039e",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/1d055f8f4eac5a1f3566a55c4ec1a387ac45039e",
+    "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/1d055f8f4eac5a1f3566a55c4ec1a387ac45039e",
+    "comments_url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/1d055f8f4eac5a1f3566a55c4ec1a387ac45039e/comments",
+    "author": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "0bfb7472d215de99eae0f3d594146d68a912104d",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/0bfb7472d215de99eae0f3d594146d68a912104d",
+        "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/0bfb7472d215de99eae0f3d594146d68a912104d"
+      }
+    ]
+  },
+  {
+    "sha": "0bfb7472d215de99eae0f3d594146d68a912104d",
+    "node_id": "C_kwDOFYWjXtoAKDBiZmI3NDcyZDIxNWRlOTllYWUwZjNkNTk0MTQ2ZDY4YTkxMjEwNGQ",
+    "commit": {
+      "author": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-08T19:42:05Z"
+      },
+      "committer": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-08T19:42:05Z"
+      },
+      "message": "Add \"set number/relativenumber\" commands.",
+      "tree": {
+        "sha": "866ae7c0e677a26b9ce20d7358abde8e727c7cd9",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/trees/866ae7c0e677a26b9ce20d7358abde8e727c7cd9"
+      },
+      "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/commits/0bfb7472d215de99eae0f3d594146d68a912104d",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/0bfb7472d215de99eae0f3d594146d68a912104d",
+    "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/0bfb7472d215de99eae0f3d594146d68a912104d",
+    "comments_url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/0bfb7472d215de99eae0f3d594146d68a912104d/comments",
+    "author": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "8ab2803575ab6fe70962386b4ced0ff7b5274cb5",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/8ab2803575ab6fe70962386b4ced0ff7b5274cb5",
+        "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/8ab2803575ab6fe70962386b4ced0ff7b5274cb5"
+      }
+    ]
+  },
+  {
+    "sha": "8ab2803575ab6fe70962386b4ced0ff7b5274cb5",
+    "node_id": "C_kwDOFYWjXtoAKDhhYjI4MDM1NzVhYjZmZTcwOTYyMzg2YjRjZWQwZmY3YjUyNzRjYjU",
+    "commit": {
+      "author": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-08T18:51:14Z"
+      },
+      "committer": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-08T18:51:14Z"
+      },
+      "message": "Update Rust version in Github CI workflow.",
+      "tree": {
+        "sha": "a4c95e8051b1eaa143f9797436480ea1bb2c6706",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/trees/a4c95e8051b1eaa143f9797436480ea1bb2c6706"
+      },
+      "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/commits/8ab2803575ab6fe70962386b4ced0ff7b5274cb5",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/8ab2803575ab6fe70962386b4ced0ff7b5274cb5",
+    "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/8ab2803575ab6fe70962386b4ced0ff7b5274cb5",
+    "comments_url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/8ab2803575ab6fe70962386b4ced0ff7b5274cb5/comments",
+    "author": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "8bbfa771d304fb069b93696dbcffe7c6545e2e9a",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/8bbfa771d304fb069b93696dbcffe7c6545e2e9a",
+        "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/8bbfa771d304fb069b93696dbcffe7c6545e2e9a"
+      }
+    ]
+  },
+  {
+    "sha": "8bbfa771d304fb069b93696dbcffe7c6545e2e9a",
+    "node_id": "C_kwDOFYWjXtoAKDhiYmZhNzcxZDMwNGZiMDY5YjkzNjk2ZGJjZmZlN2M2NTQ1ZTJlOWE",
+    "commit": {
+      "author": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-08T18:46:31Z"
+      },
+      "committer": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-08T18:46:31Z"
+      },
+      "message": "Fix last clippy issues.",
+      "tree": {
+        "sha": "140d3df5affe3353d1b1a8ba0af71184566239b4",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/trees/140d3df5affe3353d1b1a8ba0af71184566239b4"
+      },
+      "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/commits/8bbfa771d304fb069b93696dbcffe7c6545e2e9a",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/8bbfa771d304fb069b93696dbcffe7c6545e2e9a",
+    "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/8bbfa771d304fb069b93696dbcffe7c6545e2e9a",
+    "comments_url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/8bbfa771d304fb069b93696dbcffe7c6545e2e9a/comments",
+    "author": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "7c6edb7670bb0d9a239a64ed7db44611a882de48",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/7c6edb7670bb0d9a239a64ed7db44611a882de48",
+        "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/7c6edb7670bb0d9a239a64ed7db44611a882de48"
+      }
+    ]
+  },
+  {
+    "sha": "7c6edb7670bb0d9a239a64ed7db44611a882de48",
+    "node_id": "C_kwDOFYWjXtoAKDdjNmVkYjc2NzBiYjBkOWEyMzlhNjRlZDdkYjQ0NjExYTg4MmRlNDg",
+    "commit": {
+      "author": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-08T18:42:42Z"
+      },
+      "committer": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-08T18:44:34Z"
+      },
+      "message": "Fix some simple clippy lints.",
+      "tree": {
+        "sha": "15c01cb630ad9ca70e9722e398c4bacfe4e5aab8",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/trees/15c01cb630ad9ca70e9722e398c4bacfe4e5aab8"
+      },
+      "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/commits/7c6edb7670bb0d9a239a64ed7db44611a882de48",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/7c6edb7670bb0d9a239a64ed7db44611a882de48",
+    "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/7c6edb7670bb0d9a239a64ed7db44611a882de48",
+    "comments_url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/7c6edb7670bb0d9a239a64ed7db44611a882de48/comments",
+    "author": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "269ecd9782b51c431b9e330a05c022fdc047ec15",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/269ecd9782b51c431b9e330a05c022fdc047ec15",
+        "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/269ecd9782b51c431b9e330a05c022fdc047ec15"
+      }
+    ]
+  },
+  {
+    "sha": "269ecd9782b51c431b9e330a05c022fdc047ec15",
+    "node_id": "C_kwDOFYWjXtoAKDI2OWVjZDk3ODJiNTFjNDMxYjllMzMwYTA1YzAyMmZkYzA0N2VjMTU",
+    "commit": {
+      "author": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-08T18:29:50Z"
+      },
+      "committer": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-08T18:29:50Z"
+      },
+      "message": "Convert format strings to inline syntax.",
+      "tree": {
+        "sha": "2953e09d9687723ad40963d2efcfe04c55368dae",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/trees/2953e09d9687723ad40963d2efcfe04c55368dae"
+      },
+      "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/commits/269ecd9782b51c431b9e330a05c022fdc047ec15",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/269ecd9782b51c431b9e330a05c022fdc047ec15",
+    "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/269ecd9782b51c431b9e330a05c022fdc047ec15",
+    "comments_url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/269ecd9782b51c431b9e330a05c022fdc047ec15/comments",
+    "author": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "89ad5d4bd1bc278b6377e7942a618e06c5a8fba7",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/89ad5d4bd1bc278b6377e7942a618e06c5a8fba7",
+        "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/89ad5d4bd1bc278b6377e7942a618e06c5a8fba7"
+      }
+    ]
+  },
+  {
+    "sha": "89ad5d4bd1bc278b6377e7942a618e06c5a8fba7",
+    "node_id": "C_kwDOFYWjXtoAKDg5YWQ1ZDRiZDFiYzI3OGI2Mzc3ZTc5NDJhNjE4ZTA2YzVhOGZiYTc",
+    "commit": {
+      "author": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-08T18:04:57Z"
+      },
+      "committer": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-07-08T18:04:57Z"
+      },
+      "message": "Add --relative-number flag for displaying relative line numbers.",
+      "tree": {
+        "sha": "ad39e90081191b5d31447b342bdf63eecb0420e3",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/trees/ad39e90081191b5d31447b342bdf63eecb0420e3"
+      },
+      "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/commits/89ad5d4bd1bc278b6377e7942a618e06c5a8fba7",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/89ad5d4bd1bc278b6377e7942a618e06c5a8fba7",
+    "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/89ad5d4bd1bc278b6377e7942a618e06c5a8fba7",
+    "comments_url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/89ad5d4bd1bc278b6377e7942a618e06c5a8fba7/comments",
+    "author": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "60b5f1b89f87c4c985c9843d7bd181e5d6337031",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/60b5f1b89f87c4c985c9843d7bd181e5d6337031",
+        "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/60b5f1b89f87c4c985c9843d7bd181e5d6337031"
+      }
+    ]
+  },
+  {
+    "sha": "60b5f1b89f87c4c985c9843d7bd181e5d6337031",
+    "node_id": "C_kwDOFYWjXtoAKDYwYjVmMWI4OWY4N2M0Yzk4NWM5ODQzZDdiZDE4MWU1ZDYzMzcwMzE",
+    "commit": {
+      "author": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-06-29T01:50:43Z"
+      },
+      "committer": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-06-30T03:51:55Z"
+      },
+      "message": "Add support for absolute line-numbers via the --numbers flag.",
+      "tree": {
+        "sha": "5e178ad87ca8fbd84da9c05fb696df581cbd4400",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/trees/5e178ad87ca8fbd84da9c05fb696df581cbd4400"
+      },
+      "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/commits/60b5f1b89f87c4c985c9843d7bd181e5d6337031",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/60b5f1b89f87c4c985c9843d7bd181e5d6337031",
+    "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/60b5f1b89f87c4c985c9843d7bd181e5d6337031",
+    "comments_url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/60b5f1b89f87c4c985c9843d7bd181e5d6337031/comments",
+    "author": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "6ee59ddd8b23fc9d423324def859a531c6165cd5",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/6ee59ddd8b23fc9d423324def859a531c6165cd5",
+        "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/6ee59ddd8b23fc9d423324def859a531c6165cd5"
+      }
+    ]
+  },
+  {
+    "sha": "6ee59ddd8b23fc9d423324def859a531c6165cd5",
+    "node_id": "C_kwDOFYWjXtoAKDZlZTU5ZGRkOGIyM2ZjOWQ0MjMzMjRkZWY4NTlhNTMxYzYxNjVjZDU",
+    "commit": {
+      "author": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-06-30T02:25:19Z"
+      },
+      "committer": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-06-30T02:25:19Z"
+      },
+      "message": "Print spaces for indendation rather than computing column numbers and positioning the cursor; it should make printing line numbers easier.",
+      "tree": {
+        "sha": "f9321c391d88504dab5aec374a1bf1923ce4d73d",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/trees/f9321c391d88504dab5aec374a1bf1923ce4d73d"
+      },
+      "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/commits/6ee59ddd8b23fc9d423324def859a531c6165cd5",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/6ee59ddd8b23fc9d423324def859a531c6165cd5",
+    "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/6ee59ddd8b23fc9d423324def859a531c6165cd5",
+    "comments_url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/6ee59ddd8b23fc9d423324def859a531c6165cd5/comments",
+    "author": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "161ef23027dd3c33024101c722b04109c8077acb",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/161ef23027dd3c33024101c722b04109c8077acb",
+        "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/161ef23027dd3c33024101c722b04109c8077acb"
+      }
+    ]
+  },
+  {
+    "sha": "161ef23027dd3c33024101c722b04109c8077acb",
+    "node_id": "C_kwDOFYWjXtoAKDE2MWVmMjMwMjdkZDNjMzMwMjQxMDFjNzIyYjA0MTA5YzgwNzdhY2I",
+    "commit": {
+      "author": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-06-29T02:12:24Z"
+      },
+      "committer": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-06-29T02:12:24Z"
+      },
+      "message": "Emit clear line escape codes before the content for each line, rather than one clear screen code. Empirically this partially reduces (but does not fully eliminate) screen flashes when scrolling.",
+      "tree": {
+        "sha": "f27da2bfd245fd0bf1a73c7c8a2c501192123c47",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/trees/f27da2bfd245fd0bf1a73c7c8a2c501192123c47"
+      },
+      "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/commits/161ef23027dd3c33024101c722b04109c8077acb",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/161ef23027dd3c33024101c722b04109c8077acb",
+    "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/161ef23027dd3c33024101c722b04109c8077acb",
+    "comments_url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/161ef23027dd3c33024101c722b04109c8077acb/comments",
+    "author": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "37b0ab3b8ad37000e48e47b9821d918fce2eadf1",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/37b0ab3b8ad37000e48e47b9821d918fce2eadf1",
+        "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/37b0ab3b8ad37000e48e47b9821d918fce2eadf1"
+      }
+    ]
+  },
+  {
+    "sha": "37b0ab3b8ad37000e48e47b9821d918fce2eadf1",
+    "node_id": "C_kwDOFYWjXtoAKDM3YjBhYjNiOGFkMzcwMDBlNDhlNDdiOTgyMWQ5MThmY2UyZWFkZjE",
+    "commit": {
+      "author": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-06-25T19:50:48Z"
+      },
+      "committer": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-06-25T19:50:48Z"
+      },
+      "message": "Continue to highlight search matches after expanding container with matches.",
+      "tree": {
+        "sha": "107ae17e12983a79bcf163a43e5962aa8f99c28b",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/trees/107ae17e12983a79bcf163a43e5962aa8f99c28b"
+      },
+      "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/commits/37b0ab3b8ad37000e48e47b9821d918fce2eadf1",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/37b0ab3b8ad37000e48e47b9821d918fce2eadf1",
+    "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/37b0ab3b8ad37000e48e47b9821d918fce2eadf1",
+    "comments_url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/37b0ab3b8ad37000e48e47b9821d918fce2eadf1/comments",
+    "author": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "84e35a090e4ef9ff18de4a439bf8f592b9650323",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/84e35a090e4ef9ff18de4a439bf8f592b9650323",
+        "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/84e35a090e4ef9ff18de4a439bf8f592b9650323"
+      }
+    ]
+  },
+  {
+    "sha": "84e35a090e4ef9ff18de4a439bf8f592b9650323",
+    "node_id": "C_kwDOFYWjXtoAKDg0ZTM1YTA5MGU0ZWY5ZmYxOGRlNGE0MzliZjhmNTkyYjk2NTAzMjM",
+    "commit": {
+      "author": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-06-25T19:37:41Z"
+      },
+      "committer": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-06-25T19:37:41Z"
+      },
+      "message": "After expanding container with a search match, properly jump inside container when hitting 'n'.",
+      "tree": {
+        "sha": "bb9b6c3e118dd4b779c65a205c8c8d6daf8bd273",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/trees/bb9b6c3e118dd4b779c65a205c8c8d6daf8bd273"
+      },
+      "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/commits/84e35a090e4ef9ff18de4a439bf8f592b9650323",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/84e35a090e4ef9ff18de4a439bf8f592b9650323",
+    "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/84e35a090e4ef9ff18de4a439bf8f592b9650323",
+    "comments_url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/84e35a090e4ef9ff18de4a439bf8f592b9650323/comments",
+    "author": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "d780f61cbac54e13adb75221822e415004b46cb6",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/d780f61cbac54e13adb75221822e415004b46cb6",
+        "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/d780f61cbac54e13adb75221822e415004b46cb6"
+      }
+    ]
+  },
+  {
+    "sha": "d780f61cbac54e13adb75221822e415004b46cb6",
+    "node_id": "C_kwDOFYWjXtoAKGQ3ODBmNjFjYmFjNTRlMTNhZGI3NTIyMTgyMmU0MTUwMDRiNDZjYjY",
+    "commit": {
+      "author": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-06-25T18:51:50Z"
+      },
+      "committer": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-06-25T18:51:50Z"
+      },
+      "message": "Don't emphasize the currently focused search match in container previews because it's confusing and/or misleading.",
+      "tree": {
+        "sha": "37a13d3b5076b34c6e21edea8b998d818d4ef995",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/trees/37a13d3b5076b34c6e21edea8b998d818d4ef995"
+      },
+      "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/commits/d780f61cbac54e13adb75221822e415004b46cb6",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/d780f61cbac54e13adb75221822e415004b46cb6",
+    "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/d780f61cbac54e13adb75221822e415004b46cb6",
+    "comments_url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/d780f61cbac54e13adb75221822e415004b46cb6/comments",
+    "author": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "0ce3dac91f20e5a07e1bf18cd22c5434a4093570",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/0ce3dac91f20e5a07e1bf18cd22c5434a4093570",
+        "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/0ce3dac91f20e5a07e1bf18cd22c5434a4093570"
+      }
+    ]
+  },
+  {
+    "sha": "0ce3dac91f20e5a07e1bf18cd22c5434a4093570",
+    "node_id": "C_kwDOFYWjXtoAKDBjZTNkYWM5MWYyMGU1YTA3ZTFiZjE4Y2QyMmM1NDM0YTQwOTM1NzA",
+    "commit": {
+      "author": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-06-25T15:53:26Z"
+      },
+      "committer": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-06-25T15:53:26Z"
+      },
+      "message": "Add p commands, analagous to y commands, to print values.",
+      "tree": {
+        "sha": "e7b5780ed6a50da877a80fe0e7c5ade508c3d734",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/trees/e7b5780ed6a50da877a80fe0e7c5ade508c3d734"
+      },
+      "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/commits/0ce3dac91f20e5a07e1bf18cd22c5434a4093570",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/0ce3dac91f20e5a07e1bf18cd22c5434a4093570",
+    "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/0ce3dac91f20e5a07e1bf18cd22c5434a4093570",
+    "comments_url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/0ce3dac91f20e5a07e1bf18cd22c5434a4093570/comments",
+    "author": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "cf8f1e8eabfa1739121991a7514b9da61c4f7675",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/cf8f1e8eabfa1739121991a7514b9da61c4f7675",
+        "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/cf8f1e8eabfa1739121991a7514b9da61c4f7675"
+      }
+    ]
+  },
+  {
+    "sha": "cf8f1e8eabfa1739121991a7514b9da61c4f7675",
+    "node_id": "C_kwDOFYWjXtoAKGNmOGYxZThlYWJmYTE3MzkxMjE5OTFhNzUxNGI5ZGE2MWM0Zjc2NzU",
+    "commit": {
+      "author": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-05-29T18:05:11Z"
+      },
+      "committer": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-05-29T18:05:11Z"
+      },
+      "message": "Show container sizes before previews; update MSRV to 1.67.",
+      "tree": {
+        "sha": "fc5782efa9909269c772e466d1b14912d8fa8c21",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/trees/fc5782efa9909269c772e466d1b14912d8fa8c21"
+      },
+      "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/commits/cf8f1e8eabfa1739121991a7514b9da61c4f7675",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/cf8f1e8eabfa1739121991a7514b9da61c4f7675",
+    "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/cf8f1e8eabfa1739121991a7514b9da61c4f7675",
+    "comments_url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/cf8f1e8eabfa1739121991a7514b9da61c4f7675/comments",
+    "author": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "3d92f030eeedb898a7446a68e4a025940ea7336a",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/3d92f030eeedb898a7446a68e4a025940ea7336a",
+        "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/3d92f030eeedb898a7446a68e4a025940ea7336a"
+      }
+    ]
+  },
+  {
+    "sha": "3d92f030eeedb898a7446a68e4a025940ea7336a",
+    "node_id": "C_kwDOFYWjXtoAKDNkOTJmMDMwZWVlZGI4OThhNzQ0NmE2OGU0YTAyNTk0MGVhNzMzNmE",
+    "commit": {
+      "author": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-05-28T17:00:37Z"
+      },
+      "committer": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-05-28T17:00:37Z"
+      },
+      "message": "Keep control characters escaped for ys command.",
+      "tree": {
+        "sha": "c945a2d174a666fa5b3729a9b380cfa7b381cbba",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/trees/c945a2d174a666fa5b3729a9b380cfa7b381cbba"
+      },
+      "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/commits/3d92f030eeedb898a7446a68e4a025940ea7336a",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/3d92f030eeedb898a7446a68e4a025940ea7336a",
+    "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/3d92f030eeedb898a7446a68e4a025940ea7336a",
+    "comments_url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/3d92f030eeedb898a7446a68e4a025940ea7336a/comments",
+    "author": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "1cc7794f5ae731b7c882014e67ee39fa07b94457",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/1cc7794f5ae731b7c882014e67ee39fa07b94457",
+        "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/1cc7794f5ae731b7c882014e67ee39fa07b94457"
+      }
+    ]
+  },
+  {
+    "sha": "1cc7794f5ae731b7c882014e67ee39fa07b94457",
+    "node_id": "C_kwDOFYWjXtoAKDFjYzc3OTRmNWFlNzMxYjdjODgyMDE0ZTY3ZWUzOWZhMDdiOTQ0NTc",
+    "commit": {
+      "author": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-05-28T02:56:56Z"
+      },
+      "committer": {
+        "name": "Paul Julius Martinez",
+        "email": "pauljuliusmartinez@gmail.com",
+        "date": "2023-05-28T02:56:56Z"
+      },
+      "message": "Add ys command to copy unescaped string values to the clipboard.",
+      "tree": {
+        "sha": "13ebc71925f1d36a85b1fa49278a3835868f97c4",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/trees/13ebc71925f1d36a85b1fa49278a3835868f97c4"
+      },
+      "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/git/commits/1cc7794f5ae731b7c882014e67ee39fa07b94457",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/1cc7794f5ae731b7c882014e67ee39fa07b94457",
+    "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/1cc7794f5ae731b7c882014e67ee39fa07b94457",
+    "comments_url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/1cc7794f5ae731b7c882014e67ee39fa07b94457/comments",
+    "author": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "PaulJuliusMartinez",
+      "id": 3301004,
+      "node_id": "MDQ6VXNlcjMzMDEwMDQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3301004?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PaulJuliusMartinez",
+      "html_url": "https://github.com/PaulJuliusMartinez",
+      "followers_url": "https://api.github.com/users/PaulJuliusMartinez/followers",
+      "following_url": "https://api.github.com/users/PaulJuliusMartinez/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PaulJuliusMartinez/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PaulJuliusMartinez/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PaulJuliusMartinez/subscriptions",
+      "organizations_url": "https://api.github.com/users/PaulJuliusMartinez/orgs",
+      "repos_url": "https://api.github.com/users/PaulJuliusMartinez/repos",
+      "events_url": "https://api.github.com/users/PaulJuliusMartinez/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PaulJuliusMartinez/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "3aa059913395462405407c762e448868bea8d465",
+        "url": "https://api.github.com/repos/PaulJuliusMartinez/jless/commits/3aa059913395462405407c762e448868bea8d465",
+        "html_url": "https://github.com/PaulJuliusMartinez/jless/commit/3aa059913395462405407c762e448868bea8d465"
+      }
+    ]
+  }
+]
