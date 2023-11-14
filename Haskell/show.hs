@@ -293,5 +293,52 @@ isRight x y z
   | x ^ 2 + y ^ 2 == z ^ 2 = "RIGHT!"
   | otherwise = "Wrong!"
 
+avgGrade x
+  | y >= 0.7 = 'C'
+  | y >= 0.9 = 'A'
+  | y >= 0.8 = 'B'
+  | y >= 0.59 = 'D'
+  | y < 0.59 = 'F'
+ where
+  y = x / 100
 
+pal''' xs
+  | xs == reverse xs = True
+  | otherwise = False
 
+numbers x
+  | x < 0 = -1
+  | x == 0 = 0
+  | x > 0 = 1
+
+-- Point free style
+add :: Int -> Int -> Int
+add x y = x + y
+
+addPF = (+)
+
+addOne = \x -> x + 1
+
+addOnePF = (+ 1)
+
+printAddOne :: IO ()
+printAddOne = do
+  print (0 :: Int) -- 0
+  print (add 1 0) -- 1
+  print (addOne 0) -- 1
+  print (addOnePF 0) -- 1
+  print ((addOne . addOne) 0) -- 2
+  print ((addOnePF . addOne) 0) -- 2
+  print ((addOne . addOnePF) 0) -- 2
+  print ((addOnePF . addOnePF) 0) -- 2
+  print (negate (addOne 0)) -- -1
+  print ((negate . addOne) 0) -- -1
+  print
+    ( ( addOne -- 2
+          . addOne -- 1
+          . addOne -- 0
+          . negate -- -1
+          . addOne -- 1
+      )
+        0
+    )
