@@ -342,3 +342,6 @@ printAddOne = do
       )
         0
     )
+
+f0' :: (Ord a) => a -> a -> Bool
+f0' = undefined
