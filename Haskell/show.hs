@@ -1,5 +1,6 @@
 module Show where
 
+import Control.Monad
 import Data.List (sort)
 
 data Mood = Blah
