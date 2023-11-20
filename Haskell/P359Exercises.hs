@@ -1,6 +1,6 @@
 import Data.Char (digitToInt)
 import Data.Function (on)
-import Data.List (intersperse)
+import Data.List (intersperse, intercalate)
 import GHC.Natural (wordToNatural)
 import System.Posix (undl)
 
@@ -139,7 +139,9 @@ mc91 x
   | otherwise = 91
 
 wordNumber :: (Integral a) => a -> String
-wordNumber x = intersperse "-" (map digitToWord (digits x))
+wordNumber x = intercalate "-" numberList
+ where
+  numberList = map digitToWord (digits x)
 
 digits :: (Integral a) => a -> [a]
 digits x = go x []
