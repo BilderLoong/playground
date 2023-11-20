@@ -139,7 +139,7 @@ mc91 x
   | otherwise = 91
 
 wordNumber :: (Integral a) => a -> String
-wordNumber x = intersperse '-' (map digitToWord (digits x))
+wordNumber x = intersperse "-" (map digitToWord (digits x))
 
 digits :: (Integral a) => a -> [a]
 digits x = go x []
