@@ -35,23 +35,22 @@ eftChar from to
   | from > to = []
   | otherwise = from : eftChar (succ from) to
 
--- myWords :: String -> [String]
--- myWords "" = []
--- myWords str = word : myWords rest
---  where
---   word = takeWhile (/= ' ') str
---   rest = dropWhile (== ' ') str
-
+myWord's :: String -> [String]
+myWord's "" = []
+myWord's str = word : myWord's rest
+ where
+  word = takeWhile (/= ' ') str
+  rest = dropWhile (== ' ') str
 
 myWords :: String -> [String]
-myWords "" = []  -- Base case: empty string returns an empty list
+myWords "" = [] -- Base case: empty string returns an empty list
 myWords str
-  | noLeadingSpaces == "" = []  -- Termination condition: if the remaining string is empty, return an empty list
+  | noLeadingSpaces == "" = [] -- Termination condition: if the remaining string is empty, return an empty list
   | otherwise = word : myWords rest
-  where
-    -- Drop leading spaces
-    noLeadingSpaces = dropWhile (== ' ') str
-    -- Take characters until the next space
-    word = takeWhile (/= ' ') noLeadingSpaces
-    -- Drop the word and the trailing spaces, if any
-    rest = dropWhile (== ' ') (dropWhile (/= ' ') noLeadingSpaces)
+ where
+  -- Drop leading spaces
+  noLeadingSpaces = dropWhile (== ' ') str
+  -- Take characters until the next space
+  word = takeWhile (/= ' ') noLeadingSpaces
+  -- Drop the word and the trailing spaces, if any
+  rest = dropWhile (== ' ') . dropWhile (/= ' ') $ noLeadingSpaces
