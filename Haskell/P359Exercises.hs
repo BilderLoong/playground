@@ -1,8 +1,6 @@
 import Data.Char (digitToInt)
 import Data.Function (on)
-import Data.List (intersperse, intercalate)
-import GHC.Natural (wordToNatural)
-import System.Posix (undl)
+import Data.List (intercalate, intersperse)
 
 k :: (x, y) -> x
 k (x, y) = x
@@ -162,3 +160,21 @@ digitToWord x = case x of
   8 -> "eight"
   9 -> "nine"
   _ -> "Invalid digit"
+
+mySqr = [x ^ 2 | x <- [1 .. 19]]
+myEvenSqr = [x ^ 2 | x <- [1 .. 19], rem x 2 == 0]
+mySqr' = [(x, y) | x <- mySqr, y <- mySqr, x < 50, y > 50]
+
+acro xs = [x | x <- xs, elem x ['A' .. 'Z']]
+
+mySqr0 = [x ^ 2 | x <- [1 .. 5]]
+myCube = [y ^ 3 | y <- [1 .. 5]]
+
+myLCTuple = [(x, y) | x <- mySqr0, y <- myCube]
+myLCTuple' = [(x, y) | x <- mySqr0, y <- myCube, x < 50 && y < 50]
+
+listLength = count 0
+ where
+  count :: Integer -> [a] -> Integer
+  count acc [] = acc
+  count acc (_ : xs) = count (acc + 1) xs
