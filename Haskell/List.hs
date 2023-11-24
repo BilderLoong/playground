@@ -1,3 +1,5 @@
+import Data.Bool
+
 myTail :: [a] -> Maybe [a]
 myTail [] = Nothing
 myTail (_ : xs) = Just xs
@@ -92,3 +94,31 @@ mySplit str del
   noLeadingDelStr = dropWhile (== del) str
   item = takeWhile (/= del) noLeadingDelStr
   restStr = dropWhile (/= del) noLeadingDelStr
+
+funcWithTypeClass :: (Functor n) => n a -> n b -> (n a, n b)
+funcWithTypeClass = undefined
+
+-- funcWithTypeClass' :: (Num n) => n a -> n b -> (n a, n b)
+-- funcWithTypeClass' = undefined
+itIsMystery = map (`elem` "aeiou")
+
+getMultiples3Len = length . filter (\x -> rem x 3 == 0)
+
+removeArticles = filter isNotArticle . words
+ where
+  isNotArticle x = x /= "the" && x /= "a" && x /= "an"
+
+zip' :: [a] -> [b] -> [(a, b)]
+zip' = zipWith (,)
+
+mZip :: [a] -> [b] -> [(a, b)]
+mZip [] _ = []
+mZip _ [] = []
+mZip (x : xs) (y : ys) = (x, y) : mZip xs ys
+
+mZipWith :: (a -> b -> c) -> [a] -> [b] -> [c]
+mZipWith _ [] _ = []
+mZipWith _ _ [] = []
+mZipWith f (x : xs) (y : ys) = f x y : mZipWith f xs ys
+
+mZip' = mZipWith (,)
