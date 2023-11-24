@@ -1,4 +1,5 @@
 import Data.Bool
+import Data.Char
 
 myTail :: [a] -> Maybe [a]
 myTail [] = Nothing
@@ -122,3 +123,8 @@ mZipWith _ _ [] = []
 mZipWith f (x : xs) (y : ys) = f x y : mZipWith f xs ys
 
 mZip' = mZipWith (,)
+
+filterOutUpper = filter isUpper
+
+captializeWord "" = ""
+captializeWord (c : cs) = toUpper c : cs
