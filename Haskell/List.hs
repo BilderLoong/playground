@@ -126,5 +126,12 @@ mZip' = mZipWith (,)
 
 filterOutUpper = filter isUpper
 
-captializeWord "" = ""
-captializeWord (c : cs) = toUpper c : cs
+captializeChar "" = ""
+captializeChar (c : cs) = toUpper c : captializeChar cs
+
+captialize1stChar "" = ""
+captialize1stChar (c : cs) = toUpper c : cs
+
+getFirstCaptializedChar :: String -> Maybe Char
+getFirstCaptializedChar "" = Nothing
+getFirstCaptializedChar s = Just $ head . captialize1stChar $ s
