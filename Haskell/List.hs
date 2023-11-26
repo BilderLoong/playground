@@ -135,3 +135,4 @@ captialize1stChar (c : cs) = toUpper c : cs
 getFirstCaptializedChar :: String -> Maybe Char
 getFirstCaptializedChar "" = Nothing
 getFirstCaptializedChar s = Just $ head . captialize1stChar $ s
+
