@@ -1,0 +1,11 @@
+{
+  "name": "server",
+  "private": "true",
+  "scripts": {
+    "start": "bun ./index.ts"
+  },
+  "dependencies": {
+    "@types/ws": "^8.5.8",
+    "ws": "^8.14.2"
+  }
+}
