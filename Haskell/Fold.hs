@@ -103,3 +103,23 @@ g = foldr (\_ x -> x) 0 "tacos"
 
 h = foldl const 0 "burritos"
 i = foldl const 'z' [1 .. 5]
+
+fibs' = take 20 (1 : scanl (+) 1 fibs)
+fibs1 = takeWhile (< 100) (1 : scanl (+) 1 fibs)
+
+factorial = 1 : scanl (*) 1 factorial
+
+
+
+fibs = 1 : scanl (+) 1 fibs
+fibs = 1 : scanl (+) 1 fibs 
+  = 1 : scanl (+) 1 (1 : scanl (+) 1 fibs)
+  = 1 : 1 : scanl (+) (1 + 1) (scanl (+) 1 fibs)
+  = 1 : 1 : scanl (+) 2 (scanl (+) 1 fibs)
+  = 1 : 1 : scanl (+) 2 ()
+
+scanl (+) 1 [1,2,3] 
+  == 1 : scanl (+) (1 + 1) [2,3] 
+  == 1 : 2 : scanl (+) 4 [3]
+  == 1 : 2 : 4 : scanl (+) 7 []
+  == 1 : 2 : 4 : 7 : []
