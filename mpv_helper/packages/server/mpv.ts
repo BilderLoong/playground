@@ -13,3 +13,7 @@ import Mpv from "mpv";
 
   mpv.command("srcipt-mesasge");
 })();
+const socket = await startMpv({
+  videoPath:
+    "fixtures/sample.mp3",
+});
