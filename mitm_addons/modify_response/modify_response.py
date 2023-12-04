@@ -38,10 +38,11 @@ MOCKED_API_PATH_TYPE = (
     | Literal["couponUseInfo"]
     | Literal["postOrder"]
     | Literal["login"]
+    | Literal["list"]
 )
 
 # The part of the  api path aim to replace.
-MODIFIED_API_PATHS: list[MOCKED_API_PATH_TYPE] = ["pageSpuInfo", "queryDishMoreInfo"]
+MODIFIED_API_PATHS: list[MOCKED_API_PATH_TYPE] = ["list"]
 
 # def request(flow):
 #     ctx.log.info(flow.request.get_text())
@@ -62,7 +63,7 @@ def response(flow):
     if not any([i in flow.request.url for i in MODIFIED_API_PATHS]):
         return
 
-    # replace_response_body(flow)
+    replace_response_body(flow)
     # modify_response_body(flow)
 
 
