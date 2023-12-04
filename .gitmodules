@@ -4,3 +4,6 @@
 [submodule "mpv_helper/mpv_helper/packages/mpv"]
 	path = mpv_helper/mpv_helper/packages/mpv
 	url = git@github.com:BilderLoong/mpv.git
+[submodule "mpv_helper/packages/mpv"]
+	path = mpv_helper/packages/mpv
+	url = git@github.com:BilderLoong/mpv.git
