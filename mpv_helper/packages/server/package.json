@@ -6,7 +6,11 @@
   },
   "dependencies": {
     "@types/ws": "^8.5.8",
-    "ws": "^8.14.2",
-    "mpv": "^1.0.0"
+    "mpv": "^2.0.1",
+    "ws": "^8.14.2"
+  },
+  "devDependencies": {
+    "esbuild": "^0.19.8",
+    "esbuild-register": "^3.5.0"
   }
 }
