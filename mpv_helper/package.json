@@ -6,9 +6,12 @@
     "packages/*"
   ],
   "devDependencies": {
-    "bun-types": "latest"
+    "bun-types": "latest",
+    "esbuild": "^0.19.8",
+    "esbuild-register": "^3.5.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
-  }
+  },
+  "dependencies": {}
 }
