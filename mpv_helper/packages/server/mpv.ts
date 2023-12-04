@@ -13,9 +13,3 @@ import Mpv from "mpv";
 
   mpv.command("srcipt-mesasge");
 })();
-
-const mpv = Mpv({
-  args: [], // Arguments to child_process.spawn,
-  options: {}, // Options to child_process.spawn,
-  path: "mpv", // Path of mpv (defaults to mpv or mpv.exe in path or cwd)
-});
