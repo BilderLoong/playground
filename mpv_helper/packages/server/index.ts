@@ -1,35 +1,37 @@
 import Mpv from "mpv";
+import { WebSocketServer } from "ws";
 
 (async function () {
   const mpv = await Mpv({
     path: "mpv",
     args: [
-      "--audio-display=no",
+      // "--audio-display=no",
       // "--no-video",
-      // "--no-audio",
+      "--no-audio",
       "--window-minimized=yes",
     ],
   });
 
-  mpv.command(
+  await mpv.command(
     "loadfile",
     "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+    // "https://gotranscript.com/samples/captions-example.srt",
   );
 
-  // Bun.serve({
-  //   port: 8000,
-  //   fetch(req, server) {
-  //     // upgrade the request to a WebSocket
-  //     if (server.upgrade(req)) {
-  //       return; // do not return a Response
-  //     }
-  //     return new Response("Bun!");
-  //   },
-  //
-  //   websocket: {
-  //     message(ws, message) {},
-  //     open(ws) {},
-  //     drain(ws) {},
-  //   },
-  // });
+  // await mpv.command(
+  //   "sub-add",
+  //   "https://gotranscript.com/samples/captions-example.srt",
+  // );
+
+  const wss = new WebSocketServer({ port: 8080 });
+
+  wss.on("connection", function connection(ws) {
+    ws.on("error", console.error);
+
+    ws.on("message", function message(data) {
+      console.log("received: %s", data);
+    });
+
+    ws.send("something");
+  });
 })();

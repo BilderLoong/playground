@@ -15,10 +15,6 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
-    // "typingRoots": ["./packages/server/types"],
-    "types": [
-      "bun-types", // add Bun global
-      "ws"
-    ]
+    "types": ["ws"]
   }
 }
