@@ -1,5 +1,7 @@
 import Mpv from "mpv";
 import { WebSocketServer } from "ws";
+import { IncommingMessage, keyMessage, incommingMessage } from "./protocols/ws";
+import { match, P } from "ts-pattern";
 
 (async function () {
   const mpv = await Mpv({
@@ -31,8 +33,22 @@ import { WebSocketServer } from "ws";
 
     ws.on("message", function message(data) {
       console.log("received: %s", data);
+      messageDispatcher(data.toString());
     });
 
     ws.send("something");
   });
 })();
+
+function messageDispatcher(wsMsg: string) {
+  const pareseRes = incommingMessage.safeParse(wsMsg);
+  if (!pareseRes.success) {
+    return {
+      message: `Unsupport message: ${wsMsg}`,
+    };
+  }
+
+  const { command } = pareseRes.data;
+  // WIP continue here
+  // match
+}
