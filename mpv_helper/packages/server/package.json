@@ -1,6 +1,9 @@
 {
   "name": "server",
   "private": "true",
+  "files": [
+    "./protocols/*"
+  ],
   "scripts": {
     "start": "node -r esbuild-register ./index.ts"
   },
