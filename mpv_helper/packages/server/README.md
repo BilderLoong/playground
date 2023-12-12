@@ -14,7 +14,11 @@ echo '{ "command": ["script-message", "mpvacious-copy-sub-to-clipboard"] }' | so
 echo '{ "command": ["sub-add", "https://gotranscript.com/samples/captions-example.srt"] }' | socat - /tmp/mpv
 
 echo '{"request_id":3,"command":["srcipt-mesasge","mpvacious-sub-seek-forward"]}' | socat - /tmp/mpv
+
 echo '{"command":["srcipt-mesasge","mpvacious-sub-seek-forward"]}' | socat - /tmp/mpv
 
+
+echo '{"command":["loadfile", "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"]}' | socat - /tmp/mpv &
+echo '{"command":["sub-add", "https://gotranscript.com/samples/captions-example.srt"]}' | socat - /tmp/mpv 
 
 ```

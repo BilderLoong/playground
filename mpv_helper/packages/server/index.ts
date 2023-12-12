@@ -6,7 +6,6 @@ import { resolve } from "node:path";
 
 (async function () {
   const MPVAZIOUS_PATH = resolve("../mpvacious/");
-  console.log(MPVAZIOUS_PATH);
   const mpv = await Mpv({
     path: "mpv",
     args: [
@@ -18,20 +17,26 @@ import { resolve } from "node:path";
     ],
   });
 
-  await mpv.command(
+  mpv.command(
     "loadfile",
     "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
   );
 
-  // await mpv.command(
-  //   "sub-add",
-  //   "https://gotranscript.com/samples/captions-example.srt",
-  // );
+  mpv.on("file-loaded", () => {
+    mpv.command(
+      "sub-add",
+      "https://gotranscript.com/samples/captions-example.srt",
+      // resolve("./test.srt"),
+    );
+  });
+
+  mpv.on("shutdown", () => {
+    console.log("mpv shutdowned.");
+  });
 
   const wss = new WebSocketServer({ port: 8080 });
 
   wss.on("connection", function connection(ws) {
-    console.log("new connection.");
     ws.on("error", console.error);
 
     ws.on("message", function message(data) {
