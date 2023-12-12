@@ -2,8 +2,11 @@ import Mpv from "mpv";
 import { WebSocketServer } from "ws";
 import { incommingMessage, Command } from "./protocols/ws";
 import { match, P } from "ts-pattern";
+import { resolve } from "node:path";
 
 (async function () {
+  const MPVAZIOUS_PATH = resolve("../mpvacious/");
+  console.log(MPVAZIOUS_PATH);
   const mpv = await Mpv({
     path: "mpv",
     args: [
@@ -11,6 +14,7 @@ import { match, P } from "ts-pattern";
       // "--no-video",
       "--no-audio",
       "--window-minimized=yes",
+      // `--script=${MPVAZIOUS_PATH}`,
     ],
   });
 
@@ -49,6 +53,9 @@ import { match, P } from "ts-pattern";
         match(key)
           .with("j", async (key) => {
             await mpv.command("script-message", "mpvacious-sub-seek-forward");
+          })
+          .with("k", async (key) => {
+            await mpv.command("script-message", "mpvacious-sub-seek-back");
           })
           .with("c", async (key) => {
             await mpv.command(
