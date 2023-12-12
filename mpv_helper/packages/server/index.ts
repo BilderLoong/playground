@@ -1,13 +1,7 @@
 import Mpv from "mpv";
 import { WebSocketServer } from "ws";
-import {
-  IncommingMessage,
-  keyMessage,
-  incommingMessage,
-  Command,
-} from "./protocols/ws";
+import { incommingMessage, Command } from "./protocols/ws";
 import { match, P } from "ts-pattern";
-import { createLanguageService } from "typescript";
 
 (async function () {
   const mpv = await Mpv({
@@ -20,15 +14,15 @@ import { createLanguageService } from "typescript";
     ],
   });
 
-  // await mpv.command(
-  //   "loadfile",
-  //   "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-  // );
+  await mpv.command(
+    "loadfile",
+    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+  );
 
-  // await mpv.command(
-  //   "sub-add",
-  //   "https://gotranscript.com/samples/captions-example.srt",
-  // );
+  await mpv.command(
+    "sub-add",
+    "https://gotranscript.com/samples/captions-example.srt",
+  );
 
   const wss = new WebSocketServer({ port: 8080 });
 
@@ -39,23 +33,30 @@ import { createLanguageService } from "typescript";
     ws.on("message", function message(data) {
       messageDispatcher(data.toString());
     });
-
-    ws.send("something");
   });
-})();
 
-function messageDispatcher(wsMsg: string) {
-  const pareseMsg = incommingMessage.safeParse(JSON.parse(wsMsg));
-  if (!pareseMsg.success) {
-    return {
-      message: `Unsupport message: ${wsMsg}`,
-    };
+  function messageDispatcher(wsMsg: string) {
+    const pareseMsg = incommingMessage.safeParse(JSON.parse(wsMsg));
+    if (!pareseMsg.success) {
+      return {
+        message: `Unsupport message: ${wsMsg}`,
+      };
+    }
+
+    match(pareseMsg.data).with(
+      { command: Command.key, data: { key: P.select("key") } },
+      ({ key }) => {
+        match(key)
+          .with("j", async (key) => {
+            await mpv.command("script-message", "mpvacious-sub-seek-forward");
+          })
+          .with("c", async (key) => {
+            await mpv.command(
+              "script-message",
+              "mpvacious-copy-sub-to-clipboard",
+            );
+          });
+      },
+    );
   }
-
-  match(pareseMsg.data).with(
-    { command: Command.key, data: { key: P._ } },
-    (key) => {
-      console.log({ key });
-    },
-  );
-}
+})();

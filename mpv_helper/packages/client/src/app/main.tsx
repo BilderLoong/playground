@@ -10,9 +10,6 @@ export const Main = (props: {}) => {
 
     const ws = new WebSocket(WS_ADDRESS);
     wsRef.current = ws;
-    const handleKeydown = (event: KeyboardEvent) => {
-      ws.send(keyMessageFactory(event.key));
-    };
 
     document.addEventListener("keydown", handleKeydown);
 
@@ -21,6 +18,10 @@ export const Main = (props: {}) => {
       document.removeEventListener("keydown", handleKeydown);
     };
   }, []);
+
+  const handleKeydown = (event: KeyboardEvent) => {
+    wsRef.current?.send(keyMessageFactory(event.key));
+  };
 
   return <div>Click some key.</div>;
 };
@@ -34,18 +35,4 @@ function keyMessageFactory(key: string) {
       },
     }),
   );
-}
-
-function keepConnect(
-  address: string,
-  ref: React.MutableRefObject<WebSocket | undefined>,
-): React.MutableRefObject<WebSocket | undefined> {
-  const ws = new WebSocket(address);
-  ref.current = ws;
-  // ws.onclose = function (ev) {
-  //   const { code } = ev;
-  //   console.log("WebSocket connection closed with: ", ev);
-  //   setTimeout(() => keepConnect(address, ref), 100);
-  // };
-  return ref;
 }

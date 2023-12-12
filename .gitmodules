@@ -7,3 +7,6 @@
 [submodule "submodule_test"]
 	path = submodule_test
 	url = git@github.com:BilderLoong/mpv.git
+[submodule "mpv_helper/packages/mpvacious"]
+	path = mpv_helper/packages/mpvacious
+	url = git@github.com:Ajatt-Tools/mpvacious.git
