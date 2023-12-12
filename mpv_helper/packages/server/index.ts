@@ -23,10 +23,10 @@ import { resolve } from "node:path";
     "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
   );
 
-  await mpv.command(
-    "sub-add",
-    "https://gotranscript.com/samples/captions-example.srt",
-  );
+  // await mpv.command(
+  //   "sub-add",
+  //   "https://gotranscript.com/samples/captions-example.srt",
+  // );
 
   const wss = new WebSocketServer({ port: 8080 });
 
@@ -56,6 +56,9 @@ import { resolve } from "node:path";
           })
           .with("k", async (key) => {
             await mpv.command("script-message", "mpvacious-sub-seek-back");
+          })
+          .with("a", async (key) => {
+            await mpv.command("script-message", "mpvacious-menu-open");
           })
           .with("c", async (key) => {
             await mpv.command(
