@@ -14,7 +14,7 @@ import { resolve } from "node:path";
       // "--no-video",
       "--no-audio",
       "--window-minimized=yes",
-      // `--script=${MPVAZIOUS_PATH}`,
+      `--script=${MPVAZIOUS_PATH}`,
     ],
   });
 
