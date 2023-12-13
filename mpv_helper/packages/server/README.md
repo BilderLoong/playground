@@ -1,7 +1,7 @@
 ## Testing scripts
 
 ```shell
-mpv http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4 --sub-file=https://gotranscript.com/samples/captions-example.srt --no-audio --window-minimized=yes --input-ipc-server=/tmp/mpv
+proxy; mpv http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4 --sub-file=https://gotranscript.com/samples/captions-example.srt --no-audio --window-minimized=yes --input-ipc-server=/tmp/mpv
 
 echo '{ "command": ["get_property", "playback-time"] }' | socat - /tmp/mpv
 
@@ -20,5 +20,8 @@ echo '{"command":["srcipt-mesasge","mpvacious-sub-seek-forward"]}' | socat - /tm
 
 echo '{"command":["loadfile", "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"]}' | socat - /tmp/mpv &
 echo '{"command":["sub-add", "https://gotranscript.com/samples/captions-example.srt"]}' | socat - /tmp/mpv 
+
+
+echo '{"command":["keypress", "a"]}' | socat - /tmp/mpv 
 
 ```

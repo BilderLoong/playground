@@ -26,7 +26,6 @@ import { resolve } from "node:path";
     mpv.command(
       "sub-add",
       "https://gotranscript.com/samples/captions-example.srt",
-      // resolve("./test.srt"),
     );
   });
 
@@ -57,19 +56,16 @@ import { resolve } from "node:path";
       ({ key }) => {
         match(key)
           .with("j", async (key) => {
-            await mpv.command("script-message", "mpvacious-sub-seek-forward");
+            mpv.command("script-message", "mpvacious-sub-seek-forward");
           })
           .with("k", async (key) => {
-            await mpv.command("script-message", "mpvacious-sub-seek-back");
+            mpv.command("script-message", "mpvacious-sub-seek-back");
           })
           .with("a", async (key) => {
-            await mpv.command("script-message", "mpvacious-menu-open");
+            mpv.command("script-message", "mpvacious-menu-open");
           })
           .with("c", async (key) => {
-            await mpv.command(
-              "script-message",
-              "mpvacious-copy-sub-to-clipboard",
-            );
+            mpv.command("script-message", "mpvacious-copy-sub-to-clipboard");
           });
       },
     );
