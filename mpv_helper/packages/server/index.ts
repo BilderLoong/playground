@@ -70,4 +70,9 @@ import { resolve } from "node:path";
       },
     );
   }
+
+  mpv.process?.on("close", () => {
+    wss.close();
+    process.exit(0);
+  });
 })();

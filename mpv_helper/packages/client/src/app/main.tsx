@@ -13,15 +13,19 @@ export const Main = (props: {}) => {
 
     document.addEventListener("keydown", handleKeydown);
 
+    ws.onclose = (ev) => {
+      console.log({ ev });
+    };
+
     return () => {
-      ws.close();
+      ws.close(3000);
       document.removeEventListener("keydown", handleKeydown);
     };
-  }, []);
 
-  const handleKeydown = (event: KeyboardEvent) => {
-    wsRef.current?.send(keyMessageFactory(event.key));
-  };
+    function handleKeydown(event: KeyboardEvent) {
+      wsRef.current?.send(keyMessageFactory(event.key));
+    }
+  }, []);
 
   return <div>Click some key.</div>;
 };
