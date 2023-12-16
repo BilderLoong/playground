@@ -30,7 +30,7 @@ import { resolve } from "node:path";
   });
 
   mpv.observe("sub-text", (subText?: string) => {
-    console.log(subText);
+    // console.log(subText);
   });
 
   const wss = new WebSocketServer({ port: 8080 });
