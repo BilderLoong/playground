@@ -1,11 +1,5 @@
-[submodule "yarn-workspaces-playground/yarn-workspaces-example"]
-	path = yarn-workspaces-playground/yarn-workspaces-example
-	url = git@github.com:BilderLoong/yarn-workspaces-example.git
 [submodule "mpv_helper/packages/mpv"]
 	path = mpv_helper/packages/mpv
-	url = git@github.com:BilderLoong/mpv.git
-[submodule "submodule_test"]
-	path = submodule_test
 	url = git@github.com:BilderLoong/mpv.git
 [submodule "mpv_helper/packages/mpvacious"]
 	path = mpv_helper/packages/mpvacious
