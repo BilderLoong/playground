@@ -1,4 +1,5 @@
 "use client";
+import { retry } from "@/utils";
 import React, { RefObject, useEffect, useRef } from "react";
 import { Command, keyMessage } from "server/protocols/ws";
 
@@ -19,7 +20,7 @@ export const Main = (props: {}) => {
     });
 
     return () => {
-      wsRef.current?.close(WS_CLOSE_CODE.UNMOUNT);
+      wsRef.current!.close(WS_CLOSE_CODE.UNMOUNT);
       document.removeEventListener("keydown", handleKeydown);
     };
 
@@ -44,25 +45,29 @@ export function createRetryableWS(
       return;
     }
 
-    retry();
+    retry(
+      () => {
+        return new Promise<void>((resolve, rejects) => {
+          const newWS = new WebSocket(address);
+          console.log("connecting...");
+
+          newWS.addEventListener("close", () => {
+            console.log("closed.");
+            rejects();
+          });
+
+          newWS.addEventListener("open", () => {
+            resolve();
+            console.log("opened.");
+            onRetrySuccessfully(newWS);
+          });
+        });
+      },
+      { retries: 100, retryIntervalMs: 500 },
+    );
   });
 
   return ws;
-
-  function retry() {
-    const newWS = new WebSocket(address);
-    console.log("connecting...");
-
-    newWS.addEventListener("close", () => {
-      console.log("closed.");
-      setTimeout(retry);
-    });
-
-    newWS.addEventListener("open", () => {
-      console.log("opened.");
-      onRetrySuccessfully(newWS);
-    });
-  }
 }
 
 function keyMessageFactory(key: string) {
