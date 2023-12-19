@@ -2,6 +2,7 @@
 import { retry } from "@/utils";
 import React, { RefObject, useEffect, useRef } from "react";
 import { Command, keyMessage } from "server/protocols/ws";
+import { startMpv } from "./actions";
 
 enum WS_CLOSE_CODE {
   UNMOUNT = 3000,
@@ -24,7 +25,19 @@ export const Main = (props: {}) => {
       document.removeEventListener("keydown", handleKeydown);
     };
 
-    function handleKeydown(event: KeyboardEvent) {
+    async function handleKeydown(event: KeyboardEvent) {
+      const { key } = event;
+
+      if (key === "s") {
+        const mpv = await startMpv({
+          videoFileURL:
+            "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+          WSPort: 8080,
+          subtitleURL: "https://gotranscript.com/samples/captions-example.srt",
+        });
+
+        console.log({ mpv });
+      }
       if (wsRef.current && wsRef.current.readyState === wsRef.current.OPEN) {
         wsRef.current.send(keyMessageFactory(event.key));
       }
@@ -46,8 +59,8 @@ export function createRetryableWS(
     }
 
     retry(
-      () => {
-        return new Promise<void>((resolve, rejects) => {
+      () =>
+        new Promise<void>((resolve, rejects) => {
           const newWS = new WebSocket(address);
           console.log("connecting...");
 
@@ -61,8 +74,7 @@ export function createRetryableWS(
             console.log("opened.");
             onRetrySuccessfully(newWS);
           });
-        });
-      },
+        }),
       { retries: 100, retryIntervalMs: 500 },
     );
   });
