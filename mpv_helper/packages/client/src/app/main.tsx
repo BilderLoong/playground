@@ -1,14 +1,20 @@
 "use client";
 import { retry } from "@/utils";
-import React, { RefObject, useEffect, useRef } from "react";
-import { Command, keyMessage } from "server/protocols/ws";
-import { startMpv } from "./actions";
+import React, { useEffect, useRef } from "react";
+import { Command, keyMessage } from "../protocols/ws";
+import { startMpv as start } from "./actions";
 
 enum WS_CLOSE_CODE {
   UNMOUNT = 3000,
 }
 
-export const Main = (props: {}) => {
+export const Main = ({
+  startMpv,
+  stopMpv,
+}: {
+  startMpv: typeof start;
+  stopMpv: () => void;
+}) => {
   const wsRef = useRef<WebSocket>();
   useEffect(() => {
     // TODO make the link dynamic.

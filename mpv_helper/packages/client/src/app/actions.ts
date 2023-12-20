@@ -14,7 +14,7 @@ export async function startMpv({
   subtitleURL: string;
   WSPort: number;
 }) {
-  const MPVAZIOUS_PATH = resolve("../mpvacious/");
+  const MPVACIOUS_PATH = resolve("../mpvacious/");
   const mpv = await Mpv({
     path: "mpv",
     args: [
@@ -22,7 +22,7 @@ export async function startMpv({
       // "--no-video",
       "--no-audio",
       "--window-minimized=yes",
-      `--script=${MPVAZIOUS_PATH}`,
+      `--script=${MPVACIOUS_PATH}`,
     ],
   });
 
@@ -38,6 +38,10 @@ export async function startMpv({
 
   const wss = new WebSocketServer({ port: WSPort });
 
+  mpv.process?.on("close", () => {
+    wss.close();
+  });
+
   wss.on("connection", function connection(ws) {
     ws.on("error", console.error);
 
@@ -46,11 +50,15 @@ export async function startMpv({
     });
   });
 
+  return () => {
+    wss.close();
+  };
+
   function messageDispatcher(wsMsg: string) {
     const parsedMsg = incomingMessage.safeParse(JSON.parse(wsMsg));
     if (!parsedMsg.success) {
       return {
-        message: `Unsupport message: ${wsMsg}`,
+        message: `Unsupported message: ${wsMsg}`,
       };
     }
 
@@ -70,11 +78,7 @@ export async function startMpv({
           .with("c", async (key) => {
             mpv.command("script-message", "mpvacious-copy-sub-to-clipboard");
           });
-      },
+      }
     );
   }
-
-  mpv.process?.on("close", () => {
-    wss.close();
-  });
 }
