@@ -1,7 +1,7 @@
 "use server";
 import Mpv from "mpv";
 import { WebSocketServer } from "ws";
-import { incommingMessage, Command } from "server/protocols/ws";
+import { incomingMessage, Command } from "../protocols/ws";
 import { match, P } from "ts-pattern";
 import { resolve } from "node:path";
 
@@ -47,14 +47,14 @@ export async function startMpv({
   });
 
   function messageDispatcher(wsMsg: string) {
-    const pareseMsg = incommingMessage.safeParse(JSON.parse(wsMsg));
-    if (!pareseMsg.success) {
+    const parsedMsg = incomingMessage.safeParse(JSON.parse(wsMsg));
+    if (!parsedMsg.success) {
       return {
         message: `Unsupport message: ${wsMsg}`,
       };
     }
 
-    match(pareseMsg.data).with(
+    match(parsedMsg.data).with(
       { command: Command.key, data: { key: P.select("key") } },
       ({ key }) => {
         match(key)

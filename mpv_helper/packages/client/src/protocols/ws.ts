@@ -16,5 +16,5 @@ export const subtitle = z.object({
   command: z.literal(Command.subtitle),
 });
 
-export const incommingMessage = z.union([keyMessage, subtitle]);
-export type IncommingMessage = z.infer<typeof incommingMessage>;
+export const incomingMessage = z.union([keyMessage, subtitle]);
+export type IncomingMessage = z.infer<typeof incomingMessage>;

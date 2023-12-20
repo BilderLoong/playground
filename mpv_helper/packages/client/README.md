@@ -34,3 +34,31 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Testing scripts
+
+```shell
+proxy; mpv http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4 --sub-file=https://gotranscript.com/samples/captions-example.srt --no-audio --window-minimized=yes --input-ipc-server=/tmp/mpv
+
+echo '{ "command": ["get_property", "playback-time"] }' | socat - /tmp/mpv
+
+
+echo '{ "command": ["script-message", "mpvacious-copy-sub-to-clipboard"] }' | socat - /tmp/mpv
+
+
+echo '{ "command": ["script-message", "mpvacious-copy-sub-to-clipboard"] }' | socat - /tmp/mpv
+
+echo '{ "command": ["sub-add", "https://gotranscript.com/samples/captions-example.srt"] }' | socat - /tmp/mpv
+
+echo '{"request_id":3,"command":["srcipt-mesasge","mpvacious-sub-seek-forward"]}' | socat - /tmp/mpv
+
+echo '{"command":["srcipt-mesasge","mpvacious-sub-seek-forward"]}' | socat - /tmp/mpv
+
+
+echo '{"command":["loadfile", "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"]}' | socat - /tmp/mpv &
+echo '{"command":["sub-add", "https://gotranscript.com/samples/captions-example.srt"]}' | socat - /tmp/mpv 
+
+
+echo '{"command":["keypress", "a"]}' | socat - /tmp/mpv 
+
+```

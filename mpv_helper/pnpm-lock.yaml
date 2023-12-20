@@ -44,10 +44,14 @@ importers:
         version: 5.0.6
       ws:
         specifier: ^8.14.2
-        version: 8.14.2
+        version: 8.14.2(bufferutil@4.0.8)
       zod:
         specifier: ^3.22.4
         version: 3.22.4
+    optionalDependencies:
+      bufferutil:
+        specifier: ^4.0.8
+        version: 4.0.8
     devDependencies:
       '@testing-library/jest-dom':
         specifier: ^6.1.5
@@ -81,7 +85,7 @@ importers:
         version: 29.7.0(@types/node@20.10.3)
       jest-environment-jsdom:
         specifier: ^29.7.0
-        version: 29.7.0
+        version: 29.7.0(bufferutil@4.0.8)
       postcss:
         specifier: ^8
         version: 8.4.32
@@ -108,7 +112,7 @@ importers:
         version: 5.0.6
       ws:
         specifier: ^8.14.2
-        version: 8.14.2
+        version: 8.14.2(bufferutil@4.0.8)
       zod:
         specifier: ^3.22.4
         version: 3.22.4
@@ -1711,6 +1715,13 @@ packages:
   /buffer-from@1.1.2:
     resolution: {integrity: sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ==}
     dev: true
+
+  /bufferutil@4.0.8:
+    resolution: {integrity: sha512-4T53u4PdgsXqKaIctwF8ifXlRTTmEPJ8iEPWFdGZvcf7sbwYo6FKFEX9eNNAnzFZ7EzJAQ3CJeOtCRA4rDp7Pw==}
+    engines: {node: '>=6.14.2'}
+    requiresBuild: true
+    dependencies:
+      node-gyp-build: 4.7.1
 
   /bun-types@1.0.18:
     resolution: {integrity: sha512-1XZ7AxOF8oO8FZtw1xj006JAKxEjulK3dUhsktZVN95vXBlsf4NIjQxfistVdpt24v3H2I9BwHp+UU+gXSSpAw==}
@@ -3409,7 +3420,7 @@ packages:
       pretty-format: 29.7.0
     dev: true
 
-  /jest-environment-jsdom@29.7.0:
+  /jest-environment-jsdom@29.7.0(bufferutil@4.0.8):
     resolution: {integrity: sha512-k9iQbsf9OyOfdzWH8HDmrRT0gSIcX+FLNW7IQq94tFX0gynPwqDTW0Ho6iMVNjGz/nb+l/vW3dWM2bbLLpkbXA==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     peerDependencies:
@@ -3425,7 +3436,7 @@ packages:
       '@types/node': 20.10.3
       jest-mock: 29.7.0
       jest-util: 29.7.0
-      jsdom: 20.0.3
+      jsdom: 20.0.3(bufferutil@4.0.8)
     transitivePeerDependencies:
       - bufferutil
       - supports-color
@@ -3731,7 +3742,7 @@ packages:
       argparse: 2.0.1
     dev: true
 
-  /jsdom@20.0.3:
+  /jsdom@20.0.3(bufferutil@4.0.8):
     resolution: {integrity: sha512-SYhBvTh89tTfCD/CRdSOm13mOBa42iTaTyfyEWBdKcGdPxPtLFBXuHR8XHb33YNYaP+lLbmSvBTsnoesCNJEsQ==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -3764,7 +3775,7 @@ packages:
       whatwg-encoding: 2.0.0
       whatwg-mimetype: 3.0.0
       whatwg-url: 11.0.0
-      ws: 8.14.2
+      ws: 8.14.2(bufferutil@4.0.8)
       xml-name-validator: 4.0.0
     transitivePeerDependencies:
       - bufferutil
@@ -4030,6 +4041,11 @@ packages:
       - '@babel/core'
       - babel-plugin-macros
     dev: false
+
+  /node-gyp-build@4.7.1:
+    resolution: {integrity: sha512-wTSrZ+8lsRRa3I3H8Xr65dLWSgCvY2l4AOnaeKdPA9TB/WYMPaTcrzf3rXvFoVvjKNVnu0CcWSx54qq9GKRUYg==}
+    hasBin: true
+    requiresBuild: true
 
   /node-int64@0.4.0:
     resolution: {integrity: sha512-O5lz91xSOeoXP6DulyHfllpq+Eg00MWitZIbtPfoSEvqIHdl5gfcY6hYzDWnj0qD5tz52PI08u9qUvSVeUBeHw==}
@@ -5211,7 +5227,7 @@ packages:
       signal-exit: 3.0.7
     dev: true
 
-  /ws@8.14.2:
+  /ws@8.14.2(bufferutil@4.0.8):
     resolution: {integrity: sha512-wEBG1ftX4jcglPxgFCMJmZ2PLtSbJ2Peg6TmpJFTbe9GZYOQCDPdMYu/Tm0/bGZkw8paZnJY45J4K2PZrLYq8g==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
@@ -5222,6 +5238,8 @@ packages:
         optional: true
       utf-8-validate:
         optional: true
+    dependencies:
+      bufferutil: 4.0.8
 
   /xml-name-validator@4.0.0:
     resolution: {integrity: sha512-ICP2e+jsHvAj2E2lIHxa5tjXRlKDJo4IdvPvCXbXQGdzSfmSpNVyIKMvoZHjDY9DP0zV17iI85o90vRFXNccRw==}
