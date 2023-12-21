@@ -4,7 +4,9 @@
 import json
 import pathlib
 
-from typing import Literal
+from typing import Literal, Callable, Dict, Any
+import functools
+
 
 from mitmproxy import ctx
 import logging
@@ -39,10 +41,11 @@ MOCKED_API_PATH_TYPE = (
     | Literal["postOrder"]
     | Literal["login"]
     | Literal["list"]
+    | Literal["load-fmp-info"]
 )
 
 # The part of the  api path aim to replace.
-MODIFIED_API_PATHS: list[MOCKED_API_PATH_TYPE] = ["list"]
+MODIFIED_API_PATHS: list[MOCKED_API_PATH_TYPE] = ["load-fmp-info"]
 
 # def request(flow):
 #     ctx.log.info(flow.request.get_text())
@@ -60,11 +63,13 @@ MODIFIED_API_PATHS: list[MOCKED_API_PATH_TYPE] = ["list"]
 
 
 def response(flow):
+    logging.debug(f"flow.request.url: {flow.request.url}")
     if not any([i in flow.request.url for i in MODIFIED_API_PATHS]):
         return
 
-    replace_response_body(flow)
-    # modify_response_body(flow)
+    # replace_response_body(flow)
+
+    modify_response_body(flow, dropUnwantedKeys)
 
 
 def replace_response_body(flow):
@@ -96,16 +101,22 @@ def replace_response_body(flow):
                 # https://docs.mitmproxy.org/stable/api/mitmproxy/http.html#Message.set_text
                 response.set_text(json_str)
 
+def dropUnwantedKeys(fmp: Dict[str, Any]):
+    logging.info("cb called")
+    data: Dict[str, Any] = fmp.get("data")
+    data.get("moduleData").pop("groupon-coupon-swiper")
+    data.get("shopInfo").pop("groupCouponInfo")
 
-def modify_response_body(flow):
+    return fmp
+
+
+def modify_response_body(flow, cb: Callable[[Dict[str, Any]], Dict[str, Any]]):
     response = flow.response
-    # if 'queryDishMoreInfo' in
     try:
         response_dict = json.loads(response.get_text())
-        # logging.info(response_dict["data"]["moduleData"])
-        modified = add_adjacent_key(
-            response_dict, "saleQuantity", "saleQuantityStr", "haha"
-        )
+
+        modified = cb(response_dict)
+        logging.info(f"modified: {modified}")
 
         response.set_text(json.dumps(modified))
 
@@ -140,3 +151,10 @@ def add_adjacent_key(data, target_key, added_key, added_value):
         return updated_data
 
     return data  # Return non-dictionary values as is
+
+
+def compose(*functions):
+    def compose2(f, g):
+        return lambda x: f(g(x))
+
+    return functools.reduce(compose2, functions, lambda x: x)

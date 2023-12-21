@@ -8,12 +8,7 @@ enum WS_CLOSE_CODE {
   UNMOUNT = 3000,
 }
 
-export const Main = ({} // startMpv,
-// stopMpv,
-: {
-  // startMpv: typeof start;
-  // stopMpv: () => void;
-}) => {
+export const Main = () => {
   const wsRef = useRef<WebSocket>();
   useEffect(() => {
     // TODO make the link dynamic.
@@ -57,7 +52,7 @@ export const Main = ({} // startMpv,
 
 export function createRetryableWS(
   address: string,
-  onRetrySuccessfully: (ws: WebSocket) => void,
+  onRetrySuccessfully: (ws: WebSocket) => void
 ): WebSocket {
   const ws = new WebSocket(address);
 
@@ -83,7 +78,7 @@ export function createRetryableWS(
             onRetrySuccessfully(newWS);
           });
         }),
-      { retries: 100, retryIntervalMs: 500 },
+      { retries: 100, retryIntervalMs: 500 }
     );
   });
 
@@ -97,6 +92,6 @@ function keyMessageFactory(key: string) {
       data: {
         key,
       },
-    }),
+    })
   );
 }
