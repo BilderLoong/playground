@@ -5,6 +5,13 @@ import { incomingMessage, Command } from "../protocols/ws";
 import { match, P } from "ts-pattern";
 import { resolve } from "node:path";
 
+let _stopMpv: (() => void) | null = null;
+
+export async function stopMpv() {
+  _stopMpv?.();
+  _stopMpv = null;
+}
+
 export async function startMpv({
   videoFileURL,
   subtitleURL,
@@ -50,8 +57,9 @@ export async function startMpv({
     });
   });
 
-  return () => {
+  _stopMpv = () => {
     wss.close();
+    mpv.process?.kill();
   };
 
   function messageDispatcher(wsMsg: string) {

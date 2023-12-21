@@ -2,18 +2,17 @@
 import { retry } from "@/utils";
 import React, { useEffect, useRef } from "react";
 import { Command, keyMessage } from "../protocols/ws";
-import { startMpv as start } from "./actions";
+import { startMpv, stopMpv } from "./actions";
 
 enum WS_CLOSE_CODE {
   UNMOUNT = 3000,
 }
 
-export const Main = ({
-  startMpv,
-  stopMpv,
-}: {
-  startMpv: typeof start;
-  stopMpv: () => void;
+export const Main = ({} // startMpv,
+// stopMpv,
+: {
+  // startMpv: typeof start;
+  // stopMpv: () => void;
 }) => {
   const wsRef = useRef<WebSocket>();
   useEffect(() => {
@@ -33,6 +32,9 @@ export const Main = ({
 
     async function handleKeydown(event: KeyboardEvent) {
       const { key } = event;
+      if (key === "q") {
+        await stopMpv();
+      }
 
       if (key === "s") {
         const mpv = await startMpv({
