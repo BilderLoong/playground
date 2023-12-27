@@ -1,5 +1,6 @@
 local uv = require('luv')
 
+
 local stdin = uv.new_pipe()
 local stdout = uv.new_pipe()
 local stderr = uv.new_pipe()
@@ -35,11 +36,8 @@ uv.read_start(stderr, function(err, data)
     end
 end)
 
-uv.write(stdin, "Hello World")
-
-uv.shutdown(stdin, function()
-    print("stdin shutdown", stdin)
-    uv.close(handle, function()
-        print("process closed", handle, pid)
-    end)
+uv.write(stdin, "Hello World", function()
+    print 'finish'
 end)
+
+uv.run("default")
