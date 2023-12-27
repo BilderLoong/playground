@@ -42,10 +42,15 @@ MOCKED_API_PATH_TYPE = (
     | Literal["login"]
     | Literal["list"]
     | Literal["load-fmp-info"]
+    | Literal["queryGrouponCouponInfo"]
+    | Literal["query-groupon-coupon-info"]
 )
 
 # The part of the  api path aim to replace.
-MODIFIED_API_PATHS: list[MOCKED_API_PATH_TYPE] = ["load-fmp-info"]
+MODIFIED_API_PATHS: list[MOCKED_API_PATH_TYPE] = [
+    "queryGrouponCouponInfo",
+    "query-groupon-coupon-info",
+]
 
 # def request(flow):
 #     ctx.log.info(flow.request.get_text())
@@ -67,9 +72,9 @@ def response(flow):
     if not any([i in flow.request.url for i in MODIFIED_API_PATHS]):
         return
 
-    # replace_response_body(flow)
+    replace_response_body(flow)
 
-    modify_response_body(flow, dropUnwantedKeys)
+    # modify_response_body(flow, dropUnwantedKeys)
 
 
 def replace_response_body(flow):
@@ -101,11 +106,14 @@ def replace_response_body(flow):
                 # https://docs.mitmproxy.org/stable/api/mitmproxy/http.html#Message.set_text
                 response.set_text(json_str)
 
+
 def dropUnwantedKeys(fmp: Dict[str, Any]):
-    logging.info("cb called")
-    data: Dict[str, Any] = fmp.get("data")
-    data.get("moduleData").pop("groupon-coupon-swiper")
-    data.get("shopInfo").pop("groupCouponInfo")
+    try:
+        data: Dict[str, Any] = fmp.get("data")
+        data.get("moduleData").pop("groupon-coupon-swiper")
+        data.get("shopInfo").pop("groupCouponInfo")
+    except KeyError:
+        pass
 
     return fmp
 
@@ -116,7 +124,7 @@ def modify_response_body(flow, cb: Callable[[Dict[str, Any]], Dict[str, Any]]):
         response_dict = json.loads(response.get_text())
 
         modified = cb(response_dict)
-        logging.info(f"modified: {modified}")
+        # logging.info(f"modified: {modified}")
 
         response.set_text(json.dumps(modified))
 
