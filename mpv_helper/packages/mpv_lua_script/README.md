@@ -1,0 +1,3 @@
+```shell
+eval $(luarocks path)
+```
