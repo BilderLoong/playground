@@ -47,10 +47,7 @@ MOCKED_API_PATH_TYPE = (
 )
 
 # The part of the  api path aim to replace.
-MODIFIED_API_PATHS: list[MOCKED_API_PATH_TYPE] = [
-    "queryGrouponCouponInfo",
-    "query-groupon-coupon-info",
-]
+MODIFIED_API_PATHS: list[MOCKED_API_PATH_TYPE] = [ "load-fmp-info" ]
 
 # def request(flow):
 #     ctx.log.info(flow.request.get_text())
