@@ -4,7 +4,9 @@
   "description": "",
   "type": "module",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "dev": "node --loader esbuild-register/loader -r esbuild-register main.ts"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
