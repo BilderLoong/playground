@@ -9,13 +9,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "ts-node": "^10.9.2",
     "ts-pattern": "^5.0.6",
     "typescript": "^5.3.3",
     "ws": "^8.16.0"
   },
   "devDependencies": {
     "@types/node": "^20",
-    "@types/ws": "^8.5.8"
+    "@types/ws": "^8.5.8",
+    "ts-node": "^10.9.2"
   }
 }

@@ -25,11 +25,16 @@ async function main() {
   });
 
   startWSS({ port: 8088 });
-  const { server, socket } = await startNamedPipeServer(pipeName);
-  socket.on("data", (data) => {
-    console.log("123");
+  const { server, pipePath } = await startNamedPipeServer(pipeName);
+  server.on("connection", (socket) => {
+    socket.on("data", (data) => {
+      console.log("Node process received data.", data);
+    });
   });
 }
+
+net.createServer()
+
 
 function startWSS({ port }: { port: number }) {
   const wss = new WebSocketServer({ port });
@@ -40,6 +45,8 @@ function startWSS({ port }: { port: number }) {
       messageDispatcher(data.toString());
     });
   });
+
+  return wss;
 }
 
 function messageDispatcher(wsMsg: string) {
@@ -65,7 +72,7 @@ function messageDispatcher(wsMsg: string) {
 }
 
 /**
- * Create a new pipe 
+ * Create a new pipe
  */
 export function startNamedPipeServer(
   pipeName: string
