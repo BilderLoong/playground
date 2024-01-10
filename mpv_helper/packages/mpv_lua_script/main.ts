@@ -1,31 +1,31 @@
 import { WebSocketServer } from "ws";
 import { match, P } from "ts-pattern";
 import { Command, incomingMessage } from "../client/src/protocols/ws";
+import z from "zod";
 import * as net from "net";
 import * as os from "os";
+import * as fs from "fs";
+import { program } from "commander";
+import prexit from "prexit";
 
-// main();
+main();
 
 async function main() {
-  const args = process.argv.slice(2);
-  const [pipeName] = args;
-
+  const { pipName, wsPort } = getCommandLineOptions();
   process.stdin.setEncoding("utf8");
-  process.stdin.on("data", (data: string) => {
-    // Process the input data
-    const processedData = data.trim(); // Remove any leading/trailing whitespace
-
-    // Write the processed data to stdout
-    process.stdout.write(processedData + "\n");
-  });
-
   process.stdin.on("end", () => {
     // The stdin stream has ended
-    process.exit(0); // Exit the script
+    process.exit(0);
   });
 
-  startWSS({ port: 8088 });
-  const { server, pipePath } = await startNamedPipeServer(pipeName);
+  startWSS({ port: wsPort });
+
+  const { server, pipePath } = await startNamedPipeServer(pipName);
+  console.log(`Listing at pipe path: ${pipePath}.`);
+  prexit(() => {
+    fs.unlinkSync(pipePath);
+  });
+
   server.on("connection", (socket) => {
     socket.on("data", (data) => {
       console.log("Node process received data.", data);
@@ -33,8 +33,23 @@ async function main() {
   });
 }
 
-net.createServer()
+function getCommandLineOptions() {
+  const Options = z.object({
+    pipName: z.string(),
+    wsPort: z.coerce.number(),
+  });
 
+  program.option("--pip-name <str>").option("--ws-port <port>");
+  program.parse();
+
+  const optsParsedResult = Options.safeParse(program.opts());
+  if (!optsParsedResult.success) {
+    console.error("Wrong command line options.");
+    process.exit(1);
+  }
+
+  return optsParsedResult.data;
+}
 
 function startWSS({ port }: { port: number }) {
   const wss = new WebSocketServer({ port });
@@ -45,6 +60,8 @@ function startWSS({ port }: { port: number }) {
       messageDispatcher(data.toString());
     });
   });
+
+  console.log(`Websocket server start at ${port}.`);
 
   return wss;
 }
