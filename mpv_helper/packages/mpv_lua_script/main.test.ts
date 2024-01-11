@@ -1,4 +1,4 @@
-import { startNamedPipeServer } from "./main";
+import { startUnixDomainSocketServer } from "./main";
 import * as net from "node:net";
 
 import fs from "fs";
@@ -23,7 +23,7 @@ function deleteTempDir() {
   }
 }
 
-describe("startNamedPipeServer", () => {
+describe("startUnixDomainSocketServer", () => {
   beforeEach(() => {
     createTempDir();
   });
@@ -31,20 +31,20 @@ describe("startNamedPipeServer", () => {
     deleteTempDir();
   });
 
-  // const pipePath = "/tmp/testing/testPipe";
-
-  it("should create a named pipe", async () => {
-    const { server, pipePath } = await startNamedPipeServer("testing/testPipe");
+  it("should create a socket.", async () => {
+    const { server, socketPath: socketPath } =
+      await startUnixDomainSocketServer("testing/testSocket");
 
     expect(server).toBeDefined();
 
-    expect(fs.existsSync(pipePath)).toBeTruthy();
+    expect(fs.existsSync(socketPath)).toBeTruthy();
 
     server.close();
   });
 
   test("client communicates well with server.", async () => {
-    const { server, pipePath } = await startNamedPipeServer("testing/testPipe");
+    const { server, socketPath: socketPath } =
+      await startUnixDomainSocketServer("testing/testSocket");
 
     const handleClientData = jest.fn();
     server.on("connection", (socket) => {
@@ -57,7 +57,7 @@ describe("startNamedPipeServer", () => {
 
     const handleServerData = jest.fn();
     const client = await new Promise<net.Socket>((resolve, reject) => {
-      const client = net.connect({ path: pipePath }, () => {
+      const client = net.connect({ path: socketPath }, () => {
         client.setDefaultEncoding("utf-8");
         client.write("Hello from client.");
       });
@@ -73,19 +73,4 @@ describe("startNamedPipeServer", () => {
     expect(handleClientData).toHaveBeenCalledWith("Hello from client.");
     expect(handleServerData).toHaveBeenCalledWith("Hello from server.");
   });
-
-  // it("should reject on server error", async () => {
-  //   const mockError = new Error("test error");
-  //   const mockServer = {
-  //     listen: jest.fn(),
-  //     on: jest.fn((event, callback) => callback(mockError)),
-  //   };
-  //   (net.createServer as jest.Mock).mockReturnValue(mockServer);
-
-  //   const pipeName = "testPipe";
-
-  //   await expect(startNamedPipeServer(pipeName)).rejects.toThrow(mockError);
-  //   expect(net.createServer).toHaveBeenCalled();
-  //   expect(mockServer.on).toHaveBeenCalledWith("error", expect.any(Function));
-  // });
 });

@@ -5,7 +5,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev": "node --loader esbuild-register/loader -r esbuild-register main.ts"
+    "dev": "./node_wrapper main.ts"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +15,7 @@
     "prexit": "2.2.0",
     "ts-pattern": "^5.0.6",
     "typescript": "^5.3.3",
+    "winston": "^3.11.0",
     "ws": "^8.16.0"
   },
   "devDependencies": {

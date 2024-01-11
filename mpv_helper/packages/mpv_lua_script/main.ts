@@ -7,28 +7,42 @@ import * as os from "os";
 import * as fs from "fs";
 import { program } from "commander";
 import prexit from "prexit";
+import { logger } from "./log";
 
 main();
 
 async function main() {
-  const { pipName, wsPort } = getCommandLineOptions();
+  const { pipName: socketName, wsPort } = getCommandLineOptions();
   process.stdin.setEncoding("utf8");
   process.stdin.on("end", () => {
     // The stdin stream has ended
     process.exit(0);
   });
 
-  startWSS({ port: wsPort });
+  const wss = startWSS({ port: wsPort });
+  const socketPath = getSocketPath(socketName);
+  const { server: socketServer } = await startUnixDomainSocketServer(
+    socketPath
+  );
 
-  const { server, pipePath } = await startNamedPipeServer(pipName);
-  console.log(`Listing at pipe path: ${pipePath}.`);
+  logger.info(`Listing at socket path: ${socketPath}.`);
+
   prexit(() => {
-    fs.unlinkSync(pipePath);
+    // https://nodejs.org/api/net.html#serverclosecallback
+    socketServer.close();
   });
 
-  server.on("connection", (socket) => {
+  socketServer.on("connection", (socket) => {
     socket.on("data", (data) => {
-      console.log("Node process received data.", data);
+      logger.info(`${socketPath} received data: `, data.toString());
+
+      wss.on("connection", (ws) => {
+        ws.on("message", (wsMsg) => {
+          logger.info(`WS at ${wsPort} received message: `, wsMsg.toString());
+
+          // socket.write(wsMsg.toString());
+        });
+      });
     });
   });
 }
@@ -44,7 +58,7 @@ function getCommandLineOptions() {
 
   const optsParsedResult = Options.safeParse(program.opts());
   if (!optsParsedResult.success) {
-    console.error("Wrong command line options.");
+    logger.error("Wrong command line options.");
     process.exit(1);
   }
 
@@ -54,14 +68,10 @@ function getCommandLineOptions() {
 function startWSS({ port }: { port: number }) {
   const wss = new WebSocketServer({ port });
   wss.on("connection", function connection(ws) {
-    ws.on("error", console.error);
-
-    ws.on("message", function message(data) {
-      messageDispatcher(data.toString());
-    });
+    ws.on("error", logger.error);
   });
 
-  console.log(`Websocket server start at ${port}.`);
+  logger.info(`Websocket server start at ${port}.`);
 
   return wss;
 }
@@ -91,23 +101,24 @@ function messageDispatcher(wsMsg: string) {
 /**
  * Create a new pipe
  */
-export function startNamedPipeServer(
-  pipeName: string
-): Promise<{ server: net.Server; pipePath: string }> {
+export function startUnixDomainSocketServer(
+  socketPath: string
+): Promise<{ server: net.Server; socketPath: string }> {
   return new Promise((resolve, reject) => {
-    const server = net.createServer((socket) => {});
+    const server = net.createServer();
 
-    const pipePath =
-      os.platform() === "win32"
-        ? `\\\\.\\pipe\\${pipeName}`
-        : `/tmp/${pipeName}`;
-
-    server.listen(pipePath, () => {
-      resolve({ server, pipePath });
+    server.listen(socketPath, () => {
+      resolve({ server, socketPath });
     });
 
     server.on("error", (err) => {
       reject(err);
     });
   });
+}
+
+function getSocketPath(socketName: string) {
+  return os.platform() === "win32"
+    ? `\\\\.\\pipe\\${socketName}`
+    : `/tmp/${socketName}`;
 }
