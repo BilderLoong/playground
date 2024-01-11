@@ -17,8 +17,16 @@ lua main.lua
 pnpm run dev
 ```
 
+### Testing
+
+```shell
+pnpm -w run test
+```
+
 ### Troubleshooting
+
 If you get below error when running `pnpm run dev`.
+
 ```shell
 (node:60959) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
 --import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("esbuild-register/loader", pathToFileURL("./"));'
@@ -41,4 +49,4 @@ SyntaxError: Cannot use import statement outside a module
 Node.js v20.10.0
 ```
 
-It may cause by this [ issue ](https://github.com/egoist/esbuild-register/issues/96). Try lower node version instead.
+It may cause by this [issue](https://github.com/egoist/esbuild-register/issues/96). Try lower node version instead.
