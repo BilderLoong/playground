@@ -1,6 +1,6 @@
 import WebSocket, { WebSocketServer } from "ws";
 import { match, P } from "ts-pattern";
-import { Command, incomingMessage } from "../client/src/protocols/ws";
+import { Command, incomingMessage } from "../../client/src/protocols/ws";
 import z from "zod";
 import * as net from "net";
 import * as os from "os";

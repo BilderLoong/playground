@@ -15,7 +15,6 @@ import WebSocket, { WebSocketServer } from "ws";
 
 import fs from "fs";
 import path from "path";
-import { aw } from "vitest/dist/reporters-qc5Smpt5.js";
 
 function createTempDir() {
   const tmpDir = path.join("/tmp", "testing");
