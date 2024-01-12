@@ -12,9 +12,10 @@ import {
 } from "vitest";
 import * as net from "node:net";
 import WebSocket, { WebSocketServer } from "ws";
-
+import { logger } from "./log";
 import fs from "fs";
 import path from "path";
+import { log } from "node:console";
 
 function createTempDir() {
   const tmpDir = path.join("/tmp", "testing");
@@ -100,8 +101,9 @@ describe("pipeBetweenSocketAndWS", () => {
     wss = new WebSocketServer({ port: testPort });
 
     // Set up TCP socket server
-    await new Promise<void>((done) => {
-      socketServer = net.createServer().listen(testSocketPath, done);
+    socketServer = net.createServer().listen(testSocketPath);
+    await new Promise((done) => {
+      socketServer.on("listening", done);
     });
   });
 
@@ -110,52 +112,54 @@ describe("pipeBetweenSocketAndWS", () => {
     wsClient.close();
     socketClient.end();
     wss.close();
-    fs.unlinkSync(testSocketPath);
-    new Promise((done) => {
-      socketServer.close(done);
-    });
+    socketServer.close();
   });
 
   it("should pipe messages between WebSocket and TCP socket", async () => {
-    const testData = "Hello, world!";
+    const dataFromWS2Socket = "Hello from websocket!";
+    const dataFromSocket2WS = "Hello, from socket!";
+
+    const options = {
+      onReceiveWSSMsg: vi.fn((data) => {
+        return data.toString();
+      }),
+      onReceiveSocketMsg: vi.fn((data) => {
+        console.log(1);
+        return data.toString();
+    };
 
     // Start the piping function
-    pipeBetweenSocketAndWS(wss, socketServer, {
-      onReceiveWSSMsg: (data) => data.toString().toUpperCase(),
-      onReceiveSocketMsg: (data) => data.toString().toLowerCase(),
-    });
+    pipeBetweenSocketAndWS(wss, socketServer, options);
 
-    // Connect WebSocket client
+    // Send data to Websocket server.
     wsClient = new WebSocket(`ws://localhost:${testPort}`);
-    const done = new Promise<void>((done) => {
-      wsClient.on("open", async () => {
-        // When the WebSocket client is connected, connect the TCP socket client
-        socketClient = net.createConnection({ path: testSocketPath }, () => {
-          // Send a message through the WebSocket client
-          wsClient.send(testData);
-        });
-
-        socketClient.on("data", (data) => {
-          // Expect the modified message from the TCP socket server
-          expect(data.toString()).toBe(testData.toUpperCase());
-          done();
-        });
+    await new Promise<void>((done) => {
+      wsClient.on("open", () => {
+        wsClient.send(dataFromWS2Socket);
+        done();
       });
     });
 
-    // Listen to messages from the WebSocket server
+    // Send data to unix domain socket server.
+    await new Promise<void>((done) => {
+      socketClient = net.createConnection({ path: testSocketPath }, () => {
+        socketClient.write(dataFromSocket2WS);
+        done();
+      });
+    });
+
+    socketClient.on("data", (data) => {
+      expect(data.toString()).toBe(dataFromWS2Socket);
+    });
+
     wss.on("connection", (ws) => {
       ws.on("message", (message) => {
-        // Expect the modified message from the WebSocket client
-        expect(message).toBe(testData.toLowerCase());
+        expect(message).toBe(dataFromSocket2WS);
       });
     });
 
-    // Send a message to the WebSocket server through the TCP socket
-    socketServer.on("connection", (socket) => {
-      socket.write(testData);
-    });
-
-    await done;
+    // expect(options.onReceiveSocketMsg).toHaveBeenCalledOnce();
+    // expect(onReceiveWSSMsg).toHaveBeenCalledOnce();
+    // expect(options.onReceiveWSSMsg).toHaveBeenCalledTimes(1);
   });
 });

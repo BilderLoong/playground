@@ -4,5 +4,6 @@
         "mpvacious",
         "prexit",
         "wscat"
-    ]
+    ],
+    "testing.automaticallyOpenPeekView": "never"
 }
