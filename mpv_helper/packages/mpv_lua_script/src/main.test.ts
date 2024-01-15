@@ -16,6 +16,7 @@ import { logger } from "./log";
 import fs from "fs";
 import path from "path";
 import { log } from "node:console";
+import util from "util";
 
 function createTempDir() {
   const tmpDir = path.join("/tmp", "testing");
@@ -108,11 +109,12 @@ describe("pipeBetweenSocketAndWS", () => {
   });
 
   afterAll(async () => {
-    // Clean up servers and clients
-    wsClient.close();
-    socketClient.end();
-    wss.close();
-    socketServer.close();
+    await Promise.all([
+      util.promisify(wsClient.close),
+      util.promisify(socketClient.end),
+      util.promisify(wss.close),
+      util.promisify(socketServer.close),
+    ]);
   });
 
   it("should pipe messages between WebSocket and TCP socket", async () => {
