@@ -38,16 +38,17 @@ function deleteTempDir() {
 }
 
 describe("startUnixDomainSocketServer", () => {
+  const testSocketPath = "/tmp/test.socket";
+
   beforeEach(() => {
-    createTempDir();
-  });
-  afterEach(() => {
-    deleteTempDir();
+    if (fs.existsSync(testSocketPath)) {
+      fs.unlinkSync(testSocketPath);
+    }
   });
 
   it("should create a socket.", async () => {
     const { server, socketPath: socketPath } =
-      await startUnixDomainSocketServer("/tmp/testSocket");
+      await startUnixDomainSocketServer(testSocketPath);
 
     expect(server).toBeDefined();
 
@@ -58,7 +59,7 @@ describe("startUnixDomainSocketServer", () => {
 
   test("client communicates well with server.", async () => {
     const { server, socketPath: socketPath } =
-      await startUnixDomainSocketServer("/tmp/testSocket");
+      await startUnixDomainSocketServer(testSocketPath);
 
     const handleClientData = vi.fn();
     server.on("connection", (socket) => {
@@ -98,6 +99,10 @@ describe("pipeBetweenSocketAndWS", () => {
   const testSocketPath = "/tmp/test.sock";
 
   beforeAll(async () => {
+    if (fs.existsSync(testSocketPath)) {
+      fs.unlinkSync(testSocketPath);
+    }
+
     // Set up WebSocket server
     wss = new WebSocketServer({ port: testPort });
 

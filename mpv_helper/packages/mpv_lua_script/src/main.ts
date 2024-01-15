@@ -95,7 +95,9 @@ export function pipeBetweenSocketAndWS(
     const socketClient = await socketClientPromise;
 
     ws.on("message", (wsMsg) => {
-      socketClient.write(onReceiveWSSMsg(wsMsg));
+      const res = onReceiveWSSMsg(wsMsg);
+      socketClient.write(res);
+
       ws.on("close", socketClient.end);
     });
   });
