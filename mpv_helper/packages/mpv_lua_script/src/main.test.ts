@@ -124,8 +124,8 @@ describe("pipeBetweenSocketAndWS", () => {
         return data.toString();
       }),
       onReceiveSocketMsg: vi.fn((data) => {
-        console.log(1);
         return data.toString();
+      }),
     };
 
     // Start the piping function
