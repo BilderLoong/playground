@@ -140,33 +140,24 @@ describe("pipeBetweenSocketAndWS", () => {
 
     // Send data to Websocket server.
     wsClient = new WebSocket(`ws://localhost:${testPort}`);
-    await new Promise<void>((done) => {
-      wsClient.on("open", () => {
-        wsClient.send(dataFromWS2Socket);
-        done();
-      });
-    });
+    await new Promise<void>((done) => wsClient.on("open", done));
+    wsClient.send(dataFromWS2Socket);
 
     // Send data to unix domain socket server.
-    await new Promise<void>((done) => {
-      socketClient = net.createConnection({ path: testSocketPath }, () => {
-        socketClient.write(dataFromSocket2WS);
-        done();
-      });
-    });
+    socketClient = net.createConnection({ path: testSocketPath });
+    await new Promise<void>((done) => socketClient.on("connect", done));
+    socketClient.write(dataFromSocket2WS);
 
     socketClient.on("data", (data) => {
       expect(data.toString()).toBe(dataFromWS2Socket);
+      expect(options.onReceiveSocketMsg).toHaveBeenCalledOnce();
     });
 
     wss.on("connection", (ws) => {
       ws.on("message", (message) => {
         expect(message).toBe(dataFromSocket2WS);
+        expect(options.onReceiveSocketMsg).toHaveBeenCalledOnce();
       });
     });
-
-    // expect(options.onReceiveSocketMsg).toHaveBeenCalledOnce();
-    // expect(onReceiveWSSMsg).toHaveBeenCalledOnce();
-    // expect(options.onReceiveWSSMsg).toHaveBeenCalledTimes(1);
   });
 });
