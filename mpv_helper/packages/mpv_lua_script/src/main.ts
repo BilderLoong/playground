@@ -57,6 +57,11 @@ async function main() {
   });
 }
 
+/**
+ * Bridge between WebSocket and Socket
+ * @param options.onReceiveWSSMsg Called when WebSocket received a message whose return value will be send to socket.
+ * @param options.onReceiveSocketMsg Called when socket received a message whose return value will be send to WebSocket.
+ */
 export function pipeBetweenSocketAndWS(
   wss: WebSocketServer,
   socketServer: net.Server,
@@ -77,7 +82,6 @@ export function pipeBetweenSocketAndWS(
     throw new Error("Socket server address must be a string.");
   }
 
-  // const socketClientConnect =
   const socketClientPromise = new Promise<Socket>((resolve, reject) => {
     const socketClient = net.createConnection(socketPath, () => {
       resolve(socketClient);
@@ -169,7 +173,7 @@ function messageDispatcher(wsMsg: string) {
 }
 
 /**
- * Create a new pipe
+ * Create a unix domain socket server.
  */
 export function startUnixDomainSocketServer(
   socketPath: string
