@@ -68,7 +68,7 @@ local function connect_to_socket(socket_path)
     uv.pipe_connect(client, socket_path, function(err)
         if err == 'ENOENT' then
             print("Retring to connect to socket " .. socket_path .. " with error: ", err)
-            utils.setTimeout(100, function()
+            utils.setTimeout(200, function()
                 connect_to_socket(socket_path)
             end)
 

@@ -17,6 +17,7 @@ import fs from "fs";
 import path from "path";
 import { log } from "node:console";
 import util from "util";
+import exp from "node:constants";
 
 function createTempDir() {
   const tmpDir = path.join("/tmp", "testing");
@@ -149,12 +150,14 @@ describe("pipeBetweenSocketAndWS", () => {
     socketClient.write(dataFromSocket2WS);
 
     socketClient.on("data", (data) => {
+      // TODO - The below expect doesn't run.
       expect(data.toString()).toBe(dataFromWS2Socket);
       expect(options.onReceiveSocketMsg).toHaveBeenCalledOnce();
     });
 
     wss.on("connection", (ws) => {
       ws.on("message", (message) => {
+        // TODO - The below expect doesn't run.
         expect(message).toBe(dataFromSocket2WS);
         expect(options.onReceiveSocketMsg).toHaveBeenCalledOnce();
       });
