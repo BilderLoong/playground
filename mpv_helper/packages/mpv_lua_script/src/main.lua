@@ -3,10 +3,19 @@ local json    = require 'json'
 local inspect = require 'inspect'
 local utils   = require('./utils')
 
+local function get_socket_path(socket_name)
+    local platform = os.getenv('OS')
+    if platform == 'Windows_NT' then
+        return '\\\\.\\pipe\\' .. socket_name
+    else
+        return '/tmp/' .. socket_name
+    end
+end
 
---- @param  socket_name string
+
+--- @param  socket_path string
 --- @param  ws_port number | string
-local function start_node(socket_name, ws_port)
+local function start_node(socket_path, ws_port)
     local stdin       = uv.new_pipe(true)
     local stdout      = uv.new_pipe(true)
     local stderr      = uv.new_pipe(true)
@@ -16,7 +25,7 @@ local function start_node(socket_name, ws_port)
             "-r", "esbuild-register",
             "--loader", "esbuild-register/loader",
             utils.script_path() .. 'main.ts',
-            "--socket-name", socket_name,
+            "--socket-path", socket_path,
             "--ws-port", ws_port
         },
         stdio = { stdin, stdout, stderr },
@@ -52,16 +61,17 @@ local function start_node(socket_name, ws_port)
     return handle
 end
 
---- @param  socket_name string
-local function connect_to_socket(socket_name)
+--- @param  socket_path string
+local function connect_to_socket(socket_path)
     local client = uv.new_pipe(true)
 
-    uv.pipe_connect(client, "/tmp/" .. socket_name, function(err)
-        if err then
-            print("Error connecting to socket: ", err)
-            utils.setTimeout(1000, function()
-                connect_to_socket(socket_name)
+    uv.pipe_connect(client, socket_path, function(err)
+        if err == 'ENOENT' then
+            print("Retring to connect to socket " .. socket_path .. " with error: ", err)
+            utils.setTimeout(100, function()
+                connect_to_socket(socket_path)
             end)
+
             return
         end
 
@@ -71,7 +81,7 @@ local function connect_to_socket(socket_name)
         uv.read_start(client, function(err, data)
             assert(not err, err)
             if data then
-                print("client chunk", data)
+                print("client chunk: ", data)
             else
                 print("client end")
             end
@@ -92,9 +102,9 @@ end
 
 
 
-local socket_name = "mpv_helper.socket"
-local node_handle = start_node(socket_name, 5140)
+local socket_path = get_socket_path "mpv_helper.socket"
+local node_handle = start_node(socket_path, 5140)
 
-connect_to_socket(socket_name)
+connect_to_socket(socket_path)
 
 uv.run("default")

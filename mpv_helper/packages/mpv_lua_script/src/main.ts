@@ -20,7 +20,7 @@ if (isRunningAsAsMainModule) {
 }
 
 async function main() {
-  const { socketName, wsPort } = getCommandLineOptions();
+  const { socketPath, wsPort } = getCommandLineOptions();
   process.stdin.setEncoding("utf8");
   process.stdin.on("end", () => {
     // The stdin stream has ended
@@ -28,13 +28,12 @@ async function main() {
   });
 
   const wss = startWSS({ port: wsPort });
-  logger.info(`Websocket server start at ${wsPort}.
+  logger.info(`Websocket server start at port: ${wsPort}.
   You can test it by using:
     \`wscat -c ws://localhost:${wsPort}\``);
   const { server: socketServer } = await startUnixDomainSocketServer(
-    getSocketPath(socketName)
+    socketPath
   );
-  const socketPath = socketServer.address();
 
   logger.info(`Listing at socket path: ${socketServer.address()}.
   You can test it by using:
@@ -125,11 +124,11 @@ export function pipeBetweenSocketAndWS(
 
 function getCommandLineOptions() {
   const Options = z.object({
-    socketName: z.string(),
+    socketPath: z.string(),
     wsPort: z.coerce.number(),
   });
 
-  program.option("--socket-name <str>").option("--ws-port <port>");
+  program.option("--socket-path <str>").option("--ws-port <port>");
   program.parse();
 
   const optsParsedResult = Options.safeParse(program.opts());
@@ -189,10 +188,4 @@ export function startUnixDomainSocketServer(
       reject(err);
     });
   });
-}
-
-function getSocketPath(socketName: string) {
-  return os.platform() === "win32"
-    ? `\\\\.\\pipe\\${socketName}`
-    : `/tmp/${socketName}`;
 }

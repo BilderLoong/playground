@@ -25,7 +25,6 @@ end
 --- Creating a simple setTimeout wrapper
 --- @param timeout number
 --- @param callback function
----@return unknown
 function utils.setTimeout(timeout, callback)
     local timer = uv.new_timer()
     timer:start(timeout, 0, function()
