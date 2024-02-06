@@ -135,50 +135,48 @@ describe("pipeBetweenSocketAndWS", () => {
   it("should pipe messages between WebSocket and TCP socket", async () => {
     const dataFromWSClient2Socket = "Hello from websocket client!";
     const dataFromSocket2WSClient = "Hello from socket!";
-
     const options = {
       onWSSReceiveMsg: vi.fn((data) => {
-        console.debug("WSS received message: ", data.toString());
-
         return data.toString();
       }),
       onSocketServerReceiveMsg: vi.fn((data) => {
-        console.debug("Socket server received message: ", data.toString());
         return data.toString();
       }),
     };
-
     // Start the piping function
     pipeBetweenSocketAndWS(wss, socketServer, options);
 
     wsClient = new WebSocket(`ws://localhost:${testPort}`);
-    await new Promise<void>((done) => wsClient.on("open", done));
     socketClient = net.createConnection({ path: testSocketPath });
-    await new Promise<void>((done) => socketClient.on("connect", done));
+    await Promise.all([
+      new Promise<void>((done) => socketClient.on("connect", done)),
+      new Promise<void>((done) => wsClient.on("open", done)),
+    ]);
 
-    const socketClientDataPromise = new Promise((resolve) => {
-      socketClient.on("data", (data) => {
-        expect(data.toString()).toBe(dataFromWSClient2Socket);
-        expect(options.onSocketServerReceiveMsg).toHaveBeenCalledOnce();
-        resolve(data.toString());
-      });
-    });
+    const promises = Promise.all([
+      new Promise((resolve) => {
+        socketClient.on("data", (data) => {
+          resolve(data.toString());
+        });
+      }),
 
-    const wsClientMessagePromise = new Promise((resolve) => {
-      wsClient.on("message", (message) => {
-        expect(message.toString()).toBe(dataFromSocket2WSClient);
-        expect(options.onSocketServerReceiveMsg).toHaveBeenCalledOnce();
-        resolve(message.toString());
-      });
-    });
+      new Promise((resolve) => {
+        wsClient.on("message", (message) => {
+          resolve(message.toString());
+        });
+      }),
+    ]);
 
     // Send data to Websocket server.
     wsClient.send(dataFromWSClient2Socket);
     // Send data to unix domain socket server.
     socketClient.write(dataFromSocket2WSClient);
+    const [socketClientReceivedData, wsClientReceivedData] = await promises;
 
-    await socketClientDataPromise;
-    await wsClientMessagePromise;
+    expect(socketClientReceivedData).toBe(dataFromWSClient2Socket);
+    expect(options.onSocketServerReceiveMsg).toHaveBeenCalledOnce();
+    expect(wsClientReceivedData).toBe(dataFromSocket2WSClient);
+    expect(options.onSocketServerReceiveMsg).toHaveBeenCalledOnce();
     expect.assertions(4);
   });
 });
