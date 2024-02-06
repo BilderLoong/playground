@@ -21,6 +21,7 @@ import fs from "fs";
 import path from "path";
 import util from "util";
 import { MyServer } from "./myServer";
+import { P } from "ts-pattern";
 
 function createTempDir() {
   const tmpDir = path.join("/tmp", "testing");
@@ -100,7 +101,8 @@ describe.concurrent("startUnixDomainSocketServer", () => {
   });
 });
 
-describe.concurrent("pipeBetweenSocketAndWS", () => {
+describe("pipeBetweenSocketAndWS", () => {
+  // TODO Remove the global variable, otherwise it will cause concurrent tests failed.
   let wss: WebSocket.Server;
   let socketServer: MyServer;
   let wsClient: WebSocket;
@@ -188,16 +190,25 @@ describe.concurrent("pipeBetweenSocketAndWS", () => {
 
   // TODO Why?
   test.skip("Why this test stuck", async () => {
-    wsClient = new WebSocket(`ws://localhost:${testPort}`);
-    socketClient = net.createConnection({ path: testSocketPath });
+    const wsClient = new WebSocket(`ws://localhost:${testPort}`);
+    const socketClient = net.createConnection({ path: testSocketPath });
     await new Promise<void>((done) => wsClient.on("open", done));
     await new Promise<void>((done) => socketClient.on("connect", done));
   });
 
-  test.concurrent("Why this test does't stuck", async () => {
-    wsClient = new WebSocket(`ws://localhost:${testPort}`);
-    socketClient = net.createConnection({ path: testSocketPath });
+  test("Why this test does't stuck", async () => {
+    const wsClient = new WebSocket(`ws://localhost:${testPort}`);
+    const socketClient = net.createConnection({ path: testSocketPath });
     await new Promise<void>((done) => socketClient.on("connect", done));
     await new Promise<void>((done) => wsClient.on("open", done));
+  });
+
+  test("Why this test does't stuck", async () => {
+    const wsClient = new WebSocket(`ws://localhost:${testPort}`);
+    const socketClient = net.createConnection({ path: testSocketPath });
+    await Promise.all([
+      new Promise<void>((done) => socketClient.on("connect", done)),
+      new Promise<void>((done) => wsClient.on("open", done)),
+    ]);
   });
 });
