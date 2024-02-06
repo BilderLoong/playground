@@ -11,6 +11,7 @@ import { logger } from "./log";
 import { Socket } from "net";
 import { fileURLToPath } from "url";
 import process from "process";
+import { MyServer } from "./myServer";
 
 const isRunningAsAsMainModule =
   process.argv[1] === fileURLToPath(import.meta.url);
@@ -27,7 +28,7 @@ async function main() {
     process.exit(0);
   });
 
-  const wss = startWSS({ port: wsPort });
+  const wss = await startWSS({ port: wsPort });
   logger.info(`Websocket server start at port: ${wsPort}.
   You can test it by using:
     \`wscat -c ws://localhost:${wsPort}\``);
@@ -40,12 +41,12 @@ async function main() {
      \`socat - UNIX-CONNECT:${socketServer.address()}\``);
 
   pipeBetweenSocketAndWS(wss, socketServer, {
-    onReceiveSocketMsg(data) {
+    onSocketServerReceiveMsg(data) {
       logger.info(`${socketPath} received data: ${data.toString()}`);
       return data.toString();
     },
-    onReceiveWSSMsg(data) {
-      logger.info(`WS received message: ${data.toString()}.`);
+    onWSSReceiveMsg(data) {
+      logger.info(`WSS received message: ${data.toString()}.`);
       return data.toString();
     },
   });
@@ -63,53 +64,39 @@ async function main() {
  */
 export function pipeBetweenSocketAndWS(
   wss: WebSocketServer,
-  socketServer: net.Server,
+  socketServer: MyServer,
   options?: {
-    onReceiveWSSMsg?: (
+    onWSSReceiveMsg?: (
       data: WebSocket.RawData
     ) => Parameters<Socket["write"]>[0];
-    onReceiveSocketMsg?: (data: Buffer) => Parameters<WebSocket["send"]>[0];
+    onSocketServerReceiveMsg?: (
+      data: Buffer
+    ) => Parameters<WebSocket["send"]>[0];
   }
 ) {
   const toString = (data: { toString: () => string }) => data.toString();
-  const { onReceiveWSSMsg = toString, onReceiveSocketMsg = toString } =
+  const { onWSSReceiveMsg = toString, onSocketServerReceiveMsg = toString } =
     options ?? {};
 
-  const socketPath = socketServer.address();
-  if (typeof socketPath !== "string") {
-    logger.error(`Wrong socket path: ${socketPath}.`);
-    throw new Error("Socket server address must be a string.");
-  }
-
-  const socketClientPromise = new Promise<Socket>((resolve, reject) => {
-    const socketClient = net.createConnection(socketPath, () => {
-      resolve(socketClient);
-    });
-
-    socketClient.on("error", (err) => {
-      logger.error(`Error connecting to socket server: ${err}`);
-      reject(err);
-    });
-  });
-
   wss.on("connection", async (ws) => {
-    logger.info("WebSocket client connected.");
-
-    const socketClient = await socketClientPromise;
+    logger.info("A new websocket client connect to websocket server.");
 
     ws.on("message", (wsMsg) => {
-      const res = onReceiveWSSMsg(wsMsg);
-      socketClient.write(res);
+      const res = onWSSReceiveMsg(wsMsg);
 
-      ws.on("close", socketClient.end);
+      logger.info(
+        `Broadcasting a message from a ws client to to all connected socket clients. 
+         All connected client size: ${socketServer.clients.size}.`
+      );
+      socketServer.clients.broadcast(res);
     });
   });
 
   socketServer.on("connection", (socket) => {
-    logger.info("Socket client connected.");
+    logger.info("A new socket client connect to socket server.");
 
     socket.on("data", (data) => {
-      const res = onReceiveSocketMsg(data);
+      const res = onSocketServerReceiveMsg(data);
 
       wss.clients.forEach((client) => {
         if (client.readyState !== WebSocket.OPEN) {
@@ -140,13 +127,19 @@ function getCommandLineOptions() {
   return optsParsedResult.data;
 }
 
-function startWSS({ port }: { port: number }) {
+export function startWSS({ port }: { port: number }) {
   const wss = new WebSocketServer({ port });
   wss.on("connection", function connection(ws) {
     ws.on("error", logger.error);
   });
 
-  return wss;
+  return new Promise<WebSocketServer>((resolve, reject) => {
+    wss.on("listening", () => {
+      resolve(wss);
+    });
+
+    wss.on("error", reject);
+  });
 }
 
 function messageDispatcher(wsMsg: string) {
@@ -176,9 +169,9 @@ function messageDispatcher(wsMsg: string) {
  */
 export function startUnixDomainSocketServer(
   socketPath: string
-): Promise<{ server: net.Server; socketPath: string }> {
+): Promise<{ server: MyServer; socketPath: string }> {
   return new Promise((resolve, reject) => {
-    const server = net.createServer();
+    const server = new MyServer();
 
     server.listen(socketPath, () => {
       resolve({ server, socketPath });
