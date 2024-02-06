@@ -44,10 +44,12 @@ MOCKED_API_PATH_TYPE = (
     | Literal["load-fmp-info"]
     | Literal["queryGrouponCouponInfo"]
     | Literal["query-groupon-coupon-info"]
+    | Literal["query-dish-collocation"]
+    | Literal["order-confirm"]
 )
 
 # The part of the  api path aim to replace.
-MODIFIED_API_PATHS: list[MOCKED_API_PATH_TYPE] = [ "load-fmp-info" ]
+MODIFIED_API_PATHS: list[MOCKED_API_PATH_TYPE] = [ "query-dish-collocation","order-confirm" ]
 
 # def request(flow):
 #     ctx.log.info(flow.request.get_text())

@@ -186,6 +186,7 @@ describe.concurrent("pipeBetweenSocketAndWS", () => {
     expect.assertions(4);
   });
 
+  // TODO Why?
   test.skip("Why this test stuck", async () => {
     wsClient = new WebSocket(`ws://localhost:${testPort}`);
     socketClient = net.createConnection({ path: testSocketPath });
