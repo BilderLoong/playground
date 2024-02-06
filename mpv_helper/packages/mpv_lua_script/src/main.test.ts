@@ -41,9 +41,8 @@ function deleteTempDir() {
   }
 }
 
-describe("startUnixDomainSocketServer", () => {
-  const testSocketPath = "/tmp/test.socket";
-
+describe.concurrent("startUnixDomainSocketServer", () => {
+  let testSocketPath: string;
   beforeEach(() => {
     if (fs.existsSync(testSocketPath)) {
       fs.unlinkSync(testSocketPath);
@@ -51,17 +50,19 @@ describe("startUnixDomainSocketServer", () => {
   });
 
   it("should create a socket.", async () => {
-    const { server, socketPath: socketPath } =
-      await startUnixDomainSocketServer(testSocketPath);
+    testSocketPath = `/tmp/test-${Math.random()}.sock`;
+    const { server, socketPath } = await startUnixDomainSocketServer(
+      testSocketPath
+    );
 
     expect(server).toBeDefined();
-
     expect(fs.existsSync(socketPath)).toBeTruthy();
 
     server.close();
   });
 
   test("client should communicate well with the server.", async () => {
+    testSocketPath = `/tmp/test-${Math.random()}.sock`;
     const { server, socketPath } = await startUnixDomainSocketServer(
       testSocketPath
     );
@@ -99,13 +100,13 @@ describe("startUnixDomainSocketServer", () => {
   });
 });
 
-describe("pipeBetweenSocketAndWS", () => {
+describe.concurrent("pipeBetweenSocketAndWS", () => {
   let wss: WebSocket.Server;
   let socketServer: MyServer;
   let wsClient: WebSocket;
   let socketClient: net.Socket;
   const testPort = 12345;
-  const testSocketPath = "/tmp/test.sock";
+  const testSocketPath = `/tmp/test-${Math.random()}.sock`;
 
   beforeAll(async () => {
     console.info("beforeAll running.");
@@ -124,12 +125,17 @@ describe("pipeBetweenSocketAndWS", () => {
   afterAll(async () => {
     console.info("afterAll running.");
     await Promise.all([
-      util.promisify(wsClient.close),
-      util.promisify(socketClient.end),
       util.promisify(wss.close),
       util.promisify(socketServer.close),
     ]);
     console.info("afterAll end.");
+  });
+
+  afterEach(async () => {
+    await Promise.all([
+      util.promisify(wsClient.close),
+      util.promisify(socketClient.end),
+    ]);
   });
 
   it("should pipe messages between WebSocket and TCP socket", async () => {
@@ -178,5 +184,19 @@ describe("pipeBetweenSocketAndWS", () => {
     expect(wsClientReceivedData).toBe(dataFromSocket2WSClient);
     expect(options.onSocketServerReceiveMsg).toHaveBeenCalledOnce();
     expect.assertions(4);
+  });
+
+  test.skip("Why this test stuck", async () => {
+    wsClient = new WebSocket(`ws://localhost:${testPort}`);
+    socketClient = net.createConnection({ path: testSocketPath });
+    await new Promise<void>((done) => wsClient.on("open", done));
+    await new Promise<void>((done) => socketClient.on("connect", done));
+  });
+
+  test.concurrent("Why this test does't stuck", async () => {
+    wsClient = new WebSocket(`ws://localhost:${testPort}`);
+    socketClient = net.createConnection({ path: testSocketPath });
+    await new Promise<void>((done) => socketClient.on("connect", done));
+    await new Promise<void>((done) => wsClient.on("open", done));
   });
 });
