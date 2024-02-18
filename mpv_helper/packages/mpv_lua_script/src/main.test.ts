@@ -101,46 +101,59 @@ describe.concurrent("startUnixDomainSocketServer", () => {
   });
 });
 
-describe("pipeBetweenSocketAndWS", () => {
-  // TODO Remove the global variable, otherwise it will cause concurrent tests failed.
-  let wss: WebSocket.Server;
-  let socketServer: MyServer;
-  let wsClient: WebSocket;
-  let socketClient: net.Socket;
-  const testPort = 12345;
-  const testSocketPath = `/tmp/test-${Math.random()}.sock`;
+describe.concurrent("pipeBetweenSocketAndWS", () => {
+  interface LocalTestContext {
+    wss: WebSocket.Server;
+    socketServer: MyServer;
+    wsClient: WebSocket;
+    socketClient: net.Socket;
+    testWSPort: number;
+  }
 
-  beforeAll(async () => {
-    console.info("beforeAll running.");
+  beforeEach<LocalTestContext>(async (context) => {
+    console.info("beforeEach running.");
+
+    const testSocketPath = `/tmp/test-${Math.random()}.sock`;
+    const testWSPort = Math.round(Math.random() * 10000);
+
     if (fs.existsSync(testSocketPath)) {
       fs.unlinkSync(testSocketPath);
     }
 
-    ({ server: socketServer } = await startUnixDomainSocketServer(
-      testSocketPath
-    ));
-    wss = await startWSS({ port: testPort });
+    context.testWSPort = testWSPort;
 
-    console.info("beforeAll end.");
+    context.wss = await startWSS({ port: testWSPort });
+    context.socketServer = (
+      await startUnixDomainSocketServer(testSocketPath)
+    ).server;
+
+    context.wsClient = new WebSocket(`ws://localhost:${testWSPort}`);
+    context.socketClient = net.createConnection({ path: testSocketPath });
+
+    console.info("beforeEach end.");
   });
 
-  afterAll(async () => {
-    console.info("afterAll running.");
-    await Promise.all([
-      util.promisify(wss.close),
-      util.promisify(socketServer.close),
-    ]);
-    console.info("afterAll end.");
-  });
+  afterEach<LocalTestContext>(
+    async ({ wss, socketServer, wsClient, socketClient }) => {
+      console.info("afterEach running.");
 
-  afterEach(async () => {
-    await Promise.all([
-      util.promisify(wsClient.close),
-      util.promisify(socketClient.end),
-    ]);
-  });
+      await Promise.all([
+        util.promisify(wss.close),
+        util.promisify(socketServer.close),
+        util.promisify(wsClient.close),
+        util.promisify(socketClient.end),
+      ]);
 
-  it("should pipe messages between WebSocket and TCP socket", async () => {
+      console.info("afterEach end.");
+    }
+  );
+
+  it<LocalTestContext>("should pipe messages between WebSocket and TCP socket", async ({
+    socketServer,
+    wss,
+    wsClient,
+    socketClient,
+  }) => {
     const dataFromWSClient2Socket = "Hello from websocket client!";
     const dataFromSocket2WSClient = "Hello from socket!";
     const options = {
@@ -154,8 +167,6 @@ describe("pipeBetweenSocketAndWS", () => {
     // Start the piping function
     pipeBetweenSocketAndWS(wss, socketServer, options);
 
-    wsClient = new WebSocket(`ws://localhost:${testPort}`);
-    socketClient = net.createConnection({ path: testSocketPath });
     await Promise.all([
       new Promise<void>((done) => socketClient.on("connect", done)),
       new Promise<void>((done) => wsClient.on("open", done)),
@@ -189,26 +200,43 @@ describe("pipeBetweenSocketAndWS", () => {
   });
 
   // TODO Why?
-  test.skip("Why this test stuck", async () => {
-    const wsClient = new WebSocket(`ws://localhost:${testPort}`);
-    const socketClient = net.createConnection({ path: testSocketPath });
+  test.skip<LocalTestContext>("Why this test stuck", async ({
+    wsClient,
+    socketClient,
+  }) => {
     await new Promise<void>((done) => wsClient.on("open", done));
     await new Promise<void>((done) => socketClient.on("connect", done));
   });
 
-  test("Why this test does't stuck", async () => {
-    const wsClient = new WebSocket(`ws://localhost:${testPort}`);
-    const socketClient = net.createConnection({ path: testSocketPath });
+  test<LocalTestContext>("Why this test does't stuck", async ({
+    socketClient,
+    wsClient,
+  }) => {
     await new Promise<void>((done) => socketClient.on("connect", done));
     await new Promise<void>((done) => wsClient.on("open", done));
   });
 
-  test("Why this test does't stuck", async () => {
-    const wsClient = new WebSocket(`ws://localhost:${testPort}`);
-    const socketClient = net.createConnection({ path: testSocketPath });
+  test<LocalTestContext>("Why this test does't stuck", async ({
+    socketClient,
+    wsClient,
+  }) => {
     await Promise.all([
       new Promise<void>((done) => socketClient.on("connect", done)),
       new Promise<void>((done) => wsClient.on("open", done)),
     ]);
   });
 });
+
+// describe("test context", () => {
+//   beforeAll((context) => {
+//     console.log({ context });
+//   });
+//   beforeEach((context) => {
+//     context.bar = "bar";
+//     console.log({ context2: context });
+//   });
+//   it("1", (context) => {
+//     // expect(context.foo).toBe(1);
+//     expect(context.bar).toBe("bar");
+//   });
+// });
