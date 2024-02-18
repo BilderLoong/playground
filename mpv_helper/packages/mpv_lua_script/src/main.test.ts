@@ -23,25 +23,6 @@ import util from "util";
 import { MyServer } from "./myServer";
 import { P } from "ts-pattern";
 
-function createTempDir() {
-  const tmpDir = path.join("/tmp", "testing");
-  if (!fs.existsSync(tmpDir)) {
-    fs.mkdirSync(tmpDir);
-  }
-}
-
-function deleteTempDir() {
-  const tmpDir = path.join("/tmp", "testing");
-  if (fs.existsSync(tmpDir)) {
-    fs.rm(tmpDir, { recursive: true }, (err) => {
-      if (!err) {
-        return;
-      }
-      console.error(err);
-    });
-  }
-}
-
 describe.concurrent("startUnixDomainSocketServer", () => {
   let testSocketPath: string;
   beforeEach(() => {
@@ -113,8 +94,8 @@ describe.concurrent("pipeBetweenSocketAndWS", () => {
   beforeEach<LocalTestContext>(async (context) => {
     console.info("beforeEach running.");
 
-    const testSocketPath = `/tmp/test-${Math.random()}.sock`;
     const testWSPort = Math.round(Math.random() * 10000);
+    const testSocketPath = `/tmp/test-${testWSPort}.sock`;
 
     if (fs.existsSync(testSocketPath)) {
       fs.unlinkSync(testSocketPath);
@@ -157,12 +138,8 @@ describe.concurrent("pipeBetweenSocketAndWS", () => {
     const dataFromWSClient2Socket = "Hello from websocket client!";
     const dataFromSocket2WSClient = "Hello from socket!";
     const options = {
-      onWSSReceiveMsg: vi.fn((data) => {
-        return data.toString();
-      }),
-      onSocketServerReceiveMsg: vi.fn((data) => {
-        return data.toString();
-      }),
+      onWSSReceiveMsg: vi.fn((data) => data.toString()),
+      onSocketServerReceiveMsg: vi.fn((data) => data.toString()),
     };
     // Start the piping function
     pipeBetweenSocketAndWS(wss, socketServer, options);
@@ -199,7 +176,10 @@ describe.concurrent("pipeBetweenSocketAndWS", () => {
     expect.assertions(4);
   });
 
-  // TODO Why?
+  /* TODO
+   Why? 
+   https://stackoverflow.com/questions/78015217/why-does-switching-the-position-of-async-code-cause-infinite-execution-in-node-j
+  */
   test.skip<LocalTestContext>("Why this test stuck", async ({
     wsClient,
     socketClient,
@@ -226,17 +206,3 @@ describe.concurrent("pipeBetweenSocketAndWS", () => {
     ]);
   });
 });
-
-// describe("test context", () => {
-//   beforeAll((context) => {
-//     console.log({ context });
-//   });
-//   beforeEach((context) => {
-//     context.bar = "bar";
-//     console.log({ context2: context });
-//   });
-//   it("1", (context) => {
-//     // expect(context.foo).toBe(1);
-//     expect(context.bar).toBe("bar");
-//   });
-// });
