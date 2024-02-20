@@ -2,10 +2,17 @@
 
 ## Development `main.lua`
 
+First, install dependencies
+
+```shell
+luarocks init # https://memex.social/a/gKV1AAOz01VXonktFn4J, https://martin-fieber.de/blog/lua-project-setup-with-luarocks/#project-folder-setup
+./luarocks install --deps-only mpv_lua_script-dev-1.rockspec
+```
+
 Before `main.lua`, run the below command to tell the lua using the installed lua_module
 
 ```shell
-./lua_wrapper main.lua
+./lua main.lua
 ```
 
 ### Easies debug script
@@ -14,8 +21,8 @@ The below command will open multiple Tmux panels for debugging.
 
 Information
 
-- https://unix.stackexchange.com/a/152740
-- https://gist.github.com/sdondley/b01cc5bb1169c8c83401e438a652b84e#passing-shell-commands-to-splitw
+- <https://unix.stackexchange.com/a/152740>
+- <https://gist.github.com/sdondley/b01cc5bb1169c8c83401e438a652b84e#passing-shell-commands-to-splitw>
 
 ```shell
 tmux set-option remain-on-exit on; tmux splitw -h "./lua_wrapper src/main.lua" ;sleep 2; tmux splitw -h "socat - UNIX-CONNECT:/tmp/mpv_helper.socket"; tmux splitw -h "wscat -c ws://localhost:5140"

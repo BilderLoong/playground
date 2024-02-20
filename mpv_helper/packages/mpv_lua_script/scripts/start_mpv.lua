@@ -1,11 +1,12 @@
 local uv          = require 'luv'
-local utils       = require 'utils'
+local utils       = require 'src.utils'
 
 local stdin       = uv.new_pipe(true)
 local stdout      = uv.new_pipe(true)
 local stderr      = uv.new_pipe(true)
 
 local script_path = utils.script_path()
+print(script_path)
 
 local handle, pid = uv.spawn('mpv', {
     args = {
@@ -13,7 +14,7 @@ local handle, pid = uv.spawn('mpv', {
         "--sub-file=https://gotranscript.com/samples/captions-example.srt",
         '--window-minimized=yes',
         '--input-ipc-server=/tmp/mpvsocket',
-        '--script=' .. script_path .. '..',
+        '--script=' .. script_path .. '..' .. "/src",
     },
     -- stdio = { stdin, stdout, stderr },
     stdio = { 0, 1, 2 },

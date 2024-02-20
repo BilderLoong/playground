@@ -18,7 +18,8 @@ build = {
 }
 
 dependencies = {
-   "lua >= 5.1",
    "json.lua",
-   "inspect"
+   "inspect",
+   "luv",
+   "luasocket"
 }

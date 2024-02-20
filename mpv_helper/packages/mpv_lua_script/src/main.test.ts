@@ -176,9 +176,8 @@ describe.concurrent("pipeBetweenSocketAndWS", () => {
     expect.assertions(4);
   });
 
-  /* TODO
-   Why? 
-   https://stackoverflow.com/questions/78015217/why-does-switching-the-position-of-async-code-cause-infinite-execution-in-node-j
+  /* 
+    Why? https://stackoverflow.com/questions/78015217/why-does-switching-the-position-of-async-code-cause-infinite-execution-in-node-j
   */
   test.skip<LocalTestContext>("Why this test stuck", async ({
     wsClient,
