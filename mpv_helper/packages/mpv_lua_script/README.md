@@ -12,7 +12,13 @@ luarocks init # https://memex.social/a/gKV1AAOz01VXonktFn4J, https://martin-fieb
 Before `main.lua`, run the below command to tell the lua using the installed lua_module
 
 ```shell
-./lua main.lua
+./lua_wrapper src/main.lua
+```
+
+Develop lua with mpv.
+
+```shell
+./lua_wrapper script/start_mpv.lua
 ```
 
 ### Easies debug script

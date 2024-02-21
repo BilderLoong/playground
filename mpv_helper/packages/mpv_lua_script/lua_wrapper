@@ -1,0 +1,2 @@
+#!/bin/bash
+eval "$(luarocks path)" && lua -l src/init "$@"
