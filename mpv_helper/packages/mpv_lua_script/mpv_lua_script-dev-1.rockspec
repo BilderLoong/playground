@@ -21,5 +21,5 @@ dependencies = {
    "json.lua",
    "inspect",
    "luv",
-   "luasocket"
+   "luasocket",
 }

@@ -1,39 +1,44 @@
 local init = {}
 
-local function add_script_dir_path()
+--- Get directory path that the script located.
+---@return string
+local function get_script_dir_path()
     local str = debug.getinfo(2, "S").source:sub(2)
     local path = str:match("(.*/)") or "./"
 
-    package.path = package.path .. ";" .. path .. "?.lua"
+    return path .. "?.lua"
 end
 
-local function add_lua_modules_path()
+--- Add the `lua_modules` to the `package.path` and `package.cpath`.
+---@return { path: string, cpath: string }
+local function get_lua_modules_path_table()
     local version = _VERSION:match("%d+%.%d+")
-    package.path = 'lua_modules/share/lua/' ..
-        version .. '/?.lua;lua_modules/share/lua/' .. version .. '/?/init.lua;' .. package.path
-    package.cpath = 'lua_modules/lib/lua/' .. version .. '/?.so;' .. package.cpath
+
+    return {
+        path = 'lua_modules/share/lua/' .. version .. '/?.lua;lua_modules/share/lua/' .. version .. '/?/init.lua',
+        cpath = 'lua_modules/lib/lua/' .. version .. '/?.so'
+    }
 end
 
 
 function init.run()
-    -- Get the script directory
-    add_script_dir_path()
-    -- Add the script directory to the package.path
-    add_lua_modules_path()
+    package.path = package.path .. ";" .. get_script_dir_path() .. ";" .. get_lua_modules_path_table().path
+    package.cpath = package.cpath .. ';' .. get_lua_modules_path_table().cpath
 end
 
 init.run()
 
 
 --- Above code add necessary path.
+print("package.path: " .. package.path)
 
-print(package.path)
-local uv      = require 'luv'
 local json    = require 'json'
 local inspect = require 'inspect'
 local utils   = require('utils')
 
-local function run()
+--- @param handle_socket_msg? fun(msg:string): nil
+local function run(handle_socket_msg)
+    local uv = require 'luv'
     local function get_socket_path(socket_name)
         local platform = os.getenv('OS')
         if platform == 'Windows_NT' then
@@ -42,14 +47,6 @@ local function run()
             return '/tmp/' .. socket_name
         end
     end
-
-    --- @param msg string
-    --- @return nil
-    local function handle_socket_msg(msg)
-        local data = json.decode(msg)
-        print(inspect(data))
-    end
-
 
     --- @param  socket_path string
     --- @param  ws_port number | string
@@ -127,7 +124,7 @@ local function run()
     connect_to_socket(socket_path, function(client)
         uv.read_start(client, function(err, msg)
             assert(not err, err)
-            if msg then
+            if msg and handle_socket_msg then
                 handle_socket_msg(msg)
             else
                 print("client end")
@@ -150,8 +147,18 @@ local function run()
 end
 
 local success, mp = pcall(require, "mp")
-if success then
-    mp.add_key_binding("Ctrl+W", "mpvacious-web-interface", run)
-else
+-- Execute outside the mpv.
+if not success then
     run();
+    return
 end
+
+---@param msg string
+local function handle_socket_msg(msg)
+    print("Received message: ", msg)
+    mp.commandv('keypress', msg)
+end
+
+mp.add_key_binding("Ctrl+W", "mpvacious-web-interface", function()
+    run(handle_socket_msg)
+end)

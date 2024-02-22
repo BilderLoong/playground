@@ -1,12 +1,8 @@
-local uv          = require 'luv'
-local utils       = require 'src.utils'
+local uv    = require 'luv'
+local utils = require 'src.utils'
 
-local stdin       = uv.new_pipe(true)
-local stdout      = uv.new_pipe(true)
-local stderr      = uv.new_pipe(true)
 
 local script_path = utils.script_path()
-print(script_path)
 
 local handle, pid = uv.spawn('mpv', {
     args = {
@@ -21,6 +17,28 @@ local handle, pid = uv.spawn('mpv', {
 }, function(code, signal) -- on exit
     print("exit code", code)
     print("exit signal", signal)
+    os.exit(1)
 end)
 
+
+
+
+
+
+
 uv.run("default")
+
+local function pre_exit_clean_up()
+    local function close_spawned_process(signal)
+        print("got " .. signal .. ", shutting down")
+        if handle then
+            -- Kill the spawned process
+            uv.process_kill(handle, 'SIGTERM')
+        end
+    end
+
+    local signal = uv.new_signal()
+    -- Register a signal handler for the process exit
+    uv.signal_start(signal, "sigint", close_spawned_process)
+    uv.signal_start(signal, "sigterm", close_spawned_process)
+end
