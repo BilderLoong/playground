@@ -2,8 +2,8 @@
  * @typedef {Object} Api
  * @property {function(): void} ankiBuryCard - Une méthode pour enterrer une carte.
  * @property {function(string): void} ankiShowToast - Une méthode pour afficher un toast.
- * @property {function(): number} ankiGetCardFlag - Une méthode pour afficher un toast.
- * @property {function(number): void } ankiToggleFlag - Une méthode pour afficher un toast.
+ * @property {function(): number} ankiGetCardFlag 
+ * @property {function(number): void } ankiToggleFlag
  */
 /** @type {Api} */
 var api = registerAPI();
