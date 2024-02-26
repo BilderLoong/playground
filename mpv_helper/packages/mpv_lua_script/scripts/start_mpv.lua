@@ -11,6 +11,7 @@ local handle, pid = uv.spawn('mpv', {
         '--window-minimized=yes',
         '--input-ipc-server=/tmp/mpvsocket',
         '--script=' .. script_path .. '..' .. "/src",
+        "--script-opts=mpvaciousWeb-debug=true"
     },
     -- stdio = { stdin, stdout, stderr },
     stdio = { 0, 1, 2 },

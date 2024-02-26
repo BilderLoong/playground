@@ -35,10 +35,10 @@ print("package.path: " .. package.path)
 local json    = require 'json'
 local inspect = require 'inspect'
 local utils   = require('utils')
+local uv      = require 'luv'
 
---- @param handle_socket_msg? fun(msg:string): nil
-local function run(handle_socket_msg)
-    local uv = require 'luv'
+--- @param started? fun(client): nil
+local function start_web_ui(started)
     local function get_socket_path(socket_name)
         local platform = os.getenv('OS')
         if platform == 'Windows_NT' then
@@ -124,41 +124,66 @@ local function run(handle_socket_msg)
     connect_to_socket(socket_path, function(client)
         uv.read_start(client, function(err, msg)
             assert(not err, err)
-            if msg and handle_socket_msg then
-                handle_socket_msg(msg)
+            if msg and started then
+                started(client)
             else
                 print("client end")
             end
         end)
-
-        -- local message = 'Hello from mpv!'
-        -- uv.write(client, message, function(err)
-        --     -- Check for errors in writing
-        --     if err then
-        --         print("Error writing to socket:", err)
-        --         return
-        --     end
-
-        --     print("Message sent to server:", message)
-        -- end)
     end)
 
-    uv.run("default")
+    -- uv.run("default")
 end
 
+local state = {
+    is_running = false
+}
+
 local success, mp = pcall(require, "mp")
--- Execute outside the mpv.
+-- Executed outside of the mpv.
 if not success then
-    run();
+    start_web_ui();
     return
 end
 
----@param msg string
+--- @param msg string
 local function handle_socket_msg(msg)
     print("Received message: ", msg)
     mp.commandv('keypress', msg)
 end
 
-mp.add_key_binding("Ctrl+W", "mpvacious-web-interface", function()
-    run(handle_socket_msg)
-end)
+
+local function _start_web_ui()
+    if (state.is_running) then
+        return
+    end
+
+    state.is_running = true
+
+    start_web_ui(
+        function(client)
+            client:read_start(function(err, msg)
+                handle_socket_msg(msg)
+            end)
+        end
+    )
+
+    mp.add_periodic_timer(0.001, function()
+        -- Use nowait so that it won't block the loop.
+        uv.run('nowait')
+    end)
+
+    mp.register_event('shutdown', function()
+        uv.stop()
+    end)
+end
+
+if (mp.get_opt("mpvaciousWeb-debug") == "true") then
+    mp.register_event('start-file', function()
+        _start_web_ui()
+    end)
+end
+
+
+
+mp.add_key_binding("-", "mpvacious-web-interface", _start_web_ui)
