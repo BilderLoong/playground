@@ -1,3 +1,4 @@
+import Control.Applicative (Alternative (some))
 import Data.Time
 
 data DatabaseItem
@@ -170,3 +171,47 @@ myMaximumBy ::
 myMaximumBy f xs = foldr (\cur acc -> if f cur acc == GT then cur else acc) (last xs) xs
 
 myMinimumBy f xs = foldr (\cur acc -> if f cur acc == LT then cur else acc) (last xs) xs
+
+data PugType = PugData
+
+-- [1] [2]
+data HuskyType a = HuskyData -- [3] [4]
+data DogueDeBordeaux doge = DogueDeBordeaux doge
+data Doggies a = Husky a | Mastiff a deriving (Eq, Show)
+
+data Airline
+  = PapuAir
+  | CatapultsR'Us
+  | TakeYourChancesUnited
+  deriving (Eq, Show)
+
+data Manufacturer
+  = Mini
+  | -- (d)
+    Mazda
+  | -- (e)
+    Tata
+  -- (f)
+  deriving (Eq, Show)
+
+data Price = Price Integer deriving (Eq, Show)
+
+data Vehicle = Car Manufacturer Price | Plane Airline Price deriving (Eq, Show)
+
+myCar = Car Mini (Price 14000)
+urCar = Car Mazda (Price 20000)
+clownCar = Car Tata (Price 7000)
+doge = Plane PapuAir
+
+isCar :: Vehicle -> Bool
+isCar (Car _ _) = True
+isCar _ = False
+
+isPlane (Plane _ _) = True
+isPlane _ = False
+
+areCars :: [Vehicle] -> Bool
+areCars = any isCar
+
+getManu :: Vehicle -> Manufacturer
+getManu (Car a _) = a
