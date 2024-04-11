@@ -1,6 +1,7 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
 import Data.Int
+import Data.Monoid
 import Distribution.Types.AnnotatedId (AnnotatedId (AnnotatedId))
 import Text.Read (Lexeme (Number))
 
@@ -240,4 +241,19 @@ data FarmerRec = FarmerRec
 isDairyFarmerRec :: FarmerRec -> Bool
 isDairyFarmerRec farmer = case farmerType farmer of
   DairyFarmer -> True
-  _ -> False
+
+data BinaryTree a
+  = Leaf
+  | Node (BinaryTree a) a (BinaryTree a)
+  deriving (Eq, Ord, Show)
+
+insert' :: (Ord a) => a -> BinaryTree a -> BinaryTree a
+insert' n Leaf = Node Leaf n Leaf
+insert' n (Node left a right)
+  | n == a = Node left a right
+  | n < a = Node (insert' n left) a right
+  | n > a = Node left a (insert' n right)
+
+p1 = (+) 1
+p2 = (*) 2
+

@@ -1,0 +1,3 @@
+
+
+anyBool = All True <> All True
