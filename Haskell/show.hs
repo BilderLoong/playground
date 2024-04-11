@@ -12,12 +12,13 @@ class Numberish a where
   fromNumber :: Integer -> a
   toNumber :: a -> Integer
   defaultNumber :: a
-newtype Age
-  = Age Integer
-  deriving (Eq, Show)
 
 newtype Year
   = Year Integer
+  deriving (Eq, Show)
+
+newtype Age
+  = Age Integer
   deriving (Eq, Show)
 
 instance Numberish Age where
