@@ -1,7 +1,7 @@
 # Testing command
 # curl https://example.com -x http://localhost:8080
 
-from load_module import load_module
+# from .load_module import load_module
 import json
 import pathlib
 from typing import Literal, Callable, Dict, Any
