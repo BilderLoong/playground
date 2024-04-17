@@ -6,7 +6,7 @@ import json
 import pathlib
 from typing import Literal, Callable, Dict, Any
 import functools
-# from mitmproxy import ctx  # type: ignore
+from mitmproxy import ctx  # type: ignore
 import logging
 
 # https://docs.python.org/ja/3/howto/logging.html
@@ -107,7 +107,6 @@ def get_python_file_content(path: str) -> str | None:
         return module.get_json()
     except ModuleNotFoundError:
         raise
-        return None
 
 
 def get_json_file_content(path: str) -> str | None:
@@ -134,12 +133,16 @@ def replace_response_body(flow):
         if path not in request.url:
             return
 
-        json_str = get_mock_file_content(path)
-        if json_str is None:
-            ctx.log.info(f"File {path} not found.")
-            return
+        try:
+            json_str = get_mock_file_content(path)
+            if json_str is None:
+                ctx.log.warn(f"File {path} not found.")
+                return
 
-        response.set_text(json_str)
+            response.set_text(json_str)
+        except FileNotFoundError:
+            ctx.log.warn(f"File {path} not found.")
+            continue
 
 
 def dropUnwantedKeys(fmp: Dict[str, Any]):
@@ -201,3 +204,7 @@ def compose(*functions):
         return lambda x: f(g(x))
 
     return functools.reduce(compose2, functions, lambda x: x)
+
+
+def load_mock_module():
+    pass

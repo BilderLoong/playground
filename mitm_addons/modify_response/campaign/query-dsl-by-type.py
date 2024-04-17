@@ -1,2 +1,2 @@
-def mock_response():
-    return "haha"
+def get_json() -> str:
+    return "{}"

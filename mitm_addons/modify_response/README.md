@@ -1,3 +1,6 @@
+## Mock
+Support `json` and `py` file type type of mocking.
+
 ## Developing
 
 ## Setup
