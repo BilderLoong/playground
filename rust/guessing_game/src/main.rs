@@ -9,10 +9,10 @@ fn main() {
 
     println!("Guess the number!");
 
-    guessing(&secret_number);
+    guessing(secret_number);
 }
 
-fn guessing(secret_number: &u32) {
+fn guessing(secret_number: u32) {
     println!("Please input your guess."); // ほら、予想を入力してね
 
     let mut guess = String::new();
@@ -22,7 +22,7 @@ fn guessing(secret_number: &u32) {
     let guess: u32 = match guess.trim().parse() {
         Ok(num) => num,
         Err(_) => {
-            guessing(&secret_number);
+            guessing(secret_number);
             return;
         }
     };
@@ -32,12 +32,12 @@ fn guessing(secret_number: &u32) {
     match guess.cmp(&secret_number) {
         Ordering::Less => {
             println!("Too small!");
-            guessing(&secret_number);
+            guessing(secret_number);
         }
 
         Ordering::Greater => {
             println!("Too big!");
-            guessing(&secret_number);
+            guessing(secret_number);
         }
         Ordering::Equal => {
             println!("You win!");
