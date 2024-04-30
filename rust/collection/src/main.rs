@@ -1,5 +1,7 @@
+use core::panic;
 use std::collections::HashMap;
 use std::fs::File;
+use std::io::ErrorKind;
 
 fn main() {
     let s = String::from("Hello, world!");
@@ -104,7 +106,19 @@ fn main() {
     scores.entry(String::from("Blue")).or_insert(50);
     println!("{:?}", scores);
 
-    let f = File::open("hello.txt");
+    let f = match File::open("hello.txt") {
+        Err(ref error) if error.kind() == ErrorKind::NotFound => match File::create("hello.txt") {
+            Err(error) => {
+                panic!("There was a problem creating the file: {:?}", error);
+            }
+            Ok(file) => file,
+        },
+
+        Err(error) => {
+            panic!("There was a problem opening the file: {:?}", error);
+        }
+        Ok(file) => file,
+    };
 }
 
 struct Solution;
