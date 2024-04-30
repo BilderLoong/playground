@@ -1,3 +1,6 @@
+use std::collections::HashMap;
+use std::fs::File;
+
 fn main() {
     let s = String::from("Hello, world!");
     let s1 = &s[1..2];
@@ -34,7 +37,6 @@ fn main() {
     // for i in &v {
     //     println!("{}", i);
     // }
-
     for i in &v {
         println!("{}", i);
     }
@@ -62,12 +64,49 @@ fn main() {
     // println!("{:?}", v);
     let nums = vec![0, 1, 0];
     nums.split(|&x| x == 1);
+
+    let hello = "Здравствуйте";
+
+    let s = &hello[0..4];
+    println!("{}", s);
+
+    let s = &hello[0..2];
+    println!("{}", s);
+
+    let s = "नमस्ते";
+    s.chars().for_each(|x| println!("{}", x));
+    s.bytes().for_each(|x| println!("{}", x));
+
+    let mut scores = HashMap::new();
+    scores.insert("Blue".to_string(), 10);
+    scores.insert("Yellow".to_string(), 50);
+
+    let teams = vec![String::from("Blue"), String::from("Yellow")];
+    let initial_scores = vec![10, 50];
+
+    let mut scores: HashMap<_, _> = teams.iter().zip(initial_scores.iter()).collect();
+
+    let field_name = String::from("Favorite color");
+    let field_value = String::from("Blue");
+    let mut color = HashMap::new();
+    color.insert(field_name, field_value);
+
+    let mut scores = HashMap::new();
+    scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Yellow"), 50);
+    let team_name = String::from("Blue");
+    let score = scores.get(&team_name);
+
+    let mut scores = HashMap::new();
+    scores.insert(String::from("Blue"), 10);
+
+    scores.entry(String::from("Yellow")).or_insert(50);
+    scores.entry(String::from("Blue")).or_insert(50);
+    println!("{:?}", scores);
+
+    let f = File::open("hello.txt");
 }
 
 struct Solution;
 
-impl Solution {
-    pub fn find_max_consecutive_ones(nums: Vec<i32>) -> i32 {
-        nums.split(|&x| x == 1).map(|x| x.len()).max().unwrap() as i32
-    }
-}
+impl Solution {}
