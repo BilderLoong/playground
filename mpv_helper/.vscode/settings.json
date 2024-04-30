@@ -3,6 +3,7 @@
         "loadfile",
         "mpvacious",
         "prexit",
+        "Retryable",
         "wscat"
     ],
     "testing.automaticallyOpenPeekView": "never"

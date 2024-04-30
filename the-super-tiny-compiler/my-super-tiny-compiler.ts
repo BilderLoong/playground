@@ -386,11 +386,12 @@ export function codeGenerator(node: JavaScriptAST.Node): string {
 
 export function compiler(input: string): string {
   const tokens = tokenizer(input);
+  console.log({ tokens });
   const lispAst = parser(tokens);
+  console.log({ lispAst });
   const newAst = transformer(lispAst);
   const output = codeGenerator(newAst);
   return output;
 }
 
-console.log(compiler("(bar 1 (foo 2 3))"));
-console.log(compiler("1 1 1 1 "));
+console.log(compiler("(print 1 (foo 2 3))"));

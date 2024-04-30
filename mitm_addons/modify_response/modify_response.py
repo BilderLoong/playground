@@ -2,6 +2,8 @@
 # curl https://example.com -x http://localhost:8080
 
 from load_module import load_module
+import traceback
+import pprint
 import json
 import pathlib
 from typing import Literal, Callable, Dict, Any
@@ -51,9 +53,14 @@ MOCKED_API_PATH_TYPE = (
 
 # The part of the  api path aim to replace.
 MODIFIED_API_PATHS: list[MOCKED_API_PATH_TYPE] = [
-    "campaign/display",
     "campaign/query-dsl-by-type",
+    "campaign/display",
 ]
+
+
+def log_call_stack():
+    return pprint.pformat(traceback.format_stack())
+
 
 # def request(flow):
 #     ctx.log.info(flow.request.get_text())
@@ -90,12 +97,13 @@ def response(flow):
 
 def get_mock_file_content(name: str):
     path_without_extension = __dir / name
-    path_without_extension_str = path_without_extension.resolve().as_posix()
-    res = get_python_file_content(f"{path_without_extension_str}.py")
+    path_without_extension = path_without_extension.resolve().as_posix()
+
+    res = get_python_file_content(f"{path_without_extension}.py")
     if res is not None:
         return res
 
-    return get_json_file_content(f"{path_without_extension_str}.json")
+    return get_json_file_content(f"{path_without_extension}.json")
 
 
 def get_python_file_content(path: str) -> str | None:
@@ -104,9 +112,14 @@ def get_python_file_content(path: str) -> str | None:
     """
     try:
         module = load_module(path)
-        return module.get_json()
-    except ModuleNotFoundError:
-        raise
+        try:
+            return module.get_json()
+        except Exception as e:
+            ctx.log.warn(f"Got {e} when running {path}'s `get_json`.")
+            return None
+    except Exception as e:
+        ctx.log.warn(f"Got {e} when loading {path}.")
+        return None
 
 
 def get_json_file_content(path: str) -> str | None:
@@ -120,7 +133,8 @@ def get_json_file_content(path: str) -> str | None:
                 return None
 
             return json_str
-    except FileNotFoundError:
+    except FileNotFoundError as e:
+        ctx.log.warn(f"Got {e} when loading {path}.")
         return None
 
 
@@ -137,11 +151,12 @@ def replace_response_body(flow):
             json_str = get_mock_file_content(path)
             if json_str is None:
                 ctx.log.warn(f"File {path} not found.")
-                return
+                continue
 
             response.set_text(json_str)
-        except FileNotFoundError:
+        except FileNotFoundError as e:
             ctx.log.warn(f"File {path} not found.")
+            ctx.log.error(e)
             continue
 
 

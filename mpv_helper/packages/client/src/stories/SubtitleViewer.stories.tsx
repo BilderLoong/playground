@@ -16,9 +16,6 @@ const meta: Meta<typeof FileUploader> = {
   },
 };
 
-/**
- * @description A sleep function that resolves after a given time.
- */
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }

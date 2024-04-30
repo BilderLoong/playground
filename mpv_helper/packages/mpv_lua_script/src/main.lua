@@ -148,7 +148,6 @@ end
 
 --- @param msg string
 local function handle_socket_msg(msg)
-    print("Received message: ", msg)
     mp.commandv('keypress', msg)
 end
 
@@ -183,7 +182,6 @@ if (mp.get_opt("mpvaciousWeb-debug") == "true") then
         _start_web_ui()
     end)
 end
-
 
 
 mp.add_key_binding("-", "mpvacious-web-interface", _start_web_ui)
