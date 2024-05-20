@@ -1957,7 +1957,7 @@ const pageConfig = {
   data: {
     showFullLoading: true,
     dishShowType: "",
-    allDishList: [], // 切片后的菜单列表数据
+    allDishList: [], // 切片后的菜���列表数据
     finishSetDishList: false,
     firstScreenCollectEnd: false,
     reachBoundary: "",
@@ -3525,9 +3525,9 @@ const mapDispatchToData = (dispatch) => ({
   setAddOnShow: (isShow) => dispatch(setAddOnShowAction(isShow)),
   selectAddress: (addressId) => dispatch(selectAddress(addressId)),
   getUserAddressList: () => dispatch(getUserAddressList()),
-  setUserAddressList: (addressList) =>
+  setUserAddressList: (addressList) =
     dispatch(setUserAddressList(addressList)),
-  setAddressListModalFlag: (tag) => dispatch(setAddressListModalFlag(tag)),
+  setAddressListModalFlag: (tag) => dispatch(setAddress alFlag(tag)),
   updateTakeawayConfigInfo: (takeAwayDeliveryFeeRule) =>
     dispatch(updateTakeawayConfigInfo(takeAwayDeliveryFeeRule)),
   clearCart: () => {
@@ -3539,6 +3539,9 @@ const mapDispatchToData = (dispatch) => ({
   updatePrePriceTips: (tag) => dispatch(updatePrePriceTips(tag)),
 });
 
+  function bar(){
+  dsf
+  }
 const nextPageConfig = composePage(
   mapStateToData,
   mapDispatchToData,
