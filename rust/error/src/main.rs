@@ -1,4 +1,6 @@
+use std::collections::HashMap;
 use std::fs::File;
+
 use std::io;
 use std::io::Read;
 
@@ -31,17 +33,7 @@ fn ref_fn(&x: &i32) {
 struct Solution {}
 
 impl Solution {
-    pub fn next_greater_element(nums1: Vec<i32>, nums2: Vec<i32>) -> Vec<i32> {
-        nums1
-            .iter()
-            .map(|x| {
-                *nums2
-                    .iter()
-                    .skip_while(|&y| y != x)
-                    .skip(1)
-                    .find(|&y| y > x)
-                    .unwrap_or(&-1)
-            })
-            .collect()
+    pub fn has_trailing_zeros(nums: Vec<i32>) -> bool {
+        nums.iter().filter(|&x| x % 2 == 0).count() > 1
     }
 }

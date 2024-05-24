@@ -49,13 +49,11 @@ MOCKED_API_PATH_TYPE = (
     | Literal["order-pay-confirm"]
     | Literal["campaign/display"]
     | Literal["campaign/query-dsl-by-type"]
+    | Literal["draw"]
 )
 
 # The part of the  api path aim to replace.
-MODIFIED_API_PATHS: list[MOCKED_API_PATH_TYPE] = [
-    "campaign/query-dsl-by-type",
-    "campaign/display",
-]
+MODIFIED_API_PATHS: list[MOCKED_API_PATH_TYPE] = ["draw"]
 
 
 def log_call_stack():

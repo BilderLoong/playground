@@ -1,10 +1,11 @@
-import { glob, globSync, globStream, globStreamSync, Glob } from "glob";
 import z from "zod";
+import { glob, globSync, globStream, globStreamSync, Glob } from "glob";
 import yaml from "js-yaml";
 import fs from "node:fs/promises";
 import gitignoreParser from "parse-gitignore";
 import path from "path";
 import { minimatch } from "minimatch";
+z;
 
 async function main() {
   const filePathPartInMenuPackage: string[] = z
@@ -15,9 +16,9 @@ async function main() {
       yaml.load(
         await fs.readFile(
           "/Users/birudo/Project/menuorder-new-rms-h5-0/menu-package-file-list.yml",
-          "utf8"
-        )
-      )
+          "utf8",
+        ),
+      ),
     ).list;
   // console.log(filePathPartInMenuPackage)
   const filePatterInMenuPackage: string[] = z
@@ -28,9 +29,9 @@ async function main() {
       yaml.load(
         await fs.readFile(
           "/Users/birudo/Project/menuorder-new-rms-h5-0/rules/menu-package-import-TS.yml",
-          "utf8"
-        )
-      )
+          "utf8",
+        ),
+      ),
     ).ignores;
   const cwd = "/Users/birudo/Project/menuorder-new-rms-h5-0";
   const ignores = gitignoreParser(await fs.readFile(".gitignore")).patterns;
@@ -73,8 +74,7 @@ async function main() {
 
             if (
               !matchedMenuPackageComponentPathPart ||
-              !containAlias
-              ||
+              !containAlias ||
               isLimoContainerComponent
             ) {
               return [key, val];
@@ -84,7 +84,7 @@ async function main() {
             shouldReplace = true;
 
             return [key, replaceRes];
-          })
+          }),
         );
 
         if (shouldReplace) {
@@ -99,8 +99,8 @@ async function main() {
                 },
               }),
               null,
-              2
-            )
+              2,
+            ),
           );
         }
       } catch (error) {
@@ -114,8 +114,8 @@ async function main() {
 
 main();
 
-const componentsSchema = z.record(z.any()).and(
-  z.object({
-    usingComponents: z.record(z.string()).optional(),
-  })
-);
+const componentsSchema = z.record(z.any()).and(z.object({}));
+const non = z;
+non;
+non;
+non;

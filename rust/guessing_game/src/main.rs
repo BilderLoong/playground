@@ -3,6 +3,9 @@ use std::cmp::Ordering;
 use std::io;
 
 fn main() {
+    let a = Guess { value: 101 };
+    println!("Guess: {}", a.value);
+
     let secret_number = rand::thread_rng().gen_range(1..101);
 
     println!("The secret number is: {}", secret_number);
@@ -42,5 +45,23 @@ fn guessing(secret_number: u32) {
         Ordering::Equal => {
             println!("You win!");
         }
+    }
+}
+
+struct Guess {
+    value: u32,
+}
+
+impl Guess {
+    fn new(value: u32) -> Self {
+        if value < 1 || value > 100 {
+            panic!("aaaaa");
+        }
+
+        Self { value }
+    }
+
+    pub fn value(&self) -> u32 {
+        self.value
     }
 }

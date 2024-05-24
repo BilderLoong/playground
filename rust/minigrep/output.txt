@@ -1,0 +1,29 @@
+warning: struct `Solution` is never constructed
+  --> src/lib.rs:56:8
+   |
+56 | struct Solution;
+   |        ^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+warning: associated function `third_max` is never used
+  --> src/lib.rs:61:12
+   |
+60 | impl Solution {
+   | ------------- associated function in this implementation
+61 |     pub fn third_max(nums: Vec<i32>) -> i32 {
+   |            ^^^^^^^^^
+
+warning: `minigrep` (lib) generated 2 warnings
+warning: unused variable: `slice`
+ --> src/main.rs:8:9
+  |
+8 |     let slice: &[String] = binding.as_slice();
+  |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_slice`
+  |
+  = note: `#[warn(unused_variables)]` on by default
+
+warning: `minigrep` (bin "minigrep") generated 1 warning (run `cargo fix --bin "minigrep"` to apply 1 suggestion)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.01s
+     Running `target/debug/minigrep`
+Problem parsing arguments: Not enough arguments
