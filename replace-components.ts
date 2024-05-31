@@ -7,6 +7,10 @@ import path from "path";
 import { minimatch } from "minimatch";
 z;
 
+let a = 1;
+
+a = 2;
+
 async function main() {
   const filePathPartInMenuPackage: string[] = z
     .object({
