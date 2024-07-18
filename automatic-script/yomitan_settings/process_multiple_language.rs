@@ -14,13 +14,13 @@ use std::fs::File;
 use std::io::BufReader;
 
 fn main() {
-    let x: u64 = random();
-    println!("A random number: {}", x);
+    read_json_file("M-yomitan-settings-2024-07-05-02-30-40.bak.json");
 }
 
-fn read_json_file(file_path: &str) -> Result {
+fn read_json_file(file_path: &str) -> Result<Value> {
     // Open the file in read-only mode with buffer.
-    let file = File::open(file_path)?;
+    // let file = File::open(file_path).map_err(|e| serde_json::Error::io(e))?;
+    let file = File::open(file_path);
     let reader = BufReader::new(file);
 
     // Parse the JSON file into a serde_json::Value.

@@ -7,6 +7,6 @@ notifier.notify({
   // sound: true, // Play a notification sound
 });
 const special_symbol = 1
-const didi = 1
+const didi = 2
 
 log('123')

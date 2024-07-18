@@ -10,3 +10,5 @@ Mini-program-playground
 /playwright-report/
 /playwright/.cache/
 .virtualenvs/*
+# Rust builds
+**/target

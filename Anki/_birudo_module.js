@@ -25,8 +25,8 @@ async function run() {
 function registerAPI() {
   try {
     // To use toggleFlag api need to initialize first: https://github.com/ankidroid/Anki-Android/wiki/AnkiDroid-Javascript-API#initialize
-    const api = AnkiDroidJS.init({
-      version: "0.0.2",
+    const api = new AnkiDroidJS({
+      version: "0.0.3",
       developer: "cokoryu@outlook.com",
     });
 
