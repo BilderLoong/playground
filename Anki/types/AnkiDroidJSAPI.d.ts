@@ -53,7 +53,9 @@ declare global {
   class AnkiDroidJS implements AnkiDroidJsInterface {
     constructor(options: { version: string; developer: string });
 
-    ankiToggleFlag(flag: "none" | "blue"): Promise<void>;
+    ankiToggleFlag(
+      flag: "none" | "red" | "orange" | "green" | "blue",
+    ): Promise<void>;
 
     ankiAddTagToCard(): Promise<void>;
 
