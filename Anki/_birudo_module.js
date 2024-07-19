@@ -1,27 +1,15 @@
-/**
- * @typedef {Object} Api
- * @property {function(): void} ankiBuryCard - Une méthode pour enterrer une carte.
- * @property {function(string): void} ankiShowToast - Une méthode pour afficher un toast.
- * @property {function(): number} ankiGetCardFlag 
- * @property {function(number): void } ankiToggleFlag
- */
-/** @type {Api} */
-var api = registerAPI();
+const api = registerAPI();
 if (api) {
   setTimeout(run, 0);
 }
 
 async function run() {
-  burryAudioOnlyCard(api);
   makeATagOnlyRunOnLongTouch();
   // await loadScript("https://cdn.jsdelivr.net/npm/eruda").then(() => {
   //   eruda.init();
   // });
 }
 
-/**
- * @param apiNames {string[]}
- */
 function registerAPI() {
   try {
     // To use toggleFlag api need to initialize first: https://github.com/ankidroid/Anki-Android/wiki/AnkiDroid-Javascript-API#initialize
@@ -38,20 +26,20 @@ function registerAPI() {
   }
 }
 
-function burryAudioOnlyCard() {
-  const text = document.querySelector("#qa")?.innerText;
-  console.log({ 'document.querySelector("#qa")?.innerText;': text });
-
-  if (text) {
-    return;
-  }
-
-  api.ankiBuryCard();
-}
+// function burryAudioOnlyCard() {
+//   const text = document.querySelector("#qa")?.innerText;
+//   console.log({ 'document.querySelector("#qa")?.innerText;': text });
+//
+//   if (text) {
+//     return;
+//   }
+//
+//   api?.ankiBuryCard();
+// }
 
 function makeATagOnlyRunOnLongTouch() {
   document.querySelectorAll("a").forEach((a) => {
-    a.addEventListener("click", (e) => {
+    a.addEventListener("pointerdown", (e) => {
       if (e.pointerType === "touch") {
         e.preventDefault();
       }
@@ -67,7 +55,15 @@ function makeATagOnlyRunOnLongTouch() {
   });
 }
 
+/**
+ * Runs a function when a long touch is detected on the specified element.
+ *
+ * @param {HTMLElement} element - The element to listen for long touch events.
+ * @param {Function} func - The function to be executed when a long touch is detected.
+ * @param {number} delay - The delay in milliseconds that determines when a touch is considered a long touch.
+ */
 function runOnLongTouch(element, func, delay) {
+  /** @type {number | undefined} */
   let pressTimer;
 
   element.addEventListener("touchstart", function () {
@@ -81,11 +77,14 @@ function runOnLongTouch(element, func, delay) {
   });
 }
 
-
 export async function burryAndMarkOverflowCard() {
+  if (!api) {
+    return;
+  }
+
   const FLAG_ENUM = {
-    NONE: "none",
-    BLUE: "blue",
+    NONE: 0,
+    BLUE: 4,
   };
   try {
     // resizeDone is undefined in the desktop version of Anki.
@@ -97,25 +96,18 @@ export async function burryAndMarkOverflowCard() {
     return;
   }
 
-  const currentFlag = api.ankiGetCardFlag();
+  const { value: currentFlag } = await api.ankiGetCardFlag();
 
   console.debug({ currentFlag });
-  console.debug({
-    "currentFlag === FLAG_ENUM.BLUE": currentFlag === FLAG_ENUM.BLUE,
-  });
-  
+
   if (currentFlag === FLAG_ENUM.BLUE) {
-    console.log("Burry card");
     api.ankiBuryCard();
     return;
   }
 
   const isNeedScroll = _isNeedScroll();
-  console.log({ isNeedScroll });
   if (isNeedScroll) {
-    api.ankiToggleFlag(FLAG_ENUM.BLUE);
-    api.ankiBuryCard();
-    return;
+    return await Promise.all([api.ankiToggleFlag("blue"), api.ankiBuryCard()]);
   }
 
   /**
