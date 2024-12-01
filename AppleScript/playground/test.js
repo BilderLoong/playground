@@ -1,3 +1,3 @@
-var chrome = Application("Google Chrome");
-chrome.activate();
-chrome.windows[0].activeTabIndex 
+
+
+console.log(readFile("/Users/birudo/Library/Containers/com.ameba.TRex/Data/tmp/shortcutInput"))
