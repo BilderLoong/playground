@@ -1,3 +1,6 @@
+# Search Trex to with Yomitan
+
+[Final shortcuts](https://www.icloud.com/shortcuts/98df5bccbbdf4b64b86d09ee49868315).
 ## How to run JavaScript for Automation (JXA)?
 
 ### Using CLI 

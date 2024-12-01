@@ -10,6 +10,7 @@ function run(input, parameters) {
   try {
     // Read the file content
     const text = input[0]
+    // const text = 1
     if (!text) {
       notifyUserWithAlert(`Input text is empty.`);
       return
@@ -57,16 +58,28 @@ function run(input, parameters) {
  * @param {(url: string) => boolean} options.isUrlReuseable - Function to check if a tab is reusable.
  */
 function openURLInChrome({ url, isUrlReuseable }) {
-  const chrome = Application("Google Chrome");
-  chrome.activate();
+  const CHROME_NAME = "Google Chrome"
 
+  // Because the chrome.activate(); default open a chrome instance with new profile, which isn't desire effect.
+  // So we need to use shell command to open a new chrome instance.
+  // But I don't know why the `--profile-directory="Default"` doesn't work in shortcuts app. Sad.
+  // if (!isApplicationRunning(CHROME_NAME)) {
+  //   const app = Application.currentApplication();
+  //   app.includeStandardAdditions = true;
+  //   app.doShellScript(`open -na "Google Chrome" --args --profile-directory="Default" ${url}`);
+  //   return;
+  // }
+
+  const chrome = Application(CHROME_NAME);
+  chrome.activate();
   const allWindows = chrome.windows();
   const reusableTab = findReusableTab(allWindows, isUrlReuseable);
-
+  console.log("reusableTab", reusableTab);
   if (reusableTab) {
     updateTabToUrl(reusableTab, url);
     return
   }
+  console.log(JSON.stringify({ allWindows }))
   openNewTab(chrome, allWindows, url);
 
 
@@ -111,22 +124,13 @@ function openURLInChrome({ url, isUrlReuseable }) {
   * @param {string} url - The URL to open.
   */
   function openNewTab(chrome, allWindows, url) {
-    const targetWindow = allWindows.length > 0 ? allWindows[0] : createNewWindow(chrome);
+    const targetWindow = allWindows.length > 0 ? allWindows[0] : chrome.Window().make();
+
     const newTab = chrome.Tab();
     newTab.url = url;
+
     targetWindow.tabs.push(newTab);
     targetWindow.activeTabIndex = targetWindow.tabs.length; // Focus the new tab
-  }
-
-  /**
-  * Create a new Chrome window.
-  * @param {object} chrome - The Chrome application instance.
-  * @returns {object} - The new Chrome window.
-  */
-  function createNewWindow(chrome) {
-    const newWindow = chrome.Window({}); // Create a new window
-    chrome.windows.push(newWindow);
-    return newWindow;
   }
 }
 
@@ -140,4 +144,26 @@ function notifyUserWithAlert(message) {
   app.doShellScript(
     `osascript -e 'display alert "Error" message "${message}" as critical'`
   );
+}
+
+/**
+ * https://stackoverflow.com/questions/46628576/how-do-you-run-inline-applescript-from-a-jxa-javascript-for-automation-script-on
+ * @param {string} s 
+ * @returns 
+ */
+function evalAS(s) {
+  const a = Application.currentApplication();
+  return (a.includeStandardAdditions = true, a)
+    .runScript(s);
+}
+
+// Function to check if an application is running
+/**
+ * @param {string} appName
+ * @returns {boolean}
+ */
+function isApplicationRunning(appName) {
+  const systemEvents = Application("System Events");
+  const runningApps = systemEvents.applicationProcesses.where({ name: appName });
+  return runningApps.length > 0;
 }
