@@ -150,4 +150,55 @@ export function renderEtymologyTree(entry, level = 0) {
   }
 
   return details;
+}
+
+function createEtymologyEntry(entry, level = 0) {
+    const etymologyEntry = document.createElement('div');
+    etymologyEntry.className = 'etymology-entry';
+    etymologyEntry.style.marginLeft = `${level * 1.5}rem`;
+
+    const header = document.createElement('div');
+    header.className = 'etymology-header';
+
+    // Create word with components if available
+    const word = document.createElement('span');
+    word.className = 'etymology-word';
+    
+    if (entry.components && entry.components.length > 0) {
+        let currentIndex = 0;
+        entry.components.forEach(component => {
+            // Add any text before the component
+            if (currentIndex < component.index) {
+                const textBefore = document.createTextNode(entry.entry.slice(currentIndex, component.index));
+                word.appendChild(textBefore);
+            }
+            
+            // Create component span
+            const componentSpan = document.createElement('span');
+            componentSpan.className = 'word-component';
+            componentSpan.textContent = component.text;
+            
+            // Create tooltip
+            const tooltip = document.createElement('span');
+            tooltip.className = 'component-tooltip';
+            tooltip.textContent = `${component.type}: ${component.definition}`;
+            
+            componentSpan.appendChild(tooltip);
+            word.appendChild(componentSpan);
+            
+            currentIndex = component.index + component.text.length;
+        });
+        
+        // Add any remaining text after the last component
+        if (currentIndex < entry.entry.length) {
+            const textAfter = document.createTextNode(entry.entry.slice(currentIndex));
+            word.appendChild(textAfter);
+        }
+    } else {
+        word.textContent = entry.entry;
+    }
+
+    header.appendChild(word);
+
+    // ... rest of the existing code ...
 } 
