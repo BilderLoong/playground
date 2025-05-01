@@ -1,0 +1,196 @@
+/* Etymology Tree Styles */
+.etymology-entry {
+    margin: 0.5rem 0;
+    padding-left: 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.etymology-entry:hover {
+    background-color: rgba(52, 152, 219, 0.05);
+}
+
+.etymology-entry.expanded {
+    background-color: rgba(52, 152, 219, 0.08);
+}
+
+.etymology-entry.expanded:hover {
+    background-color: rgba(52, 152, 219, 0.12);
+}
+
+.etymology-header {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-bottom: 0.25rem;
+    flex-wrap: wrap;
+    line-height: 1.2;
+}
+
+.etymology-word {
+    font-size: 1rem;
+    color: #2c3e50;
+    margin: 0;
+}
+
+.etymology-type {
+    background-color: #3498db;
+    color: white;
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    cursor: help;
+    border-bottom: 1px dotted rgba(255, 255, 255, 0.5);
+}
+
+.etymology-type:hover {
+    border-bottom-color: white;
+}
+
+.etymology-language {
+    background-color: #27ae60;
+    color: white;
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.75rem;
+}
+
+.etymology-language abbr {
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(255, 255, 255, 0.5);
+    cursor: help;
+}
+
+.etymology-language abbr:hover {
+    border-bottom-color: white;
+}
+
+.etymology-content {
+    margin-left: 0.75rem;
+}
+
+.etymology-definition {
+    font-style: italic;
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+}
+
+.etymology-origin {
+    color: #7f8c8d;
+    font-size: 0.8rem;
+    margin-bottom: 0.25rem;
+}
+
+.etymology-notes {
+    color: #7f8c8d;
+    font-size: 0.8rem;
+    margin-bottom: 0.25rem;
+}
+
+.etymology-examples {
+    margin: 0.5rem 0;
+}
+
+.etymology-example {
+    background-color: #f8f9fa;
+    padding: 0.35rem;
+    border-radius: 3px;
+    margin-bottom: 0.25rem;
+    font-size: 0.85rem;
+}
+
+.etymology-example strong {
+    color: #2c3e50;
+}
+
+.etymology-example small {
+    color: #7f8c8d;
+    display: block;
+}
+
+.etymology-components {
+    margin: 0.5rem 0;
+}
+
+.etymology-component {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    margin-bottom: 0.25rem;
+    font-size: 0.85rem;
+}
+
+.component-type {
+    background-color: #e74c3c;
+    color: white;
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.75rem;
+}
+
+.component-text {
+    font-weight: bold;
+}
+
+.component-definition {
+    color: #7f8c8d;
+}
+
+.etymology-children {
+    margin-left: 1.5rem;
+}
+
+/* Details and Summary Styles */
+details {
+    margin: 0.5rem 0;
+    padding-left: 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+details:hover {
+    background-color: rgba(52, 152, 219, 0.05);
+}
+
+details[open] {
+    background-color: rgba(52, 152, 219, 0.08);
+}
+
+details[open]:hover {
+    background-color: rgba(52, 152, 219, 0.12);
+}
+
+summary {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-bottom: 0.25rem;
+    flex-wrap: wrap;
+    line-height: 1.2;
+    cursor: pointer;
+    list-style: none;
+    position: relative;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+summary::before {
+    content: '▶';
+    display: inline-block;
+    margin-right: 0.35rem;
+    transition: transform 0.3s;
+    font-size: 0.8rem;
+    position: relative;
+    transform-origin: center;
+}
+
+details[open] > summary::before {
+    transform: rotate(90deg);
+}
+
+/* Ensure nested details also rotate */
+details details[open] > summary::before {
+    transform: rotate(90deg);
+} 
