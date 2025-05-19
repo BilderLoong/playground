@@ -1,27 +1,3 @@
-"""
-Write a Python script to download files with the given `{version}` and a list of `{file_name}` to the current location.
-
-## Functional requirements
-- Read `{version}` from the 1st command line argument.
-- from this URL: https://github.com/yomidevs/kaikki-to-yomitan/releases/download/{version}/{file_name}.zip
-- `{file_name}` is one item in the `{file_names}`
-- `{file_names}` is `['kty-de-de-ipa', 'kty-fr-fr-ipa', 'kty-en-en-ipa', 'kty-en-en', 'kty-en-fr', 'kty-en-de', 'kty-en-ja', 'kty-zh-zh', 'kty-zh-fr', 'kty-zh-de', 'kty-zh-ja', 'kty-fr-en', 'kty-fr-fr', 'kty-fr-de', 'kty-fr-ja', 'kty-de-ja', 'kty-de-en', 'kty-de-fr', 'kty-de-de', 'kty-ja-ja', 'kty-la-zh', 'kty-la-en', 'kty-la-fr', 'kty-la-de', 'kty-la-ja']`.
-- The download file name is in the format of `{file_name}_{version}.zip`
-- If there is already a file with the same name skip it.
-- Show the download process for each file as while as the whole downloading process.
-- Show the final download stat including the success and failure.
-  - Report the `{file_name}` that fail to download.
-- If one of the file downloads fails skip it and warning.
-- Downloading files concurrently.
-
-## Code standard requirements
-- Clearly commented.
-- Using functional programming only, no OOP stuff!
-- Write maintainable code.
-- Handel error, consider wrong input, etc.
-- Clearly typing.
-"""
-
 import sys
 import requests
 import os
@@ -34,7 +10,6 @@ from urllib.parse import urljoin
 from tqdm import tqdm
 
 # Constants
-BASE_URL = "https://github.com/yomidevs/kaikki-to-yomitan/releases/download/"
 API_URL = "https://api.github.com/repos/yomidevs/kaikki-to-yomitan/releases/latest"
 BASE_FILE_NAMES: List[str] = ['kty-de-de-ipa', 'kty-fr-fr-ipa', 'kty-en-en-ipa', 'kty-en-en', 'kty-en-fr', 'kty-en-de', 'kty-en-ja', 'kty-zh-zh', 'kty-zh-fr', 'kty-zh-de', 'kty-zh-ja', 'kty-fr-en', 'kty-fr-fr', 'kty-fr-de', 'kty-fr-ja', 'kty-de-ja', 'kty-de-en', 'kty-de-fr', 'kty-de-de', 'kty-ja-ja', 'kty-la-zh', 'kty-la-en', 'kty-la-fr', 'kty-la-de', 'kty-la-ja']
 MAX_WORKERS = 4 # Limit concurrent downloads to avoid overwhelming the server or system.
