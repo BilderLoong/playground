@@ -312,6 +312,17 @@ def orchestrate_downloads_and_distribution(
             elif not attempted and all_target_dirs: # Should ideally not happen if jobs created correctly
                 print(f"Warning: Retaining '{target_filename}' in cache. No distribution attempts recorded for it despite target directories existing.")
             # If not attempted because all_target_dirs was empty, covered by the outer 'if not all_target_dirs'
+          
+          # If CACHE_DIR is empty, remove it.
+        if not os.listdir(cache_directory_path):
+          try:
+              os.rmdir(cache_directory_path)
+              print(f"Cache directory '{cache_directory_path}' is empty and has been removed.")
+          except OSError as e:
+              print(f"Warning: Failed to remove empty cache directory '{cache_directory_path}'. Error: {e}")
+        
+            
+            
         stats["cache_files_deleted_after_distribution"] = files_deleted_count
         print(f"Cache cleanup summary: {files_deleted_count} file(s) removed from cache.")
     return stats
@@ -395,7 +406,7 @@ ALL_CONFIGURED_SOURCES: List[DictionarySource] = [
     DictionarySource("kaikki-to-yomitan", kty_resolver_fn, "kty_version",
         {"id": "kaikki-to-yomitan", "repo_owner": "yomidevs", "repo_name": "kaikki-to-yomitan", "asset_basenames_to_download": KTY_STANDARD_DICTIONARIES}),
     DictionarySource("jitendex", jitendex_resolver_fn, "jitendex_version",
-        {"id": "jitendex", "download_url": "https://github.com/stephenmk/stephenmk.github.io/releases/latest/download/jitendex-yomitan.zip", "base_name": "jitendex-yomitan"}),
+        resolver_config = {"id": "jitendex", "download_url": "https://github.com/stephenmk/stephenmk.github.io/releases/latest/download/jitendex-yomitan.zip", "base_name": "jitendex-yomitan"}),
 ]
 
 def main() -> None:
