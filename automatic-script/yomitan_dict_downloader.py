@@ -5,485 +5,385 @@ import glob
 import shutil
 import argparse
 import datetime
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import List, Tuple, Dict, Optional, Callable, NamedTuple, Any, Union
 from tqdm import tqdm # type: ignore
 
 # --- Constants ---
-MAX_WORKERS = 5  # Limit concurrent downloads
+MAX_WORKERS = 5
 ACHIEVED_DIR = "achieved"
 DEFAULT_TARGET_DIR = os.getcwd()
+CACHE_SUBDIR_NAME = ".downloader_cache"
 
 # --- Custom Error Types ---
-class DownloaderError(Exception):
-    """Base class for errors in this script."""
-    pass
-
-class HttpError(DownloaderError):
-    """For HTTP request failures."""
-    pass
-
-class ResolverError(DownloaderError):
-    """For issues during the resolution of download targets."""
-    pass
-
-class ConfigError(DownloaderError):
-    """For configuration errors."""
-    pass
-
+class DownloaderError(Exception): pass
+class HttpError(DownloaderError): pass
+class ResolverError(DownloaderError): pass
+class ConfigError(DownloaderError): pass
 
 # --- Core Data Structures ---
 class ResolvedDownloadTarget(NamedTuple):
-    """
-    Represents a single file to be downloaded, with all necessary info resolved.
-    """
-    source_id: str          # Identifier for the dictionary source (e.g., "kty", "jitendex")
-    base_name: str          # Base name for the file (e.g., "kty-en-en", "jitendex-yomitan")
-    download_url: str       # Direct download URL
-    version_str: str        # Version string for this download (e.g., tag, date, timestamp)
+    source_id: str
+    base_name: str
+    download_url: str
+    version_str: str
 
     def get_target_filename(self) -> str:
-        """Generates the filename for saving (e.g., 'base_name_version.zip')."""
         return f"{self.base_name}_{self.version_str}.zip"
 
-# Type for a resolver function
 ResolverFn = Callable[
     [requests.Session, Optional[str], Optional[Dict[str, Any]]],
     List[ResolvedDownloadTarget]
 ]
 
 class DictionarySource(NamedTuple):
-    """
-    Configuration for a dictionary source.
-    """
-    id: str                     # Unique identifier for the source (e.g., "kaikki-to-yomitan")
-    resolver_fn: ResolverFn     # Function to get download targets for this source
-    cli_version_arg_name: Optional[str] = None # If source takes a version via CLI (e.g., "kty_version")
-    resolver_config: Optional[Dict[str, Any]] = None # Source-specific configuration
-
+    id: str
+    resolver_fn: ResolverFn
+    cli_version_arg_name: Optional[str] = None
+    resolver_config: Optional[Dict[str, Any]] = None
 
 # --- HTTP Utilities (Effectful, but managed) ---
 def make_http_request(
-    session: requests.Session,
-    url: str,
-    method: str = "GET",
-    timeout: int = 10,
-    to_json: bool = True
+    session: requests.Session, url: str, method: str = "GET",
+    timeout: int = 10, to_json: bool = True
 ) -> Union[Dict[Any, Any], str, requests.Response]:
-    """
-    Makes an HTTP request and handles common errors.
-
-    Args:
-        session: The requests.Session to use.
-        url: The URL to request.
-        method: HTTP method (GET, POST, HEAD, etc.).
-        timeout: Request timeout in seconds.
-        to_json: If True, attempts to parse the response as JSON.
-
-    Returns:
-        Parsed JSON (dict) or response text (str) or the full Response object if not to_json.
-
-    Raises:
-        HttpError: If the request fails or returns a non-2xx status.
-    """
     try:
         response = session.request(method, url, timeout=timeout)
-        response.raise_for_status()  # Raises HTTPError for bad responses (4xx or 5xx)
-        if not to_json:
-            return response
+        response.raise_for_status()
+        if not to_json: return response
         return response.json() if response.content else {}
     except requests.exceptions.RequestException as e:
         raise HttpError(f"HTTP request failed for {method} {url}: {e}") from e
-    except ValueError as e: # JSONDecodeError inherits from ValueError
+    except ValueError as e:
         raise HttpError(f"Failed to decode JSON response from {url}: {e}") from e
 
-# --- Resolver Implementations ---
-
-# Kaikki-to-Yomitan (KTY) Resolver
+# --- Resolver Implementations (KTY and Jitendex - content unchanged) ---
 KTY_API_REPO_URL_TEMPLATE = "https://api.github.com/repos/{repo_owner}/{repo_name}/releases"
 KTY_DEFAULT_REPO_OWNER = "yomidevs"
 KTY_DEFAULT_REPO_NAME = "kaikki-to-yomitan"
 
-def _get_kty_latest_release_tag(
-    session: requests.Session, repo_owner: str, repo_name: str
-) -> str:
-    """Fetches the latest release tag for a KTY-like GitHub repository."""
+def _get_kty_latest_release_tag(session: requests.Session, repo_owner: str, repo_name: str) -> str:
     latest_release_url = KTY_API_REPO_URL_TEMPLATE.format(repo_owner=repo_owner, repo_name=repo_name) + "/latest"
     try:
         data = make_http_request(session, latest_release_url)
-        if not isinstance(data, dict): # Should be a dict
-            raise ResolverError(f"Unexpected response type for latest release from {latest_release_url}")
+        if not isinstance(data, dict): raise ResolverError(f"Unexpected response type for latest release from {latest_release_url}")
         tag_name = data.get('tag_name')
-        if not tag_name:
-            raise ResolverError(f"Could not determine latest KTY release tag from {latest_release_url}")
-        print(f"Latest KTY release version: {tag_name}")
+        if not tag_name: raise ResolverError(f"Could not determine latest KTY release tag from {latest_release_url}")
+        print(f"Latest KTY release version ({repo_owner}/{repo_name}): {tag_name}")
         return tag_name
-    except HttpError as e:
-        raise ResolverError(f"Failed to fetch latest KTY release tag: {e}") from e
+    except HttpError as e: raise ResolverError(f"Failed to fetch latest KTY release tag: {e}") from e
 
-def _get_kty_release_assets(
-    session: requests.Session, repo_owner: str, repo_name: str, tag: str
-) -> List[Dict[str, Any]]:
-    """Fetches asset data for a specific KTY-like GitHub release tag."""
+def _get_kty_release_assets(session: requests.Session, repo_owner: str, repo_name: str, tag: str) -> List[Dict[str, Any]]:
     release_by_tag_url = KTY_API_REPO_URL_TEMPLATE.format(repo_owner=repo_owner, repo_name=repo_name) + f"/tags/{tag}"
     try:
         data = make_http_request(session, release_by_tag_url)
-        if not isinstance(data, dict): # Should be a dict
-            raise ResolverError(f"Unexpected response type for release assets from {release_by_tag_url}")
+        if not isinstance(data, dict): raise ResolverError(f"Unexpected response type for release assets from {release_by_tag_url}")
         assets = data.get('assets', [])
-        if not isinstance(assets, list):
-            raise ResolverError(f"Assets field is not a list in response from {release_by_tag_url}")
+        if not isinstance(assets, list): raise ResolverError(f"Assets field is not a list in response from {release_by_tag_url}")
         return assets
-    except HttpError as e:
-        raise ResolverError(f"Failed to fetch KTY release assets for tag {tag}: {e}") from e
+    except HttpError as e: raise ResolverError(f"Failed to fetch KTY release assets for tag {tag}: {e}") from e
 
-def kty_resolver_fn(
-    session: requests.Session,
-    cli_version: Optional[str],
-    config: Optional[Dict[str, Any]]
-) -> List[ResolvedDownloadTarget]:
-    """
-    Resolver for Kaikki-to-Yomitan dictionaries.
-    Fetches release information from GitHub.
-    Config options:
-        `repo_owner` (str): GitHub repository owner. Default: "yomidevs".
-        `repo_name` (str): GitHub repository name. Default: "kaikki-to-yomitan".
-        `asset_basenames_to_download` (List[str]): Specific base names to download (e.g., ["kty-en-en", "kty-de-de-ipa"]).
-                                                 If None or empty, downloads all .zip assets.
-    """
+def kty_resolver_fn(session: requests.Session, cli_version: Optional[str], config: Optional[Dict[str, Any]]) -> List[ResolvedDownloadTarget]:
     cfg = config or {}
     repo_owner = cfg.get("repo_owner", KTY_DEFAULT_REPO_OWNER)
     repo_name = cfg.get("repo_name", KTY_DEFAULT_REPO_NAME)
     asset_filter_list = cfg.get("asset_basenames_to_download")
+    source_id_val = cfg.get("id", "kaikki-to-yomitan")
 
     version_to_fetch = cli_version
     if not version_to_fetch:
-        print(f"No version provided for KTY source. Fetching latest...")
+        print(f"No version provided for {source_id_val} source ({repo_name}). Fetching latest...")
         version_to_fetch = _get_kty_latest_release_tag(session, repo_owner, repo_name)
-    
-    if not version_to_fetch: # Should not happen if _get_kty_latest_release_tag succeeds or cli_version is set
-        raise ResolverError("Unable to determine a version for KTY source.")
+    if not version_to_fetch: raise ResolverError(f"Unable to determine a version for {source_id_val} source ({repo_name}).")
 
-    print(f"Fetching KTY download URLs for version {version_to_fetch}...")
+    print(f"Fetching KTY download URLs for version {version_to_fetch} from {repo_owner}/{repo_name}...")
     assets = _get_kty_release_assets(session, repo_owner, repo_name, version_to_fetch)
-    
     targets: List[ResolvedDownloadTarget] = []
     for asset in assets:
-        asset_name = asset.get("name")
-        download_url = asset.get("browser_download_url")
-
-        if not (asset_name and asset_name.endswith(".zip") and download_url):
-            continue
-
-        base_name = asset_name[:-4]  # Remove .zip
-
-        if asset_filter_list and base_name not in asset_filter_list:
-            continue # Skip if not in the desired list
-
-        targets.append(ResolvedDownloadTarget(
-            source_id="kaikki-to-yomitan", # Or could be made dynamic via config
-            base_name=base_name,
-            download_url=download_url,
-            version_str=version_to_fetch
-        ))
-    
-    if not targets:
-        print(f"Warning: No download targets resolved for KTY source with version {version_to_fetch}.")
+        asset_name, download_url = asset.get("name"), asset.get("browser_download_url")
+        if not (asset_name and asset_name.endswith(".zip") and download_url): continue
+        base_name = asset_name[:-4]
+        if asset_filter_list and base_name not in asset_filter_list: continue
+        targets.append(ResolvedDownloadTarget(source_id_val, base_name, download_url, version_to_fetch))
+    if not targets: print(f"Warning: No download targets resolved for {source_id_val} source ({repo_name}) with version {version_to_fetch}.")
     return targets
 
-
-# Jitendex Resolver
-
-def jitendex_resolver_fn(
-    session: requests.Session,
-    cli_version: Optional[str],
-    config: Optional[Dict[str, Any]]
-) -> List[ResolvedDownloadTarget]:
-    """
-    Resolver for Jitendex dictionary.
-    Uses a fixed URL by default, version can be specified or derived.
-    Config options:
-        `download_url` (str): The direct download URL. Default: JITENDEX_DEFAULT_URL.
-        `base_name` (str): The base name for the dictionary. Default: JITENDEX_DEFAULT_BASE_NAME.
-    """
+def jitendex_resolver_fn(session: requests.Session, cli_version: Optional[str], config: Optional[Dict[str, Any]]) -> List[ResolvedDownloadTarget]:
     cfg = config or {}
-    download_url = cfg.get("download_url")
-    base_name = cfg.get("base_name")
+    download_url, base_name, source_id = cfg.get("download_url"), cfg.get("base_name"), cfg.get("id", "jitendex")
+    if not download_url or not base_name: raise ConfigError(f"{source_id} resolver config missing 'download_url' or 'base_name'.")
 
     effective_version: str
     if cli_version:
         effective_version = cli_version
-        print(f"Using provided version for Jitendex: {effective_version}")
+        print(f"Using provided version for {source_id}: {effective_version}")
     else:
-        # Try to get Last-Modified header for versioning
-        print(f"No version provided for Jitendex. Attempting to derive from Last-Modified header of {download_url}...")
+        print(f"No version provided for {source_id}. Attempting to derive from Last-Modified header of {download_url}...")
         try:
             response = make_http_request(session, download_url, method="HEAD", to_json=False)
-            assert isinstance(response, requests.Response) # for type checker
+            assert isinstance(response, requests.Response)
             last_modified = response.headers.get("Last-Modified")
             if last_modified:
-                # Parse date and reformat to YYYYMMDDHHMMSS or similar
                 dt_obj = datetime.datetime.strptime(last_modified, "%a, %d %b %Y %H:%M:%S %Z")
                 effective_version = dt_obj.strftime("%Y%m%d%H%M%S")
-                print(f"Derived Jitendex version from Last-Modified: {effective_version}")
-            else:
-                raise HttpError("Last-Modified header not found.") # Caught by except below
-        except (HttpError, ValueError, AttributeError) as e: # ValueError for strptime, AttributeError for None.strftime
-            print(f"Warning: Could not get Last-Modified for Jitendex ({e}). Using current timestamp as version.")
+                print(f"Derived {source_id} version from Last-Modified: {effective_version}")
+            else: raise HttpError("Last-Modified header not found.")
+        except (HttpError, ValueError, AttributeError) as e:
+            print(f"Warning: Could not get Last-Modified for {source_id} ({e}). Using current timestamp as version.")
             effective_version = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-            
-    return [ResolvedDownloadTarget(
-        source_id="jitendex", # Or dynamic via config
-        base_name=base_name,
-        download_url=download_url,
-        version_str=effective_version
-    )]
+    return [ResolvedDownloadTarget(source_id, base_name, download_url, effective_version)]
 
-
-# --- File System and Download Logic (Effectful) ---
+# --- File System Utilities (Effectful) ---
 def ensure_directory_exists(directory: str) -> None:
-    """Ensures a directory exists, creating it if necessary."""
     if not os.path.exists(directory):
         try:
             os.makedirs(directory, exist_ok=True)
-            print(f"Created directory: {directory}")
-        except OSError as e:
-            raise DownloaderError(f"Error creating directory {directory}: {e}") from e
+            # print(f"Created directory: {directory}") # Less verbose
+        except OSError as e: raise DownloaderError(f"Error creating directory {directory}: {e}") from e
 
 def ensure_achieved_directory_exists(target_dir: str) -> str:
-    """Ensures the 'achieved' subdirectory exists within the target directory."""
     achieved_path = os.path.join(target_dir, ACHIEVED_DIR)
     ensure_directory_exists(achieved_path)
     return achieved_path
 
 def find_existing_versions_for_base_name(target_dir: str, base_name: str) -> List[str]:
-    """Finds all existing versioned files for a given base name in the target directory."""
-    pattern = os.path.join(target_dir, f"{base_name}_*.zip")
-    return glob.glob(pattern)
+    return glob.glob(os.path.join(target_dir, f"{base_name}_*.zip"))
 
-def move_old_versions_to_achieved(
-    target_dir: str, base_name: str, current_version_str: str
-) -> None:
-    """Moves old versions of a dictionary file to the achieved directory."""
+def move_old_versions_to_achieved(target_dir: str, base_name: str, current_version_str: str) -> None:
     achieved_dir_path = ensure_achieved_directory_exists(target_dir)
     current_file_name_expected = f"{base_name}_{current_version_str}.zip"
-    
     for old_file_path in find_existing_versions_for_base_name(target_dir, base_name):
-        old_file_name = os.path.basename(old_file_path)
-        if old_file_name == current_file_name_expected:
-            continue # Don't move the file we might have just downloaded or are about to download.
-            
-        destination = os.path.join(achieved_dir_path, old_file_name)
+        if os.path.basename(old_file_path) == current_file_name_expected: continue
+        destination = os.path.join(achieved_dir_path, os.path.basename(old_file_path))
         try:
+            print(f"Archiving old version '{old_file_path}' to '{destination}'")
             shutil.move(old_file_path, destination)
-            print(f"Moved old version '{old_file_path}' to '{destination}'")
-        except Exception as e: # Catch broad exception for shutil.move
-            print(f"Warning: Failed to move '{old_file_path}' to achieved directory. Error: {e}")
+        except Exception as e: print(f"Warning: Failed to move '{old_file_path}' to achieved. Error: {e}")
 
-def execute_single_download_task(
-    task: ResolvedDownloadTarget,
-    target_dir: str,
-    session: requests.Session
-) -> str:
-    """
-    Downloads a single file as per the ResolvedDownloadTarget.
-    Manages file existence checks, download with progress, and archival of old versions.
-
-    Returns:
-        str: "success", "skipped", or "failed".
-    """
-    ensure_directory_exists(target_dir)
-    target_filename = task.get_target_filename()
-    download_path = os.path.join(target_dir, target_filename)
-
-    if os.path.exists(download_path):
-        # Check file size to ensure it's not a partially downloaded file (simple check)
-        # A more robust check would involve checksums if available.
-        try:
-            if os.path.getsize(download_path) > 0: # Basic check for non-empty file
-                print(f"File {download_path} already exists and is not empty. Skipping download.")
-                return "skipped"
-            else:
-                print(f"File {download_path} exists but is empty. Attempting re-download.")
-        except OSError: # File might disappear between exists and getsize
-             print(f"File {download_path} existed but could not get size. Attempting re-download.")
-
-
+# --- Core Download and Distribution Logic (Effectful) ---
+def _perform_actual_download(download_url: str, output_full_path: str, session: requests.Session, display_filename: str) -> bool:
+    temp_output_path = output_full_path + ".part"
     try:
-        print(f"Downloading {target_filename} to {target_dir} from {task.download_url}...")
-        # Perform archival *before* download to free up the name if an old version is the current one
-        move_old_versions_to_achieved(target_dir, task.base_name, task.version_str)
-
-        response = session.get(task.download_url, stream=True, timeout=600) # Increased timeout for large files
+        print(f"Downloading: {display_filename} from {download_url}")
+        response = session.get(download_url, stream=True, timeout=600)
         response.raise_for_status()
+        total_size = int(response.headers.get('content-length', 0))
+        with open(temp_output_path, 'wb') as f, tqdm(total=total_size, unit='iB', unit_scale=True, desc=display_filename, leave=False, position=1) as pb:
+            for data in response.iter_content(chunk_size=8192):
+                pb.update(len(data))
+                f.write(data)
+        if total_size != 0 and pb.n != total_size:
+            os.remove(temp_output_path)
+            print(f"ERROR: Download incomplete for {display_filename}. Partial file removed.")
+            return False
+        shutil.move(temp_output_path, output_full_path)
+        print(f"Successfully downloaded {display_filename} to {output_full_path}")
+        return True
+    except requests.exceptions.RequestException as e: print(f"Warning: Failed to download {display_filename}. HTTP Error: {e}")
+    except IOError as e: print(f"Warning: Failed to save {display_filename}. IO Error: {e}")
+    except Exception as e: print(f"Warning: Unexpected error downloading {display_filename}. Error: {e}")
+    if os.path.exists(temp_output_path):
+        try: os.remove(temp_output_path)
+        except OSError: pass
+    return False
 
-        total_size_in_bytes = int(response.headers.get('content-length', 0))
-        block_size = 8192 # Adjusted block size
-        
-        # Create a temporary download path to avoid partial files if interrupted
-        temp_download_path = download_path + ".part"
+def _download_to_cache_task(task: ResolvedDownloadTarget, cache_dir: str, session: requests.Session) -> Tuple[str, ResolvedDownloadTarget, Optional[str]]:
+    target_filename = task.get_target_filename()
+    cached_file_path = os.path.join(cache_dir, target_filename)
+    try:
+        if os.path.exists(cached_file_path) and os.path.getsize(cached_file_path) > 0:
+            print(f"Cache hit: {target_filename} already in cache.")
+            return "skipped_cache_hit", task, cached_file_path
+    except OSError: print(f"Warning: Could not stat cached file {cached_file_path}. Attempting download.")
+    
+    if _perform_actual_download(task.download_url, cached_file_path, session, target_filename):
+        return "success", task, cached_file_path
+    return "failed", task, None
 
-        with open(temp_download_path, 'wb') as file, \
-             tqdm(total=total_size_in_bytes, unit='iB', unit_scale=True, desc=target_filename, leave=False) as progress_bar:
-            for data in response.iter_content(block_size):
-                progress_bar.update(len(data))
-                file.write(data)
-        
-        if total_size_in_bytes != 0 and progress_bar.n != total_size_in_bytes:
-            os.remove(temp_download_path) # Clean up partial file
-            print(f"ERROR: Download incomplete for {target_filename} ({progress_bar.n}/{total_size_in_bytes} bytes). Partial file removed.")
-            return "failed"
-
-        shutil.move(temp_download_path, download_path) # Atomic rename if possible
-        print(f"Downloaded {target_filename} successfully to {download_path}.")
-        return "success"
-
-    except requests.exceptions.RequestException as e:
-        print(f"Warning: Failed to download {target_filename}. HTTP Error: {e}")
-        if os.path.exists(temp_download_path): os.remove(temp_download_path)
-        return "failed"
-    except IOError as e: # Catches file system errors during write or move
-        print(f"Warning: Failed to save {target_filename}. IO Error: {e}")
-        if os.path.exists(temp_download_path): os.remove(temp_download_path)
-        return "failed"
+def _distribute_from_cache_task(task: ResolvedDownloadTarget, cached_file_path: str, target_dir: str) -> Tuple[str, ResolvedDownloadTarget, str]:
+    target_filename = task.get_target_filename()
+    destination_path = os.path.join(target_dir, target_filename)
+    try:
+        ensure_directory_exists(target_dir)
+        move_old_versions_to_achieved(target_dir, task.base_name, task.version_str)
+        if os.path.exists(destination_path):
+            # Assuming if it exists with correct name after archival, it's the one we want.
+            # Could add size/hash comparison with cache if needed for more robustness.
+            print(f"Distribution: {target_filename} (correct version) already exists in {target_dir}. Skipping copy.")
+            return "skipped_already_exists", task, target_dir
+        print(f"Distributing: Copying {target_filename} from cache to {target_dir}")
+        shutil.copy2(cached_file_path, destination_path)
+        print(f"Distribution: Successfully copied {target_filename} to {destination_path}")
+        return "success", task, target_dir
     except Exception as e:
-        print(f"Warning: An unexpected error occurred while downloading {target_filename}. Error: {e}")
-        if 'temp_download_path' in locals() and os.path.exists(temp_download_path): # type: ignore
-             os.remove(temp_download_path) # type: ignore
-        return "failed"
+        print(f"Warning: Failed to distribute {target_filename} to {target_dir}. Error: {e}")
+        return "failed", task, target_dir
 
-def orchestrate_concurrent_downloads(
-    all_download_targets: List[ResolvedDownloadTarget],
-    target_dirs: List[str],
-    session: requests.Session
+def _delete_from_cache(cached_file_path: str, display_filename: str) -> bool:
+    """Attempts to delete a file from the cache. Returns True if successful or file already gone."""
+    try:
+        if os.path.exists(cached_file_path):
+            os.remove(cached_file_path)
+            print(f"Cache cleanup: Removed '{display_filename}' from cache ({cached_file_path}).")
+            return True
+        else:
+            # print(f"Cache cleanup: File '{display_filename}' already removed or not found at {cached_file_path}.")
+            return True # Considered success if already gone
+    except OSError as e:
+        print(f"Warning: Failed to remove '{display_filename}' from cache ({cached_file_path}). Error: {e}")
+        return False
+
+def orchestrate_downloads_and_distribution(
+    all_resolved_targets: List[ResolvedDownloadTarget],
+    all_target_dirs: List[str],
+    session: requests.Session,
+    cache_directory_path: str
 ) -> Dict[str, int]:
-    """
-    Downloads files for all resolved targets to all specified target directories, concurrently.
-    """
-    download_results: Dict[str, int] = {"success": 0, "failed": 0, "skipped": 0}
+    stats = {
+        "unique_downloads_successful": 0, "unique_downloads_skipped_cache_hit": 0,
+        "unique_downloads_failed": 0, "distributions_successful": 0,
+        "distributions_skipped_already_exists": 0, "distributions_failed": 0,
+        "cache_files_deleted_after_distribution": 0, # New stat
+    }
+    if not all_resolved_targets: print("No download targets resolved."); return stats
+    ensure_directory_exists(cache_directory_path)
+
+    # --- Phase 1: Download unique files to cache ---
+    print(f"\n--- Phase 1: Downloading {len(all_resolved_targets)} unique files to cache ({cache_directory_path}) ---")
+    successfully_cached_items: List[Tuple[ResolvedDownloadTarget, str]] = []
+    with ThreadPoolExecutor(max_workers=min(MAX_WORKERS, len(all_resolved_targets))) as executor:
+        cache_futures = {executor.submit(_download_to_cache_task, task, cache_directory_path, session): task for task in all_resolved_targets}
+        for future in tqdm(as_completed(cache_futures), total=len(all_resolved_targets), desc="Caching Downloads", unit="file", position=0, leave=True):
+            status, task_obj, cached_path = future.result()
+            if status == "success": stats["unique_downloads_successful"] += 1
+            elif status == "skipped_cache_hit": stats["unique_downloads_skipped_cache_hit"] += 1
+            else: stats["unique_downloads_failed"] += 1
+            if cached_path and (status == "success" or status == "skipped_cache_hit"):
+                successfully_cached_items.append((task_obj, cached_path))
+    print(f"Cache phase summary: {stats['unique_downloads_successful']} downloaded, "
+          f"{stats['unique_downloads_skipped_cache_hit']} cache hits, "
+          f"{stats['unique_downloads_failed']} failed.")
+    if not successfully_cached_items: print("No files in cache for distribution."); return stats
+
+    # --- Phase 2: Distribute cached files to target directories ---
+    print(f"\n--- Phase 2: Distributing {len(successfully_cached_items)} cached files to {len(all_target_dirs)} target director{'ies' if len(all_target_dirs) > 1 else 'y'} ---")
+    distribution_jobs = [(task, cp, t_dir) for task, cp in successfully_cached_items for t_dir in all_target_dirs]
     
-    if not all_download_targets:
-        print("No download targets were resolved. Nothing to download.")
-        return download_results
+    cache_file_has_distribution_failures: Dict[str, bool] = {path: False for _, path in successfully_cached_items}
+    cache_file_had_distribution_attempts: Dict[str, bool] = {path: False for _, path in successfully_cached_items}
 
-    # Ensure all base target directories exist before starting downloads
-    for t_dir in target_dirs:
-        ensure_directory_exists(t_dir)
-
-    # Create a list of (task, target_dir) tuples for the executor
-    download_jobs: List[Tuple[ResolvedDownloadTarget, str]] = [
-        (target, t_dir) for target in all_download_targets for t_dir in target_dirs
-    ]
-    
-    if not download_jobs:
-        print("No download jobs to process.")
-        return download_results
-
-    num_actual_workers = min(MAX_WORKERS, len(download_jobs))
-    print(f"Starting download process for {len(all_download_targets)} unique files to {len(target_dirs)} director{'y' if len(target_dirs) == 1 else 'ies'} each.")
-    print(f"Total individual download operations: {len(download_jobs)}. Using up to {num_actual_workers} worker threads.")
-
-    with ThreadPoolExecutor(max_workers=num_actual_workers) as executor:
-        # Prepare futures
-        futures_map = {
-            executor.submit(execute_single_download_task, job_task, job_dir, session): (job_task, job_dir)
-            for job_task, job_dir in download_jobs
-        }
-
-        # Process futures as they complete
-        for future in tqdm(futures_map.keys(), total=len(download_jobs), desc="Overall Progress"):
-            # job_task_info, job_dir_info = futures_map[future] # For debugging if needed
-            try:
-                result_status = future.result()
-                download_results[result_status] += 1
-            except Exception as e: # Should not happen if execute_single_download_task catches its exceptions
-                print(f"Error processing a download future: {e}") # Log unexpected errors from future.result()
-                download_results["failed"] += 1
+    if distribution_jobs:
+        with ThreadPoolExecutor(max_workers=min(MAX_WORKERS, len(distribution_jobs))) as executor:
+            future_to_dist_job_details = {
+                executor.submit(_distribute_from_cache_task, job_task, job_cached_path, job_target_dir):
+                                (job_task, job_cached_path, job_target_dir)
+                for job_task, job_cached_path, job_target_dir in distribution_jobs
+            }
+            for future in tqdm(as_completed(future_to_dist_job_details), total=len(distribution_jobs), desc="Distributing Files", unit="op", position=0, leave=True):
+                _, original_cached_path, _ = future_to_dist_job_details[future]
+                status, _, _ = future.result()
                 
-    return download_results
+                cache_file_had_distribution_attempts[original_cached_path] = True
+                if status == "failed":
+                    cache_file_has_distribution_failures[original_cached_path] = True
+                
+                if status == "success": stats["distributions_successful"] += 1
+                elif status == "skipped_already_exists": stats["distributions_skipped_already_exists"] += 1
+                else: stats["distributions_failed"] += 1 # Counts individual copy failures
+    else:
+        print("No distribution jobs to process (e.g., no target directories specified).")
 
+    # --- Phase 3: Cache Cleanup ---
+    if not all_target_dirs:
+        print("\nSkipping cache cleanup: No target directories were specified.")
+    else:
+        print(f"\n--- Phase 3: Cleaning up cache directory ({cache_directory_path}) ---")
+        files_deleted_count = 0
+        for task, cached_file_path in successfully_cached_items:
+            target_filename = task.get_target_filename()
+            attempted = cache_file_had_distribution_attempts.get(cached_file_path, False)
+            had_failures = cache_file_has_distribution_failures.get(cached_file_path, True) # Default True (has failures) for safety
+
+            if attempted and not had_failures:
+                if _delete_from_cache(cached_file_path, target_filename):
+                    files_deleted_count += 1
+            elif attempted and had_failures:
+                print(f"Retaining '{target_filename}' in cache due to one or more distribution failures.")
+            elif not attempted and all_target_dirs: # Should ideally not happen if jobs created correctly
+                print(f"Warning: Retaining '{target_filename}' in cache. No distribution attempts recorded for it despite target directories existing.")
+            # If not attempted because all_target_dirs was empty, covered by the outer 'if not all_target_dirs'
+        stats["cache_files_deleted_after_distribution"] = files_deleted_count
+        print(f"Cache cleanup summary: {files_deleted_count} file(s) removed from cache.")
+    return stats
 
 # --- Argument Parsing and Main Orchestration ---
 def parse_cli_arguments(dictionary_sources: List[DictionarySource]) -> argparse.Namespace:
-    """Parses command-line arguments, dynamically adding version options for sources."""
-    parser = argparse.ArgumentParser(
-        description="Download various yomitan dictionaries from their sources.",
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter
-    )
-    
-    parser.add_argument(
-        "--target_dirs", 
-        nargs="+", 
-        default=[DEFAULT_TARGET_DIR],
-        help="Target directories to download dictionaries to. "
-             "Will create directories if they don't exist. "
-             "Each target directory will have its own 'achieved' subdirectory."
-    )
-
-    # Dynamically add version arguments for each source that specifies one
-    for source_config in dictionary_sources:
-        if source_config.cli_version_arg_name:
-            parser.add_argument(
-                f"--{source_config.cli_version_arg_name}",
-                dest=source_config.cli_version_arg_name, # Ensure correct attribute name in Namespace
-                help=f"Version for {source_config.id} (e.g., a release tag like 'v1.2.3', a date 'YYYY-MM-DD'). "
-                     "If not provided, 'latest' logic applies for this source."
-            )
-            
+    parser = argparse.ArgumentParser(description="Download yomitan dictionaries. Files are cached, then copied to target dirs.", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument("--target_dirs", nargs="+", default=[DEFAULT_TARGET_DIR], help="Target directories for dictionaries.")
+    parser.add_argument("--cache_base_dir", default=os.getcwd(), help=f"Base directory for '{CACHE_SUBDIR_NAME}'.")
+    for source in dictionary_sources:
+        if source.cli_version_arg_name:
+            parser.add_argument(f"--{source.cli_version_arg_name}", dest=source.cli_version_arg_name, help=f"Version for {source.id}.")
     return parser.parse_args()
 
-def resolve_all_download_targets(
-    sources: List[DictionarySource],
-    args: argparse.Namespace,
-    session: requests.Session
-) -> List[ResolvedDownloadTarget]:
-    """Iterates through all configured sources and calls their resolvers."""
+def resolve_all_download_targets(sources: List[DictionarySource], args: argparse.Namespace, session: requests.Session) -> List[ResolvedDownloadTarget]:
     all_targets: List[ResolvedDownloadTarget] = []
+    unique_target_keys = set()
     for source in sources:
         print(f"\n--- Resolving source: {source.id} ---")
-        cli_version_for_source: Optional[str] = None
-        if source.cli_version_arg_name:
-            cli_version_for_source = getattr(args, source.cli_version_arg_name, None)
-        
+        cli_version = getattr(args, source.cli_version_arg_name, None) if source.cli_version_arg_name else None
         try:
-            targets_for_source = source.resolver_fn(
-                session,
-                cli_version_for_source,
-                source.resolver_config
-            )
-            all_targets.extend(targets_for_source)
-            print(f"Resolved {len(targets_for_source)} target(s) for {source.id}.")
-        except ResolverError as e:
-            print(f"Error resolving source {source.id}: {e}. This source will be skipped.")
-        except HttpError as e:
-            print(f"HTTP Error during resolution for source {source.id}: {e}. This source will be skipped.")
-        except Exception as e:
-            print(f"Unexpected error resolving source {source.id}: {e}. This source will be skipped.")
-            # Consider re-raising for critical errors or add a traceback print for debugging
-            # import traceback
-            # traceback.print_exc()
-
+            targets_for_source = source.resolver_fn(session, cli_version, source.resolver_config)
+            newly_resolved_count = 0
+            for target in targets_for_source:
+                target_key = (target.source_id, target.base_name, target.version_str, target.download_url)
+                if target_key not in unique_target_keys:
+                    all_targets.append(target); unique_target_keys.add(target_key); newly_resolved_count += 1
+                # else: print(f"Note: Duplicate resolved target skipped: {target.get_target_filename()} from {target.source_id}")
+            print(f"Resolved {newly_resolved_count} new unique target(s) for {source.id}.")
+        except (ResolverError, HttpError) as e: print(f"Error resolving source {source.id}: {e}. Skipped.")
+        except Exception as e: print(f"Unexpected error resolving source {source.id}: {e}. Skipped."); # import traceback; traceback.print_exc()
     return all_targets
 
-def print_summary_stats(results: Dict[str, int], total_expected_downloads: int) -> None:
-    """Prints the final download statistics."""
-    print("\n--- Download Summary ---")
-    if total_expected_downloads == 0:
-        print("No download operations were attempted (possibly due to no targets resolved or no target directories).")
-        return
+def print_summary_stats(results: Dict[str, int], num_unique_targets_resolved: int, num_target_dirs: int) -> None:
+    print("\n--- Overall Summary ---")
+    uds, udsch, udf = results['unique_downloads_successful'], results['unique_downloads_skipped_cache_hit'], results['unique_downloads_failed']
+    ds, dsae, df = results['distributions_successful'], results['distributions_skipped_already_exists'], results['distributions_failed']
+    cache_deleted = results.get('cache_files_deleted_after_distribution', 0)
 
-    print(f"Total individual download operations attempted: {total_expected_downloads}")
-    print(f"  Successful: {results['success']}")
-    print(f"  Skipped (already exist): {results['skipped']}")
-    print(f"  Failed: {results['failed']}")
+    print(f"Unique dictionary files considered: {num_unique_targets_resolved}")
+    print("\nCache Phase:")
+    print(f"  Successfully downloaded to cache: {uds}")
+    print(f"  Skipped (already in cache):      {udsch}")
+    print(f"  Failed to download to cache:     {udf}")
     
-    if results['failed'] > 0:
-        print("\nSome downloads failed. Check warnings above for details.")
+    total_cached_or_found = uds + udsch
+    if total_cached_or_found > 0 and num_target_dirs > 0:
+        print("\nDistribution Phase:")
+        print(f"  Files available from cache for distribution: {total_cached_or_found}")
+        print(f"  Target directories: {num_target_dirs}")
+        print(f"  Total distribution operations attempted: {total_cached_or_found * num_target_dirs}")
+        print(f"    Successfully distributed:          {ds}")
+        print(f"    Skipped (already in target dir): {dsae}")
+        print(f"    Failed to distribute:              {df}")
+    elif num_unique_targets_resolved > 0:
+        print("\nDistribution Phase: Skipped (no files available from cache or no target directories).")
+
+    if num_target_dirs > 0 and total_cached_or_found > 0:
+        print("\nCache Cleanup (post-distribution):")
+        print(f"  Files removed from cache: {cache_deleted} / {total_cached_or_found} (candidates)")
+    
+    if udf > 0 or df > 0:
+        print("\nSome operations failed. Check warnings above for details. Related files may be retained in cache.")
+    elif num_target_dirs > 0 and total_cached_or_found > 0 and cache_deleted < total_cached_or_found :
+         print("\nNot all eligible cached files were deleted; some were retained due to distribution issues or configuration.")
+    else:
+        print("\nAll operations completed as expected.")
+        if num_target_dirs > 0 and total_cached_or_found > 0 and cache_deleted == total_cached_or_found:
+             print("All successfully cached files were also successfully distributed and removed from cache.")
 
 
 # --- Define Dictionary Sources ---
-# These are the KTY dictionary files that were originally in BASE_FILE_NAMES
-# They can be used as a filter for the KTY resolver.
 KTY_STANDARD_DICTIONARIES = [
     'kty-de-de-ipa', 'kty-fr-fr-ipa', 'kty-en-en-ipa', 'kty-en-en', 'kty-en-fr', 
     'kty-en-de', 'kty-en-ja', 'kty-zh-zh', 'kty-zh-fr', 'kty-zh-de', 'kty-zh-ja', 
@@ -491,66 +391,37 @@ KTY_STANDARD_DICTIONARIES = [
     'kty-de-fr', 'kty-de-de', 'kty-ja-ja', 'kty-la-zh', 'kty-la-en', 'kty-la-fr', 
     'kty-la-de', 'kty-la-ja'
 ]
-
 ALL_CONFIGURED_SOURCES: List[DictionarySource] = [
-    DictionarySource(
-        id="kaikki-to-yomitan",
-        resolver_fn=kty_resolver_fn,
-        cli_version_arg_name="kty_version", # e.g., --kty_version v2025-04-08...
-        resolver_config={
-            "asset_basenames_to_download": KTY_STANDARD_DICTIONARIES
-        }
-    ),
-    DictionarySource(
-        id="jitendex",
-        resolver_fn=jitendex_resolver_fn,
-        cli_version_arg_name="jitendex_version", # e.g., --jitendex_version 20230101
-        resolver_config={
-            "download_url": "https://github.com/stephenmk/stephenmk.github.io/releases/latest/download/jitendex-yomitan.zip", 
-            "base_name": "jitendex-yomitan"
-        }
-    ),
-    # Add more DictionarySource tuples here for other dictionaries
+    DictionarySource("kaikki-to-yomitan", kty_resolver_fn, "kty_version",
+        {"id": "kaikki-to-yomitan", "repo_owner": "yomidevs", "repo_name": "kaikki-to-yomitan", "asset_basenames_to_download": KTY_STANDARD_DICTIONARIES}),
+    DictionarySource("jitendex", jitendex_resolver_fn, "jitendex_version",
+        {"id": "jitendex", "download_url": "https://github.com/stephenmk/stephenmk.github.io/releases/latest/download/jitendex-yomitan.zip", "base_name": "jitendex-yomitan"}),
 ]
 
-
 def main() -> None:
-    """Main function to orchestrate the dictionary download process."""
     try:
         cli_args = parse_cli_arguments(ALL_CONFIGURED_SOURCES)
-        
-        # Setup a shared requests session
-        # This is an effectful object but managed and passed explicitly
+        cache_dir = os.path.join(cli_args.cache_base_dir, CACHE_SUBDIR_NAME)
+        print(f"Using cache directory: {os.path.abspath(cache_dir)}")
+
         with requests.Session() as http_session:
-            # Add a User-Agent to be polite
-            http_session.headers.update({'User-Agent': 'YomitanDictionaryDownloader/1.0'})
-
-            # 1. Resolve all download targets from all sources
-            resolved_download_targets = resolve_all_download_targets(ALL_CONFIGURED_SOURCES, cli_args, http_session)
-            
-            if not resolved_download_targets:
+            http_session.headers.update({'User-Agent': 'YomitanDictionaryDownloader/1.2'})
+            resolved_targets = resolve_all_download_targets(ALL_CONFIGURED_SOURCES, cli_args, http_session)
+            if not resolved_targets:
                 print("\nNo dictionary files to download after resolving all sources.")
-                return
+                print_summary_stats({}, 0, len(cli_args.target_dirs)); return
 
-            # 2. Perform downloads concurrently
-            target_directories = cli_args.target_dirs
-            download_stats = orchestrate_concurrent_downloads(resolved_download_targets, target_directories, http_session)
+            target_dirs_abs = [os.path.abspath(d) for d in cli_args.target_dirs]
+            for t_dir in target_dirs_abs: ensure_directory_exists(t_dir)
+            
+            op_stats = orchestrate_downloads_and_distribution(resolved_targets, target_dirs_abs, http_session, cache_dir)
+            print_summary_stats(op_stats, len(resolved_targets), len(target_dirs_abs))
 
-            # 3. Print summary
-            total_ops = len(resolved_download_targets) * len(target_directories)
-            print_summary_stats(download_stats, total_ops)
-
-    except DownloaderError as e: # Catch custom errors
-        print(f"ERROR: {e}", file=sys.stderr)
-        sys.exit(1)
-    except KeyboardInterrupt:
-        print("\nDownload process interrupted by user.", file=sys.stderr)
-        sys.exit(1)
-    except Exception as e: # Catch any other unexpected errors
+    except DownloaderError as e: print(f"ERROR: {e}", file=sys.stderr); sys.exit(1)
+    except KeyboardInterrupt: print("\nDownload interrupted by user.", file=sys.stderr); sys.exit(1)
+    except Exception as e:
         print(f"An unexpected critical error occurred: {e}", file=sys.stderr)
-        # For debugging, you might want to print the full traceback
-        # import traceback
-        # traceback.print_exc()
+        import traceback; traceback.print_exc()
         sys.exit(2)
 
 if __name__ == "__main__":
