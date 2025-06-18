@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @updateURL    https://raw.githubusercontent.com/BilderLoong/playground/refs/heads/master/tampermonkey_scripts/Remove%20Premium%20Ribbon%20on%20Windy.js
 // @downloadURL  https://raw.githubusercontent.com/BilderLoong/playground/refs/heads/master/tampermonkey_scripts/Remove%20Premium%20Ribbon%20on%20Windy.js
-// @version      2025-06-18
+// @version      1.0.0
 // @description  Removes the "Get Premium" ribbon/element on Windy.com
 // @author       cokoryu@outlook.com
 // @match        https://www.windy.com/*
