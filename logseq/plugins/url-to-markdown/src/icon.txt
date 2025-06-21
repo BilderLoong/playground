@@ -1,0 +1,8 @@
+This is a placeholder for the icon.png file.
+
+To create a proper icon:
+1. Create a 64x64 pixel PNG image
+2. Save it as "icon.png" in this directory
+3. The icon should represent the URL to Markdown conversion functionality
+
+You can use any image editing software to create this icon.

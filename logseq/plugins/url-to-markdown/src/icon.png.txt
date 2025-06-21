@@ -1,0 +1,8 @@
+This is a placeholder for the icon.png file.
+
+To use this plugin, you need to replace this file with an actual PNG image:
+1. Create a 64x64 pixel PNG image
+2. Save it as "icon.png" (remove the .txt extension from this file)
+3. The icon should represent the URL to Markdown conversion functionality
+
+Without a proper icon.png file, the plugin may not display correctly in Logseq.

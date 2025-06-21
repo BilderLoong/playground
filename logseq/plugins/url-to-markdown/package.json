@@ -1,0 +1,32 @@
+{
+  "name": "logseq-url-to-markdown",
+  "version": "0.1.0",
+  "description": "A Logseq plugin that converts URLs in blocks to markdown format with the title of the URL",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "bun build src/index.ts --outdir dist --target node",
+    "dev": "bun build src/index.ts --outdir dist --target node --watch"
+  },
+  "keywords": [
+    "logseq",
+    "plugin",
+    "url",
+    "markdown"
+  ],
+  "author": "",
+  "license": "MIT",
+  "logseq": {
+    "id": "logseq-url-to-markdown",
+    "title": "URL to Markdown",
+    "main": "dist/index.js"
+  },
+  "dependencies": {
+    "@logseq/libs": "^0.0.17",
+    "undici": "^5.28.2"
+  },
+  "devDependencies": {
+    "bun-types": "latest",
+    "typescript": "^5.8.3"
+  }
+}
