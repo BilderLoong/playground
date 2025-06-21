@@ -1,100 +1,203 @@
 /**
- * URL regex pattern to detect URLs in text
- * Matches common URL patterns starting with http://, https://, or www.
- * Excludes trailing punctuation like periods, commas, etc.
- * Properly handles query parameters and fragments
+ * Types for the URL processing domain
  */
-const URL_REGEX = /https?:\/\/[^\s),:;]+(?:[./?=&#][^\s),:;]+)*/g;
-const MARKDOWN_LINK_REGEX = /\[([^\]]*)\]\(([^)]+)\)/g;
+type URL = string;
+type Title = string;
+type MarkdownLink = string;
 
 /**
- * Process block content to convert URLs to markdown format
- * @param content - The block content to process
- * @returns The processed content with URLs converted to markdown
+ * Represents a range in text with start and end positions
  */
-/**
- * Custom implementation of processBlockContent for testing
- * This doesn't rely on the original module's functions
- */
-export const processBlockContent = async (content: string): Promise<string> => {
-  if (!content) return content;
-
-  // Find all markdown links to exclude them from processing
-  const markdownLinks = [...content.matchAll(MARKDOWN_LINK_REGEX)];
-  const markdownRanges = markdownLinks.map((match: RegExpMatchArray) => ({
-    start: match.index!,
-    end: match.index! + match[0].length,
-  }));
-
-  // Find all URLs
-  const matches = [...content.matchAll(URL_REGEX)];
-
-  // Filter out URLs that are already part of markdown links
-  const urlsToProcess = matches
-    .filter((match: RegExpMatchArray) => {
-      const start = match.index!;
-      const end = start + match[0].length;
-      return !markdownRanges.some(
-        (range) => start >= range.start && end <= range.end
-      );
-    })
-    .map((match: RegExpMatchArray) => ({
-      url: match[0],
-      start: match.index!,
-      end: match.index! + match[0].length,
-    }));
-
-  if (urlsToProcess.length === 0) return content;
-
-  // Sort URLs by position in reverse order to avoid offset issues when replacing
-  urlsToProcess.sort(
-    (a: { start: number }, b: { start: number }) => b.start - a.start
-  );
-
-  // Create a mutable copy of the content
-  let result = content;
-
-  // Process each URL
-  for (const { url, start, end } of urlsToProcess) {
-    // Check for trailing punctuation
-    let trailingPunctuation = "";
-    const originalText = result.substring(start, end);
-    const punctuationMatch = originalText.match(/([.,;:!?]+)$/);
-
-    if (punctuationMatch) {
-      trailingPunctuation = punctuationMatch[1];
-      // Adjust the URL to exclude the trailing punctuation
-      const cleanUrl = url.slice(0, -trailingPunctuation.length);
-
-      const title = await fetchUrlTitle(cleanUrl);
-      if (title) {
-        const markdown = `[${title.replace(
-          /(\[|\])/g,
-          "\\$1"
-        )}](${cleanUrl})${trailingPunctuation}`;
-        result = result.substring(0, start) + markdown + result.substring(end);
-      }
-    } else {
-      const title = await fetchUrlTitle(url);
-      if (title) {
-        const markdown = `[${title.replace(/(\[|\])/g, "\\$1")}](${url})`;
-        result = result.substring(0, start) + markdown + result.substring(end);
-      }
-    }
-  }
-
-  return result;
+type TextRange = {
+  readonly start: number;
+  readonly end: number;
 };
 
 /**
- * Fetch the title of a URL
- * This function contains side effects (network request)
- * @param url - The URL to fetch the title from
- * @returns The title of the URL or null if not found
+ * Represents a URL match with its position in text
  */
-const fetchUrlTitle = async (url: string): Promise<string | null> => {
+type URLMatch = {
+  readonly url: URL;
+  readonly start: number;
+  readonly end: number;
+};
+
+/**
+ * Represents a URL with optional trailing punctuation
+ */
+type ParsedURL = {
+  readonly cleanUrl: URL;
+  readonly trailingPunctuation: string;
+};
+
+/**
+ * Represents a side effect that fetches a title
+ */
+type TitleFetcher = (url: URL) => Promise<Title | null>;
+
+/**
+ * Regular expression patterns
+ */
+const URL_REGEX = /https?:\/\/[^\s),:;]+(?:[./?=&#][^\s),:;]+)*/g;
+const MARKDOWN_LINK_REGEX = /\[([^\]]*)\]\(([^)]+)\)/g;
+const TRAILING_PUNCTUATION_REGEX = /([.,;:!?]+)$/;
+const TITLE_TAG_REGEX = /<title[^>]*>([^<]+)<\/title>/i;
+const MARKDOWN_ESCAPE_REGEX = /(\[|\])/g;
+
+/**
+ * Process block content to convert URLs to markdown format
+ * This is the main pure function that orchestrates the transformation pipeline
+ */
+export const processBlockContent = (
+  content: string,
+  fetchTitle: TitleFetcher = fetchUrlTitle
+): Promise<string> => {
+  if (!content) return Promise.resolve(content);
+
+  // Extract all components from the content
+  const markdownRanges = findMarkdownLinkRanges(content);
+  const urlMatches = findUrlMatches(content);
+  
+  // Filter URLs that aren't already in markdown links
+  const urlsToProcess = filterUrlsNotInMarkdown(urlMatches, markdownRanges);
+  
+  if (urlsToProcess.length === 0) return Promise.resolve(content);
+  
+  // Sort URLs by position in reverse order to avoid offset issues when replacing
+  const sortedUrls = sortUrlsByPositionDesc(urlsToProcess);
+  
+  // Transform the content by replacing URLs with markdown links
+  return replaceUrlsWithMarkdown(content, sortedUrls, fetchTitle);
+};
+
+/**
+ * Find all markdown link ranges in the content
+ */
+const findMarkdownLinkRanges = (content: string): ReadonlyArray<TextRange> => {
+  const matches = Array.from(content.matchAll(MARKDOWN_LINK_REGEX));
+  return matches.map(match => ({
+    start: match.index!,
+    end: match.index! + match[0].length
+  }));
+};
+
+/**
+ * Find all URL matches in the content
+ */
+const findUrlMatches = (content: string): ReadonlyArray<URLMatch> => {
+  const matches = Array.from(content.matchAll(URL_REGEX));
+  return matches.map(match => ({
+    url: match[0],
+    start: match.index!,
+    end: match.index! + match[0].length
+  }));
+};
+
+/**
+ * Filter URLs that aren't already part of markdown links
+ */
+const filterUrlsNotInMarkdown = (
+  urls: ReadonlyArray<URLMatch>,
+  markdownRanges: ReadonlyArray<TextRange>
+): ReadonlyArray<URLMatch> => {
+  return urls.filter(({ start, end }) => 
+    !markdownRanges.some(range => 
+      start >= range.start && end <= range.end
+    )
+  );
+};
+
+/**
+ * Sort URLs by position in descending order
+ */
+const sortUrlsByPositionDesc = (
+  urls: ReadonlyArray<URLMatch>
+): ReadonlyArray<URLMatch> => {
+  return [...urls].sort((a, b) => b.start - a.start);
+};
+
+/**
+ * Parse a URL to extract any trailing punctuation
+ */
+const parseUrl = (url: URL): ParsedURL => {
+  const punctuationMatch = url.match(TRAILING_PUNCTUATION_REGEX);
+  
+  if (!punctuationMatch) {
+    return {
+      cleanUrl: url,
+      trailingPunctuation: ""
+    };
+  }
+  
+  const trailingPunctuation = punctuationMatch[1];
+  const cleanUrl = url.slice(0, -trailingPunctuation.length);
+  
+  return {
+    cleanUrl,
+    trailingPunctuation
+  };
+};
+
+/**
+ * Create a markdown link from a title and URL
+ */
+const createMarkdownLink = (
+  title: Title,
+  url: URL,
+  trailingPunctuation: string = ""
+): MarkdownLink => {
+  const escapedTitle = title.replace(MARKDOWN_ESCAPE_REGEX, "\\$1");
+  return `[${escapedTitle}](${url})${trailingPunctuation}`;
+};
+
+/**
+ * Replace a single URL with its markdown equivalent
+ */
+const replaceUrlWithMarkdown = async (
+  content: string,
+  urlMatch: URLMatch,
+  fetchTitle: TitleFetcher
+): Promise<string> => {
+  const { url, start, end } = urlMatch;
+  const { cleanUrl, trailingPunctuation } = parseUrl(url);
+  
+  const title = await fetchTitle(cleanUrl);
+  
+  if (!title) return content;
+  
+  const markdown = createMarkdownLink(title, cleanUrl, trailingPunctuation);
+  
+  return content.substring(0, start) + markdown + content.substring(end);
+};
+
+/**
+ * Replace all URLs with markdown links
+ * This function handles the sequential async replacements
+ */
+const replaceUrlsWithMarkdown = async (
+  content: string,
+  urls: ReadonlyArray<URLMatch>,
+  fetchTitle: TitleFetcher
+): Promise<string> => {
+  // Use reduce to sequentially apply transformations while maintaining immutability
+  return urls.reduce(
+    async (contentPromise, urlMatch) => {
+      const currentContent = await contentPromise;
+      return replaceUrlWithMarkdown(currentContent, urlMatch, fetchTitle);
+    },
+    Promise.resolve(content)
+  );
+};
+
+/**
+ * Fetch the title of a URL - this function contains side effects (network request)
+ * It's isolated from the pure functions and can be injected as a dependency
+ */
+export const fetchUrlTitle = async (url: URL): Promise<Title | null> => {
   try {
     const formattedUrl = url.startsWith("www.") ? `https://${url}` : url;
+    
+    // Side effect: Network request
     const response = await fetch(formattedUrl, {
       headers: {
         "User-Agent":
@@ -103,13 +206,14 @@ const fetchUrlTitle = async (url: string): Promise<string | null> => {
     });
 
     if (!response.ok) {
-      throw new Error(`Failed to fetch URL: ${response.status}`);
+      return Promise.reject(new Error(`Failed to fetch URL: ${response.status}`));
     }
 
     const html = await response.text();
-    const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
+    const titleMatch = html.match(TITLE_TAG_REGEX);
     return titleMatch ? titleMatch[1].trim() : null;
   } catch (error) {
+    // Side effect: Logging
     console.error(
       `Error fetching URL title: ${
         error instanceof Error ? error.message : String(error)
