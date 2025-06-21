@@ -1,0 +1,4 @@
+- `getSelectedBlocks()` always returns `null` error.
+- Better error reporting.
+- Add loading state.
+- Auto convert to markdown.

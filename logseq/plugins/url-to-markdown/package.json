@@ -6,7 +6,8 @@
   "main": "src/index.ts",
   "scripts": {
     "build": "bun build src/index.ts --outdir dist --target node",
-    "dev": "bun build src/index.ts --outdir dist --target node --watch"
+    "dev": "bun build src/index.ts --outdir dist --target node --watch",
+    "test": "bun test"
   },
   "keywords": [
     "logseq",
@@ -22,8 +23,7 @@
     "main": "dist/index.js"
   },
   "dependencies": {
-    "@logseq/libs": "^0.0.17",
-    "undici": "^5.28.2"
+    "@logseq/libs": "^0.0.17"
   },
   "devDependencies": {
     "bun-types": "latest",
