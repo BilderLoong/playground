@@ -55,6 +55,12 @@
     subObserver.observe(llnSubs, { childList: true, subtree: true });
   }
 
+  /**
+   * Wait for a specific element to be added to the DOM.
+   * @param {string} selector - The CSS selector of the element to wait for.
+   * @param {() => unknown} callback - The function to call when the element is found.
+   * @returns
+   */
   // This function will wait for the #lln-subs element to be added to the page.
   function waitForElement(selector, callback) {
     // Check if the element already exists
