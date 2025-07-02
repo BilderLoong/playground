@@ -12,72 +12,75 @@
 // @license MIT
 // ==/UserScript==
 
-(function() {
-    'use strict';
+(function () {
+  "use strict";
 
-    // This is the function that contains your original logic.
-    function removeBrTags() {
-        // Find the Language Reactor subtitle container.
-        const llnSubs = document.querySelector("#lln-subs");
+  // This is the function that contains your original logic.
+  function removeBrTags() {
+    // Find the Language Reactor subtitle container.
+    const llnSubs = document.querySelector("#lln-subs");
 
-        // If it doesn't exist for some reason, just stop.
-        if (!llnSubs) {
-            console.log("Language Reactor Improver: #lln-subs not found yet.");
-            return;
-        }
-
-        console.log("Language Reactor Improver: #lln-subs found! Removing <br> tags.");
-
-        const brTags = llnSubs.querySelectorAll('br');
-        brTags.forEach(br => {
-            br.remove();
-        });
-
-        // We can also observe the subtitle panel itself for changes,
-        // in case new subtitles with <br> tags are loaded later.
-        const subObserver = new MutationObserver((mutations) => {
-            for (const mutation of mutations) {
-                if (mutation.addedNodes.length > 0) {
-                     const newBrTags = llnSubs.querySelectorAll('br');
-                     if (newBrTags.length > 0) {
-                         // console.log("Language Reactor Improver: New <br> tags detected, removing...");
-                         newBrTags.forEach(br => br.remove());
-                     }
-                }
-            }
-        });
-
-        // Start observing the subtitle panel for new children being added.
-        subObserver.observe(llnSubs, { childList: true, subtree: true });
+    // If it doesn't exist for some reason, just stop.
+    if (!llnSubs) {
+      console.log("Language Reactor Improver: #lln-subs not found yet.");
+      return;
     }
 
-    // This function will wait for the #lln-subs element to be added to the page.
-    function waitForElement(selector, callback) {
-        // Check if the element already exists
-        if (document.querySelector(selector)) {
-            callback();
-            return;
+    console.log(
+      "Language Reactor Improver: #lln-subs found! Removing <br> tags."
+    );
+
+    const brTags = llnSubs.querySelectorAll("br");
+    const llnTtHidden = llnSubs.querySelectorAll(".lln-tt-hidden");
+
+    [...brTags, ...llnTtHidden].forEach((br) => {
+      br.remove();
+    });
+
+    // We can also observe the subtitle panel itself for changes,
+    // in case new subtitles with <br> tags are loaded later.
+    const subObserver = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        if (mutation.addedNodes.length > 0) {
+          const newBrTags = llnSubs.querySelectorAll("br");
+          if (newBrTags.length > 0) {
+            // console.log("Language Reactor Improver: New <br> tags detected, removing...");
+            newBrTags.forEach((br) => br.remove());
+          }
         }
+      }
+    });
 
-        // If not, set up a MutationObserver to watch for it
-        const observer = new MutationObserver((mutations, me) => {
-            if (document.querySelector(selector)) {
-                callback();
-            }
-        });
+    // Start observing the subtitle panel for new children being added.
+    subObserver.observe(llnSubs, { childList: true, subtree: true });
+  }
 
-        // Start observing the entire document for additions
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true
-        });
+  // This function will wait for the #lln-subs element to be added to the page.
+  function waitForElement(selector, callback) {
+    // Check if the element already exists
+    if (document.querySelector(selector)) {
+      callback();
+      return;
     }
 
-    // --- Main Execution ---
+    // If not, set up a MutationObserver to watch for it
+    const observer = new MutationObserver((mutations, me) => {
+      if (document.querySelector(selector)) {
+        callback();
+      }
+    });
 
-    // This is the key part:
-    // We wait for the '#lln-subs-container' (a parent element that loads first)
-    // before running our main function.
-    waitForElement('#lln-subs', removeBrTags);
+    // Start observing the entire document for additions
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+  }
 
+  // --- Main Execution ---
+
+  // This is the key part:
+  // We wait for the '#lln-subs-container' (a parent element that loads first)
+  // before running our main function.
+  waitForElement("#lln-subs", removeBrTags);
 })();
