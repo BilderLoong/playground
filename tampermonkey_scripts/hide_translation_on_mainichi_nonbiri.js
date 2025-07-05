@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          Remove Chinese translation and blur english translation on mainichi-nonbiri.com
 // @namespace     http://tampermonkey.net/
-// @version       2025-06-30
+// @version       1.0.0
 // @description   Remove Chinese translation and blur English translation on mainichi-nonbiri.com
 // @author        You
 // @match         https://mainichi-nonbiri.com/grammar/*
