@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name          Remove Chinese translation and blur english tranlation on mainichi-nonbiri.com
+// @name          Remove Chinese translation and blur english translation on mainichi-nonbiri.com
 // @namespace     http://tampermonkey.net/
 // @version       2025-06-30
 // @description   try to take over the world!
