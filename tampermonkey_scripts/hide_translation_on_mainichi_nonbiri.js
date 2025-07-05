@@ -2,7 +2,7 @@
 // @name          Remove Chinese translation and blur english translation on mainichi-nonbiri.com
 // @namespace     http://tampermonkey.net/
 // @version       2025-06-30
-// @description   try to take over the world!
+// @description   Remove Chinese translation and blur English translation on mainichi-nonbiri.com
 // @author        You
 // @match         https://mainichi-nonbiri.com/grammar/*
 // @icon          https://www.google.com/s2/favicons?sz=64&domain=mainichi-nonbiri.com
