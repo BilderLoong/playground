@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube Subtitle Masker (Functional)
 // @namespace    http://tampermonkey.net/
-// @version      1.2
+// @version      1.2.1
 // @description  Adds movable, resizable, and removable rectangular masks to the YouTube player. Controls appear on hover.
 // @author       Gemini
 // @match        *://*.youtube.com/watch*
