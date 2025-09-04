@@ -319,8 +319,11 @@
                 opacity: 1;
                 pointer-events: auto; /* Allow interaction on hover */
             }
-            .yt-mask-handle {
-                position: absolute; width: 12px; height: 12px;
+            .yt-mask:hover {
+                opacity: 0.05; /* 95% transparent on hover */
+            }
+            .yt-mask:hover {
+                opacity: 0.05; /* 95% transparent on hover */
                 background-color: rgba(255, 255, 255, 0.7); border: 1px solid black;
                 border-radius: 2px; box-sizing: border-box;
             }
