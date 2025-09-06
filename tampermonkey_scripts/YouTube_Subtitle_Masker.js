@@ -114,6 +114,17 @@
   });
 
   /**
+   * Removes a mask from the state.
+   * @param {AppState} state - The current application state.
+   * @param {string} maskId - The ID of the mask to remove.
+   * @returns {AppState} The new application state with the mask removed.
+   */
+  const removeMask = (state, maskId) => ({
+    ...state,
+    masks: state.masks.filter((mask) => mask.id !== maskId),
+  });
+
+  /**
    * Calculates the new position and size of a mask during a drag event.
    * This is the core transformation logic.
    * @param {AppState} state - The current application state.
@@ -189,12 +200,33 @@
   };
 
   /**
+   * Creates the DOM element for a close button.
+   * @param {string} maskId - The ID of the mask this close button belongs to.
+   * @param {function} onClose - Callback function to handle close button clicks.
+   * @returns {HTMLDivElement}
+   */
+  const createCloseButtonElement = (maskId, onClose) => {
+    const closeButton = document.createElement("div");
+    closeButton.className = "yt-mask-close";
+    closeButton.dataset.maskId = maskId;
+    closeButton.innerHTML = "×";
+    closeButton.title = "Close mask";
+    closeButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      onClose(maskId);
+    });
+    return closeButton;
+  };
+
+  /**
    * Renders the entire UI based on the current state. This function is the
    * primary source of side effects, manipulating the DOM to match the state.
    * @param {AppState} state - The state object to render.
    * @param {HTMLElement} container - The DOM element to render into.
+   * @param {function} onMaskClose - Callback function to handle mask removal.
    */
-  const render = (state, container) => {
+  const render = (state, container, onMaskClose) => {
     // Synchronize mask elements with the state
     state.masks.forEach((maskData) => {
       let maskEl = container.querySelector(`#${maskData.id}`);
@@ -208,6 +240,8 @@
         ["tl", "tr", "bl", "br"].forEach((pos) =>
           maskEl.appendChild(createHandleElement(`resize-${pos}`))
         );
+        // Add close button
+        maskEl.appendChild(createCloseButtonElement(maskData.id, onMaskClose));
         container.appendChild(maskEl);
       }
 
@@ -252,7 +286,9 @@
      */
     const updateStateAndRender = (newState) => {
       currentState = newState;
-      render(currentState, appContainer);
+      render(currentState, appContainer, (maskId) => {
+        updateStateAndRender(removeMask(currentState, maskId));
+      });
     };
 
     // --- UI Control Elements (Side Effects) ---
@@ -265,9 +301,13 @@
     });
 
     // --- Global Event Listeners (Side Effects) ---
+
     appContainer.addEventListener("mousedown", (e) => {
       const target = e.target;
       if (!target) return;
+
+      // Prevent drag on close button
+      if (target.classList.contains("yt-mask-close")) return;
 
       const maskId = target.closest(".yt-mask")?.dataset.maskId;
       const handleType = target.dataset.handleType;
@@ -364,6 +404,29 @@
             .yt-mask-handle.resize-tr { top: -6px; right: -6px; cursor: nesw-resize; }
             .yt-mask-handle.resize-bl { bottom: -6px; left: -6px; cursor: nesw-resize; }
             .yt-mask-handle.resize-br { bottom: -6px; right: -6px; cursor: nwse-resize; }
+            .yt-mask-close {
+                position: absolute;
+                top: -8px; right: -8px;
+                width: 16px; height: 16px;
+                background-color: rgba(220, 53, 69, 0.9);
+                color: white;
+                border: 1px solid rgba(255, 255, 255, 0.8);
+                border-radius: 50%;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 11px;
+                font-weight: bold;
+                line-height: 1;
+                box-sizing: border-box;
+                user-select: none;
+                z-index: 10;
+            }
+            .yt-mask-close:hover {
+                background-color: rgba(220, 53, 69, 1);
+                transform: scale(1.1);
+            }
         `;
     const styleSheet = document.createElement("style");
     styleSheet.innerText = styles;
