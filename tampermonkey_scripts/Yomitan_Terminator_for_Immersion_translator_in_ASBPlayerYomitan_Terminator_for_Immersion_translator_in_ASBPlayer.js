@@ -14,7 +14,7 @@
 
   // --- Configuration ---
   // You can change the text content of the terminator span here.
-  const terminatorText = "『";
+  const terminatorText = "︙";
   // --- End Configuration ---
 
 
