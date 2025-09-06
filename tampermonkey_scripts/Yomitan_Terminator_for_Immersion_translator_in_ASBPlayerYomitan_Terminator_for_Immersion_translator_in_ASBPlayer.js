@@ -14,14 +14,12 @@
 
   // --- Configuration ---
   // You can change the text content of the terminator span here.
-  // By default, it's empty to remain invisible.
   const terminatorText = "『";
-  // const targetWrapperSelector =
-  //   ".subtitle-line font.immersive-translate-target-inner";
-  const targetInnerSelector = ".immersive-translate-target-inner";
-  const YOMITAN_TERMINATOR_CLASS = "yomitan-terminator";
   // --- End Configuration ---
 
+
+  const TARGET_INNER_SELECTOR = ".immersive-translate-target-inner";
+  const YOMITAN_TERMINATOR_CLASS = "yomitan-terminator";
   /**
    * Creates and inserts a yomitan-terminator span before the given element if it doesn't already have one.
    * @param {Element} wrapperElement - The `font.immersive-translate-target-inner` element.
@@ -59,7 +57,7 @@
    * Processes all subtitle wrappers currently in the DOM.
    */
   function processExistingSubtitles() {
-    const subtitleWrappers = document.querySelectorAll(targetInnerSelector);
+    const subtitleWrappers = document.querySelectorAll(TARGET_INNER_SELECTOR);
     subtitleWrappers.forEach(addTerminator);
   }
 
@@ -89,7 +87,7 @@
             return;
           }
 
-          e.querySelectorAll(targetInnerSelector).forEach(addTerminator);
+          e.querySelectorAll(TARGET_INNER_SELECTOR).forEach(addTerminator);
         });
     }
   });
