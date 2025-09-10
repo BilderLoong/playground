@@ -6,7 +6,7 @@
 // @downloadURL  https://raw.githubusercontent.com/BilderLoong/playground/refs/heads/master/tampermonkey_scripts/Make%20Language%20Reactor%20campatible%20with%20Yomitan.js
 // @description  Waits for Language Reactor panel to load, then removes <br> and <span>... </span> tags from subtitles, so that when using yomitan can pick up full sentence when scanning the subtitle inside video.
 // @author       cokoryu@outlook.com
-// @match        https://www.youtube.com/watch*
+// @match        *://www.youtube.com/watch*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=youtube.com
 // @grant        none
 // @license MIT
