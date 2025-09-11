@@ -26,9 +26,9 @@
       return;
     }
 
-    console.log(
-      "Language Reactor Improver: #lln-subs found! Removing <br> tags."
-    );
+    // console.log(
+    //   "Language Reactor Improver: #lln-subs found! Removing <br> tags."
+    // );
 
     const brTags = llnSubs.querySelectorAll("br");
     const llnTtHidden = llnSubs.querySelectorAll(".lln-tt-hidden");
