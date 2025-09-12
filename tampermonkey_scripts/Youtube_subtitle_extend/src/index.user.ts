@@ -218,6 +218,8 @@ function getCurrentSubtitleLanguageFactory() {
     }
 
     try {
+      // There is also a attribute in the `body.lln-sublangcode_g="fr"` may indicate the language of
+      // the current selected.
       const {
         Y,
         N,
