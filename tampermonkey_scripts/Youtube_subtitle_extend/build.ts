@@ -1,16 +1,19 @@
 import { watch } from "fs";
 
+const distDirName = 'dist'
 // Define your userscript header as a template literal
 const userscriptHeader = `
 // ==UserScript==
-// @name         XHR Interceptor (Tampermonkey)
+// @name         Language reactor subtitle extender
 // @namespace    http://tampermonkey.net/
-// @version      0.2
-// @description  Intercept and inspect/modify XMLHttpRequest (open, setRequestHeader, send, responseText).
-// @author       You
+// @version      1.0
+// @description  So that Yomitan (or other popup dictionary) can pick up full sentence.
+// @author       Birudo
 // @match        *://www.youtube.com/watch*
 // @grant        none
 // @run-at       document-start
+// @updateURL    https://raw.githubusercontent.com/BilderLoong/playground/refs/heads/master/tampermonkey_scripts/Youtube_subtitle_extend/${distDirName}/index.user.js
+// @downloadURL  https://raw.githubusercontent.com/BilderLoong/playground/refs/heads/master/tampermonkey_scripts/Youtube_subtitle_extend/${distDirName}/index.user.js
 // ==/UserScript==
 `.trim(); // .trim() removes any leading/trailing whitespace
 
@@ -20,7 +23,7 @@ async function buildScript() {
   try {
     await Bun.build({
       entrypoints: ["./src/index.user.ts"],
-      outdir: "./dist",
+      outdir: `./${distDirName}`,
       banner: userscriptHeader,
     });
     console.log("✅ Build successful!");
