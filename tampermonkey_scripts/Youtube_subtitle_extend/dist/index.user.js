@@ -248,11 +248,11 @@ var subtitleMap = new Map;
     }
     const spanBefore = document.createElement("span");
     spanBefore.className = "subtitle-extension-before";
-    spanBefore.textContent = beforeText;
+    spanBefore.textContent = beforeText + " ";
     hideElement(spanBefore);
     const spanAfter = document.createElement("span");
     spanAfter.className = "subtitle-extension-after";
-    spanAfter.textContent = afterText;
+    spanAfter.textContent = " " + afterText;
     hideElement(spanAfter);
     const firstChild = originalSubtitleEle.firstChild;
     if (firstChild && firstChild.nextSibling) {
