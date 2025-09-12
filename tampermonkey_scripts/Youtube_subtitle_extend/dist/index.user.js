@@ -1,12 +1,14 @@
 // ==UserScript==
-// @name         XHR Interceptor (Tampermonkey)
+// @name         Language reactor subtitle extender
 // @namespace    http://tampermonkey.net/
-// @version      0.2
-// @description  Intercept and inspect/modify XMLHttpRequest (open, setRequestHeader, send, responseText).
-// @author       You
+// @version      1.0
+// @description  So that Yomitan (or other popup dictionary) can pick up full sentence.
+// @author       Birudo
 // @match        *://www.youtube.com/watch*
 // @grant        none
 // @run-at       document-start
+// @updateURL    https://raw.githubusercontent.com/BilderLoong/playground/refs/heads/master/tampermonkey_scripts/Youtube_subtitle_extend/dist/index.user.js
+// @downloadURL  https://raw.githubusercontent.com/BilderLoong/playground/refs/heads/master/tampermonkey_scripts/Youtube_subtitle_extend/dist/index.user.js
 // ==/UserScript==
 // src/interceptor.ts
 var interceptors = {
