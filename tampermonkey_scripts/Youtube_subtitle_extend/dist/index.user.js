@@ -166,12 +166,26 @@ var subtitleMap = new Map;
       return { modify: false };
     }
   });
+  function onLlnSubsWrapAdd(callback) {
+    const observer = new MutationObserver((mutationsList, observer2) => {
+      mutationsList.forEach((mutation) => {
+        mutation.addedNodes.forEach((node) => {
+          if (node.nodeType !== Node.ELEMENT_NODE || !(node instanceof Element) || !node.matches(".lln-subs-wrap")) {
+            return;
+          }
+          callback(node);
+        });
+      });
+    });
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      characterData: true
+    });
+}
   const getCurrentSubtitleLanguage = getCurrentSubtitleLanguageFactory();
   const getPlayerInstance = getPlayerInstanceFactory();
-  document.addEventListener("DOMContentLoaded", () => {
-    onLlnSubsWrapAdd(handleLlnSubsWrapAdd);
-  });
-  function handleLlnSubsWrapAdd(llnSubsWrap) {
+  onLlnSubsWrapAdd((llnSubsWrap) => {
     const originalSubtitleEle = llnSubsWrap.querySelector("#lln-subs");
     if (!originalSubtitleEle) {
       console.error(`No #lln-subs found`);
@@ -254,7 +268,7 @@ var subtitleMap = new Map;
     } else {
       originalSubtitleEle.appendChild(spanAfter);
     }
-  }
+  });
 })();
 function getCurrentSubtitleLanguageFactory() {
   const player = document.getElementById("movie_player");
@@ -282,21 +296,4 @@ function getPlayerInstanceFactory() {
     }
     return player;
   };
-}
-function onLlnSubsWrapAdd(callback) {
-  const observer = new MutationObserver((mutationsList, observer2) => {
-    mutationsList.forEach((mutation) => {
-      mutation.addedNodes.forEach((node) => {
-        if (node.nodeType !== Node.ELEMENT_NODE || !(node instanceof Element) || !node.matches(".lln-subs-wrap")) {
-          return;
-        }
-        callback(node);
-      });
-    });
-  });
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true,
-    characterData: true
-  });
 }
