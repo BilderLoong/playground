@@ -1,5 +1,5 @@
 export const userScriptBanner = `
-// ==UserScript=
+// ==UserScript==
 // @name         Language reactor subtitle extender
 // @namespace    http://tampermonkey.net/
 // @version      1.5
