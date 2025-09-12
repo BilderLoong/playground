@@ -1,4 +1,4 @@
-// ==UserScript==
+// ==UserScript=
 // @name         Language reactor subtitle extender
 // @namespace    http://tampermonkey.net/
 // @version      1.2
@@ -182,7 +182,7 @@ var subtitleMap = new Map;
       subtree: true,
       characterData: true
     });
-}
+  }
   const getCurrentSubtitleLanguage = getCurrentSubtitleLanguageFactory();
   const getPlayerInstance = getPlayerInstanceFactory();
   onLlnSubsWrapAdd((llnSubsWrap) => {
