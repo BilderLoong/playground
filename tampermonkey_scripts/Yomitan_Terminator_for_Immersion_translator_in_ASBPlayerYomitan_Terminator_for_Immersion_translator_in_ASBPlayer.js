@@ -1,12 +1,14 @@
 // ==UserScript==
 // @name         Yomitan Terminator for Immersion translator in ASBPlayer
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.2
 // @description  Inserts an invisible `span.yomitan-terminator` element as a sibling to subtitle lines on asbplayer for better parsing.
 // @author       Gemini
 // @match        https://killergerbah.github.io/asbplayer/*
 // @grant        none
 // @run-at       document-idle
+// @license MIT
+
 // ==/UserScript==
 
 (function () {

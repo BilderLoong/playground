@@ -1,12 +1,13 @@
 // ==UserScript==
 // @name         YouTube Subtitle Masker
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  Adds movable and resizable rectangular masks to the YouTube player to cover subtitles or other elements.
 // @author       Birudo
 // @match        *://*.youtube.com/watch*
 // @grant        none
 // @run-at       document-idle
+// @license MIT
 // ==/UserScript==
 
 (function () {

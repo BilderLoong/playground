@@ -1,12 +1,13 @@
 // ==UserScript==
 // @name          Remove Chinese translation and blur english translation on mainichi-nonbiri.com
 // @namespace     http://tampermonkey.net/
-// @version       1.0.0
+// @version       1.1.0
 // @description   Remove Chinese translation and blur English translation on mainichi-nonbiri.com
 // @author        You
 // @match         https://mainichi-nonbiri.com/grammar/*
 // @icon          https://www.google.com/s2/favicons?sz=64&domain=mainichi-nonbiri.com
 // @grant         none
+// @license MIT
 // ==/UserScript==
 
 (function() {
