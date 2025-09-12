@@ -6,7 +6,7 @@
 // @author       Birudo
 // @match        *://www.youtube.com/watch*
 // @grant        none
-// @run-at       document-start
+// @run-at       document-body
 // @updateURL    https://raw.githubusercontent.com/BilderLoong/playground/refs/heads/master/tampermonkey_scripts/Youtube_subtitle_extend/dist/index.user.js
 // @downloadURL  https://raw.githubusercontent.com/BilderLoong/playground/refs/heads/master/tampermonkey_scripts/Youtube_subtitle_extend/dist/index.user.js
 // ==/UserScript==
