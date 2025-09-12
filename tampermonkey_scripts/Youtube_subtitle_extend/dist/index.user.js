@@ -168,7 +168,10 @@ var subtitleMap = new Map;
   });
   const getCurrentSubtitleLanguage = getCurrentSubtitleLanguageFactory();
   const getPlayerInstance = getPlayerInstanceFactory();
-  onLlnSubsWrapAdd((llnSubsWrap) => {
+  document.addEventListener("DOMContentLoaded", () => {
+    onLlnSubsWrapAdd(handleLlnSubsWrapAdd);
+  });
+  function handleLlnSubsWrapAdd(llnSubsWrap) {
     const originalSubtitleEle = llnSubsWrap.querySelector("#lln-subs");
     if (!originalSubtitleEle) {
       console.error(`No #lln-subs found`);
@@ -251,7 +254,7 @@ var subtitleMap = new Map;
     } else {
       originalSubtitleEle.appendChild(spanAfter);
     }
-  });
+  }
 })();
 function getCurrentSubtitleLanguageFactory() {
   const player = document.getElementById("movie_player");

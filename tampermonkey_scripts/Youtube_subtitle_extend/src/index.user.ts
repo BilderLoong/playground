@@ -31,7 +31,11 @@ const subtitleMap = new Map<string, XMLHttpRequest>();
   const getCurrentSubtitleLanguage = getCurrentSubtitleLanguageFactory();
   const getPlayerInstance = getPlayerInstanceFactory();
 
-  onLlnSubsWrapAdd((llnSubsWrap) => {
+  document.addEventListener("DOMContentLoaded", () => {
+    onLlnSubsWrapAdd(handleLlnSubsWrapAdd);
+  });
+
+  function handleLlnSubsWrapAdd(llnSubsWrap: HTMLElement) {
     const originalSubtitleEle = llnSubsWrap.querySelector("#lln-subs");
 
     if (!originalSubtitleEle) {
@@ -179,7 +183,7 @@ const subtitleMap = new Map<string, XMLHttpRequest>();
     }
 
     // console.log("✅ Added span elements around subtitle");
-  });
+  }
 })();
 
 function getCurrentSubtitleLanguageFactory() {
@@ -222,7 +226,7 @@ function getPlayerInstanceFactory() {
   };
 }
 
-function onLlnSubsWrapAdd(callback: (llnSubsWrap: Element) => void) {
+function onLlnSubsWrapAdd(callback: (llnSubsWrap: HTMLElement) => void) {
   const observer = new MutationObserver((mutationsList, observer) => {
     // console.log("MutationObserver detected changes:", mutationsList);
     mutationsList.forEach((mutation) => {
