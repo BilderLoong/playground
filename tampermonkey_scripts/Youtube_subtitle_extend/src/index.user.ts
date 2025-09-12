@@ -28,32 +28,6 @@ const subtitleMap = new Map<string, XMLHttpRequest>();
     },
   });
 
-  function onLlnSubsWrapAdd(callback: (llnSubsWrap: Element) => void) {
-    const observer = new MutationObserver((mutationsList, observer) => {
-      // console.log("MutationObserver detected changes:", mutationsList);
-      mutationsList.forEach((mutation) => {
-        // if (mutation.type !== "childList") return;
-        mutation.addedNodes.forEach((node) => {
-          if (
-            node.nodeType !== Node.ELEMENT_NODE ||
-            !(node instanceof Element) ||
-            !node.matches(".lln-subs-wrap")
-          ) {
-            return;
-          }
-
-          callback(node);
-        });
-      });
-    });
-
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true,
-      characterData: true, // Observe changes to the text content of nodes
-    });
-  }
-
   const getCurrentSubtitleLanguage = getCurrentSubtitleLanguageFactory();
   const getPlayerInstance = getPlayerInstanceFactory();
 
@@ -161,7 +135,7 @@ const subtitleMap = new Map<string, XMLHttpRequest>();
     const afterText = joinTimedText(afterSegments);
 
     function hideElement(ele: HTMLElement) {
-      ele.style.display = 'inline-block'
+      ele.style.display = "inline-block";
       ele.style.width = "0";
       ele.style.height = "0";
       ele.style.overflow = "hidden";
@@ -246,4 +220,30 @@ function getPlayerInstanceFactory() {
 
     return player;
   };
+}
+
+function onLlnSubsWrapAdd(callback: (llnSubsWrap: Element) => void) {
+  const observer = new MutationObserver((mutationsList, observer) => {
+    // console.log("MutationObserver detected changes:", mutationsList);
+    mutationsList.forEach((mutation) => {
+      // if (mutation.type !== "childList") return;
+      mutation.addedNodes.forEach((node) => {
+        if (
+          node.nodeType !== Node.ELEMENT_NODE ||
+          !(node instanceof Element) ||
+          !node.matches(".lln-subs-wrap")
+        ) {
+          return;
+        }
+
+        callback(node);
+      });
+    });
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+    characterData: true, // Observe changes to the text content of nodes
+  });
 }
