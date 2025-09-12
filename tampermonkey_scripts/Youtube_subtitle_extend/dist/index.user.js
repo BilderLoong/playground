@@ -1,32 +1,28 @@
 // ==UserScript==
-// @name         Langauge reactor subtitle extender
+// @name         XHR Interceptor (Tampermonkey)
 // @namespace    http://tampermonkey.net/
-// @version      1.0
-// @description  So that Yomitan can pick up full sentence.
-// @author       Birudo
+// @version      0.2
+// @description  Intercept and inspect/modify XMLHttpRequest (open, setRequestHeader, send, responseText).
+// @author       You
 // @match        *://www.youtube.com/watch*
 // @grant        none
 // @run-at       document-start
-// @updateURL       
-// @downloadURL     
 // ==/UserScript==
 // src/interceptor.ts
 var interceptors = {
-  onResponseReady: [],
+  onResponseReady: []
 };
-
 function proxy(config) {
   if (config.onResponseReady) {
     interceptors.onResponseReady.push(config.onResponseReady);
   }
   return () => {
-    interceptors.onResponseReady = interceptors.onResponseReady.filter(
-      (handler) => handler !== config.onResponseReady
-    );
+    interceptors.onResponseReady = interceptors.onResponseReady.filter((handler) => handler !== config.onResponseReady);
   };
 }
 function main() {
-  if (window.__XHR_INTERCEPTOR_INSTALLED__) return;
+  if (window.__XHR_INTERCEPTOR_INSTALLED__)
+    return;
   window.__XHR_INTERCEPTOR_INSTALLED__ = true;
   const origOpen = XMLHttpRequest.prototype.open;
   const origSend = XMLHttpRequest.prototype.send;
@@ -36,13 +32,7 @@ function main() {
     return { proceed: true, newBody: body };
   }
   function onResponseReady(xhr) {}
-  XMLHttpRequest.prototype.open = function (
-    method,
-    url,
-    async = true,
-    user,
-    password
-  ) {
+  XMLHttpRequest.prototype.open = function(method, url, async = true, user, password) {
     try {
       this._method = method;
     } catch (e) {}
@@ -62,14 +52,15 @@ function main() {
     }
     return origOpen.apply(this, arguments);
   };
-  XMLHttpRequest.prototype.setRequestHeader = function (name, value) {
+  XMLHttpRequest.prototype.setRequestHeader = function(name, value) {
     try {
-      if (!this._reqHeaders) this._reqHeaders = {};
+      if (!this._reqHeaders)
+        this._reqHeaders = {};
       this._reqHeaders[name] = value;
     } catch (e) {}
     return origSetRequestHeader.apply(this, arguments);
   };
-  XMLHttpRequest.prototype.send = function (body) {
+  XMLHttpRequest.prototype.send = function(body) {
     let decision = { proceed: true, newBody: body };
     try {
       decision = onRequestSend(this, body) || decision;
@@ -87,17 +78,17 @@ function main() {
       return;
     }
     const _this = this;
-    const handler = function () {
+    const handler = function() {
       if (_this.readyState === 4) {
         let respDecision = {
-          modify: false,
+          modify: false
         };
         try {
           interceptors.onResponseReady.reduce((acc, handler2) => {
             const result = handler2(_this);
             return {
               modify: acc.modify || result.modify,
-              newResponseText: result.newResponseText || acc.newResponseText,
+              newResponseText: result.newResponseText || acc.newResponseText
             };
           }, respDecision);
         } catch (e) {
@@ -105,17 +96,14 @@ function main() {
         }
         if (respDecision && respDecision.modify) {
           try {
-            const newText =
-              respDecision.newResponseText === undefined
-                ? ""
-                : String(respDecision.newResponseText);
+            const newText = respDecision.newResponseText === undefined ? "" : String(respDecision.newResponseText);
             try {
               Object.defineProperty(_this, "responseText", {
                 configurable: true,
                 enumerable: true,
                 get() {
                   return newText;
-                },
+                }
               });
             } catch (e) {
               console.warn("Could not override responseText:", e);
@@ -126,7 +114,7 @@ function main() {
                 enumerable: true,
                 get() {
                   return newText;
-                },
+                }
               });
             } catch (e) {
               console.warn("Could not override response:", e);
@@ -145,7 +133,7 @@ function main() {
     if (!proto.__xhrPatchedToString) {
       proto.__xhrPatchedToString = true;
       const origToString = proto.toString;
-      proto.toString = function () {
+      proto.toString = function() {
         try {
           return origToString.call(this);
         } catch (e) {
@@ -157,8 +145,8 @@ function main() {
 }
 main();
 
-// src/index.ts
-var subtitleMap = new Map();
+// src/index.user.ts
+var subtitleMap = new Map;
 (() => {
   proxy({
     onResponseReady: (xhr) => {
@@ -174,17 +162,13 @@ var subtitleMap = new Map();
         console.error("No language found in /timedtext request.");
       }
       return { modify: false };
-    },
+    }
   });
   function onLlnSubsWrapAdd(callback) {
     const observer = new MutationObserver((mutationsList, observer2) => {
       mutationsList.forEach((mutation) => {
         mutation.addedNodes.forEach((node) => {
-          if (
-            node.nodeType !== Node.ELEMENT_NODE ||
-            !(node instanceof Element) ||
-            !node.matches(".lln-subs-wrap")
-          ) {
+          if (node.nodeType !== Node.ELEMENT_NODE || !(node instanceof Element) || !node.matches(".lln-subs-wrap")) {
             return;
           }
           callback(node);
@@ -194,7 +178,7 @@ var subtitleMap = new Map();
     observer.observe(document.body, {
       childList: true,
       subtree: true,
-      characterData: true,
+      characterData: true
     });
   }
   const getCurrentSubtitleLanguage = getCurrentSubtitleLanguageFactory();
@@ -207,16 +191,12 @@ var subtitleMap = new Map();
     }
     const currentSubtitleLanguageCode = getCurrentSubtitleLanguage();
     if (!currentSubtitleLanguageCode) {
-      console.error(
-        `Got empty or undefined language code from player instance, languageCode: ${currentSubtitleLanguageCode}. `
-      );
+      console.error(`Got empty or undefined language code from player instance, languageCode: ${currentSubtitleLanguageCode}. `);
       return;
     }
     const targetTimedTextRes = subtitleMap.get(currentSubtitleLanguageCode);
     if (!targetTimedTextRes) {
-      console.error(
-        `No corresponded XHR found for current language code: ${currentSubtitleLanguageCode}.`
-      );
+      console.error(`No corresponded XHR found for current language code: ${currentSubtitleLanguageCode}.`);
       return;
     }
     const player = getPlayerInstance();
@@ -236,33 +216,26 @@ var subtitleMap = new Map();
       return;
     }
     const currentVideoMs = player.getCurrentTime() * 1000;
-    const currentSegIndex = timedTextData.events.findIndex(
-      ({ dDurationMs: durationMs, tStartMs: startMs }) =>
-        currentVideoMs >= startMs && currentVideoMs <= startMs + durationMs
-    );
-    const { afterSegments, beforeSegments } = timedTextData.events.reduce(
-      (acc, current) => {
-        if (current.tStartMs + current.dDurationMs < currentVideoMs) {
-          return {
-            ...acc,
-            beforeSegments: [...acc.beforeSegments, current],
-          };
-        }
-        if (current.tStartMs > currentVideoMs) {
-          return {
-            ...acc,
-            afterSegments: [...acc.afterSegments, current],
-          };
-        }
-        return acc;
-      },
-      {
-        beforeSegments: [],
-        afterSegments: [],
+    const currentSegIndex = timedTextData.events.findIndex(({ dDurationMs: durationMs, tStartMs: startMs }) => currentVideoMs >= startMs && currentVideoMs <= startMs + durationMs);
+    const { afterSegments, beforeSegments } = timedTextData.events.reduce((acc, current) => {
+      if (current.tStartMs + current.dDurationMs < currentVideoMs) {
+        return {
+          ...acc,
+          beforeSegments: [...acc.beforeSegments, current]
+        };
       }
-    );
-    const joinTimedText = (segments) =>
-      segments.map((e) => e.segs[0].utf8).join(" ");
+      if (current.tStartMs > currentVideoMs) {
+        return {
+          ...acc,
+          afterSegments: [...acc.afterSegments, current]
+        };
+      }
+      return acc;
+    }, {
+      beforeSegments: [],
+      afterSegments: []
+    });
+    const joinTimedText = (segments) => segments.map((e) => e.segs[0].utf8).join(" ");
     const beforeText = joinTimedText(beforeSegments);
     const afterText = joinTimedText(afterSegments);
     function hideElement(ele) {
@@ -303,19 +276,19 @@ function getCurrentSubtitleLanguageFactory() {
       return;
     }
     try {
-      const { Y, N } = player.getAudioTrack();
+      const {
+        Y,
+        N
+      } = player.getAudioTrack();
       return Y?.languageCode ?? N?.languageCode;
     } catch (error) {
-      console.error(
-        "error when getting current subtitle language from player instance.",
-        error
-      );
+      console.error("error when getting current subtitle language from player instance.", error);
     }
   };
 }
 function getPlayerInstanceFactory() {
   let player = document.getElementById("movie_player");
-  return function () {
+  return function() {
     if (!player) {
       player = document.getElementById("movie_player");
     }

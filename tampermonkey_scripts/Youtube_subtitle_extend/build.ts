@@ -19,7 +19,7 @@ async function buildScript() {
   console.log("Building script...");
   try {
     await Bun.build({
-      entrypoints: ["./src/index.ts"],
+      entrypoints: ["./src/index.user.ts"],
       outdir: "./dist",
       banner: userscriptHeader,
     });
