@@ -176,7 +176,7 @@ const subtitleMap = new Map<string, XMLHttpRequest>();
     // Create span element before
     const spanBefore = document.createElement("span");
     spanBefore.className = "subtitle-extension-before";
-    spanBefore.textContent = beforeText + " "; // Placeholder content, can be modified as needed
+    spanBefore.textContent = beforeText; // Placeholder content, can be modified as needed
     hideElement(spanBefore);
 
     // Create span element after
