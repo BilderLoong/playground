@@ -220,21 +220,18 @@ function getCurrentSubtitleLanguageFactory() {
     try {
       // There is also a attribute in the `body.lln-sublangcode_g="fr"` may indicate the language of
       // the current selected.
-      const {
-        Y,
-        N,
-        J,
-        T,
-      }: {
-        Y: { languageCode: string } | null;
-        N: { languageCode: string } | null;
-        J: { languageCode: string } | null;
-        T: { languageCode: string } | null;
-      } = player.getAudioTrack();
+      const res: {
+        captions: {
+          playerCaptionsTracklistRenderer: {
+            captionTracks: {
+              languageCode: string;
+            }[];
+          };
+        };
+      } = player.getPlayerResponse();
 
-      return (
-        Y?.languageCode ?? N?.languageCode ?? J?.languageCode ?? T?.languageCode
-      );
+      return res.captions.playerCaptionsTracklistRenderer.captionTracks[0]
+        ?.languageCode;
     } catch (error) {
       console.error(
         "error when getting current subtitle language from player instance.",
