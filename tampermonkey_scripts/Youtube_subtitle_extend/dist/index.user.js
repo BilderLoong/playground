@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Language reactor subtitle extender
 // @namespace    http://tampermonkey.net/
-// @version      1.8
+// @version      1.11
 // @license MIT
 // @description  So that Yomitan (or other popup dictionary) can pick up full sentence.
 // @author       Birudo
@@ -279,11 +279,8 @@ function getCurrentSubtitleLanguageFactory() {
       return;
     }
     try {
-      const {
-        Y,
-        N
-      } = player.getAudioTrack();
-      return Y?.languageCode ?? N?.languageCode;
+      const res = player.getPlayerResponse();
+      return res.captions.playerCaptionsTracklistRenderer.captionTracks[0]?.languageCode;
     } catch (error) {
       console.error("error when getting current subtitle language from player instance.", error);
     }
