@@ -223,12 +223,18 @@ function getCurrentSubtitleLanguageFactory() {
       const {
         Y,
         N,
+        J,
+        T,
       }: {
         Y: { languageCode: string } | null;
         N: { languageCode: string } | null;
+        J: { languageCode: string } | null;
+        T: { languageCode: string } | null;
       } = player.getAudioTrack();
 
-      return Y?.languageCode ?? N?.languageCode;
+      return (
+        Y?.languageCode ?? N?.languageCode ?? J?.languageCode ?? T?.languageCode
+      );
     } catch (error) {
       console.error(
         "error when getting current subtitle language from player instance.",
