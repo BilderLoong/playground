@@ -5,7 +5,7 @@ export const userScriptBanner = `
 // @version      1.11
 // @license MIT
 // @description  So that Yomitan (or other popup dictionary) can pick up full sentence.
-// @author       Birudgso
+// @author       Birudo
 // @match        *://www.youtube.com/watch*
 // @grant        none
 // @run-at       document-body
