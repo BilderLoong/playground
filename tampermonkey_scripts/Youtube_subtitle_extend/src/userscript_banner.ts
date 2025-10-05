@@ -2,7 +2,7 @@ export const userScriptBanner = `
 // ==UserScript==
 // @name         Language reactor subtitle extender
 // @namespace    http://tampermonkey.net/
-// @version      3.0
+// @version      3.1
 // @license MIT
 // @description  So that Yomitan (or other popup dictionary) can pick up full sentence.
 // @author       Birudo

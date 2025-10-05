@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Language reactor subtitle extender
 // @namespace    http://tampermonkey.net/
-// @version      3.0
+// @version      3.1
 // @license MIT
 // @description  So that Yomitan (or other popup dictionary) can pick up full sentence.
 // @author       Birudo
@@ -194,7 +194,7 @@ var subtitleMap = new Map;
     }
     const currentSubtitleLanguageCode = getCurrentSubtitleLanguage();
     if (!currentSubtitleLanguageCode) {
-      console.error(`Got empty or undefined language code from player instance, languageCode: ${currentSubtitleLanguageCode}. `);
+      console.error(`Got empty, null or undefined language code from body attribute: "lln-sublangcode_g", current languageCode: ${currentSubtitleLanguageCode}. `);
       return;
     }
     const targetTimedTextRes = subtitleMap.get(currentSubtitleLanguageCode);
@@ -272,18 +272,9 @@ var subtitleMap = new Map;
   });
 })();
 function getCurrentSubtitleLanguageFactory() {
-  const player = document.getElementById("movie_player");
+  const body = document.body;
   return () => {
-    if (!player) {
-      console.error("no player instance found.");
-      return;
-    }
-    try {
-      const res = player.getPlayerResponse();
-      return res.captions.playerCaptionsTracklistRenderer.captionTracks[0]?.languageCode;
-    } catch (error) {
-      console.error("error when getting current subtitle language from player instance.", error);
-    }
+    return body.getAttribute("lln-sublangcode_g");
   };
 }
 function getPlayerInstanceFactory() {

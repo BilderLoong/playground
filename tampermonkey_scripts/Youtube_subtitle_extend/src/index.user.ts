@@ -69,7 +69,7 @@ const subtitleMap = new Map<string, XMLHttpRequest>();
     const currentSubtitleLanguageCode = getCurrentSubtitleLanguage();
     if (!currentSubtitleLanguageCode) {
       console.error(
-        `Got empty or undefined language code from player instance, languageCode: ${currentSubtitleLanguageCode}. `
+        `Got empty, null or undefined language code from body attribute: "lln-sublangcode_g", current languageCode: ${currentSubtitleLanguageCode}. `
       );
       return;
     }
@@ -209,35 +209,11 @@ const subtitleMap = new Map<string, XMLHttpRequest>();
 })();
 
 function getCurrentSubtitleLanguageFactory() {
-  const player = document.getElementById("movie_player");
+  // const player = document.getElementById("movie_player");
+  const body = document.body;
 
   return () => {
-    if (!player) {
-      console.error("no player instance found.");
-      return;
-    }
-
-    try {
-      // There is also a attribute in the `body.lln-sublangcode_g="fr"` may indicate the language of
-      // the current selected.
-      const res: {
-        captions: {
-          playerCaptionsTracklistRenderer: {
-            captionTracks: {
-              languageCode: string;
-            }[];
-          };
-        };
-      } = player.getPlayerResponse();
-
-      return res.captions.playerCaptionsTracklistRenderer.captionTracks[0]
-        ?.languageCode;
-    } catch (error) {
-      console.error(
-        "error when getting current subtitle language from player instance.",
-        error
-      );
-    }
+    return body.getAttribute("lln-sublangcode_g");
   };
 }
 
