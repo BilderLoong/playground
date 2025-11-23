@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Etymology of {{entry}}</title>
+    <style>
+      .entries {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif;
+      }
+      .etymology-tree {
+      }
+      .entry-header {
+        /* margin-bottom: 5px; */
+      }
+      .entry-word {
+        font-weight: bold;
+        font-size: 1.2em;
+        color: #1a1a1a;
+      }
+      .entry-type {
+        font-style: italic;
+        color: #666;
+      }
+      .entry-lang {
+        font-style: italic;
+        color: #005a9c;
+      }
+      .definition {
+      }
+
+      .section-title {
+        font-weight: bold;
+        /* margin-bottom: 5px; */
+      }
+      .notes-content {
+        display: none;
+      }
+      .section-title:hover + .notes-content {
+        display: inline;
+      }
+      ul {
+        margin: 0;
+        /* list-style-type: "→"; */
+      }
+    </style>
+  </head>
+  <body>
+    <script id="main-template" type="text/x-handlebars-template">
+      <div class="etymology-tree">
+          {{> entryPartial .}}
+      </div>
+    </script>
+
+    <script id="entryPartial" type="text/x-handlebars-template">
+      <div class="entries">
+        <div class="entry">
+                <span class="entry-word">{{entry}} </span>
+                {{#if origin_language}}
+                    <span class="entry-lang" title="{{origin_language.full_language_name}}">[{{origin_language.iso_639_3_code}}]</span>
+                {{/if}}
+
+                {{#if definition}}
+                  <span class="definition">: {{definition}}</span>
+                {{/if}}
+
+                {{#if notes}}
+                    <span class="section">
+                        <span class="section-title">Notes</span>
+                        <span class="notes-content">: {{notes}}</span>
+                    </span>
+                {{/if}}
+        </div>
+
+          {{#if ancestor}}
+                  {{! Recursive call for the ancestor }}
+               {{> entryPartial ancestor}}
+          {{/if}}
+
+          {{#if components}}
+                  <ul>
+                      {{#each components}}
+                          <li>
+                              {{! Recursive call for each component }}
+                              {{> entryPartial this}}
+                          </li>
+                      {{/each}}
+                  </ul>
+          {{/if}}
+
+          {{#if examples}}
+              <div class="section">
+                  <ul>
+                      {{#each examples}}
+                          <li><strong>{{word}}</strong> ({{language}}): {{simple_definition}}</li>
+                      {{/each}}
+                  </ul>
+              </div>
+          {{/if}}
+      </div>
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <script>
+      // compile the template
+      const source = document.getElementById("main-template").innerHTML;
+      Handlebars.registerPartial(
+        "entryPartial",
+        document.getElementById("entryPartial").innerHTML
+      );
+      const template = Handlebars.compile(source);
+      // execute the compiled template and render it to the body.
+      document.body.innerHTML = template(
+        JSON.parse(`
+     {
+  "entry": "insertion",
+  "type": "compound",
+  "definition": "The action of inserting or the state of being inserted.",
+  "origin_language": {
+    "iso_639_3_code": "eng",
+    "full_language_name": "English"
+  },
+  "notes": "The word entered English in the 1590s, from French 'insertion' or directly from Late Latin.",
+  "ancestor": {
+    "entry": "insertio",
+    "type": "root",
+    "definition": "a putting in, a grafting",
+    "origin_language": {
+      "iso_639_3_code": "lat",
+      "full_language_name": "Late Latin"
+    }
+  },
+  "components": [
+    {
+      "entry": "in-",
+      "type": "prefix",
+      "definition": "in, into, on, upon",
+      "origin_language": {
+        "iso_639_3_code": "lat",
+        "full_language_name": "Latin"
+      },
+      "ancestor": {
+        "entry": "*en",
+        "type": "root",
+        "definition": "in",
+        "origin_language": {
+          "iso_639_3_code": "ine",
+          "full_language_name": "Proto-Indo-European"
+        }
+      }
+    },
+    {
+      "entry": "serere",
+      "type": "root",
+      "definition": "to join, link, bind together, arrange, put in a row",
+      "origin_language": {
+        "iso_639_3_code": "lat",
+        "full_language_name": "Latin"
+      },
+      "ancestor": {
+        "entry": "*ser-",
+        "type": "root",
+        "definition": "to line up",
+        "origin_language": {
+          "iso_639_3_code": "ine",
+          "full_language_name": "Proto-Indo-European"
+        }
+      },
+      "examples": [
+        {
+          "word": "series",
+          "simple_definition": "A number of similar or related things coming one after another.",
+          "language": "English"
+        },
+        {
+            "word": "assert",
+            "simple_definition": "To state a fact or belief confidently and forcefully.",
+            "language": "English"
+        }
+      ]
+    },
+    {
+      "entry": "-tion",
+      "type": "suffix",
+      "definition": "A suffix forming nouns of action, condition, or result.",
+      "origin_language": {
+        "iso_639_3_code": "eng",
+        "full_language_name": "English"
+      },
+      "ancestor": {
+        "entry": "-tionem",
+        "type": "suffix",
+        "definition": "Suffix forming nouns of action from verbs.",
+        "origin_language": {
+          "iso_639_3_code": "lat",
+          "full_language_name": "Latin"
+        }
+      }
+    }
+  ]
+}
+
+      `)
+      );
+    </script>
+  </body>
+</html>

@@ -176,13 +176,13 @@ const subtitleMap = new Map<string, XMLHttpRequest>();
     // Create span element before
     const spanBefore = document.createElement("span");
     spanBefore.className = "subtitle-extension-before";
-    spanBefore.textContent = beforeText; // Placeholder content, can be modified as needed
+    spanBefore.textContent = beforeText + (beforeText.endsWith(" ") ? "" : " "); // Placeholder content, can be modified as needed
     hideElement(spanBefore);
 
     // Create span element after
     const spanAfter = document.createElement("span");
     spanAfter.className = "subtitle-extension-after";
-    spanAfter.textContent = " " + afterText; // Placeholder content, can be modified as needed
+    spanAfter.textContent = (afterText.startsWith(" ") ? "" : " ") + afterText; // Placeholder content, can be modified as needed
     hideElement(spanAfter);
 
     // Insert the spans as second and second-to-last direct child of the `originalSubtitleEle`
