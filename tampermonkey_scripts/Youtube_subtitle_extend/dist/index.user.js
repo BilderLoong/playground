@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Language reactor subtitle extender
 // @namespace    http://tampermonkey.net/
-// @version      3.2
+// @version      3.3
 // @license MIT
 // @description  So that Yomitan (or other popup dictionary) can pick up full sentence.
 // @author       Birudo
@@ -167,39 +167,72 @@ var subtitleMap = new Map;
       return { modify: false };
     }
   });
-  function onLlnSubsWrapAdd(callback) {
-    const observer = new MutationObserver((mutationsList, observer2) => {
-      mutationsList.forEach((mutation) => {
-        mutation.addedNodes.forEach((node) => {
-          if (node.nodeType !== Node.ELEMENT_NODE || !(node instanceof Element) || !node.matches(".lln-subs-wrap")) {
-            return;
-          }
-          callback(node);
-        });
+  function observeSelector(selector, callback) {
+    function startObserving(element) {
+      const observer = new MutationObserver((mutations) => {
+        callback(mutations, element);
       });
+      observer.observe(element, {
+        childList: true,
+        subtree: true,
+        characterData: true
+      });
+      console.log(`Now observing: ${selector}`);
+    }
+    const existingElement = document.querySelector(selector);
+    if (existingElement) {
+      startObserving(existingElement);
+      return;
+    }
+    const bodyObserver = new MutationObserver((mutations, observer) => {
+      const element = document.querySelector(selector);
+      if (element) {
+        startObserving(element);
+        observer.disconnect();
+      }
     });
-    observer.observe(document.body, {
+    bodyObserver.observe(document.body, {
       childList: true,
-      subtree: true,
-      characterData: true
+      subtree: true
     });
   }
   const getCurrentSubtitleLanguage = getCurrentSubtitleLanguageFactory();
   const getPlayerInstance = getPlayerInstanceFactory();
-  onLlnSubsWrapAdd((llnSubsWrap) => {
-    const originalSubtitleEle = llnSubsWrap.querySelector("#lln-subs");
+  function addSubtitleExtensionElements() {
+    if (document.querySelector(".subtitle-extension-before")) {
+      return;
+    }
+    const originalSubtitleEle = document.querySelector("#lln-subs");
     if (!originalSubtitleEle) {
       console.error(`No #lln-subs found`);
       return;
     }
-    const currentSubtitleLanguageCode = getCurrentSubtitleLanguage();
-    if (!currentSubtitleLanguageCode) {
-      console.error(`Got empty, null or undefined language code from body attribute: "lln-sublangcode_g", current languageCode: ${currentSubtitleLanguageCode}. `);
+    const currentSubtitleLanguage = getCurrentSubtitleLanguage();
+    if (!currentSubtitleLanguage) {
+      console.error(`Got empty, null or undefined language code from body attribute: "lln-sublangcode_g", current languageCode: ${currentSubtitleLanguage}. `);
       return;
     }
-    const targetTimedTextRes = subtitleMap.get(currentSubtitleLanguageCode);
+    console.log(`Current language: ${currentSubtitleLanguage}`);
+    function findClosestLanguageCode(target) {
+      const subtitleMapKeys = Array.from(subtitleMap.keys());
+      if (subtitleMapKeys.includes(target)) {
+        return target;
+      }
+      return subtitleMapKeys.filter((key) => {
+        if (key.includes(target)) {
+          return true;
+        }
+      }).sort((a, b) => a.length - b.length)[0] || null;
+    }
+    const closestLanguageCode = findClosestLanguageCode(currentSubtitleLanguage);
+    if (!closestLanguageCode) {
+      console.error(`No closest language code found in the subtitleMap for current language: ${currentSubtitleLanguage}. `);
+      return;
+    }
+    console.log(`Current language **code**: ${closestLanguageCode}`);
+    const targetTimedTextRes = subtitleMap.get(closestLanguageCode);
     if (!targetTimedTextRes) {
-      console.error(`No corresponded XHR found for current language code: ${currentSubtitleLanguageCode}.`);
+      console.error(`No corresponded XHR found for current language code: ${currentSubtitleLanguage}.`);
       return;
     }
     const player = getPlayerInstance();
@@ -269,6 +302,9 @@ var subtitleMap = new Map;
     } else {
       originalSubtitleEle.appendChild(spanAfter);
     }
+  }
+  observeSelector("#lln-main-subs", () => {
+    addSubtitleExtensionElements();
   });
 })();
 function getCurrentSubtitleLanguageFactory() {

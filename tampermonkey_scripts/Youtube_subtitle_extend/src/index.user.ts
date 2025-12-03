@@ -28,37 +28,67 @@ const subtitleMap = new Map<string, XMLHttpRequest>();
     },
   });
 
-  function onLlnSubsWrapAdd(callback: (llnSubsWrap: Element) => void) {
-    const observer = new MutationObserver((mutationsList, observer) => {
-      // console.log("MutationObserver detected changes:", mutationsList);
-      mutationsList.forEach((mutation) => {
-        // if (mutation.type !== "childList") return;
-        mutation.addedNodes.forEach((node) => {
-          if (
-            node.nodeType !== Node.ELEMENT_NODE ||
-            !(node instanceof Element) ||
-            !node.matches(".lln-subs-wrap")
-          ) {
-            return;
-          }
-
-          callback(node);
-        });
+  /**
+   * Waits for an element to exist, then observes it for any changes.
+   * @param {string} selector - The CSS selector to watch.
+   * @param {function} callback - The function to run when changes happen.
+   */
+  function observeSelector(
+    selector: string,
+    callback: (mutations: MutationRecord[], element: Element) => void
+  ) {
+    // 1. Define the logic to start watching the specific element
+    function startObserving(element: Element) {
+      const observer = new MutationObserver((mutations) => {
+        // Run the user's callback whenever a change is detected
+        callback(mutations, element);
       });
+
+      observer.observe(element, {
+        // attributes: true, // Watch attribute changes
+        childList: true, // Watch add/remove of children
+        subtree: true, // Watch deep inside the element
+        characterData: true, // Watch text changes
+      });
+
+      console.log(`Now observing: ${selector}`);
+    }
+
+    // 2. Check if the element already exists
+    const existingElement = document.querySelector(selector);
+    if (existingElement) {
+      startObserving(existingElement);
+      return; // Exit, we are done
+    }
+
+    // 3. If not, watch the body until the element appears
+    const bodyObserver = new MutationObserver((mutations, observer) => {
+      const element = document.querySelector(selector);
+
+      if (element) {
+        // Element found! Start watching it specifically
+        startObserving(element);
+
+        // Stop watching the whole body (performance)
+        observer.disconnect();
+      }
     });
 
-    observer.observe(document.body, {
+    bodyObserver.observe(document.body, {
       childList: true,
       subtree: true,
-      characterData: true, // Observe changes to the text content of nodes
     });
   }
 
   const getCurrentSubtitleLanguage = getCurrentSubtitleLanguageFactory();
   const getPlayerInstance = getPlayerInstanceFactory();
 
-  onLlnSubsWrapAdd((llnSubsWrap) => {
-    const originalSubtitleEle = llnSubsWrap.querySelector("#lln-subs");
+  function addSubtitleExtensionElements() {
+    if (document.querySelector(".subtitle-extension-before")) {
+      // Already added
+      return;
+    }
+    const originalSubtitleEle = document.querySelector("#lln-subs");
 
     if (!originalSubtitleEle) {
       console.error(`No #lln-subs found`);
@@ -66,20 +96,51 @@ const subtitleMap = new Map<string, XMLHttpRequest>();
       return;
     }
 
-    const currentSubtitleLanguageCode = getCurrentSubtitleLanguage();
-    if (!currentSubtitleLanguageCode) {
+    const currentSubtitleLanguage = getCurrentSubtitleLanguage();
+    if (!currentSubtitleLanguage) {
       console.error(
-        `Got empty, null or undefined language code from body attribute: "lln-sublangcode_g", current languageCode: ${currentSubtitleLanguageCode}. `
+        `Got empty, null or undefined language code from body attribute: "lln-sublangcode_g", current languageCode: ${currentSubtitleLanguage}. `
       );
       return;
     }
 
-    // console.log(`Current language code: ${currentSubtitleLanguageCode}`);
+    console.log(`Current language: ${currentSubtitleLanguage}`);
 
-    const targetTimedTextRes = subtitleMap.get(currentSubtitleLanguageCode);
+    function findClosestLanguageCode(target: string): string | null {
+      const subtitleMapKeys = Array.from(subtitleMap.keys());
+
+      if (subtitleMapKeys.includes(target)) {
+        return target;
+      }
+
+      return (
+        subtitleMapKeys
+          .filter((key) => {
+            if (key.includes(target)) {
+              return true;
+            }
+          })
+          .sort((a, b) => a.length - b.length)[0] || null
+      );
+    }
+
+    const closestLanguageCode = findClosestLanguageCode(
+      currentSubtitleLanguage
+    );
+    if (!closestLanguageCode) {
+      console.error(
+        `No closest language code found in the subtitleMap for current language: ${currentSubtitleLanguage}. `
+      );
+
+      return;
+    }
+
+    console.log(`Current language **code**: ${closestLanguageCode}`);
+    const targetTimedTextRes = subtitleMap.get(closestLanguageCode);
+
     if (!targetTimedTextRes) {
       console.error(
-        `No corresponded XHR found for current language code: ${currentSubtitleLanguageCode}.`
+        `No corresponded XHR found for current language code: ${currentSubtitleLanguage}.`
       );
 
       return;
@@ -205,6 +266,9 @@ const subtitleMap = new Map<string, XMLHttpRequest>();
     }
 
     // console.log("✅ Added span elements around subtitle");
+  }
+  observeSelector("#lln-main-subs", () => {
+    addSubtitleExtensionElements();
   });
 })();
 
