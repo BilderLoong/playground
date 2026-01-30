@@ -1,10 +1,10 @@
 // ==UserScript==
-// @name         Remove Premium Ribbon on Windy.com
+// @name         Improve Windy.com
 // @namespace    http://tampermonkey.net/
 // @updateURL    https://raw.githubusercontent.com/BilderLoong/playground/refs/heads/master/tampermonkey_scripts/Remove%20Premium%20Ribbon%20on%20Windy.js
 // @downloadURL  https://raw.githubusercontent.com/BilderLoong/playground/refs/heads/master/tampermonkey_scripts/Remove%20Premium%20Ribbon%20on%20Windy.js
 // @version      1.2.0
-// @description  Removes the "Get Premium" ribbon/element on Windy.com
+// @description  Removes the "Get Premium" ribbon/element on Windy.com; Remove watermark and gray filter.
 // @author       cokoryu@outlook.com
 // @match        https://www.windy.com/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
