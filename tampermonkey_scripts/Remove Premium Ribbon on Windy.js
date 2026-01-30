@@ -20,6 +20,14 @@
         .get-premium {
             display: none  !important;
         }
+
+        .premium-calendar #map-container::after {
+            background-image: none !important;
+        }
+
+        .premium-calendar #map-container #leaflet-map {
+           filter:none !important;
+        }
     `;
     document.head.appendChild(style);
 })();
