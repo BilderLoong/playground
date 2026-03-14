@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Language reactor subtitle extender
 // @namespace    http://tampermonkey.net/
-// @version      3.3
+// @version      3.4
 // @license MIT
 // @description  So that Yomitan (or other popup dictionary) can pick up full sentence.
 // @author       Birudo
@@ -11,6 +11,7 @@
 // @updateURL    https://raw.githubusercontent.com/BilderLoong/playground/refs/heads/master/tampermonkey_scripts/Youtube_subtitle_extend/dist/index.user.js
 // @downloadURL  https://raw.githubusercontent.com/BilderLoong/playground/refs/heads/master/tampermonkey_scripts/Youtube_subtitle_extend/dist/index.user.js
 // ==/UserScript==
+
 // src/interceptor.ts
 var interceptors = {
   onResponseReady: []
@@ -272,14 +273,16 @@ var subtitleMap = new Map;
       afterSegments: []
     });
     const joinTimedText = (segments) => segments.map((e) => e.segs[0].utf8).join(" ");
-    const beforeText = joinTimedText(beforeSegments);
-    const afterText = joinTimedText(afterSegments);
     function hideElement(ele) {
       ele.style.display = "inline-block";
       ele.style.width = "0";
       ele.style.height = "0";
       ele.style.overflow = "hidden";
     }
+    const fullBeforeText = joinTimedText(beforeSegments);
+    const fullAfterText = joinTimedText(afterSegments);
+    const beforeText = fullBeforeText.substring(fullAfterText.length - 500);
+    const afterText = fullAfterText.substring(0, 500);
     const spanBefore = document.createElement("span");
     spanBefore.className = "subtitle-extension-before";
     spanBefore.textContent = beforeText + (beforeText.endsWith(" ") ? "" : " ");

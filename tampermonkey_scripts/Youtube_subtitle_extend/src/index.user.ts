@@ -35,7 +35,7 @@ const subtitleMap = new Map<string, XMLHttpRequest>();
    */
   function observeSelector(
     selector: string,
-    callback: (mutations: MutationRecord[], element: Element) => void
+    callback: (mutations: MutationRecord[], element: Element) => void,
   ) {
     // 1. Define the logic to start watching the specific element
     function startObserving(element: Element) {
@@ -99,7 +99,7 @@ const subtitleMap = new Map<string, XMLHttpRequest>();
     const currentSubtitleLanguage = getCurrentSubtitleLanguage();
     if (!currentSubtitleLanguage) {
       console.error(
-        `Got empty, null or undefined language code from body attribute: "lln-sublangcode_g", current languageCode: ${currentSubtitleLanguage}. `
+        `Got empty, null or undefined language code from body attribute: "lln-sublangcode_g", current languageCode: ${currentSubtitleLanguage}. `,
       );
       return;
     }
@@ -125,11 +125,11 @@ const subtitleMap = new Map<string, XMLHttpRequest>();
     }
 
     const closestLanguageCode = findClosestLanguageCode(
-      currentSubtitleLanguage
+      currentSubtitleLanguage,
     );
     if (!closestLanguageCode) {
       console.error(
-        `No closest language code found in the subtitleMap for current language: ${currentSubtitleLanguage}. `
+        `No closest language code found in the subtitleMap for current language: ${currentSubtitleLanguage}. `,
       );
 
       return;
@@ -140,7 +140,7 @@ const subtitleMap = new Map<string, XMLHttpRequest>();
 
     if (!targetTimedTextRes) {
       console.error(
-        `No corresponded XHR found for current language code: ${currentSubtitleLanguage}.`
+        `No corresponded XHR found for current language code: ${currentSubtitleLanguage}.`,
       );
 
       return;
@@ -158,7 +158,7 @@ const subtitleMap = new Map<string, XMLHttpRequest>();
       segs: [
         {
           utf8: string;
-        }
+        },
       ];
     }
     interface TimedText {
@@ -181,7 +181,7 @@ const subtitleMap = new Map<string, XMLHttpRequest>();
     const currentVideoMs = player.getCurrentTime() * 1000;
     const currentSegIndex = timedTextData.events.findIndex(
       ({ dDurationMs: durationMs, tStartMs: startMs }) =>
-        currentVideoMs >= startMs && currentVideoMs <= startMs + durationMs
+        currentVideoMs >= startMs && currentVideoMs <= startMs + durationMs,
     );
 
     const { afterSegments, beforeSegments } = timedTextData.events.reduce(
@@ -205,7 +205,7 @@ const subtitleMap = new Map<string, XMLHttpRequest>();
       {
         beforeSegments: [] as TimedSegment[],
         afterSegments: [] as TimedSegment[],
-      }
+      },
     );
 
     // console.log({
@@ -218,15 +218,17 @@ const subtitleMap = new Map<string, XMLHttpRequest>();
     const joinTimedText = (segments: TimedSegment[]): string =>
       segments.map((e) => e.segs[0].utf8).join(" ");
 
-    const beforeText = joinTimedText(beforeSegments);
-    const afterText = joinTimedText(afterSegments);
-
     function hideElement(ele: HTMLElement) {
       ele.style.display = "inline-block";
       ele.style.width = "0";
       ele.style.height = "0";
       ele.style.overflow = "hidden";
     }
+
+    const fullBeforeText = joinTimedText(beforeSegments);
+    const fullAfterText = joinTimedText(afterSegments);
+    const beforeText = fullBeforeText.substring(fullAfterText.length - 500);
+    const afterText = fullAfterText.substring(0, 500);
 
     // console.log({
     //   beforeText,
