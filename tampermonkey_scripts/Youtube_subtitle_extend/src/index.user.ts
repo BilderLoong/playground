@@ -227,7 +227,7 @@ const subtitleMap = new Map<string, XMLHttpRequest>();
 
     const fullBeforeText = joinTimedText(beforeSegments);
     const fullAfterText = joinTimedText(afterSegments);
-    const beforeText = fullBeforeText.substring(fullAfterText.length - 500);
+    const beforeText = fullBeforeText.substring(fullBeforeText.length - 500);
     const afterText = fullAfterText.substring(0, 500);
 
     // console.log({

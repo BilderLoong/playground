@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Language reactor subtitle extender
 // @namespace    http://tampermonkey.net/
-// @version      3.4
+// @version      3.5
 // @license MIT
 // @description  So that Yomitan (or other popup dictionary) can pick up full sentence.
 // @author       Birudo
@@ -281,7 +281,7 @@ var subtitleMap = new Map;
     }
     const fullBeforeText = joinTimedText(beforeSegments);
     const fullAfterText = joinTimedText(afterSegments);
-    const beforeText = fullBeforeText.substring(fullAfterText.length - 500);
+    const beforeText = fullBeforeText.substring(fullBeforeText.length - 500);
     const afterText = fullAfterText.substring(0, 500);
     const spanBefore = document.createElement("span");
     spanBefore.className = "subtitle-extension-before";
