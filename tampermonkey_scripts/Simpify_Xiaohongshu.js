@@ -16,7 +16,7 @@
      // Select the element containing the watermark using its CSS class
     const style = document.createElement('style');
     style.innerHTML = `
-    #exploreFeeds {
+    #exploreFeeds, #channel-container {
        display: none !important;
     }
     `;
