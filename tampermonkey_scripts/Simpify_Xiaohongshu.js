@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @updateURL    https://raw.githubusercontent.com/BilderLoong/playground/refs/heads/master/tampermonkey_scripts/Simpify_Xiaohongshu.js
 // @downloadURL  https://raw.githubusercontent.com/BilderLoong/playground/refs/heads/master/tampermonkey_scripts/Simpify_Xiaohongshu.js
-// @version      1.0.0
+// @version      1.0.1
 // @description  Remove the feed page on Xiaohongshu.com;
 // @author       cokoryu@outlook.com
 // @match        https://www.xiaohongshu.com/explore/*
