@@ -15,6 +15,24 @@
 (function () {
   "use strict";
 
+  function normalizeWhitespace(container) {
+    const walker = document.createTreeWalker(
+      container,
+      NodeFilter.SHOW_TEXT,
+      null,
+      false
+    );
+
+    const textNodes = [];
+    while (walker.nextNode()) {
+      textNodes.push(walker.currentNode);
+    }
+
+    textNodes.forEach((node) => {
+      node.textContent = node.textContent.replace(/\s+/g, " ");
+    });
+  }
+
   // This is the function that contains your original logic.
   function removeBrTags() {
     // Find the Language Reactor subtitle container.
@@ -37,6 +55,8 @@
       br.remove();
     });
 
+    normalizeWhitespace(llnSubs);
+
     // We can also observe the subtitle panel itself for changes,
     // in case new subtitles with <br> tags are loaded later.
     const subObserver = new MutationObserver((mutations) => {
@@ -46,6 +66,7 @@
           if (newBrTags.length > 0) {
             // console.log("Language Reactor Improver: New <br> tags detected, removing...");
             newBrTags.forEach((br) => br.remove());
+            normalizeWhitespace(llnSubs);
           }
         }
       }
