@@ -15,6 +15,11 @@
 (function () {
   "use strict";
 
+  // Language Reactor renders each word as a separate <span>.
+  // The browser inserts newline + indent text nodes between them,
+  // which become \n gaps in textContent. Yomitan sees these gaps
+  // as sentence breaks, so it can't scan across word boundaries.
+  // Collapsing all whitespace into single spaces fixes this.
   function normalizeWhitespace(container) {
     const walker = document.createTreeWalker(
       container,
