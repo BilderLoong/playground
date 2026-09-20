@@ -1,29 +1,47 @@
 use std::future::Future;
 
-trait Animal {
+trait AnimalAsync {
     async fn speak(&self) -> String;
 }
 
-trait AnimalCorrect {
+trait AnimalAsyncCorrect {
     fn speak(&self) -> Box<dyn Future<Output = String>>;
+}
+
+trait Animal {
+    fn speak(&self) -> String;
 }
 
 struct Dog;
 
-impl Animal for Dog {
+impl AnimalAsync for Dog {
     async fn speak(&self) -> String {
         "".to_owned()
     }
 }
 struct Cat;
 
-impl Animal for Cat {
+impl AnimalAsync for Cat {
     async fn speak(&self) -> String {
         "".to_owned()
     }
 }
 
-impl AnimalCorrect for Dog {
+struct Duck;
+impl Animal for Duck {
+    fn speak(&self) -> String {
+        "".to_string()
+    }
+}
+
+struct Chicken;
+impl Animal for Chicken {
+    fn speak(&self) -> String {
+        "".to_string()
+    }
+}
+
+impl AnimalAsyncCorrect for Dog {
     fn speak(&self) -> Box<dyn Future<Output = String>> {
         Box::new(async { "".to_string() })
     }
@@ -37,14 +55,25 @@ fn run() {
     let animal = Box::new(cat);
     let future = animal.speak();
 
+    // This is allowed
+    let animal: Box<dyn Animal> = if 1 != 0 {
+        Box::new(Duck)
+    } else {
+        Box::new(Chicken)
+    };
+
+    let speaking = animal.speak();
+
     let cat = Cat;
-    let animal: Box<dyn Animal> = Box::new(cat);
+    let animal: Box<dyn AnimalAsync> = Box::new(cat);
+    let animal: &dyn AnimalAsync = &cat;
     // Cause the speak() may return difference complier generated future type, it not possible to
     // determine the future varibale type here.
     let future = animal.speak();
 
     let dog = Dog;
-    let animal: Box<dyn AnimalCorrect> = Box::new(dog);
+    let animal: Box<dyn AnimalAsyncCorrect> = Box::new(dog);
+    let animal: &dyn AnimalAsyncCorrect = &dog;
     // Correct cause now we use a uniform type to describe the future.
     let future = animal.speak();
 }
