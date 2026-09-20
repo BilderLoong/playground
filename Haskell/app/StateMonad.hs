@@ -17,10 +17,8 @@ add'' x =
 
 main :: IO ()
 main = do
-  let (log0, state0) = add 1 2
-  let (log1, state1) = add 1 state0
+  let final_state = 
 
-  print $ log1 ++ "Final state" ++ show state1
 
 -- newtype State' s a = State
 --   {runState' :: s -> (a, s)}
