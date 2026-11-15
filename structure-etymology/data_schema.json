@@ -1,0 +1,86 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Etymology Tree (Node-Based)",
+  "description": "Etymological word breakdowns using a strict breakable vs atomic node structure.",
+  "oneOf": [
+    {
+      "$ref": "#/definitions/baseNode"
+    }
+  ],
+  "definitions": {
+    "atomicTypes": {
+      "type": "string",
+      "enum": [
+        "root",
+        "prefix",
+        "suffix",
+        "infix",
+        "connector"
+      ],
+      "description": "Elements that cannot be broken down further."
+    },
+    "breakableTypes": {
+      "type": "string",
+      "enum": [
+        "compound",
+        "phrase"
+      ],
+      "description": "Elements that are built from smaller components."
+    },
+    "baseNode": {
+      "type": "object",
+      "required": [
+        "entry",
+        "definition"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "root",
+            "prefix",
+            "suffix",
+            "infix",
+            "connector",
+            "compound",
+            "phrase"
+          ]
+        },
+        "entry": {
+          "type": "string",
+          "description": "The word or morpheme being analyzed."
+        },
+        "definition": {
+          "type": "string",
+          "description": "The concise meaning of this entry."
+        },
+        "origin_language": {
+          "type": "object",
+          "required": [
+            "iso_639_3_code",
+            "full_language_name"
+          ],
+          "properties": {
+            "iso_639_3_code": {
+              "type": "string"
+            },
+            "full_language_name": {
+              "type": "string"
+            }
+          }
+        },
+        "notes": {
+          "type": "string",
+          "description": "Additional information or commentary about this entry. Like etymological nuances, historical context, or interesting trivia and how meaning has shifted over time."
+        },
+        "children": {
+          "type": "array",
+          "description": "Curated recursive relationships representing the most pedagogically useful etymological path for understanding this entry. Children may represent structural components, historical ancestors, borrowings, or other significant etymological relations. This field is intentionally selective rather than exhaustive. Choose to show those most help me to understand the word's meaning and could help me to learn other words in the future.",
+          "items": {
+            "$ref": "#"
+          }
+        }
+      }
+    }
+  }
+}

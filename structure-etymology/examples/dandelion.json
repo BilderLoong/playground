@@ -1,0 +1,87 @@
+{
+  "entry": "dandelion",
+  "definition": "A widely distributed weed of the daisy family, with a rosette of leaves and large bright yellow flowers.",
+  "type": "compound",
+  "origin_language": {
+    "iso_639_3_code": "eng",
+    "full_language_name": "English"
+  },
+  "components": [
+    {
+      "entry": "dent",
+      "definition": "Tooth.",
+      "type": "root"
+    },
+    {
+      "entry": "de",
+      "definition": "Of.",
+      "type": "connector"
+    },
+    {
+      "entry": "lion",
+      "definition": "Lion.",
+      "type": "root"
+    }
+  ],
+  "ancestors": [
+    {
+      "entry": "dent de lion",
+      "definition": "Tooth of the lion (referring to the coarsely toothed leaves).",
+      "type": "phrase",
+      "origin_language": {
+        "iso_639_3_code": "frm",
+        "full_language_name": "Middle French"
+      },
+      "components": [
+        {
+          "entry": "dent",
+          "definition": "tooth",
+          "type": "root",
+          "ancestors": [
+            {
+              "entry": "dens",
+              "definition": "tooth",
+              "type": "root",
+              "origin_language": {
+                "iso_639_3_code": "lat",
+                "full_language_name": "Latin"
+              }
+            }
+          ]
+        },
+        {
+          "entry": "de",
+          "definition": "of",
+          "type": "connector",
+          "ancestors": [
+            {
+              "entry": "de",
+              "definition": "down from, of",
+              "type": "connector",
+              "origin_language": {
+                "iso_639_3_code": "lat",
+                "full_language_name": "Latin"
+              }
+            }
+          ]
+        },
+        {
+          "entry": "lion",
+          "definition": "lion",
+          "type": "root",
+          "ancestors": [
+            {
+              "entry": "leo",
+              "definition": "lion",
+              "type": "root",
+              "origin_language": {
+                "iso_639_3_code": "lat",
+                "full_language_name": "Latin"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
