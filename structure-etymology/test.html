@@ -1,209 +1,428 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Etymology of {{entry}}</title>
-    <style>
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          Helvetica, Arial, sans-serif;
-      }
-      .etymology-tree {
-      }
-      .entry {
-      }
-      .entry-header {
-        /* margin-bottom: 5px; */
-      }
-      .entry-word {
-        font-weight: bold;
-        font-size: 1.2em;
-        color: #1a1a1a;
-      }
-      .entry-type {
-        font-style: italic;
-        color: #666;
-      }
-      .entry-lang {
-        font-style: italic;
-        color: #005a9c;
-      }
-      .definition {
-      }
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Etymology trees</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #252a2d; background: #fafaf8; -webkit-font-smoothing: antialiased; }
+    * { box-sizing: border-box; }
+    body { max-width: 1020px; margin: 0 auto; padding: 24px 28px 40px; font-size: 14px; line-height: 1.45; }
+    h1 { margin: 0; font-size: 24px; letter-spacing: -0.035em; }
+    .intro { margin: 4px 0 8px; color: #626967; }
+    .legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-bottom: 16px; font-size: 12px; color: #626967; }
+    .legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .entry-card { padding: 18px 20px; margin-top: 16px; border: 1px solid #dedfd9; border-radius: 10px; background: white; }
+    .tree, .children, .related-list { list-style: none; padding: 0; margin: 0; }
+    .entry-heading { display: flex; align-items: baseline; gap: 7px; flex-wrap: wrap; }
+    .entry-word { font-size: 16px; font-weight: 650; letter-spacing: -0.015em; }
+    h2.entry-word { margin: 0; font-size: 26px; letter-spacing: -0.035em; }
+    .entry-meta, .entry-type, .usefulness { display: inline-block; padding: 0 6px; border-radius: 4px; font-size: 12px; line-height: 20px; font-weight: 650; background: #f0f1ef; color: #5e6661; }
+    .entry-meta, .entry-type { font-weight: 500; }
+    .usefulness[data-rank="甲"] { background: #e7f0e9; color: #315d42; }
+    .usefulness[data-rank="乙"] { background: #f5eddc; color: #795c26; }
+    .definition { margin: 2px 0 4px; text-wrap: pretty; }
+    .notes { margin: 0 0 4px; color: #626967; font-size: 13px; text-wrap: pretty; }
+    .source { color: #46665c; font-size: 12px; text-underline-offset: 3px; }
+    a:hover { color: #1a4534; }
+    a:focus-visible, summary:focus-visible { outline: 2px solid #46665c; outline-offset: 4px; border-radius: 2px; }
+    .children { border-left: 1px solid #d9dfda; margin: 10px 0 0 6px; padding-left: 18px; }
+    .children > .entry + .entry { margin-top: 12px; }
+    .related { margin-top: 2px; }
+    .related summary { width: fit-content; cursor: pointer; color: #46665c; font-size: 12px; padding: 4px 0; min-height: 40px; }
+    .related-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 16px; padding: 4px 0; }
+    .related-word { padding-left: 10px; border-left: 2px solid #e4e8e2; }
+    .related-word .entry-word { font-size: 14px; }
+    .related-word .definition { font-size: 13px; margin-bottom: 3px; }
+    .connection { margin: 0; color: #69716d; font-size: 12px; }
+    mark { background: #f5eddc; color: inherit; padding: 0 2px; }
+    @media (max-width: 640px) { body { padding: 18px 12px 28px; } .entry-card { padding: 14px 12px; } .children { padding-left: 12px; } .related-list { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
 
-      .section {
-      }
-      .section-title {
-        font-weight: bold;
-        /* margin-bottom: 5px; */
-      }
-      .notes-content {
-        display: none;
-      }
-      .section-title:hover + .notes-content {
-        display: inline;
-      }
-      ul {
-        margin: 0;
-        /* list-style-type: "→"; */
-      }
-    </style>
-  </head>
-  <body>
-    <script id="main-template" type="text/x-handlebars-template">
-      <ul class="etymology-tree">
-          {{> entryPartial .}}
-      </ul>
-    </script>
+    <header>
+      <h1>Etymology trees</h1>
+      <p class="intro">Selected paths, useful roots, and related words in English and French.</p>
+      <div class="legend" aria-label="Usefulness levels">
+        <span><b class="usefulness" data-rank="甲">甲</b> Prioritize learning</span>
+        <span><b class="usefulness" data-rank="乙">乙</b> Learn when relevant</span>
+        <span><b class="usefulness" data-rank="丙">丙</b> Low priority</span>
+      </div>
+    </header>
+    <main>
+        <article class="entry-card" id="entry-0">
+          <ul class="tree">
+    <li class="entry">
+      <div class="entry-heading">
+        <h2 class="entry-word">glutamine</h2>
+        <span class="entry-meta" title="English">eng</span>
+        <span class="entry-type">compound</span>
+        <span class="usefulness" data-rank="丙" title="Low priority" aria-label="丙: Low priority">丙</span>
+        <a class="source" href="https://en.wiktionary.org/wiki/glutamine#English" aria-label="Etymology source">Source</a>
+      </div>
+      <p class="definition">An amino acid used to build proteins: C<sub>5</sub>H<sub>10</sub>N<sub>2</sub>O<sub>3</sub>.</p>
+      <p class="notes">A specialist science word. Its name combines gluta- with -amine; the selected path explains those two naming elements.</p>
+        <details class="related" open>
+          <summary>Related words · 2</summary>
+          <ul class="related-list">
+    <li class="related-word">
+      <div class="entry-heading">
+        <span class="entry-word"><strong>glut</strong>amate</span>
+        <span class="entry-meta" title="English">eng</span>
+        <span class="usefulness" data-rank="乙" title="Learn when relevant" aria-label="乙: Learn when relevant">乙</span>
+      </div>
+      <p class="definition">A salt or ester of glutamic acid.</p>
+      <p class="connection">Shares the glutamic-acid naming base with glutamine. <a class="source" href="https://en.wiktionary.org/wiki/glutamate#English">Source</a></p>
+    </li>
 
-    <script id="entryPartial" type="text/x-handlebars-template">
-      <li class="entry">
-                <span class="entry-word">{{entry}} </span>
-                {{#if origin_language}}
-                    <span class="entry-lang" title="{{origin_language.full_language_name}}">[{{origin_language.iso_639_3_code}}]</span>
-                {{/if}}
+    <li class="related-word">
+      <div class="entry-heading">
+        <span class="entry-word"><strong>glut</strong>amate</span>
+        <span class="entry-meta" title="French">fra</span>
+        <span class="usefulness" data-rank="乙" title="Learn when relevant" aria-label="乙: Learn when relevant">乙</span>
+      </div>
+      <p class="definition">Glutamate; used in chemistry and food terminology.</p>
+      <p class="connection">The French member of the same glutamic-acid word family. <a class="source" href="https://en.wiktionary.org/wiki/glutamate#French">Source</a></p>
+    </li>
+  </ul>
+        </details>
+        <ul class="children">
+    <li class="entry">
+      <div class="entry-heading">
+        <span class="entry-word">gluta-</span>
+        <span class="entry-meta" title="English">eng</span>
+        <span class="entry-type">prefix</span>
+        <span class="usefulness" data-rank="丙" title="Low priority" aria-label="丙: Low priority">丙</span>
+        <a class="source" href="https://en.wiktionary.org/wiki/gluta-#English" aria-label="Etymology source">Source</a>
+      </div>
+      <p class="definition">A naming element that refers to <em>glutamic acid</em>.</p>
+      <p class="notes">Useful mainly for recognizing this small family of scientific terms.</p>
+        <details class="related" >
+          <summary>Related words · 2</summary>
+          <ul class="related-list">
+    <li class="related-word">
+      <div class="entry-heading">
+        <span class="entry-word"><strong>glut</strong>amate</span>
+        <span class="entry-meta" title="English">eng</span>
+        <span class="usefulness" data-rank="乙" title="Learn when relevant" aria-label="乙: Learn when relevant">乙</span>
+      </div>
+      <p class="definition">A salt or ester of glutamic acid.</p>
+      <p class="connection">Shares the glutamic-acid naming base with glutamine. <a class="source" href="https://en.wiktionary.org/wiki/glutamate#English">Source</a></p>
+    </li>
 
-                {{#if definition}}
-                  <span class="definition">: {{definition}}</span>
-                {{/if}}
+    <li class="related-word">
+      <div class="entry-heading">
+        <span class="entry-word"><strong>glut</strong>amate</span>
+        <span class="entry-meta" title="French">fra</span>
+        <span class="usefulness" data-rank="乙" title="Learn when relevant" aria-label="乙: Learn when relevant">乙</span>
+      </div>
+      <p class="definition">Glutamate; used in chemistry and food terminology.</p>
+      <p class="connection">The French member of the same glutamic-acid word family. <a class="source" href="https://en.wiktionary.org/wiki/glutamate#French">Source</a></p>
+    </li>
+  </ul>
+        </details>
+        <ul class="children">
+    <li class="entry">
+      <div class="entry-heading">
+        <span class="entry-word"><em>glutamic acid</em></span>
+        <span class="entry-meta" title="English">eng</span>
+        <span class="entry-type">phrase</span>
+        <span class="usefulness" data-rank="丙" title="Low priority" aria-label="丙: Low priority">丙</span>
+        <a class="source" href="https://en.wiktionary.org/wiki/glutamic_acid#English" aria-label="Etymology source">Source</a>
+      </div>
+      <p class="definition">An amino acid; its salts are called glutamates.</p>
+      <p class="notes">This is the term referred to by gluta-, rather than an additional piece of glutamine&#x27;s spelling.</p>
+        <details class="related" >
+          <summary>Related words · 2</summary>
+          <ul class="related-list">
+    <li class="related-word">
+      <div class="entry-heading">
+        <span class="entry-word"><strong>glut</strong>amate</span>
+        <span class="entry-meta" title="English">eng</span>
+        <span class="usefulness" data-rank="乙" title="Learn when relevant" aria-label="乙: Learn when relevant">乙</span>
+      </div>
+      <p class="definition">A salt or ester of glutamic acid.</p>
+      <p class="connection">Shares the glutamic-acid naming base with glutamine. <a class="source" href="https://en.wiktionary.org/wiki/glutamate#English">Source</a></p>
+    </li>
 
-                {{#if notes}}
-                    <span class="section">
-                        <span class="section-title">Notes</span>
-                        <span class="notes-content">: {{notes}}</span>
-                    </span>
-                {{/if}}
+    <li class="related-word">
+      <div class="entry-heading">
+        <span class="entry-word"><strong>glut</strong>amate</span>
+        <span class="entry-meta" title="French">fra</span>
+        <span class="usefulness" data-rank="乙" title="Learn when relevant" aria-label="乙: Learn when relevant">乙</span>
+      </div>
+      <p class="definition">Glutamate; used in chemistry and food terminology.</p>
+      <p class="connection">The French member of the same glutamic-acid word family. <a class="source" href="https://en.wiktionary.org/wiki/glutamate#French">Source</a></p>
+    </li>
+  </ul>
+        </details>
+    </li>
+  </ul>
+    </li>
 
-                {{#if examples}}
-                    <div class="section">
-                        <ul>
-                            {{#each examples}}
-                                <li><strong>{{word}}</strong> ({{language}}): {{simple_definition}}</li>
-                            {{/each}}
-                        </ul>
-                    </div>
-                {{/if}}
-      </li>
+    <li class="entry">
+      <div class="entry-heading">
+        <span class="entry-word">-amine</span>
+        <span class="entry-meta" title="English">eng</span>
+        <span class="entry-type">suffix</span>
+        <span class="usefulness" data-rank="乙" title="Learn when relevant" aria-label="乙: Learn when relevant">乙</span>
+        <a class="source" href="https://en.wiktionary.org/wiki/-amine#English" aria-label="Etymology source">Source</a>
+      </div>
+      <p class="definition">A chemical naming ending associated with amines and related compounds.</p>
+      <p class="notes">Recognizing the ending can help with chemical vocabulary. Glutamine itself is an amide of glutamic acid.</p>
+        <details class="related" >
+          <summary>Related words · 2</summary>
+          <ul class="related-list">
+    <li class="related-word">
+      <div class="entry-heading">
+        <span class="entry-word">amine</span>
+        <span class="entry-meta" title="English">eng</span>
+        <span class="usefulness" data-rank="乙" title="Learn when relevant" aria-label="乙: Learn when relevant">乙</span>
+      </div>
+      <p class="definition">A compound related to ammonia by replacement of hydrogen atoms.</p>
+      <p class="connection">The noun from which the ending -amine is formed. <a class="source" href="https://en.wiktionary.org/wiki/amine#English">Source</a></p>
+    </li>
 
-          {{#if ancestor}}
-                  {{! Recursive call for the ancestor }}
-               {{> entryPartial ancestor}}
-          {{/if}}
+    <li class="related-word">
+      <div class="entry-heading">
+        <span class="entry-word">amine</span>
+        <span class="entry-meta" title="French">fra</span>
+        <span class="usefulness" data-rank="乙" title="Learn when relevant" aria-label="乙: Learn when relevant">乙</span>
+      </div>
+      <p class="definition">The French chemistry term for an amine.</p>
+      <p class="connection">The corresponding French member of the amine naming family. <a class="source" href="https://en.wiktionary.org/wiki/amine#French">Source</a></p>
+    </li>
+  </ul>
+        </details>
+    </li>
+  </ul>
+    </li>
+  </ul>
+        </article>
+        <article class="entry-card" id="entry-1">
+          <ul class="tree">
+    <li class="entry">
+      <div class="entry-heading">
+        <h2 class="entry-word">impétueux</h2>
+        <span class="entry-meta" title="French">fra</span>
+        <span class="entry-type">root</span>
+        <span class="usefulness" data-rank="乙" title="Learn when relevant" aria-label="乙: Learn when relevant">乙</span>
+        <a class="source" href="https://en.wiktionary.org/wiki/imp%C3%A9tueux#French" aria-label="Etymology source">Source</a>
+      </div>
+      <p class="definition">Forceful or violent; also describes someone who acts with little thought or restraint.</p>
+      <p class="notes">Via Old French impetueus, from Latin impetuōsus. The tree selects the historical forms that best explain the word.</p>
+        <details class="related" open>
+          <summary>Related words · 2</summary>
+          <ul class="related-list">
+    <li class="related-word">
+      <div class="entry-heading">
+        <span class="entry-word"><strong>impetu</strong>ous</span>
+        <span class="entry-meta" title="English">eng</span>
+        <span class="usefulness" data-rank="乙" title="Learn when relevant" aria-label="乙: Learn when relevant">乙</span>
+      </div>
+      <p class="definition">Acting suddenly, with little thought about the result.</p>
+      <p class="connection">Shares the Latin ancestor impetuōsus with impétueux. <a class="source" href="https://en.wiktionary.org/wiki/impetuous#English">Source</a></p>
+    </li>
 
-          {{#if components}}
-                  <ul>
-                      {{#each components}}
-                          <li>
-                              {{! Recursive call for each component }}
-                              {{> entryPartial this}}
-                          </li>
-                      {{/each}}
-                  </ul>
-          {{/if}}
-    </script>
+    <li class="related-word">
+      <div class="entry-heading">
+        <span class="entry-word"><strong>impétu</strong>osité</span>
+        <span class="entry-meta" title="French">fra</span>
+        <span class="usefulness" data-rank="乙" title="Learn when relevant" aria-label="乙: Learn when relevant">乙</span>
+      </div>
+      <p class="definition">The quality of being impetuous; force or uncontrolled eagerness.</p>
+      <p class="connection">The corresponding noun in the same French impétu- family. <a class="source" href="https://en.wiktionary.org/wiki/imp%C3%A9tuosit%C3%A9#French">Source</a></p>
+    </li>
+  </ul>
+        </details>
+        <ul class="children">
+    <li class="entry">
+      <div class="entry-heading">
+        <span class="entry-word"><em>impetuōsus</em></span>
+        <span class="entry-meta" title="Latin">lat</span>
+        <span class="entry-type">compound</span>
+        <span class="usefulness" data-rank="丙" title="Low priority" aria-label="丙: Low priority">丙</span>
+        <a class="source" href="https://en.wiktionary.org/wiki/impetuosus#Latin" aria-label="Etymology source">Source</a>
+      </div>
+      <p class="definition">Impetuous or violent: <strong>impetus</strong> + <strong>-ōsus</strong>.</p>
 
-    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
-    <script>
-      // compile the template
-      const source = document.getElementById("main-template").innerHTML;
-      Handlebars.registerPartial(
-        "entryPartial",
-        document.getElementById("entryPartial").innerHTML
-      );
-      const template = Handlebars.compile(source);
-      // execute the compiled template and render it to the body.
-      document.body.innerHTML = template(
-        JSON.parse(`
-     {
-  "entry": "insertion",
-  "type": "compound",
-  "definition": "The action of inserting or the state of being inserted.",
-  "origin_language": {
-    "iso_639_3_code": "eng",
-    "full_language_name": "English"
-  },
-  "notes": "The word entered English in the 1590s, from French 'insertion' or directly from Late Latin.",
-  "ancestor": {
-    "entry": "insertio",
-    "type": "root",
-    "definition": "a putting in, a grafting",
-    "origin_language": {
-      "iso_639_3_code": "lat",
-      "full_language_name": "Late Latin"
-    }
-  },
-  "components": [
-    {
-      "entry": "in-",
-      "type": "prefix",
-      "definition": "in, into, on, upon",
-      "origin_language": {
-        "iso_639_3_code": "lat",
-        "full_language_name": "Latin"
-      },
-      "ancestor": {
-        "entry": "*en",
-        "type": "root",
-        "definition": "in",
-        "origin_language": {
-          "iso_639_3_code": "ine",
-          "full_language_name": "Proto-Indo-European"
-        }
-      }
-    },
-    {
-      "entry": "serere",
-      "type": "root",
-      "definition": "to join, link, bind together, arrange, put in a row",
-      "origin_language": {
-        "iso_639_3_code": "lat",
-        "full_language_name": "Latin"
-      },
-      "ancestor": {
-        "entry": "*ser-",
-        "type": "root",
-        "definition": "to line up",
-        "origin_language": {
-          "iso_639_3_code": "ine",
-          "full_language_name": "Proto-Indo-European"
-        }
-      },
-      "examples": [
-        {
-          "word": "series",
-          "simple_definition": "A number of similar or related things coming one after another.",
-          "language": "English"
-        },
-        {
-            "word": "assert",
-            "simple_definition": "To state a fact or belief confidently and forcefully.",
-            "language": "English"
-        }
-      ]
-    },
-    {
-      "entry": "-tion",
-      "type": "suffix",
-      "definition": "A suffix forming nouns of action, condition, or result.",
-      "origin_language": {
-        "iso_639_3_code": "eng",
-        "full_language_name": "English"
-      },
-      "ancestor": {
-        "entry": "-tionem",
-        "type": "suffix",
-        "definition": "Suffix forming nouns of action from verbs.",
-        "origin_language": {
-          "iso_639_3_code": "lat",
-          "full_language_name": "Latin"
-        }
-      }
-    }
-  ]
-}
+        <details class="related" >
+          <summary>Related words · 2</summary>
+          <ul class="related-list">
+    <li class="related-word">
+      <div class="entry-heading">
+        <span class="entry-word"><strong>impetu</strong>ous</span>
+        <span class="entry-meta" title="English">eng</span>
+        <span class="usefulness" data-rank="乙" title="Learn when relevant" aria-label="乙: Learn when relevant">乙</span>
+      </div>
+      <p class="definition">Acting suddenly, with little thought about the result.</p>
+      <p class="connection">Shares the Latin ancestor impetuōsus with impétueux. <a class="source" href="https://en.wiktionary.org/wiki/impetuous#English">Source</a></p>
+    </li>
 
-      `)
-      );
-    </script>
-  </body>
+    <li class="related-word">
+      <div class="entry-heading">
+        <span class="entry-word"><strong>impétu</strong>osité</span>
+        <span class="entry-meta" title="French">fra</span>
+        <span class="usefulness" data-rank="乙" title="Learn when relevant" aria-label="乙: Learn when relevant">乙</span>
+      </div>
+      <p class="definition">The quality of being impetuous; force or uncontrolled eagerness.</p>
+      <p class="connection">The corresponding noun in the same French impétu- family. <a class="source" href="https://en.wiktionary.org/wiki/imp%C3%A9tuosit%C3%A9#French">Source</a></p>
+    </li>
+  </ul>
+        </details>
+        <ul class="children">
+    <li class="entry">
+      <div class="entry-heading">
+        <span class="entry-word"><em>impetus</em></span>
+        <span class="entry-meta" title="Latin">lat</span>
+        <span class="entry-type">root</span>
+        <span class="usefulness" data-rank="乙" title="Learn when relevant" aria-label="乙: Learn when relevant">乙</span>
+        <a class="source" href="https://en.wiktionary.org/wiki/impetus#Latin" aria-label="Etymology source">Source</a>
+      </div>
+      <p class="definition">A rush, an attack, or driving force.</p>
+      <p class="notes">The selected path follows impetō, &#x27;to rush upon&#x27;, to in- and petere. The exact formation of the noun impetus is uncertain.</p>
+        <details class="related" >
+          <summary>Related words · 2</summary>
+          <ul class="related-list">
+    <li class="related-word">
+      <div class="entry-heading">
+        <span class="entry-word">impetus</span>
+        <span class="entry-meta" title="English">eng</span>
+        <span class="usefulness" data-rank="乙" title="Learn when relevant" aria-label="乙: Learn when relevant">乙</span>
+      </div>
+      <p class="definition">A force or reason that makes something happen.</p>
+      <p class="connection">Borrowed from this Latin noun. <a class="source" href="https://en.wiktionary.org/wiki/impetus#English">Source</a></p>
+    </li>
+
+    <li class="related-word">
+      <div class="entry-heading">
+        <span class="entry-word">impétuosité</span>
+        <span class="entry-meta" title="French">fra</span>
+        <span class="usefulness" data-rank="乙" title="Learn when relevant" aria-label="乙: Learn when relevant">乙</span>
+      </div>
+      <p class="definition">Impetuousness; force or uncontrolled eagerness.</p>
+      <p class="connection">Shares the impetus base through the impétueux family. <a class="source" href="https://en.wiktionary.org/wiki/imp%C3%A9tuosit%C3%A9#French">Source</a></p>
+    </li>
+  </ul>
+        </details>
+        <ul class="children">
+    <li class="entry">
+      <div class="entry-heading">
+        <span class="entry-word">in- → im-</span>
+        <span class="entry-meta" title="Latin">lat</span>
+        <span class="entry-type">prefix</span>
+        <span class="usefulness" data-rank="甲" title="Prioritize learning" aria-label="甲: Prioritize learning">甲</span>
+        <a class="source" href="https://en.wiktionary.org/wiki/impeto#Latin" aria-label="Etymology source">Source</a>
+      </div>
+      <p class="definition">In, into, or upon; the prefix takes the form <strong>im-</strong> before p.</p>
+
+        <details class="related" >
+          <summary>Related words · 2</summary>
+          <ul class="related-list">
+    <li class="related-word">
+      <div class="entry-heading">
+        <span class="entry-word"><strong>im</strong>pose</span>
+        <span class="entry-meta" title="English">eng</span>
+        <span class="usefulness" data-rank="甲" title="Prioritize learning" aria-label="甲: Prioritize learning">甲</span>
+      </div>
+      <p class="definition">To force a rule, duty, or burden on someone.</p>
+      <p class="connection">The im- prefix comes through French forms modelled on Latin imponere, with in- meaning upon. <a class="source" href="https://en.wiktionary.org/wiki/impose#English">Source</a></p>
+    </li>
+
+    <li class="related-word">
+      <div class="entry-heading">
+        <span class="entry-word"><strong>im</strong>poser</span>
+        <span class="entry-meta" title="French">fra</span>
+        <span class="usefulness" data-rank="甲" title="Prioritize learning" aria-label="甲: Prioritize learning">甲</span>
+      </div>
+      <p class="definition">To impose or force something on someone.</p>
+      <p class="connection">Uses the same in-/im- prefix family, through forms modelled on Latin imponere. <a class="source" href="https://en.wiktionary.org/wiki/impose#English">Source</a></p>
+    </li>
+  </ul>
+        </details>
+    </li>
+
+    <li class="entry">
+      <div class="entry-heading">
+        <span class="entry-word"><em>petere</em></span>
+        <span class="entry-meta" title="Latin">lat</span>
+        <span class="entry-type">root</span>
+        <span class="usefulness" data-rank="甲" title="Prioritize learning" aria-label="甲: Prioritize learning">甲</span>
+        <a class="source" href="https://en.wiktionary.org/wiki/peto#Latin" aria-label="Etymology source">Source</a>
+      </div>
+      <p class="definition">To seek, aim for, or attack.</p>
+      <p class="notes">A useful connection: the idea of seeking also appears in the competition family.</p>
+        <details class="related" >
+          <summary>Related words · 2</summary>
+          <ul class="related-list">
+    <li class="related-word">
+      <div class="entry-heading">
+        <span class="entry-word">com<strong>pet</strong>ition</span>
+        <span class="entry-meta" title="English">eng</span>
+        <span class="usefulness" data-rank="甲" title="Prioritize learning" aria-label="甲: Prioritize learning">甲</span>
+      </div>
+      <p class="definition">A contest or an effort to succeed against others.</p>
+      <p class="connection">Through Latin competere, formed from con- and petere: seeking together. <a class="source" href="https://en.wiktionary.org/wiki/competition#English">Source</a></p>
+    </li>
+
+    <li class="related-word">
+      <div class="entry-heading">
+        <span class="entry-word">com<strong>pét</strong>ition</span>
+        <span class="entry-meta" title="French">fra</span>
+        <span class="usefulness" data-rank="甲" title="Prioritize learning" aria-label="甲: Prioritize learning">甲</span>
+      </div>
+      <p class="definition">Competition; a contest or rivalry.</p>
+      <p class="connection">Through Latin competitiō and competere, from the same petere root. <a class="source" href="https://en.wiktionary.org/wiki/comp%C3%A9tition#French">Source</a></p>
+    </li>
+  </ul>
+        </details>
+    </li>
+  </ul>
+    </li>
+
+    <li class="entry">
+      <div class="entry-heading">
+        <span class="entry-word">-ōsus</span>
+        <span class="entry-meta" title="Latin">lat</span>
+        <span class="entry-type">suffix</span>
+        <span class="usefulness" data-rank="甲" title="Prioritize learning" aria-label="甲: Prioritize learning">甲</span>
+        <a class="source" href="https://en.wiktionary.org/wiki/-osus#Latin" aria-label="Etymology source">Source</a>
+      </div>
+      <p class="definition">An adjective ending meaning <strong>full of</strong> or <strong>having much of</strong>.</p>
+
+        <details class="related" >
+          <summary>Related words · 2</summary>
+          <ul class="related-list">
+    <li class="related-word">
+      <div class="entry-heading">
+        <span class="entry-word">curi<strong>ous</strong></span>
+        <span class="entry-meta" title="English">eng</span>
+        <span class="usefulness" data-rank="甲" title="Prioritize learning" aria-label="甲: Prioritize learning">甲</span>
+      </div>
+      <p class="definition">Wanting to know or learn more.</p>
+      <p class="connection">Through Latin curiosus; its adjective ending belongs to the -osus family. <a class="source" href="https://en.wiktionary.org/wiki/curious#English">Source</a></p>
+    </li>
+
+    <li class="related-word">
+      <div class="entry-heading">
+        <span class="entry-word">curi<strong>eux</strong></span>
+        <span class="entry-meta" title="French">fra</span>
+        <span class="usefulness" data-rank="甲" title="Prioritize learning" aria-label="甲: Prioritize learning">甲</span>
+      </div>
+      <p class="definition">Curious or interested in finding out more.</p>
+      <p class="connection">From Latin curiosus, sharing the adjective ending represented by -osus. <a class="source" href="https://en.wiktionary.org/wiki/curieux#French">Source</a></p>
+    </li>
+  </ul>
+        </details>
+    </li>
+  </ul>
+    </li>
+  </ul>
+    </li>
+  </ul>
+        </article>
+    </main>
+
+</body>
 </html>
