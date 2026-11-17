@@ -229,7 +229,7 @@
       <p class="definition">{{inlineHtml definition}}</p>
       {{#if notes}}<p class="notes">{{notes}}</p>{{/if}}
       {{#if related_words}}
-        <details class="related" {{#if isRoot}}open{{/if}}>
+        <details class="related">
           <summary>Related words · {{related_words.length}}</summary>
           <ul class="related-list">{{#each related_words}}{{> relatedWordPartial this}}{{/each}}</ul>
         </details>
